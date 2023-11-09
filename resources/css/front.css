@@ -3,6 +3,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
+    color: #141621;
 }
 
 
@@ -49,5 +50,9 @@ body {
     display: flex;
     list-style: none;
     padding: 0;
+}
+.header-bottom-nav nav ul li a {
+    color: #141621;
+    text-decoration: none;
 }
 /* HEADER */

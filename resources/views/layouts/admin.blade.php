@@ -9,21 +9,14 @@
 
         @vite('resources/css/admin.css')
     </head>
-    <body>
-        <div id="admin" class="wrapper">
-            <header>
-                
-            </header>
+    <body class="admin_panel" style="min-height: 100vh;">
+        @auth
+            <div id="admin"></div>
+        @endauth
 
-            <main>
-                @yield('content')
-            </main>
-
-            <footer>
-
-            </footer>
-        </div>
+        @if(Route::currentRouteName() != 'login')
+            @vite('resources/js/admin.js')
+        @endif
         
-        @vite('resources/js/admin.js')
     </body>
 </html>
