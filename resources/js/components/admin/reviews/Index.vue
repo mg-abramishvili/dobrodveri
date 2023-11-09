@@ -23,7 +23,7 @@
                     <tbody>
                         <tr v-for="review in reviews" :key="review.id" :style=" review.is_active ? 'background-color: #b4dfbb;' : 'background-color: #fee9a5;' ">
                             <td class="w-25">
-                                {{ $filters.datetime(review.created_at) }}<br>
+                                {{ $dayjs(review.created_at).locale('ru').utcOffset(5).format('DD-MM-YYYY H:mm') }}<br>
                                 {{ review.product.name }}
                             </td>
                             <td>

@@ -12,9 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('short_description')->nullable();
-            $table->string('image')->nullable();
             $table->timestamps();
+            $table->string('image')->nullable();
+            $table->string('short_description')->nullable();
         });
     }
     

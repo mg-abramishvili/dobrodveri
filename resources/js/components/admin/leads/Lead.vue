@@ -22,7 +22,7 @@
                 <div class="box-tab-content">
                     <p>
                         <strong>Дата:</strong>
-                        {{ $filters.datetime(lead.created_at) }}
+                        {{ $dayjs(lead.created_at).locale('ru').utcOffset(5).format('DD-MM-YYYY H:mm') }}
                     </p>
 
                     <p>
