@@ -42,8 +42,7 @@ import FurnitureTypeCreate from './components/admin/furnituretypes/Create.vue'
 import FurnitureTypeEdit from './components/admin/furnituretypes/Edit.vue'
 
 import Glasses from './components/admin/glasses/Index.vue'
-import GlassCreate from './components/admin/glasses/Create.vue'
-import GlassEdit from './components/admin/glasses/Edit.vue'
+import GlassMaster from './components/admin/glasses/Master.vue'
 
 import MainSlider from './components/admin/mainslider/Index.vue'
 import MainSlideCreate from './components/admin/mainslider/Create.vue'
@@ -209,14 +208,9 @@ const routes = [
         component: Glasses
     },
     {
-        path: '/admin/glasses/create',
-        name: 'GlassCreate',
-        component: GlassCreate
-    },
-    {
-        path: '/admin/glass/:id',
-        name: 'GlassEdit',
-        component: GlassEdit
+        path: '/admin/glass-master/:id?',
+        name: 'GlassMaster',
+        component: GlassMaster
     },
     {
         path: '/admin/mainslider',

@@ -72,6 +72,10 @@ class GlassController extends Controller
     {
         $glass = Glass::find($id);
 
+        if(count($glass->skus) > 0) {
+            return response('Невозможно удалить остекление.<br>Остекление используется в товарах.', 500);
+        }
+
         $glass->delete();
     }
 }

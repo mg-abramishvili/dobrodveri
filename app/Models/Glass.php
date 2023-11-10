@@ -10,4 +10,9 @@ class Glass extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public function skus()
+    {
+        return $this->hasMany(Sku::class);
+    }
 }
