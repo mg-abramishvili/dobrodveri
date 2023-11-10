@@ -80,19 +80,7 @@
                     </div>
                 </div>
 
-                <div class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Фабрика</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.factory" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option v-for="factory in factories" :value="factory.id" :key="factory.id">
-                                {{ factory.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <SelectFactory />
 
                 <div v-if="selected.category == 1" class="row align-items-center my-4">
                     <div class="col-12 col-lg-5">
@@ -258,7 +246,7 @@
                         v-bind:allow-multiple="false"
                         v-bind:allow-reorder="false"
                         accepted-file-types="image/jpeg, image/png"
-                        :server="server"
+                        :server="filepondServer"
                         v-bind:files="filepond_vkhod_image_edit"
                     />
                 </div>
@@ -275,33 +263,7 @@
             </div>
 
             <div v-show="views.currentTab == 'markers'" class="box-tab-content">
-                <div class="form-check">
-                    <input v-model="hit" class="form-check-input" type="checkbox" id="hit">
-                    <label class="form-check-label" for="hit">
-                        Хит
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input v-model="discount" class="form-check-input" type="checkbox" id="discount">
-                    <label class="form-check-label" for="discount">
-                        Скидка
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input v-model="sale" class="form-check-input" type="checkbox" id="sale">
-                    <label class="form-check-label" for="sale">
-                        Распродажа
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input v-model="special" class="form-check-input" type="checkbox" id="special">
-                    <label class="form-check-label" for="special">
-                        Акция
-                    </label>
-                </div>
+                <Markers />
             </div>
         </div>
     </div>
@@ -309,8 +271,10 @@
 
 <script>
 import SelectCategory from './master/SelectCategory.vue'
-import SelectBalance from './master/SelectBalance.vue'
 import SelectType from './master/SelectType.vue'
+import SelectBalance from './master/SelectBalance.vue'
+import SelectFactory from './master/SelectFactory.vue'
+import Markers from './master/Markers.vue'
 import SkuGenerator from './master/SkuGenerator.vue'
 import SkuItem from './master/SkuItem.vue'
 
@@ -321,6 +285,8 @@ import "filepond/dist/filepond.min.css"
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
 import FilePondPluginImagePreview from "filepond-plugin-image-preview"
+
+import FilepondServer from '../FilepondServer.js'
 
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
@@ -343,7 +309,6 @@ export default {
             special: '',
             
             styles: [],
-            factories: [],
             surfaces: [],
             constructs: [],
             purposes: [],
@@ -391,46 +356,7 @@ export default {
                 toolbar: [ 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'insertTable', '|', 'undo', 'redo' ],
             },
 
-            server: {
-                remove(filename, load) {
-                    load('1');
-                },
-                process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-                    const formData = new FormData();
-                    formData.append(fieldName, file, file.name);
-                    const request = new XMLHttpRequest();
-                    request.open('POST', '/_admin/file/upload');
-                    request.upload.onprogress = (e) => {
-                        progress(e.lengthComputable, e.loaded, e.total);
-                    };
-                    request.onload = function() {
-                        if (request.status >= 200 && request.status < 300) {
-                            load(request.responseText);
-                        }
-                        else {
-                            error('oh no');
-                        }
-                    };
-                    request.send(formData);
-                    return {
-                        abort: () => {
-                            request.abort();
-                            abort();
-                        }
-                    };
-                },
-                revert: (filename, load) => {
-                    load(filename)
-                },
-                load: (source, load, error, progress, abort, headers) => {
-                    var myRequest = new Request(source);
-                    fetch(myRequest).then(function(response) {
-                        response.blob().then(function(myBlob) {
-                            load(myBlob)
-                        });
-                    });
-                },
-            },
+            filepondServer: FilepondServer,
         };
     },
     computed: {
@@ -451,18 +377,9 @@ export default {
         },
     },
     created() {
-        this.loadFactories()
+        this.loadSurfaces()
     },
     methods: {
-        loadFactories() {
-            axios
-            .get(`/_admin/factories`)
-            .then(response => {
-                this.factories = response.data
-
-                this.loadSurfaces()
-            })
-        },
         loadPurposes() {
             axios
             .get(`/_admin/purposes`)
@@ -722,9 +639,11 @@ export default {
         },
     },
     components: {
+        SelectType,
         SelectCategory,
         SelectBalance,
-        SelectType,
+        SelectFactory,
+        Markers,
         SkuGenerator,
         SkuItem,
         FilePond

@@ -1,4 +1,4 @@
-{
+export default {
     slugify(str) {
         let ru = {
             'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 
