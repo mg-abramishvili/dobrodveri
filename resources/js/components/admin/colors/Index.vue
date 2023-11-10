@@ -5,7 +5,7 @@
                 <h1>Цвета</h1>
             </div>
             <div class="col-12 col-md-6 text-end">
-                <router-link :to="{ name: 'ColorMaster' }" class="btn btn-sm btn-primary">Добавить</router-link>
+                <router-link :to="{ name: 'ColorMaster' }" class="btn btn-primary">Добавить</router-link>
             </div>
         </div>
     </div>

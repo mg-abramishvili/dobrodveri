@@ -5,7 +5,7 @@
                 <h1>Стили</h1>
             </div>
             <div class="col-12 col-md-6 text-end">
-                <router-link :to="{ name: 'StyleMaster' }" class="btn btn-sm btn-primary">Добавить</router-link>
+                <router-link :to="{ name: 'StyleMaster' }" class="btn btn-primary">Добавить</router-link>
             </div>
         </div>
     </div>
