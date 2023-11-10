@@ -11,8 +11,7 @@ import CategoryCreate from './components/admin/categories/Create.vue'
 import CategoryEdit from './components/admin/categories/Edit.vue'
 
 import Colors from './components/admin/colors/Index.vue'
-import ColorCreate from './components/admin/colors/Create.vue'
-import ColorEdit from './components/admin/colors/Edit.vue'
+import ColorMaster from './components/admin/colors/Master.vue'
 
 import Styles from './components/admin/styles/Index.vue'
 import StyleCreate from './components/admin/styles/Create.vue'
@@ -104,14 +103,9 @@ const routes = [
         component: Colors
     },
     {
-        path: '/admin/colors/create',
-        name: 'ColorCreate',
-        component: ColorCreate
-    },
-    {
-        path: '/admin/color/:id',
-        name: 'ColorEdit',
-        component: ColorEdit
+        path: '/admin/color-master/:id?',
+        name: 'ColorMaster',
+        component: ColorMaster
     },
     {
         path: '/admin/styles',

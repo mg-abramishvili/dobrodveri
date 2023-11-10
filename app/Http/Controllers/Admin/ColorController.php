@@ -72,6 +72,10 @@ class ColorController extends Controller
     {
         $color = Color::find($id);
 
+        if(count($color->skus) > 0) {
+            return response('Невозможно удалить цвет.<br>Цвет используется в товарах.', 500);
+        }
+
         $color->delete();
     }
 }

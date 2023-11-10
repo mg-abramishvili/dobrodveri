@@ -1,5 +1,7 @@
-<template>         
-    <div class="subheader w-100">
+<template>
+    <Loader v-if="views.loading"></Loader>
+
+    <div v-if="!views.loading" class="subheader w-100">
         <div class="row align-items-center">
             <div class="col-12 col-md-6">
                 <h1>
@@ -8,13 +10,15 @@
                             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
                     </router-link>
-                    Новый цвет
+
+                    <template v-if="$route.params.id">{{ color.name }}</template>
+                    <template v-else>Новый цвет</template>
                 </h1>
             </div>
         </div>
     </div>
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+    <div v-if="!views.loading" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
         <div class="w-100">
             <div class="box px-4 py-4 mb-4">
                 <div class="box-tab-content">
@@ -37,7 +41,7 @@
                             v-bind:allow-multiple="false"
                             v-bind:allow-reorder="false"
                             accepted-file-types="image/jpeg, image/png"
-                            :server="server"
+                            :server="filepondServer"
                             v-bind:files="filepond_image_edit"
                         />
                     </div>
@@ -56,6 +60,8 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
 import FilePondPluginImagePreview from "filepond-plugin-image-preview"
 
+import FilepondServer from "../FilepondServer"
+
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview
@@ -64,6 +70,8 @@ const FilePond = vueFilePond(
 export default {
     data() {
         return {
+            color: {},
+
             name: '',
             slug: '',
             image: '',
@@ -72,52 +80,46 @@ export default {
             filepond_image_edit: [],
 
             views: {
+                loading: true,
                 saveButton: true,
             },
 
-            server: {
-                remove(filename, load) {
-                    load('1');
-                },
-                process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-                    const formData = new FormData();
-                    formData.append(fieldName, file, file.name);
-                    const request = new XMLHttpRequest();
-                    request.open('POST', '/_admin/file/upload');
-                    request.upload.onprogress = (e) => {
-                        progress(e.lengthComputable, e.loaded, e.total);
-                    };
-                    request.onload = function() {
-                        if (request.status >= 200 && request.status < 300) {
-                            load(request.responseText);
-                        }
-                        else {
-                            error('oh no');
-                        }
-                    };
-                    request.send(formData);
-                    return {
-                        abort: () => {
-                            request.abort();
-                            abort();
-                        }
-                    };
-                },
-                revert: (filename, load) => {
-                    load(filename)
-                },
-                load: (source, load, error, progress, abort, headers) => {
-                    var myRequest = new Request(source);
-                    fetch(myRequest).then(function(response) {
-                        response.blob().then(function(myBlob) {
-                            load(myBlob)
-                        });
-                    });
-                },
-            },
+            filepondServer: FilepondServer
+        }
+    },
+    created() {
+        if(this.$route.params.id) {
+            this.loadColor()
+        } else {
+            this.views.loading = false
         }
     },
     methods: {
+        loadColor() {
+            axios.get(`/_admin/color/${this.$route.params.id}`)
+            .then(response => {
+                this.color = response.data
+
+                this.name = response.data.name
+                this.slug = response.data.slug
+                
+                if(response.data.image) {
+                    this.filepond_image_edit = [
+                        {
+                            source: response.data.image,
+                            options: {
+                                type: 'local',
+                            }
+                        }
+                    ]
+                }
+
+                this.views.loading = false
+            })
+            .catch(errors => {
+                //
+            })
+        },
         slugify() {
             if(this.name) {
                 this.slug = this.$filters.slugify(this.name)
@@ -149,35 +151,47 @@ export default {
 
             this.views.saveButton = false
 
-            axios.post('/_admin/colors', {
+            let postData = {
                 name: this.name,
                 slug: this.slug,
                 image: this.image
-            })
-            .then(response => {
-                this.views.saveButton = true
-                this.$router.push({ name: 'Colors' })
-            })
-            .catch(errors => {
-                this.views.saveButton = true
+            }
 
-                let errorMessage = ''
-
-                if(errors.response.data) {
-                    errorMessage = errors.response.data
-                } else {
-                    errorMessage = errors
-                }
-
-                return this.$swal({
-                    text: errorMessage,
-                    icon: 'error',
+            if(this.$route.params.id) {
+                axios.put(`/_admin/color/${this.$route.params.id}/update`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'Colors' })
                 })
-            })
+                .catch(errors => {
+                    this.views.saveButton = true
+    
+                    return this.$swal({
+                        text: 'Ошибка',
+                        icon: 'error',
+                    })
+                })
+            }
+            
+            if(!this.$route.params.id) {
+                axios.post(`/_admin/colors`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'Colors' })
+                })
+                .catch(errors => {
+                    this.views.saveButton = true
+    
+                    return this.$swal({
+                        text: 'Ошибка',
+                        icon: 'error',
+                    })
+                })
+            }
         },
     },
     components: {
-        FilePond,
-    },
+        FilePond
+    }
 }
 </script>

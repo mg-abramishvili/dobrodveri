@@ -10,13 +10,13 @@
                             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
                     </router-link>
-                    <template v-if="editMode == true">{{ product.name }}</template>
+                    <template v-if="editMode">{{ product.name }}</template>
                     <template v-else>Новый товар</template>
                 </h1>
             </div>
             <div class="col-12 col-md-4 text-end">
-                <button :disabled="views.saveButton == false"  @click="save()" class="btn btn-primary">Сохранить</button>
-                <button v-if="editMode == true" @click="deactivate()" class="btn btn-outline-danger ms-2">Удалить</button>
+                <button :disabled="!views.saveButton"  @click="save()" class="btn btn-primary">Сохранить</button>
+                <button v-if="editMode" @click="deactivate()" class="btn btn-outline-danger ms-2">Удалить</button>
             </div>
         </div>
     </div>
@@ -26,8 +26,8 @@
             <li @click="selectTab('general')" :class="{ 'active' : views.currentTab == 'general'}">Общая информация</li>
             <li @click="selectTab('characteristics')" :class="{ 'active' : views.currentTab == 'characteristics'}">Характеристики</li>
             <li @click="selectTab('sizes')" :class="{ 'active' : views.currentTab == 'sizes'}">Размеры</li>
-            <li v-if="editMode == true" @click="selectTab('variations')" :class="{ 'active' : views.currentTab == 'variations'}">Вариации</li>
-            <li v-if="editMode == true" @click="selectTab('markers')" :class="{ 'active' : views.currentTab == 'markers'}">Галочки</li>
+            <li v-if="editMode" @click="selectTab('variations')" :class="{ 'active' : views.currentTab == 'variations'}">Вариации</li>
+            <li v-if="editMode" @click="selectTab('markers')" :class="{ 'active' : views.currentTab == 'markers'}">Галочки</li>
         </ul>
         <div class="box px-4 py-4 mb-4">
             <div v-show="views.currentTab == 'general'" class="box-tab-content">
@@ -110,19 +110,7 @@
                     </div>
                 </div>
 
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Назначение двери</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.purpose" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option v-for="purpose in purposes" :value="purpose.id" :key="purpose.id">
-                                {{ purpose.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <SelectPurpose v-if="selected.category == 2" />
 
                 <div v-if="selected.category == 2" class="row align-items-center my-4">
                     <div class="col-12 col-lg-5">
@@ -137,80 +125,7 @@
                     </div>
                 </div>
 
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Толщина полотна</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <input v-model="tolschina_polotna" class="form-control">
-                    </div>
-                </div>
-
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Толщина металла</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <input v-model="tolschina_metalla" class="form-control">
-                    </div>
-                </div>
-
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Внутренняя панель</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <input v-model="vnutr_panel" class="form-control">
-                    </div>
-                </div>
-
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Замок</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <input v-model="zamok" class="form-control">
-                    </div>
-                </div>
-
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Терморазрыв</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="termorazryv" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option value="Да">Да</option>
-                            <option value="Нет">Нет</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Ночная задвижка</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="noch_zadvizh" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option value="Да">Да</option>
-                            <option value="Нет">Нет</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Ребра жесткости</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="rebra_zh" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option value="Да">Да</option>
-                            <option value="Нет">Нет</option>
-                        </select>
-                    </div>
-                </div>
+                <MetalDoorAttributes v-if="selected.category == 2" />
 
                 <div v-if="selected.category == 3" class="row align-items-center my-4">
                     <div class="col-12 col-lg-5">
@@ -228,12 +143,7 @@
             </div>
 
             <div v-show="views.currentTab == 'sizes'" class="box-tab-content">
-                <div v-for="size in sizes" class="form-check">
-                    <input v-model="selected.sizes" class="form-check-input" type="checkbox" :value="size.id" :id="'size_' + size.id">
-                    <label class="form-check-label" :for="'size_' + size.id">
-                        {{ size.name }}
-                    </label>
-                </div>
+                <SelectSizes />
             </div>
 
             <div v-show="views.currentTab == 'variations'" class="box-tab-content">
@@ -274,6 +184,9 @@ import SelectCategory from './master/SelectCategory.vue'
 import SelectType from './master/SelectType.vue'
 import SelectBalance from './master/SelectBalance.vue'
 import SelectFactory from './master/SelectFactory.vue'
+import SelectPurpose from './master/SelectPurpose.vue'
+import SelectSizes from './master/SelectSizes.vue'
+import MetalDoorAttributes from './master/MetaDoorAttributes.vue'
 import Markers from './master/Markers.vue'
 import SkuGenerator from './master/SkuGenerator.vue'
 import SkuItem from './master/SkuItem.vue'
@@ -311,10 +224,8 @@ export default {
             styles: [],
             surfaces: [],
             constructs: [],
-            purposes: [],
             furnituretypes: [],
             colors: [],
-            sizes: [],
             
             selected: {
                 category: '',
@@ -351,7 +262,6 @@ export default {
             },
 
             editor: ClassicEditor,
-            editorData: '',
             editorConfig: {
                 toolbar: [ 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'insertTable', '|', 'undo', 'redo' ],
             },
@@ -364,6 +274,7 @@ export default {
             if(this.$route.params.id) {
                 return true
             }
+
             if(!this.$route.params.id) {
                 return false
             }
@@ -380,29 +291,11 @@ export default {
         this.loadSurfaces()
     },
     methods: {
-        loadPurposes() {
-            axios
-            .get(`/_admin/purposes`)
-            .then(response => {
-                this.purposes = response.data
-
-                this.loadFurnitureTypes()
-            })
-        },
         loadFurnitureTypes() {
             axios
             .get(`/_admin/furnituretypes`)
             .then(response => {
                 this.furnituretypes = response.data
-
-                this.loadSizes()
-            })
-        },
-        loadSizes() {
-            axios
-            .get(`/_admin/sizes`)
-            .then(response => {
-                this.sizes = response.data
 
                 this.loadProduct()
             })
@@ -431,17 +324,17 @@ export default {
             .then(response => {
                 this.styles = response.data
 
-                this.loadPurposes()
+                this.loadFurnitureTypes()
             })
         },
         loadProduct() {
-            if(this.editMode == false) {
+            if(!this.editMode) {
                 this.views.saveButton = true
+
                 return this.views.loading = false
             }
 
-            axios
-            .get(`/_admin/product/${this.$route.params.id}`)
+            axios.get(`/_admin/product/${this.$route.params.id}`)
             .then((response => {
                 this.product = response.data
                 this.name = response.data.name
@@ -468,10 +361,10 @@ export default {
                 this.selected.surface = response.data.surface_id
                 this.selected.sizes = response.data.sizes.map(size => size.id)
 
-                if(response.data.hit == 1) { this.hit = true } else { this.hit = false }
-                if(response.data.discount == 1) { this.discount = true } else { this.discount = false }
-                if(response.data.sale == 1) { this.sale = true } else { this.sale = false }
-                if(response.data.special == 1) { this.special = true } else { this.special = false }
+                this.hit = response.data.hit == 1 ? response.data.hit = true : false
+                this.discount = response.data.discount == 1 ? response.data.discount = true : false
+                this.sale = response.data.sale == 1 ? response.data.sale = true : false
+                this.special = response.data.special == 1 ? response.data.special = true : false
 
                 if(response.data.vkhod_image) {
                     this.filepond_vkhod_image_edit = [
@@ -502,7 +395,7 @@ export default {
             }
         },
         save() {
-            if(this.editMode == true) {
+            if(this.editMode) {
                 if(document.getElementsByName("vkhod_image")[0]) {
                     this.vkhod_image = document.getElementsByName("vkhod_image")[0].value
                 }
@@ -575,7 +468,7 @@ export default {
                 balance: this.selected.balance,
             }
 
-            if(this.editMode == false) {
+            if(!this.editMode) {
                 axios.post(`/_admin/products`, data)
                 .then(response => {
                     this.views.saveButton = true
@@ -584,22 +477,14 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
 
-                    let errorMessage = ''
-
-                    if(errors.response.data) {
-                        errorMessage = errors.response.data
-                    } else {
-                        errorMessage = errors
-                    }
-
                     return this.$swal({
-                        text: errorMessage,
+                        text: errors.response.data ? errors.response.data : errors,
                         icon: 'error',
                     })
                 })
             }
 
-            if(this.editMode == true) {
+            if(this.editMode) {
                 axios.put(`/_admin/product/${this.$route.params.id}/update`, data)
                 .then(response => {
                     this.views.saveButton = true
@@ -608,30 +493,22 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
 
-                    let errorMessage = ''
-
-                    if(errors.response.data) {
-                        errorMessage = errors.response.data
-                    } else {
-                        errorMessage = errors
-                    }
-
                     return this.$swal({
-                        text: errorMessage,
+                        text: errors.response.data ? errors.response.data : errors,
                         icon: 'error',
                     })
                 })
             }
         },
         deactivate() {
-            if (confirm("Точно удалить?")) {
+            if (confirm("Товар будет перенесён в раздел Удаленные. Продолжить?")) {
                 axios.put(`/_admin/product/${this.$route.params.id}/deactivate`)
                 .then(response => {
                     this.$router.push({ name: 'Products' })
                 })
                 .catch(errors => {
                     return this.$swal({
-                        text: errors,
+                        text: errors.response.data ? errors.response.data : errors,
                         icon: 'error',
                     })
                 })
@@ -643,6 +520,9 @@ export default {
         SelectCategory,
         SelectBalance,
         SelectFactory,
+        SelectPurpose,
+        SelectSizes,
+        MetalDoorAttributes,
         Markers,
         SkuGenerator,
         SkuItem,
