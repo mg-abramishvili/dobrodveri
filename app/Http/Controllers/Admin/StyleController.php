@@ -68,6 +68,10 @@ class StyleController extends Controller
     {
         $style = Style::find($id);
 
+        if(count($style->products) > 0) {
+            return response('Невозможно удалить стиль.<br>Стиль используется в товарах.', 500);
+        }
+
         $style->delete();
     }
 }

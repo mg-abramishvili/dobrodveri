@@ -14,8 +14,7 @@ import Colors from './components/admin/colors/Index.vue'
 import ColorMaster from './components/admin/colors/Master.vue'
 
 import Styles from './components/admin/styles/Index.vue'
-import StyleCreate from './components/admin/styles/Create.vue'
-import StyleEdit from './components/admin/styles/Edit.vue'
+import StyleMaster from './components/admin/styles/Master.vue'
 
 import Factories from './components/admin/factories/Index.vue'
 import FactoryCreate from './components/admin/factories/Create.vue'
@@ -113,14 +112,9 @@ const routes = [
         component: Styles
     },
     {
-        path: '/admin/styles/create',
-        name: 'StyleCreate',
-        component: StyleCreate
-    },
-    {
-        path: '/admin/style/:id',
-        name: 'StyleEdit',
-        component: StyleEdit
+        path: '/admin/style-master/:id?',
+        name: 'StyleMaster',
+        component: StyleMaster
     },
     {
         path: '/admin/factories',

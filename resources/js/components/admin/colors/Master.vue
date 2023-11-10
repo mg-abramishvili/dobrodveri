@@ -90,7 +90,9 @@ export default {
     created() {
         if(this.$route.params.id) {
             this.loadColor()
-        } else {
+        }
+        
+        if(!this.$route.params.id) {
             this.views.loading = false
         }
     },
@@ -117,7 +119,12 @@ export default {
                 this.views.loading = false
             })
             .catch(errors => {
-                //
+                this.views.saveButton = true
+                
+                return this.$swal({
+                    text: errors.response.data ? errors.response.data : errors,
+                    icon: 'error',
+                })
             })
         },
         slugify() {
@@ -165,9 +172,9 @@ export default {
                 })
                 .catch(errors => {
                     this.views.saveButton = true
-    
+                
                     return this.$swal({
-                        text: 'Ошибка',
+                        text: errors.response.data ? errors.response.data : errors,
                         icon: 'error',
                     })
                 })
@@ -183,7 +190,7 @@ export default {
                     this.views.saveButton = true
     
                     return this.$swal({
-                        text: 'Ошибка',
+                        text: errors.response.data ? errors.response.data : errors,
                         icon: 'error',
                     })
                 })

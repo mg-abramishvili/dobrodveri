@@ -17,6 +17,6 @@ export default {
             )
         }
       
-        return n_str.join('').replace(/\s+/g, '-')
+        return n_str.join('').replace(/\s+/g, '-').toLocaleLowerCase()
     }
 }
