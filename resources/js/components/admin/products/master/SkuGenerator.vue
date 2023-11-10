@@ -2,21 +2,28 @@
     <div class="sku-generator">
         <Loader v-if="views.loading"></Loader>
 
-        <div v-if="!views.loading" class="row align-items-center">
+        <div v-if="!views.loading" class="row align-items-end">
             <div class="col">
                 <span v-if="product.category_id == 1" class="fw-bolder">Цвет</span>
                 <span v-if="product.category_id == 2" class="fw-bolder">Цвет внутренней панели</span>
                 <span v-if="product.category_id == 3" class="fw-bolder">Цвет</span>
-                <div v-for="color in colors" :key="color.id" class="form-check">
-                    <input v-model="selected.colors" type="checkbox" :value="color.id" :id="'color_' + color.id" class="form-check-input">
-                    <label :for="'color_' + color.id" class="form-check-label">{{ color.name }}</label>
+
+                <div style="height: 300px; overflow-y: auto;">
+                    <div v-for="color in colors" :key="color.id" class="form-check">
+                        <input v-model="selected.colors" type="checkbox" :value="color.id" :id="'color_' + color.id" class="form-check-input">
+                        <label :for="'color_' + color.id" class="form-check-label">{{ color.name }}</label>
+                    </div>
                 </div>
+
             </div>
             <div v-if="product.category_id == 1" class="col">
                 <span class="fw-bolder">Остекление</span>
-                <div v-for="glass in glasses" :key="glass.id" class="form-check">
-                    <input v-model="selected.glasses" type="checkbox" :value="glass.id" :id="'glass_' + glass.id" class="form-check-input">
-                    <label :for="'glass_' + glass.id" class="form-check-label">{{ glass.name }}</label>
+
+                <div style="height: 300px; overflow-y: auto;">
+                    <div v-for="glass in glasses" :key="glass.id" class="form-check">
+                        <input v-model="selected.glasses" type="checkbox" :value="glass.id" :id="'glass_' + glass.id" class="form-check-input">
+                        <label :for="'glass_' + glass.id" class="form-check-label">{{ glass.name }}</label>
+                    </div>
                 </div>
             </div>
             <div v-if="product.category_id == 2" class="col">
@@ -27,7 +34,7 @@
                 </div>
             </div>
             <div class="col text-end">
-                <button :disabled="views.saveButton == false"  @click="save()" class="btn btn-outline-primary">Создать</button>
+                <button :disabled="views.saveButton == false"  @click="save()" class="btn btn-sm btn-primary">Создать вариации</button>
             </div>
         </div>
     </div>
