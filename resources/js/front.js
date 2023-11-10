@@ -3,11 +3,11 @@ import './bootstrap'
 import { createApp } from 'vue'
 import mitt from 'mitt'
 
-import CatalogCategory from './components/front/CatalogCategory'
-import ProductSlider from './components/front/ProductSlider'
-import SelectColorAndGlass from './components/front/SelectColorAndGlass'
-import Lead from './components/front/Lead'
-import ProductReview from './components/front/ProductReview'
+import CatalogCategory from './components/front/CatalogCategory.vue'
+import ProductSlider from './components/front/ProductSlider.vue'
+import SelectColorAndGlass from './components/front/SelectColorAndGlass.vue'
+import Lead from './components/front/Lead.vue'
+import ProductReview from './components/front/ProductReview.vue'
 
 const emitter = mitt()
 

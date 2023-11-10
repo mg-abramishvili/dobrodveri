@@ -14,6 +14,12 @@
             <div id="admin"></div>
         @endauth
 
+        @guest
+            <main>
+                @yield('content')
+            </main>
+        @endguest
+
         @if(Route::currentRouteName() != 'login')
             @vite('resources/js/admin.js')
         @endif

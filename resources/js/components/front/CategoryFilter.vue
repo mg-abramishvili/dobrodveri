@@ -96,8 +96,8 @@
 </template>
 
 <script>
-import Loader from './Loader'
-import PriceRangeSlider from './PriceRangeSlider'
+import Loader from './Loader.vue'
+import PriceRangeSlider from './PriceRangeSlider.vue'
 
 export default {
     props: ['category', 'filterParams'],

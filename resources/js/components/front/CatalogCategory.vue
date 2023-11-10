@@ -82,11 +82,11 @@
 </template>
 
 <script>
-import CategoryFilter from './CategoryFilter'
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
+import CategoryFilter from './CategoryFilter.vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
 
-import Loader from './Loader'
+import Loader from './Loader.vue'
 
 export default {
     props: ['category', 'types', 'surfaces', 'colors', 'glasses', 'price_from', 'price_to', 'order', 'order_direction', 'furnituretypes', 'purposes', 'innerdecors'],

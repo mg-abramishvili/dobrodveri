@@ -46,6 +46,7 @@ export default {
     props: ['subject', 'product', 'params', 'price'],
     data() {
         return {
+            subject: '',
             name: '',
             phone: '',
             message: '',
