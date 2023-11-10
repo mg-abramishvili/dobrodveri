@@ -68,6 +68,10 @@ class SurfaceController extends Controller
     {
         $surface = Surface::find($id);
 
+        if(count($surface->products) > 0) {
+            return response('Невозможно удалить покрытие.<br>Покрытие используется в товарах.', 500);
+        }
+
         $surface->delete();
     }
 }

@@ -23,8 +23,7 @@ import Constructs from './components/admin/constructs/Index.vue'
 import ConstructMaster from './components/admin/constructs/Master.vue'
 
 import Surfaces from './components/admin/surfaces/Index.vue'
-import SurfaceCreate from './components/admin/surfaces/Create.vue'
-import SurfaceEdit from './components/admin/surfaces/Edit.vue'
+import SurfaceMaster from './components/admin/surfaces/Master.vue'
 
 import Types from './components/admin/types/Index.vue'
 import TypeCreate from './components/admin/types/Create.vue'
@@ -140,14 +139,9 @@ const routes = [
         component: Surfaces
     },
     {
-        path: '/admin/surfaces/create',
-        name: 'SurfaceCreate',
-        component: SurfaceCreate
-    },
-    {
-        path: '/admin/surface/:id',
-        name: 'SurfaceEdit',
-        component: SurfaceEdit
+        path: '/admin/surface-master/:id?',
+        name: 'SurfaceMaster',
+        component: SurfaceMaster
     },
     {
         path: '/admin/types',
