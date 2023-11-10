@@ -72,7 +72,7 @@ export default {
             })
         },
         del(id) {
-            if (confirm("Точно удалить стиль?")) {
+            if (confirm("Точно удалить фабрику?")) {
                 axios.delete(`/_admin/factory/${id}/delete`)
                 .then(response => {
                     this.loadFactories()

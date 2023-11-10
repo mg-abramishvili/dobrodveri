@@ -20,8 +20,7 @@ import Factories from './components/admin/factories/Index.vue'
 import FactoryMaster from './components/admin/factories/Master.vue'
 
 import Constructs from './components/admin/constructs/Index.vue'
-import ConstructCreate from './components/admin/constructs/Create.vue'
-import ConstructEdit from './components/admin/constructs/Edit.vue'
+import ConstructMaster from './components/admin/constructs/Master.vue'
 
 import Surfaces from './components/admin/surfaces/Index.vue'
 import SurfaceCreate from './components/admin/surfaces/Create.vue'
@@ -131,14 +130,9 @@ const routes = [
         component: Constructs
     },
     {
-        path: '/admin/constructs/create',
-        name: 'ConstructCreate',
-        component: ConstructCreate
-    },
-    {
-        path: '/admin/construct/:id',
-        name: 'ConstructEdit',
-        component: ConstructEdit
+        path: '/admin/construct-master/:id?',
+        name: 'ConstructMaster',
+        component: ConstructMaster
     },
     {
         path: '/admin/surfaces',

@@ -68,6 +68,10 @@ class ConstructController extends Controller
     {
         $construct = Construct::find($id);
 
+        if(count($construct->products) > 0) {
+            return response('Невозможно удалить конструкцию.<br>Конструкция используется в товарах.', 500);
+        }
+
         $construct->delete();
     }
 }
