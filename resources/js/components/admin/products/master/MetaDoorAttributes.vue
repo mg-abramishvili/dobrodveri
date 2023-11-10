@@ -1,6 +1,19 @@
 <template>
     <div class="row align-items-center my-4">
         <div class="col-12 col-lg-5">
+            <label class="form-label">Наполнение</label>
+        </div>
+        <div class="col-12 col-lg-7">
+            <select v-model="$parent.napolnenie" class="form-select">
+                <option value="">Не выбрано</option>
+                <option value="Пенополистерол">Пенополистерол</option>
+                <option value="Базальтовая плита">Базальтовая плита</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row align-items-center my-4">
+        <div class="col-12 col-lg-5">
             <label class="form-label">Толщина полотна</label>
         </div>
         <div class="col-12 col-lg-7">

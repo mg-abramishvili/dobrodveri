@@ -66,80 +66,19 @@
 
                 <SelectType v-if="selected.category && selected.category == 1" />
 
-                <div v-if="selected.category == 1" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Стиль</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.style" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option v-for="style in styles" :value="style.id" :key="style.id">
-                                {{ style.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
+                <SelectStyle v-if="selected.category && selected.category == 1" />
+                
                 <SelectFactory />
 
-                <div v-if="selected.category == 1" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Покрытие</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.surface" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option v-for="surface in surfaces" :value="surface.id" :key="surface.id">
-                                {{ surface.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <SelectSurface v-if="selected.category && selected.category == 1" />
 
-                <div v-if="selected.category == 1" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Конструкция</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.construct" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option v-for="construct in constructs" :value="construct.id" :key="construct.id">
-                                {{ construct.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <SelectConstruct v-if="selected.category && selected.category == 1" />
 
-                <SelectPurpose v-if="selected.category == 2" />
+                <SelectPurpose v-if="selected.category && selected.category == 2" />
 
-                <div v-if="selected.category == 2" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Наполнение</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="napolnenie" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option value="Пенополистерол">Пенополистерол</option>
-                            <option value="Базальтовая плита">Базальтовая плита</option>
-                        </select>
-                    </div>
-                </div>
+                <MetalDoorAttributes v-if="selected.category && selected.category == 2" />
 
-                <MetalDoorAttributes v-if="selected.category == 2" />
-
-                <div v-if="selected.category == 3" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Тип фурнитуры</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.furnituretype" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option v-for="furnituretype in furnituretypes" :value="furnituretype.id" :key="furnituretype.id">
-                                {{ furnituretype.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <SelectFurnitureType v-if="selected.category && selected.category == 3" />
             </div>
 
             <div v-show="views.currentTab == 'sizes'" class="box-tab-content">
@@ -147,7 +86,7 @@
             </div>
 
             <div v-show="views.currentTab == 'variations'" class="box-tab-content">
-                <div class="mb-4">
+                <div v-if="selected.category && selected.category == 2" class="mb-4">
                     <label class="form-label">Лицевая сторона металической двери</label>
                     <file-pond
                         name="vkhod_image"
@@ -186,6 +125,10 @@ import SelectBalance from './master/SelectBalance.vue'
 import SelectFactory from './master/SelectFactory.vue'
 import SelectPurpose from './master/SelectPurpose.vue'
 import SelectSizes from './master/SelectSizes.vue'
+import SelectStyle from './master/SelectStyle.vue'
+import SelectConstruct from './master/SelectConstruct.vue'
+import SelectSurface from './master/SelectSurface.vue'
+import SelectFurnitureType from './master/SelectFurnitureType.vue'
 import MetalDoorAttributes from './master/MetaDoorAttributes.vue'
 import Markers from './master/Markers.vue'
 import SkuGenerator from './master/SkuGenerator.vue'
@@ -220,12 +163,6 @@ export default {
             discount: '',
             sale: '',
             special: '',
-            
-            styles: [],
-            surfaces: [],
-            constructs: [],
-            furnituretypes: [],
-            colors: [],
             
             selected: {
                 category: '',
@@ -288,45 +225,9 @@ export default {
         },
     },
     created() {
-        this.loadSurfaces()
+        this.loadProduct()
     },
     methods: {
-        loadFurnitureTypes() {
-            axios
-            .get(`/_admin/furnituretypes`)
-            .then(response => {
-                this.furnituretypes = response.data
-
-                this.loadProduct()
-            })
-        },
-        loadConstructs() {
-            axios
-            .get(`/_admin/constructs`)
-            .then(response => {
-                this.constructs = response.data
-
-                this.loadStyles()
-            })
-        },
-        loadSurfaces() {
-            axios
-            .get(`/_admin/surfaces`)
-            .then(response => {
-                this.surfaces = response.data
-
-                this.loadConstructs()
-            })
-        },
-        loadStyles() {
-            axios
-            .get(`/_admin/styles`)
-            .then(response => {
-                this.styles = response.data
-
-                this.loadFurnitureTypes()
-            })
-        },
         loadProduct() {
             if(!this.editMode) {
                 this.views.saveButton = true
@@ -340,7 +241,7 @@ export default {
                 this.name = response.data.name
                 this.slug = response.data.slug
                 this.price = response.data.price
-                this.description = response.data.description
+                this.description = response.data.description ? response.data.description : ''
                 this.selected.category = response.data.category_id
                 this.selected.style = response.data.style_id
                 this.selected.type = response.data.type_id
@@ -522,6 +423,10 @@ export default {
         SelectFactory,
         SelectPurpose,
         SelectSizes,
+        SelectStyle,
+        SelectConstruct,
+        SelectSurface,
+        SelectFurnitureType,
         MetalDoorAttributes,
         Markers,
         SkuGenerator,
