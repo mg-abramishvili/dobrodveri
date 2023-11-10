@@ -7,8 +7,7 @@ import DeactivatedProducts from './components/admin/products/IndexDeactivated.vu
 import ProductMaster from './components/admin/products/Master.vue'
 
 import Categories from './components/admin/categories/Index.vue'
-import CategoryCreate from './components/admin/categories/Create.vue'
-import CategoryEdit from './components/admin/categories/Edit.vue'
+import CategoryMaster from './components/admin/categories/Master.vue'
 
 import Colors from './components/admin/colors/Index.vue'
 import ColorMaster from './components/admin/colors/Master.vue'
@@ -29,23 +28,19 @@ import Types from './components/admin/types/Index.vue'
 import TypeMaster from './components/admin/types/Master.vue'
 
 import Purposes from './components/admin/purposes/Index.vue'
-import PurposeCreate from './components/admin/purposes/Create.vue'
-import PurposeEdit from './components/admin/purposes/Edit.vue'
+import PurposeMaster from './components/admin/purposes/Master.vue'
 
 import InnerDecors from './components/admin/innerdecors/Index.vue'
-import InnerDecorCreate from './components/admin/innerdecors/Create.vue'
-import InnerDecorEdit from './components/admin/innerdecors/Edit.vue'
+import InnerDecorMaster from './components/admin/innerdecors/Master.vue'
 
 import FurnitureTypes from './components/admin/furnituretypes/Index.vue'
-import FurnitureTypeCreate from './components/admin/furnituretypes/Create.vue'
-import FurnitureTypeEdit from './components/admin/furnituretypes/Edit.vue'
+import FurnitureTypeMaster from './components/admin/furnituretypes/Master.vue'
 
 import Glasses from './components/admin/glasses/Index.vue'
 import GlassMaster from './components/admin/glasses/Master.vue'
 
 import MainSlider from './components/admin/mainslider/Index.vue'
-import MainSlideCreate from './components/admin/mainslider/Create.vue'
-import MainSlideEdit from './components/admin/mainslider/Edit.vue'
+import MainSlideMaster from './components/admin/mainslider/Master.vue'
 
 import Leads from './components/admin/leads/Index.vue'
 import Lead from './components/admin/leads/Lead.vue'
@@ -53,7 +48,7 @@ import Lead from './components/admin/leads/Lead.vue'
 import Reviews from './components/admin/reviews/Index.vue'
 
 import Pages from './components/admin/pages/Index.vue'
-import PageEdit from './components/admin/pages/Edit.vue'
+import PageMaster from './components/admin/pages/Master.vue'
 
 const routes = [
     {
@@ -82,14 +77,9 @@ const routes = [
         component: Categories
     },
     {
-        path: '/admin/categories/create',
-        name: 'CategoryCreate',
-        component: CategoryCreate
-    },
-    {
-        path: '/admin/category/:id',
-        name: 'CategoryEdit',
-        component: CategoryEdit
+        path: '/admin/category-master/:id?',
+        name: 'CategoryMaster',
+        component: CategoryMaster
     },
     {
         path: '/admin/colors',
@@ -157,14 +147,9 @@ const routes = [
         component: Purposes
     },
     {
-        path: '/admin/purposes/create',
-        name: 'PurposeCreate',
-        component: PurposeCreate
-    },
-    {
-        path: '/admin/purpose/:id',
-        name: 'PurposeEdit',
-        component: PurposeEdit
+        path: '/admin/purpose-master/:id?',
+        name: 'PurposeMaster',
+        component: PurposeMaster
     },
     {
         path: '/admin/innerdecors',
@@ -172,14 +157,9 @@ const routes = [
         component: InnerDecors
     },
     {
-        path: '/admin/innerdecors/create',
-        name: 'InnerDecorCreate',
-        component: InnerDecorCreate
-    },
-    {
-        path: '/admin/innerdecor/:id',
-        name: 'InnerDecorEdit',
-        component: InnerDecorEdit
+        path: '/admin/innerdecor-master/:id?',
+        name: 'InnerDecorMaster',
+        component: InnerDecorMaster
     },
     {
         path: '/admin/furnituretypes',
@@ -187,14 +167,9 @@ const routes = [
         component: FurnitureTypes
     },
     {
-        path: '/admin/furnituretypes/create',
-        name: 'FurnitureTypeCreate',
-        component: FurnitureTypeCreate
-    },
-    {
-        path: '/admin/furnituretype/:id',
-        name: 'FurnitureTypeEdit',
-        component: FurnitureTypeEdit
+        path: '/admin/furnituretype-master/:id?',
+        name: 'FurnitureTypeMaster',
+        component: FurnitureTypeMaster
     },
     {
         path: '/admin/glasses',
@@ -212,14 +187,9 @@ const routes = [
         component: MainSlider
     },
     {
-        path: '/admin/mainslider/create',
-        name: 'MainSlideCreate',
-        component: MainSlideCreate
-    },
-    {
-        path: '/admin/mainslide/:id',
-        name: 'MainSlideEdit',
-        component: MainSlideEdit
+        path: '/admin/mainslide-master/:id?',
+        name: 'MainSlideMaster',
+        component: MainSlideMaster
     },
     {
         path: '/admin/leads',
@@ -242,9 +212,9 @@ const routes = [
         component: Pages
     },
     {
-        path: '/admin/page/:id',
-        name: 'PageEdit',
-        component: PageEdit
+        path: '/admin/page-master/:id?',
+        name: 'PageMaster',
+        component: PageMaster
     },
 ];
 

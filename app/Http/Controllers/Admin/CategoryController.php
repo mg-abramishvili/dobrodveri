@@ -68,6 +68,10 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
+        if(count($category->products) > 0) {
+            return response('Невозможно удалить категорию.<br>Категория используется в товарах.', 500);
+        }
+
         $category->delete();
     }
 }
