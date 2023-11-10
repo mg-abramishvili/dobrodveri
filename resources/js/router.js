@@ -17,8 +17,7 @@ import Styles from './components/admin/styles/Index.vue'
 import StyleMaster from './components/admin/styles/Master.vue'
 
 import Factories from './components/admin/factories/Index.vue'
-import FactoryCreate from './components/admin/factories/Create.vue'
-import FactoryEdit from './components/admin/factories/Edit.vue'
+import FactoryMaster from './components/admin/factories/Master.vue'
 
 import Constructs from './components/admin/constructs/Index.vue'
 import ConstructCreate from './components/admin/constructs/Create.vue'
@@ -122,14 +121,9 @@ const routes = [
         component: Factories
     },
     {
-        path: '/admin/factories/create',
-        name: 'FactoryCreate',
-        component: FactoryCreate
-    },
-    {
-        path: '/admin/factory/:id',
-        name: 'FactoryEdit',
-        component: FactoryEdit
+        path: '/admin/factory-master/:id?',
+        name: 'FactoryMaster',
+        component: FactoryMaster
     },
     {
         path: '/admin/constructs',

@@ -119,8 +119,6 @@ export default {
                 this.views.loading = false
             })
             .catch(errors => {
-                this.views.saveButton = true
-                
                 return this.$swal({
                     text: errors.response.data ? errors.response.data : errors,
                     icon: 'error',

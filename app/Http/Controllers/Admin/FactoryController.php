@@ -72,9 +72,8 @@ class FactoryController extends Controller
     {
         $factory = Factory::find($id);
 
-        if(count($factory->products))
-        {
-            return response('Фабрику нельзя удалить - к ней привязаны товары', 500);
+        if(count($factory->products) > 0) {
+            return response('Невозможно удалить фабрику.<br>Фабрика используется в товарах.', 500);
         }
 
         $factory->delete();

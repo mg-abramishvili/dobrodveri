@@ -1,5 +1,7 @@
-<template>         
-    <div class="subheader w-100">
+<template>
+    <Loader v-if="views.loading"></Loader>
+
+    <div v-if="!views.loading" class="subheader w-100">
         <div class="row align-items-center">
             <div class="col-12 col-md-6">
                 <h1>
@@ -8,13 +10,15 @@
                             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
                     </router-link>
-                    Новая фабрика
+
+                    <template v-if="$route.params.id">{{ factory.name }}</template>
+                    <template v-else>Новая фабрика</template>
                 </h1>
             </div>
         </div>
     </div>
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+    <div v-if="!views.loading" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
         <div class="w-100">
             <div class="box px-4 py-4 mb-4">
                 <div class="box-tab-content">
@@ -27,7 +31,7 @@
                         <label class="form-label">Символьный код</label>
                         <input v-model="slug" type="text" class="form-control">
                     </div>
-                    
+
                     <div class="mb-4">
                         <label class="form-label">Размер скидки</label>
                         <input v-model="coef" type="number" min="1" step="1" class="form-control">
@@ -44,16 +48,46 @@
 export default {
     data() {
         return {
+            factory: {},
+
             name: '',
             slug: '',
             coef: 1.00,
 
             views: {
+                loading: true,
                 saveButton: true,
             }
         }
     },
+    created() {
+        if(this.$route.params.id) {
+            this.loadFactory()
+        }
+
+        if(!this.$route.params.id) {
+            this.views.loading = false
+        }
+    },
     methods: {
+        loadFactory() {
+            axios.get(`/_admin/factory/${this.$route.params.id}`)
+            .then(response => {
+                this.factory = response.data
+
+                this.name = response.data.name
+                this.slug = response.data.slug
+                this.coef = response.data.coef
+
+                this.views.loading = false
+            })
+            .catch(errors => {
+                return this.$swal({
+                    text: errors.response.data ? errors.response.data : errors,
+                    icon: 'error',
+                })
+            })
+        },
         slugify() {
             if(this.name) {
                 this.slug = this.$filters.slugify(this.name)
@@ -72,6 +106,12 @@ export default {
                     icon: 'error',
                 })
             }
+            if(!this.slug) {
+                return this.$swal({
+                    text: 'Укажите цвет',
+                    icon: 'error',
+                })
+            }
             if(!this.coef) {
                 return this.$swal({
                     text: 'Укажите размер скидки',
@@ -81,31 +121,43 @@ export default {
 
             this.views.saveButton = false
 
-            axios.post('/_admin/factories', {
+            let postData = {
                 name: this.name,
                 slug: this.slug,
                 coef: this.coef,
-            })
-            .then(response => {
-                this.views.saveButton = true
-                this.$router.push({ name: 'Factories' })
-            })
-            .catch(errors => {
-                this.views.saveButton = true
+            }
 
-                let errorMessage = ''
-
-                if(errors.response.data) {
-                    errorMessage = errors.response.data
-                } else {
-                    errorMessage = errors
-                }
-
-                return this.$swal({
-                    text: errorMessage,
-                    icon: 'error',
+            if(this.$route.params.id) {
+                axios.put(`/_admin/factory/${this.$route.params.id}/update`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'Factories' })
                 })
-            })
+                .catch(errors => {
+                    this.views.saveButton = true
+    
+                    return this.$swal({
+                        text: errors.response.data ? errors.response.data : errors,
+                        icon: 'error',
+                    })
+                })
+            }
+
+            if(!this.$route.params.id) {
+                axios.post(`/_admin/factories`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'Factories' })
+                })
+                .catch(errors => {
+                    this.views.saveButton = true
+    
+                    return this.$swal({
+                        text: errors.response.data ? errors.response.data : errors,
+                        icon: 'error',
+                    })
+                })
+            }
         },
     },
 }
