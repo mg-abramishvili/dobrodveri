@@ -43,19 +43,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-lg-6 mb-4">
-                        <label class="form-label">Категория</label>
-                        <select v-model="selected.category" class="form-select" :disabled="editMode == true">
-                            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-                        </select>
-                    </div>
+                    <SelectCategory />
+
                     <div class="col-12 col-lg-3 mb-4">
                         <label class="form-label">Цена</label>
                         <input v-model="price" type="number" min="0" class="form-control">
                     </div>
                     <div class="col-12 col-lg-3 mb-4">
                         <label class="form-label">Старая цена</label>
-                        <input v-model="old_price" type="number" min="0" class="form-control" disabled>
+                        <input v-model="oldPrice" type="number" min="0" class="form-control" disabled>
                     </div>
                 </div>
 
@@ -66,33 +62,9 @@
             </div>
             
             <div v-show="views.currentTab == 'characteristics'" class="box-tab-content">
-                <div class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Наличие</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.balance" class="form-select">
-                            <option value="В наличии в Уфе">В наличии в Уфе</option>
-                            <option value="3-7 дней">3-7 дней</option>
-                            <option value="7-14 дней">7-14 дней</option>
-                            <option value="15-30 дней">15-30 дней</option>
-                        </select>
-                    </div>
-                </div>
+                <SelectBalance />
 
-                <div v-if="selected.category == 1" class="row align-items-center my-4">
-                    <div class="col-12 col-lg-5">
-                        <label class="form-label">Тип</label>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <select v-model="selected.type" class="form-select">
-                            <option value="">Не выбрано</option>
-                            <option v-for="type in types" :value="type.id" :key="type.id">
-                                {{ type.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <SelectType v-if="selected.category && selected.category == 1" />
 
                 <div v-if="selected.category == 1" class="row align-items-center my-4">
                     <div class="col-12 col-lg-5">
@@ -336,6 +308,9 @@
 </template>
 
 <script>
+import SelectCategory from './master/SelectCategory.vue'
+import SelectBalance from './master/SelectBalance.vue'
+import SelectType from './master/SelectType.vue'
 import SkuGenerator from './master/SkuGenerator.vue'
 import SkuItem from './master/SkuItem.vue'
 
@@ -366,9 +341,7 @@ export default {
             discount: '',
             sale: '',
             special: '',
-
-            categories: [],
-            types: [],
+            
             styles: [],
             factories: [],
             surfaces: [],
@@ -469,7 +442,7 @@ export default {
                 return false
             }
         },
-        old_price() {
+        oldPrice() {
             if(this.product.factory && this.product.factory.coef) {
                 return Math.ceil((parseInt(this.price) * 100 / (100 - parseInt(this.product.factory.coef)) / 10)) * 10
             } else {
@@ -478,27 +451,9 @@ export default {
         },
     },
     created() {
-        this.loadCategories()
+        this.loadFactories()
     },
     methods: {
-        loadCategories() {
-            axios
-            .get(`/_admin/categories`)
-            .then(response => {
-                this.categories = response.data
-
-                this.loadTypes()
-            })
-        },
-        loadTypes() {
-            axios
-            .get(`/_admin/types`)
-            .then(response => {
-                this.types = response.data
-
-                this.loadFactories()
-            })
-        },
         loadFactories() {
             axios
             .get(`/_admin/factories`)
@@ -675,7 +630,7 @@ export default {
                 name: this.name,
                 slug: this.slug,
                 price: this.price,
-                old_price: this.old_price,
+                old_price: this.oldPrice,
                 category: this.selected.category,
                 type: this.selected.type,
                 surface: this.selected.surface,
@@ -767,6 +722,9 @@ export default {
         },
     },
     components: {
+        SelectCategory,
+        SelectBalance,
+        SelectType,
         SkuGenerator,
         SkuItem,
         FilePond
