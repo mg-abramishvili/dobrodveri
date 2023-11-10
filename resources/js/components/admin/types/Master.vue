@@ -10,7 +10,9 @@
                             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
                     </router-link>
-                    {{ type.name }}
+
+                    <template v-if="$route.params.id">{{ type.name }}</template>
+                    <template v-else>Новый цвет</template>
                 </h1>
             </div>
         </div>
@@ -53,7 +55,13 @@ export default {
         }
     },
     created() {
-        this.loadType()
+        if(this.$route.params.id) {
+            this.loadType()
+        }
+        
+        if(!this.$route.params.id) {
+            this.views.loading = false
+        }
     },
     methods: {
         loadType() {
@@ -67,7 +75,10 @@ export default {
                 this.views.loading = false
             })
             .catch(errors => {
-                //
+                return this.$swal({
+                    text: errors.response.data ? errors.response.data : errors,
+                    icon: 'error',
+                })
             })
         },
         slugify() {
@@ -97,30 +108,42 @@ export default {
 
             this.views.saveButton = false
 
-            axios.put(`/_admin/type/${this.$route.params.id}/update`, {
+            let postData = {
                 name: this.name,
-                slug: this.slug
-            })
-            .then(response => {
-                this.views.saveButton = true
-                this.$router.push({ name: 'Types' })
-            })
-            .catch(errors => {
-                this.views.saveButton = true
+                slug: this.slug,
+            }
 
-                let errorMessage = ''
-
-                if(errors.response.data) {
-                    errorMessage = errors.response.data
-                } else {
-                    errorMessage = errors
-                }
-
-                return this.$swal({
-                    text: errorMessage,
-                    icon: 'error',
+            if(this.$route.params.id) {
+                axios.put(`/_admin/type/${this.$route.params.id}/update`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'Types' })
                 })
-            })
+                .catch(errors => {
+                    this.views.saveButton = true
+                
+                    return this.$swal({
+                        text: errors.response.data ? errors.response.data : errors,
+                        icon: 'error',
+                    })
+                })
+            }
+
+            if(!this.$route.params.id) {
+                axios.post(`/_admin/types`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'Types' })
+                })
+                .catch(errors => {
+                    this.views.saveButton = true
+                
+                    return this.$swal({
+                        text: errors.response.data ? errors.response.data : errors,
+                        icon: 'error',
+                    })
+                })
+            }
         },
     },
 }

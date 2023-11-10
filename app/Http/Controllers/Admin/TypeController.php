@@ -68,6 +68,10 @@ class TypeController extends Controller
     {
         $type = Type::find($id);
 
+        if(count($type->products) > 0) {
+            return response('Невозможно удалить тип.<br>Тип используется в товарах.', 500);
+        }
+
         $type->delete();
     }
 }

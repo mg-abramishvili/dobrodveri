@@ -26,8 +26,7 @@ import Surfaces from './components/admin/surfaces/Index.vue'
 import SurfaceMaster from './components/admin/surfaces/Master.vue'
 
 import Types from './components/admin/types/Index.vue'
-import TypeCreate from './components/admin/types/Create.vue'
-import TypeEdit from './components/admin/types/Edit.vue'
+import TypeMaster from './components/admin/types/Master.vue'
 
 import Purposes from './components/admin/purposes/Index.vue'
 import PurposeCreate from './components/admin/purposes/Create.vue'
@@ -148,14 +147,9 @@ const routes = [
         component: Types
     },
     {
-        path: '/admin/types/create',
-        name: 'TypeCreate',
-        component: TypeCreate
-    },
-    {
-        path: '/admin/type/:id',
-        name: 'TypeEdit',
-        component: TypeEdit
+        path: '/admin/type-master/:id?',
+        name: 'TypeMaster',
+        component: TypeMaster
     },
     {
         path: '/admin/purposes',
