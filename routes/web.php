@@ -153,6 +153,7 @@ Route::delete('_admin/review/{id}/delete', [App\Http\Controllers\Admin\ReviewCon
 
 // ADMIN PAGES
 Route::get('_admin/pages', [App\Http\Controllers\Admin\PageController::class, 'index']);
+Route::post('_admin/pages', [App\Http\Controllers\Admin\PageController::class, 'store']);
 Route::get('_admin/page/{id}', [App\Http\Controllers\Admin\PageController::class, 'page']);
 Route::put('_admin/page/{id}/update', [App\Http\Controllers\Admin\PageController::class, 'update']);
 

@@ -18,6 +18,23 @@ class PageController extends Controller
         return Page::find($id);
     }
 
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'slug' => 'required',
+            'text' => 'required',
+        ]);
+
+        $page = new Page();
+        
+        $page->name = $request->name;
+        $page->slug = $request->slug;
+        $page->text = $request->text;
+
+        $page->save();
+    }
+
     public function update($id, Request $request)
     {
         $this->validate($request, [
