@@ -68,6 +68,10 @@ class InnerDecorController extends Controller
     {
         $innerdecor = InnerDecor::find($id);
 
+        if(count($innerdecor->skus) > 0) {
+            return response('Невозможно удалить отделку.<br>Отделка используется в товарах.', 500);
+        }
+
         $innerdecor->delete();
     }
 }

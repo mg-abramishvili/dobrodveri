@@ -68,6 +68,10 @@ class FurnitureTypeController extends Controller
     {
         $furnituretype = FurnitureType::find($id);
 
+        if(count($furnituretype->products) > 0) {
+            return response('Невозможно удалить тип фурнитуры.<br>Тип используется в товарах.', 500);
+        }
+
         $furnituretype->delete();
     }
 }
