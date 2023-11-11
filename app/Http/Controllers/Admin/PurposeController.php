@@ -68,6 +68,10 @@ class PurposeController extends Controller
     {
         $purpose = Purpose::find($id);
 
+        if(count($purpose->products) > 0) {
+            return response('Невозможно удалить назначение.<br>Назначение используется в товарах.', 500);
+        }
+
         $purpose->delete();
     }
 }

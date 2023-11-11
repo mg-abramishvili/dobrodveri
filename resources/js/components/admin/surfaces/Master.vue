@@ -12,7 +12,7 @@
                     </router-link>
 
                     <template v-if="$route.params.id">{{ surface.name }}</template>
-                    <template v-else>Новый цвет</template>
+                    <template v-else>Новое покрытие</template>
                 </h1>
             </div>
         </div>

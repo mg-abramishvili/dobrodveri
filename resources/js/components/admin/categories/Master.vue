@@ -12,7 +12,7 @@
                     </router-link>
 
                     <template v-if="$route.params.id">{{ category.name }}</template>
-                    <template v-else>Новый цвет</template>
+                    <template v-else>Новая категория</template>
                 </h1>
             </div>
         </div>
