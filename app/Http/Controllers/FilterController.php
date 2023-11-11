@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Surface;
 use App\Models\Type;
+use App\Models\Style;
+use App\Models\Surface;
 use Illuminate\Http\Request;
 
 class FilterController extends Controller
@@ -12,18 +13,24 @@ class FilterController extends Controller
     {
         $category_id = $request->category_id;
         $types = $request->types;
+        $styles = $request->styles;
         $surfaces = $request->surfaces;
 
-        $filteredTypes = Type::withCount(['products' => function ($query) use($types, $surfaces) {
-            $query->withFilters($types, $surfaces);
+        $filteredTypes = Type::withCount(['products' => function ($query) use($types, $styles, $surfaces) {
+            $query->withFilters($types, $styles, $surfaces);
         }])->get();
 
-        $filteredSurfaces = Surface::withCount(['products' => function ($query) use($types, $surfaces) {
-            $query->withFilters($types, $surfaces);
+        $filteredStyles = Style::withCount(['products' => function ($query) use($types, $styles, $surfaces) {
+            $query->withFilters($types, $styles, $surfaces);
+        }])->get();
+
+        $filteredSurfaces = Surface::withCount(['products' => function ($query) use($types, $styles, $surfaces) {
+            $query->withFilters($types, $styles, $surfaces);
         }])->get();
 
         return response()->json([
             'types' => $filteredTypes,
+            'styles' => $filteredStyles,
             'surfaces' => $filteredSurfaces,
         ]);
     }

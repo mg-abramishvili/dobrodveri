@@ -21,6 +21,17 @@
         </div>
 
         <div v-if="category == 1" class="filter-box">
+            <p class="fw-bold mb-1">Стиль</p>
+            
+            <div v-for="style in styles" class="form-check">
+                <input v-model="selected.styles" class="form-check-input" type="checkbox" :value="style.slug" :id="'style_' + style.slug" :disabled="style.products_count == 0">
+                <label class="form-check-label" :class="{ 'form-check-label-disabled': style.products_count == 0 }" :for="'style_' + style.slug">
+                    {{ style.name }} <small>{{ style.products_count }}</small>
+                </label>
+            </div>
+        </div>
+
+        <div v-if="category == 1" class="filter-box">
             <p class="fw-bold mb-1">Покрытие</p>
             
             <div v-for="surface in surfaces" class="form-check">
@@ -42,6 +53,7 @@ export default {
     data() {
         return {
             types: [],
+            styles: [],
             surfaces: [],
 
             selected: {
@@ -50,6 +62,7 @@ export default {
                 order: '',
                 order_direction: '',
                 types: [],
+                styles: [],
                 surfaces: [],
             },
 
@@ -76,11 +89,14 @@ export default {
             axios.get(`/_filterdata`, {
                 params: {
                     category_id: this.category.id,
+                    types: this.filterParams.types,
+                    styles: this.filterParams.styles,
                     surfaces: this.filterParams.surfaces,
                 }
             })
             .then(response => {
                 this.types = response.data.types
+                this.styles = response.data.styles
                 this.surfaces = response.data.surfaces
 
                 this.views.loading = false

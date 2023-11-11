@@ -39,15 +39,21 @@ class CategoryController extends Controller
         $order = $request->order;
         $order_direction = $request->order_direction;
         $types = $request->types;
+        $styles = $request->styles;
         $surfaces = $request->surfaces;
 
-        if($types || $surfaces || $price_from || $price_to)
+        if($types || $styles || $surfaces || $price_from || $price_to)
         {
             return Category::with([
-                    'products' => function($q) use($types, $surfaces, $price_from, $price_to, $order, $order_direction) {
+                    'products' => function($q) use($types, $styles, $surfaces, $price_from, $price_to, $order, $order_direction) {
                         if($types) {
                             $q->whereHas('type', function($q) use($types) {
                                 $q->whereIn('slug', $types);
+                            });
+                        }
+                        if($styles) {
+                            $q->whereHas('style', function($q) use($styles) {
+                                $q->whereIn('slug', $styles);
                             });
                         }
                         if($surfaces) {

@@ -41,6 +41,7 @@ export default {
                 order: 'price',
                 order_direction: 'asc',
                 types: [],
+                styles: [],
                 surfaces: [],
             },
 
