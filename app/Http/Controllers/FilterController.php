@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Color;
-use App\Models\Glass;
-use App\Models\InnerDecor;
-use App\Models\Purpose;
 use App\Models\Surface;
 use App\Models\Type;
-use App\Models\FurnitureType;
 use Illuminate\Http\Request;
 
 class FilterController extends Controller
 {
-    public function index($category_id)
+    public function index(Request $request)
     {
+        $category_id = $request->category_id;
+        $types = $request->types;
+        $surfaces = $request->surfaces;
+
+        $filteredTypes = Type::withCount(['products' => function ($query) use($types, $surfaces) {
+            $query->withFilters($types, $surfaces);
+        }])->get();
+
+        $filteredSurfaces = Surface::withCount(['products' => function ($query) use($types, $surfaces) {
+            $query->withFilters($types, $surfaces);
+        }])->get();
+
         return response()->json([
-            'colors' => Color::where(function ($q) use($category_id) { $q->whereRelation('skus.product', 'category_id', $category_id); })->get(),
-            'glasses' => Glass::all(),
-            'types' => Type::all(),
-            'innerdecors' => InnerDecor::all(),
-            'purposes' => Purpose::all(),
-            'surfaces' => Surface::all(),
-            'furnituretypes' => FurnitureType::all(),
+            'types' => $filteredTypes,
+            'surfaces' => $filteredSurfaces,
         ]);
     }
 }

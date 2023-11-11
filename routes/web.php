@@ -25,7 +25,7 @@ Route::get('catalog/{categorySlug}', [App\Http\Controllers\CategoryController::c
 Route::get('_catalog/{categoryID}', [App\Http\Controllers\CategoryController::class, 'categoryApi']);
 
 // FOR FILTER
-Route::get('_filterdata/{category_id}', [App\Http\Controllers\FilterController::class, 'index']);
+Route::get('_filterdata', [App\Http\Controllers\FilterController::class, 'index']);
 
 // CATALOG PRODUCT
 Route::get('product/{productSlug}', [App\Http\Controllers\ProductController::class, 'product'])->name('product');

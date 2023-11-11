@@ -2,5 +2,7 @@
 @section('title', 'Добродвери')
 
 @section('content')
-    <p>home page</p>
+    <div class="container">
+        <p>home page</p>
+    </div>
 @endsection

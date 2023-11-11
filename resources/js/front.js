@@ -20,4 +20,4 @@ app.component('create-lead', Lead)
 app.component('product-review', ProductReview)
 
 app.config.globalProperties.emitter = emitter
-app.mount('#app')
+app.mount('#front')

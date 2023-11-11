@@ -1,6 +1,8 @@
 @extends('layouts.front')
-@section('title', 'Добродвери')
+@section('title', 'Товар - Добродвери')
 
 @section('content')
-    <p>product page</p>
+    <div class="container">
+        <p>product page</p>
+    </div>
 @endsection

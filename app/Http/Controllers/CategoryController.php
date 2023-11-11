@@ -16,7 +16,7 @@ class CategoryController extends Controller
             }])
         ->get();
 
-        return view('categories.index', compact('categories'));
+        return view('categories', compact('categories'));
     }
 
     public function category($categorySlug)
@@ -25,12 +25,11 @@ class CategoryController extends Controller
             ->where('slug', $categorySlug)
             ->with([
                 'products' => function($query) {
-                    $query->where('is_active', true);
+                    $query->where('is_active', 1);
                 }])
-            ->get()
             ->first();
 
-        return view('categories.category', compact('category'));
+        return view('category', compact('category'));
     }
 
     public function categoryApi($categoryID, Request $request)
@@ -41,46 +40,22 @@ class CategoryController extends Controller
         $order_direction = $request->order_direction;
         $types = $request->types;
         $surfaces = $request->surfaces;
-        $purposes = $request->purposes;
-        $furnituretypes = $request->furnituretypes;
-        $colors = $request->colors;
-        $glasses = $request->glasses;
-        $innerdecors = $request->innerdecors;
 
-        if($types || $surfaces || $purposes || $furnituretypes || $colors || $glasses || $innerdecors || $price_from || $price_to)
+        if($types || $surfaces || $price_from || $price_to)
         {
             return Category::with([
-                    'products' => function($q) use($types, $surfaces, $colors, $glasses, $innerdecors, $price_from, $purposes, $furnituretypes, $price_to, $order, $order_direction) {
-                        if($order && $order_direction) {
-                            $q->where('is_active', true)->orderBy($order, $order_direction);
-                        } else {
-                            $q->where('is_active', true);
-                        }
-
+                    'products' => function($q) use($types, $surfaces, $price_from, $price_to, $order, $order_direction) {
                         if($types) {
-                            $q->whereRelation('type', 'slug');
-                            foreach($types as $type) {
-                                $q->orWhereRelation('type', 'slug', $type);
-                            }
+                            $q->whereHas('type', function($q) use($types) {
+                                $q->whereIn('slug', $types);
+                            });
                         }
                         if($surfaces) {
-                            $q->whereRelation('surface', 'slug');
-                            foreach($surfaces as $surface) {
-                                $q->orWhereRelation('surface', 'slug', $surface);
-                            }
+                            $q->whereHas('surface', function($q) use($surfaces) {
+                                $q->whereIn('slug', $surfaces);
+                            });
                         }
-                        if($purposes) {
-                            $q->whereRelation('purpose', 'slug');
-                            foreach($purposes as $purpose) {
-                                $q->orWhereRelation('purpose', 'slug', $purpose);
-                            }
-                        }
-                        if($furnituretypes) {
-                            $q->whereRelation('furnituretype', 'slug');
-                            foreach($furnituretypes as $furnituretype) {
-                                $q->orWhereRelation('furnituretype', 'slug', $furnituretype);
-                            }
-                        }
+
                         if($price_from) {
                             $q->where('price', '>=', $price_from);
                         }
@@ -88,27 +63,11 @@ class CategoryController extends Controller
                             $q->where('price', '<=', $price_to);
                         }
 
-                        $q->with([
-                            'skus' => function($q) use($colors, $glasses, $innerdecors) {
-                                if($colors) {
-                                    $q->whereHas('color', function($q) use($colors) {
-                                        $q->whereIn('slug', $colors);
-                                    })->with('color');
-                                }
+                        $q->where('is_active', 1);
 
-                                if($glasses) {
-                                    $q->whereHas('glass', function($q) use($glasses) {
-                                        $q->whereIn('slug', $glasses);
-                                    })->with('glass');
-                                }
-
-                                if($innerdecors) {
-                                    $q->whereHas('innerdecor', function($q) use($innerdecors) {
-                                        $q->whereIn('slug', $innerdecors);
-                                    })->with('innerdecor');
-                                }
-                            }
-                        ]);
+                        if($order && $order_direction) {
+                            $q->orderBy($order, $order_direction);
+                        }
                     }
                 ]
             )
@@ -118,10 +77,10 @@ class CategoryController extends Controller
         return Category::query()
             ->with([
                 'products' => function($query) use($order, $order_direction) {
+                    $query->where('is_active', 1)->with('skus');
+                    
                     if($order && $order_direction) {
-                        $query->where('is_active', true)->with('skus')->orderBy($order, $order_direction);
-                    } else {
-                        $query->where('is_active', true)->with('skus');
+                        $query->orderBy($order, $order_direction);
                     }
                 }])
             ->find($categoryID);
