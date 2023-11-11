@@ -10,7 +10,9 @@
                             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
                     </router-link>
-                    Слайд #{{ slide.id }}
+                    
+                    <template v-if="$route.params.id">Слайд #{{ slide.id }}</template>
+                    <template v-else>Новый слайд</template>
                 </h1>
             </div>
         </div>
@@ -44,7 +46,7 @@
                             v-bind:allow-multiple="false"
                             v-bind:allow-reorder="false"
                             accepted-file-types="image/jpeg, image/png"
-                            :server="server"
+                            :server="filepondServer"
                             v-bind:files="filepond_image_edit"
                         />
                     </div>
@@ -63,6 +65,8 @@ import "filepond/dist/filepond.min.css"
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
 import FilePondPluginImagePreview from "filepond-plugin-image-preview"
+
+import FilepondServer from "../FilepondServer"
 
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
@@ -86,51 +90,18 @@ export default {
                 loading: true,
                 saveButton: true,
             },
-
-            server: {
-                remove(filename, load) {
-                    load('1');
-                },
-                process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-                    const formData = new FormData();
-                    formData.append(fieldName, file, file.name);
-                    const request = new XMLHttpRequest();
-                    request.open('POST', '/_admin/file/upload');
-                    request.upload.onprogress = (e) => {
-                        progress(e.lengthComputable, e.loaded, e.total);
-                    };
-                    request.onload = function() {
-                        if (request.status >= 200 && request.status < 300) {
-                            load(request.responseText);
-                        }
-                        else {
-                            error('oh no');
-                        }
-                    };
-                    request.send(formData);
-                    return {
-                        abort: () => {
-                            request.abort();
-                            abort();
-                        }
-                    };
-                },
-                revert: (filename, load) => {
-                    load(filename)
-                },
-                load: (source, load, error, progress, abort, headers) => {
-                    var myRequest = new Request(source);
-                    fetch(myRequest).then(function(response) {
-                        response.blob().then(function(myBlob) {
-                            load(myBlob)
-                        });
-                    });
-                },
-            },
+            
+            filepondServer: FilepondServer
         }
     },
     created() {
-        this.loadSlide()
+        if(this.$route.params.id) {
+            this.loadSlide()
+        }
+        
+        if(!this.$route.params.id) {
+            this.views.loading = false
+        }
     },
     methods: {
         loadSlide() {
@@ -156,7 +127,10 @@ export default {
                 this.views.loading = false
             })
             .catch(errors => {
-                //
+                return this.$swal({
+                    text: errors.response.data ? errors.response.data : errors,
+                    icon: 'error',
+                })
             })
         },
         save() {
@@ -179,38 +153,56 @@ export default {
 
             this.views.saveButton = false
 
-            axios.put(`/_admin/mainslide/${this.$route.params.id}/update`, {
+            let postData = {
                 header: this.header,
                 text: this.text,
                 image: this.image,
                 link: this.link,
-            })
-            .then(response => {
-                this.views.saveButton = true
-                this.$router.push({ name: 'MainSlider' })
-            })
-            .catch(errors => {
-                this.views.saveButton = true
+            }
 
-                let errorMessage = ''
-
-                if(errors.response.data) {
-                    errorMessage = errors.response.data
-                } else {
-                    errorMessage = errors
-                }
-
-                return this.$swal({
-                    text: errorMessage,
-                    icon: 'error',
+            if(this.$route.params.id) {
+                axios.put(`/_admin/mainslide/${this.$route.params.id}/update`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'MainSlider' })
                 })
-            })
+                .catch(errors => {
+                    this.views.saveButton = true
+                
+                    return this.$swal({
+                        text: errors.response.data ? errors.response.data : errors,
+                        icon: 'error',
+                    })
+                })
+            }
+
+            if(!this.$route.params.id) {
+                axios.post(`/_admin/mainslides`, postData)
+                .then(response => {
+                    this.views.saveButton = true
+                    this.$router.push({ name: 'MainSlider' })
+                })
+                .catch(errors => {
+                    this.views.saveButton = true
+                
+                    return this.$swal({
+                        text: errors.response.data ? errors.response.data : errors,
+                        icon: 'error',
+                    })
+                })
+            }
         },
         del() {
-            if (confirm("Точно удалить?")) {
+            if (confirm("Точно удалить слайд?")) {
                 axios.delete(`/_admin/mainslide/${this.$route.params.id}/delete`)
                 .then(response => {
                     this.$router.push({ name: 'MainSlider' })
+                })
+                .catch(errors => {
+                    return this.$swal({
+                        html: errors.response.data ? errors.response.data : errors,
+                        icon: 'error',
+                    })
                 })
             }
         },

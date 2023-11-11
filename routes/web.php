@@ -137,7 +137,7 @@ Route::get('_admin/sizes', [App\Http\Controllers\Admin\SizeController::class, 'i
 
 // ADMIN MAINSLIDER
 Route::get('_admin/mainslider', [App\Http\Controllers\Admin\MainSliderController::class, 'index']);
-Route::post('_admin/mainslider', [App\Http\Controllers\Admin\MainSliderController::class, 'store']);
+Route::post('_admin/mainslides', [App\Http\Controllers\Admin\MainSliderController::class, 'store']);
 Route::get('_admin/mainslide/{id}', [App\Http\Controllers\Admin\MainSliderController::class, 'slide']);
 Route::put('_admin/mainslide/{id}/update', [App\Http\Controllers\Admin\MainSliderController::class, 'update']);
 Route::delete('_admin/mainslide/{id}/delete', [App\Http\Controllers\Admin\MainSliderController::class, 'delete']);
