@@ -123,7 +123,7 @@ Route::get('_admin/furnituretypes', [App\Http\Controllers\Admin\FurnitureTypeCon
 Route::get('_admin/furnituretype/{id}', [App\Http\Controllers\Admin\FurnitureTypeController::class, 'furnituretype']);
 Route::post('_admin/furnituretypes', [App\Http\Controllers\Admin\FurnitureTypeController::class, 'store']);
 Route::put('_admin/furnituretype/{id}/update', [App\Http\Controllers\Admin\FurnitureTypeController::class, 'update']);
-Route::delete('_admin/furnituretypes/{id}/delete', [App\Http\Controllers\Admin\FurnitureTypeController::class, 'delete']);
+Route::delete('_admin/furnituretype/{id}/delete', [App\Http\Controllers\Admin\FurnitureTypeController::class, 'delete']);
 
 // ADMIN GLASSES
 Route::get('_admin/glasses', [App\Http\Controllers\Admin\GlassController::class, 'index']);
