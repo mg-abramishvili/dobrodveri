@@ -22,12 +22,10 @@ Route::post('review', [App\Http\Controllers\ReviewController::class, 'store'])->
 // CATALOG
 Route::get('catalog', [App\Http\Controllers\CategoryController::class, 'index'])->name('catalog');
 Route::get('catalog/{categorySlug}', [App\Http\Controllers\CategoryController::class, 'category'])->name('category');
-Route::get('_catalog/{categoryID}', [App\Http\Controllers\CategoryController::class, 'categoryApi']);
 
-// FOR FILTER
-Route::get('_filterdata', [App\Http\Controllers\FilterController::class, 'index']);
-
-// CATALOG PRODUCT
+// PRODUCTS
+Route::get('products', [App\Http\Controllers\ProductController::class, 'index']);
+Route::get('_products', [App\Http\Controllers\ProductController::class, 'indexData']);
 Route::get('product/{productSlug}', [App\Http\Controllers\ProductController::class, 'product'])->name('product');
 
 // ADMIN

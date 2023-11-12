@@ -1,6 +1,6 @@
 <template>
     <aside class="category-filter">
-        <CategoryFilter :category="category.id" :filterParams="filterParams" />
+        <ProductFilter :category="category.id" :types="types" :styles="styles" :surfaces="surfaces" :filterParams="filterParams" />
 
         <button @click="loadProducts()" class="category-filter-button">Применить фильтр</button>
     </aside>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import CategoryFilter from './CategoryFilter.vue'
+import ProductFilter from './ProductFilter.vue'
 
 import Loader from './Loader.vue'
 
@@ -34,8 +34,12 @@ export default {
     data() {
         return {
             products: [],
+            types: [],
+            styles: [],
+            surfaces: [],
 
             filterParams: {
+                category_id: this.category.id,
                 price_from: 0,
                 price_to: 100000,
                 order: 'price',
@@ -55,8 +59,19 @@ export default {
     },
     methods: {
         loadProducts() {
-            axios.get(`/_catalog/${this.category.id}`, { params: this.filterParams })
+            axios.get(`/_products`, {
+                params: {
+                    category_id: this.filterParams.category_id,
+                    types: this.filterParams.types,
+                    styles: this.filterParams.styles,
+                    surfaces: this.filterParams.surfaces,
+                }
+            })
             .then(response => {
+                this.types = response.data.types
+                this.styles = response.data.styles
+                this.surfaces = response.data.surfaces
+
                 this.products = response.data.products
 
                 window.scrollTo(0, 0)
@@ -66,7 +81,7 @@ export default {
         },
     },
     components: {
-        CategoryFilter,
+        ProductFilter,
         Loader
     },
 }

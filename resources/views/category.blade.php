@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container category">
-        <catalog-category
+        <products
             :category="{{ $category }}"
 
             @if(request()->price_from)

@@ -2,7 +2,6 @@
     <Loader v-if="views.loading" />
 
     <div v-else>
-        <button @click="loadFilterData()">test</button>
         <div class="filter-box">
             <p class="fw-bold mb-1">Цена</p>
 
@@ -49,13 +48,9 @@ import Loader from './Loader.vue'
 import PriceRangeSlider from './PriceRangeSlider.vue'
 
 export default {
-    props: ['category', 'filterParams'],
+    props: ['category', 'types', 'styles', 'surfaces', 'filterParams'],
     data() {
         return {
-            types: [],
-            styles: [],
-            surfaces: [],
-
             selected: {
                 price_from: '',
                 price_to: '',
@@ -67,7 +62,7 @@ export default {
             },
 
             views: {
-                loading: true,
+                loading: false,
             }
         }
     },
@@ -80,28 +75,7 @@ export default {
         }
     },
     created() {
-        this.loadFilterData()
-
         this.selected = this.filterParams
-    },
-    methods: {
-        loadFilterData() {
-            axios.get(`/_filterdata`, {
-                params: {
-                    category_id: this.category.id,
-                    types: this.filterParams.types,
-                    styles: this.filterParams.styles,
-                    surfaces: this.filterParams.surfaces,
-                }
-            })
-            .then(response => {
-                this.types = response.data.types
-                this.styles = response.data.styles
-                this.surfaces = response.data.surfaces
-
-                this.views.loading = false
-            })
-        },
     },
     components: {
         Loader,
