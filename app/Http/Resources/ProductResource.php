@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'skus' => $this->skus,
             'colors' => ProductColorResource::collection($this->skus->unique('color_id')->values()->all()),
-            'glasses' => ProductGlassResource::collection($this->skus->unique('glass_id')->values()->all()),
+            'glasses' => ProductGlassResource::collection($this->skus->where('glass_id', '!=', null)->unique('glass_id')->values()->all()),
         ];
     }
 }

@@ -2,8 +2,12 @@
 @section('title', $product["name"] . ' - Добродвери')
 
 @section('content')
-    <div class="container">
-        <div class="product-detail">
+    <div class="container product-detail">
+        <div class="product-detail-image-sliders">
+            <product-slider :product="{{ json_encode($product) }}"></product-slider>
+        </div>
+
+        <div class="product-detail-desc">
             <h1>{{ $product["name"] }}</h1>
             
             <select-color-glass
