@@ -10,7 +10,7 @@
 
         <div class="category-products-list">
             <div v-for="product in products" class="products-list-item">
-                <a>
+                <a :href="'/product/' + product.slug">
                     <p class="products-list-item-name">
                         {{ product.name }}
                     </p>
