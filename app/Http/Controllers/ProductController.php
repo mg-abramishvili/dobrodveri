@@ -34,18 +34,18 @@ class ProductController extends Controller
         //     ])
         //     ->first();
 
-        // $product = Product::where('slug', $productSlug)->first();
+        $product = Product::where('slug', $productSlug)->first();
         
-        // $product->view_counter = $product->view_counter + 1;
+        $product->view_counter = $product->view_counter + 1;
         
-        // if($product->view_counter >= 50) {
-        //     $product->hit = true;
-        // }
+        if($product->view_counter >= 50) {
+            $product->hit = true;
+        }
         
-        // $product->save();
+        $product->save();
 
         $product = new ProductResource(Product::where('slug', $productSlug)->first());
-return $product;
+
         return view('product', compact('product'));
     }
 
