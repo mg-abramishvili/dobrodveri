@@ -44,49 +44,13 @@ import 'swiper/css'
 
 export default {
     props: ['product'],
-    data() {
-        return {
-            selected: {
-                color: '',
-                glass: '',
-            }
-        }
-    },
     mounted() {
-        if(!this.selected.color) {
-            this.selected.color = this.product.colors[0] ? this.product.colors[0] : null
-        }
-
-        this.emitter.on('product-color-select', (selectedColor) => {
-            this.selected.color = selectedColor
+        this.emitter.on('product-sku-index', (index) => {
+            this.swiperBig.slideTo(index)
+            
+            return this.markSelectedMiniSlideAsActive(index)
         })
-
-        this.emitter.on('product-glass-select', (selectedGlass) => {
-            this.selected.glass = selectedGlass
-        })
-    },
-    watch: {
-        selected: {
-            deep: true,
-            handler() {
-                if(this.selected.color && this.selected.glass) {
-                    let selectedSku = this.product.skus.find((sku) => sku.color_id == this.selected.color.id && sku.glass_id == this.selected.glass.id)
-
-                    this.swiperBig.slideTo(this.product.skus.indexOf(selectedSku))
-
-                    return this.markSelectedMiniSlideAsActive(this.product.skus.indexOf(selectedSku))
-                }
-
-                if(this.selected.color) {
-                    let selectedSku = this.product.skus.find((sku) => sku.color_id == this.selected.color.id)
-
-                    this.swiperBig.slideTo(this.product.skus.indexOf(selectedSku))
-
-                    return this.markSelectedMiniSlideAsActive(this.product.skus.indexOf(selectedSku))
-                }
-            }
-        }
-    },
+    },   
     methods: {
         OnSwiperBig(swiper) {
             this.swiperBig = swiper
@@ -95,6 +59,8 @@ export default {
             this.swiperMini = swiper
         },
         selectThumb(index) {
+            if(!index) { return }
+
             this.swiperBig.slideTo(index)
 
             this.markSelectedMiniSlideAsActive(index)
@@ -106,6 +72,8 @@ export default {
             this.swiperMini.slideNext()
         },
         markSelectedMiniSlideAsActive(index) {
+            if(!index) { return }
+
             let allMiniSlides = document.querySelectorAll('.product-detail-slider-mini .swiper-slide')
 
             allMiniSlides.forEach(s => {

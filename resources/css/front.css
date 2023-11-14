@@ -377,4 +377,49 @@ header .container {
 .product-detail-desc {
     width: 50%;
 }
+.product-colors-list,
+.product-glasses-list,
+.product-sizes-list,
+.product-types-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+.product-colors-list li,
+.product-glasses-list li,
+.product-sizes-list li,
+.product-types-list li {
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 5px
+}
+.product-color-button,
+.product-glass-button,
+.product-size-button,
+.product-type-button {
+    background: none;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 1;
+    margin: 0;
+    padding: 8px 12px
+}
+.product-color-button,
+.product-glass-button {
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 100%;
+    height: 32px;
+    line-height: 32px;
+    padding: 0;
+    width: 32px
+}
+.product-color-button_active,
+.product-glass-button_active,
+.product-size-button_active,
+.product-type-button_active {
+    border-color: #df3e3c
+}
 /* PRODUCT PAGE */
