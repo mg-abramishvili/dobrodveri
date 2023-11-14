@@ -104,5 +104,7 @@
         </div>
         
         @vite('resources/js/front.js')
+
+        @yield('scripts')
     </body>
 </html>

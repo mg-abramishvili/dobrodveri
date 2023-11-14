@@ -422,4 +422,14 @@ header .container {
 .product-type-button_active {
     border-color: #df3e3c
 }
+.product-detail-tabs {
+    width: 100%;
+    margin-top: 50px;
+}
+.product-detail-tab {
+    display: none;
+}
+.product-detail-tab-active {
+    display: block;
+}
 /* PRODUCT PAGE */
