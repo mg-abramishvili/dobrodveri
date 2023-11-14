@@ -282,7 +282,7 @@ header .container {
     margin-top: 40px;
 }
 .product-detail-image-sliders {
-    width: 50%;
+    width: 40%;
 }
 .product-detail-sliders-wrapper {
     display: flex;
@@ -375,7 +375,11 @@ header .container {
     margin-top: 3px;
 }
 .product-detail-desc {
-    width: 50%;
+    width: 60%;
+}
+.product-detail-name {
+    display: inline-flex;
+    width: 70%;
 }
 .product-colors-list,
 .product-glasses-list,
@@ -431,5 +435,21 @@ header .container {
 }
 .product-detail-tab-active {
     display: block;
+}
+.product-reviews-stars {
+    display: inline-flex;
+    width: 30%;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    text-align: right;
+    line-height: 1;
+}
+.product-reviews-stars svg {
+    width: 100px;
+    margin-right: 10px;
+}
+.product-reviews-stars span {
+    width: 100%;
 }
 /* PRODUCT PAGE */

@@ -44,9 +44,9 @@ class ProductController extends Controller
         
         $product->save();
 
-        $product = new ProductResource(Product::where('slug', $productSlug)->first());
+        $productResource = new ProductResource(Product::where('slug', $productSlug)->first());
 
-        return view('product', compact('product'));
+        return view('product', ['product' => json_encode($productResource)]);
     }
 
     public function indexData(Request $request)

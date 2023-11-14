@@ -5,14 +5,15 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductColorResource extends JsonResource
+class ProductReviewResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->color->id,
-            'name' => $this->color->name,
-            'image' => $this->color->image,
+            'id' => $this->id,
+            'name' => $this->name,
+            'text' => $this->text,
+            'rating' => $this->rating,
         ];
     }
 }

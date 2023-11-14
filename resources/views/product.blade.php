@@ -1,3 +1,7 @@
+@php
+    $product = json_decode($product, true);
+@endphp
+
 @extends('layouts.front')
 @section('title', $product["name"] . ' - Добродвери')
 
@@ -8,7 +12,9 @@
         </div>
 
         <div class="product-detail-desc">
-            <h1>{{ $product["name"] }}</h1>
+            <h1 class="product-detail-name">{{ $product["name"] }}</h1>
+
+            @include('productReviewsCounter ', ['reviews' => $product["reviews"], 'rating' => $product["rating"]])
             
             <select-color-glass
                 :product="{{ json_encode($product) }}"
@@ -31,7 +37,7 @@
             />
         </div>
 
-        <div class="product-detail-tabs">
+        <div class="product-detail-tabs" id="product-detail-tabs">
             <ul class="product-detail-tabs-buttons">
                 <li class="product-detail-tab-button">
                     <button onclick="selectTab('description')">Описание</button>
@@ -48,13 +54,17 @@
             </ul>
 
             <div class="product-detail-tab product-detail-tab-active product-detail-tab-description">
-                {!! $product->description !!}
+                {!! $product["description"] !!}
             </div>
             <div class="product-detail-tab product-detail-tab-attributes">
                 Характеристики
             </div>
             <div class="product-detail-tab product-detail-tab-reviews">
-                <product-reviews :product_id="{{ $product->id }}"></product-reviews>
+                @foreach($product["reviews"] as $review)
+                    {{ $review["text"] }}
+                @endforeach
+
+                <create-product-review :product_id="{{ $product['id'] }}" />
             </div>
             <div class="product-detail-tab product-detail-tab-specials">
                 Акции
@@ -73,6 +83,16 @@
         })
 
         document.getElementsByClassName("product-detail-tab-" + selectedTab)[0].classList.add('product-detail-tab-active');
+    }
+
+    function goToProductReviews() {
+        var tabsElmnt = document.getElementById("product-detail-tabs")
+
+        tabsElmnt.scrollIntoView()
+
+        setTimeout(() => {
+            selectTab('reviews')
+        }, 500)
     }
 </script>
 @endsection

@@ -4,6 +4,13 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
     plugins: [
+        vue({
+            template: {
+                transformAssetUrls: {
+                    includeAbsolute: false,
+                },
+            },
+        }),
         laravel({
             input: [
                 'resources/css/admin.css',
@@ -13,7 +20,6 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-        vue()
     ],
     resolve: {
         alias: {
