@@ -315,12 +315,12 @@ header .container {
 }
 .product-detail-slider-mini .swiper-slide {
     position: relative;
-    width: calc(100% - 4px);
+    width: 100%;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #eee;
+    box-shadow:inset 0px 0px 0px 1px #eee;
     padding: 0;
 }
 .product-detail-slider-mini .actvd {
