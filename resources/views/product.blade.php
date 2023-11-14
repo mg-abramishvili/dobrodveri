@@ -54,7 +54,7 @@
                 Характеристики
             </div>
             <div class="product-detail-tab product-detail-tab-reviews">
-                Отзывы
+                <product-reviews :product_id="{{ $product->id }}"></product-reviews>
             </div>
             <div class="product-detail-tab product-detail-tab-specials">
                 Акции
