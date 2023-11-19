@@ -426,6 +426,31 @@ header .container {
 .product-type-button_active {
     border-color: #df3e3c
 }
+.product-detail-tabs-buttons {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.product-detail-tab-button button {
+    box-shadow: none;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-right: 1px solid;
+    border-left: 0;
+    border-color: #ddd !important;
+    background-color: #f6f6f6;
+    padding: 14px 26px;
+}
+.product-detail-tab-button:nth-of-type(1) button {
+    border-left: 1px solid;
+}
+.product-detail-tab-button button:hover,
+.product-detail-tab-button button:focus {
+    cursor: pointer;
+    color: #df3e3c;
+    border-bottom-color: #df3e3c !important;
+}
 .product-detail-tabs {
     width: 100%;
     margin-top: 50px;

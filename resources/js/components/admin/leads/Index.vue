@@ -22,7 +22,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="lead in leads" :key="lead.id">
-                            <td class="w-25">{{ $dayjs(lead.created_at).locale('ru').utcOffset(5).format('DD-MM-YYYY H:mm') }}</td>
+                            <td class="w-25">{{ $filters.date(lead.created_at) }}</td>
                             <td>{{ lead.subject }}</td>
                             <td class="text-end">
                                 <router-link :to="{ name: 'Lead', params: {id: lead.id} }" class="btn btn-sm btn-outline-primary">

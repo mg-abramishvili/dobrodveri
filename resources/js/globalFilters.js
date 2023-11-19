@@ -1,4 +1,13 @@
+// dayjs
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc)
+
 export default {
+    date(date) {
+        return dayjs(date).locale('ru').utcOffset(5).format('DD-MM-YYYY H:mm')
+    },
     slugify(str) {
         let ru = {
             'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 
