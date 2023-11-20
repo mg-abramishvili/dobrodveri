@@ -128,11 +128,22 @@
         </div>
         <div class="product-detail-tab product-detail-tab-reviews">
             <div class="container">
-                @foreach($product["reviews"] as $review)
-                    {{ $review["text"] }}
-                @endforeach
-    
-                <create-product-review :product_id="{{ $product['id'] }}" />
+                <div class="product-detail-tab-left">
+                    Отзывы
+                </div>
+                <div class="product-detail-tab-right">
+                    <div class="product-reviews">
+                        @foreach($product["reviews"] as $review)
+                            <div class="product-review">
+                                <div class="product-review-name">{{ $review["name"] }}</div>
+                                <div class="product-review-rating">Оценка: <strong>{{ $review["rating"] }}</strong></div>
+                                <div class="product-review-text">{{ $review["text"] }}</div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <create-product-review :product_id="{{ $product['id'] }}" />
+                </div>
             </div>
         </div>
         <div class="product-detail-tab product-detail-tab-specials">
