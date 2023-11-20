@@ -55,16 +55,16 @@
     <div class="product-detail-tabs" id="product-detail-tabs">
         <div class="container">
             <ul class="product-detail-tabs-buttons">
-                <li class="product-detail-tab-button product-detail-tab-button-active">
+                <li class="product-detail-tab-button product-detail-tab-button-description product-detail-tab-button-active">
                     <button onclick="selectTab('description')">Описание</button>
                 </li>
-                <li class="product-detail-tab-button">
+                <li class="product-detail-tab-button product-detail-tab-button-attributes">
                     <button onclick="selectTab('attributes')">Характеристики</button>
                 </li>
-                <li class="product-detail-tab-button">
+                <li class="product-detail-tab-button product-detail-tab-button-reviews">
                     <button onclick="selectTab('reviews')">Отзывы</button>
                 </li>
-                <li class="product-detail-tab-button">
+                <li class="product-detail-tab-button product-detail-tab-button-specials">
                     <button onclick="selectTab('specials')">Акции</button>
                 </li>
             </ul>
@@ -167,11 +167,11 @@
 
         let productTabsButtons = document.querySelectorAll('.product-detail-tab-button')
 
-        productTabsButtons.forEach(tab => {
-            tab.classList.remove('product-detail-tab-button-active')
+        productTabsButtons.forEach(tabButton => {
+            tabButton.classList.remove('product-detail-tab-button-active')
         })
 
-        document.getElementsByClassName("product-detail-tab-button-" + selectedTab)[0].classList.add('product-detail-tab-active');
+        document.getElementsByClassName("product-detail-tab-button-" + selectedTab)[0].classList.add('product-detail-tab-button-active');
     }
 
     function goToProductReviews() {
