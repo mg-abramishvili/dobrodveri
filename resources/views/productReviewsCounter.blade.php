@@ -26,6 +26,7 @@
 @endphp
 
 <div class="product-reviews-stars">
+    @if(round($rating, 1) > 0)
     <svg width="160" height="32" viewBox="0 0 160 32">
       <defs>
         <mask id="perc">
@@ -47,5 +48,7 @@
     
       <use xlink:href="#stars" fill="#df3e3c" stroke="#444" mask="url(#perc)"></use>
     </svg> {{ round($rating, 1) }}
-    <span onclick="goToProductReviews()" style="cursor: pointer">{{ $reviewsCountText }}</span>
+    @endif
+
+    <span onclick="goToProductReviews()" style="cursor: pointer">{{ count($reviews) > 0 ? $reviewsCountText : 'Нет отзывов' }}</span>
 </div>

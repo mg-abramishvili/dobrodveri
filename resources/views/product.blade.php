@@ -6,6 +6,20 @@
 @section('title', $product["name"] . ' - Добродвери')
 
 @section('content')
+    <div class="container breadcrumbs">
+        <ul>
+            <li>
+                <a href="/catalog/">Каталог</a>
+            </li>
+            <li>
+                <a href="/catalog/{{ $product["category"]["slug"] }}/">{{ $product["category"]["name"] }}</a>
+            </li>
+            <li>
+                <a>{{ $product["name"] }}</a>
+            </li>
+        </ul>
+    </div>
+
     <div class="container product-detail">
         <div class="product-detail-image-sliders">
             <product-slider :product="{{ json_encode($product) }}"></product-slider>

@@ -70,7 +70,7 @@
                             <nav>
                                 <ul>
                                     <li>
-                                        <a href="/catalog/mezhkomnatnye-dveri">Межкомнатные двери</a>
+                                        <a href="/catalog/mezhkomnatnye-dveri/">Межкомнатные двери</a>
                                     </li>
                                     <li>
                                         <a href="#">Скрытые двери</a>

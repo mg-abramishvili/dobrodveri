@@ -15,6 +15,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'category' => $this->category,
             'description' => $this->description,
             'style' => $this->style->name,
             'type' => $this->type->name,
@@ -25,7 +26,7 @@ class ProductResource extends JsonResource
             'colors' => ProductColorResource::collection($this->skus->unique('color_id')->values()->all()),
             'glasses' => ProductGlassResource::collection($this->skus->where('glass_id', '!=', null)->unique('glass_id')->values()->all()),
             'reviews' => ProductReviewResource::collection($this->reviews->where('is_active', 1)),
-            'rating' => $this->reviews->where('is_active', 1)->sum('rating') / $this->reviews->where('is_active', 1)->count(),
+            'rating' => $this->reviews->where('is_active', 1)->count() ? $this->reviews->where('is_active', 1)->sum('rating') / $this->reviews->where('is_active', 1)->count() : null,
         ];
     }
 }
