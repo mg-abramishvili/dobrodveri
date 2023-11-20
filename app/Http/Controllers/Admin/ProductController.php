@@ -159,12 +159,12 @@ class ProductController extends Controller
 
         $product->sizes()->sync([]);
 
-        foreach($prodcut->skus as $sku)
+        foreach($product->skus as $sku)
         {
             $sku->delete();
         }
 
-        foreach($prodcut->reviews as $review)
+        foreach($product->reviews as $review)
         {
             $review->delete();
         }

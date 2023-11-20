@@ -617,3 +617,24 @@ header .container {
     border-image: initial;
 }
 /* MAP */
+
+
+
+/* 404 */
+.p404 {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.p404 h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.p404 p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.p404 a {
+    color: #df3e3c;
+}
+/* 404 */
