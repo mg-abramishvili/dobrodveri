@@ -59,8 +59,6 @@ export default {
             this.swiperMini = swiper
         },
         selectThumb(index) {
-            if(!index) { return }
-
             this.swiperBig.slideTo(index)
 
             this.markSelectedMiniSlideAsActive(index)
@@ -72,8 +70,6 @@ export default {
             this.swiperMini.slideNext()
         },
         markSelectedMiniSlideAsActive(index) {
-            if(!index) { return }
-
             let allMiniSlides = document.querySelectorAll('.product-detail-slider-mini .swiper-slide')
 
             allMiniSlides.forEach(s => {

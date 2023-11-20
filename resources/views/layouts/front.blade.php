@@ -96,6 +96,12 @@
 
             <main>
                 @yield('content')
+
+                <div class="map">
+                    <div id="map-wrapper">
+                        <iframe style="pointer-events: none;" src="https://yandex.ru/map-widget/v1/?um=constructor%3Afd9a3265a8a0f18f0262e22602e41e4149fe13ce4f185bf8ca78087a1c7e74a3&amp;source=constructor" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
             </main>
 
             <footer>
@@ -106,5 +112,31 @@
         @vite('resources/js/front.js')
 
         @yield('scripts')
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let mapTitle = document.createElement('div')
+                mapTitle.className = 'map-title'
+                mapTitle.textContent = 'Для активации карты нажмите по ней'
+
+                let mapWrapper = document.getElementById('map-wrapper')
+                mapWrapper.appendChild(mapTitle)
+
+                mapWrapper.onclick = function() {
+                    this.children[0].removeAttribute('style')
+                    mapTitle.parentElement.removeChild(mapTitle)
+                }
+                
+                mapWrapper.onmousemove = function(event) {
+                    mapTitle.style.display = 'block'
+                    if(event.offsetY > 10) mapTitle.style.top = event.offsetY + 20 + 'px'
+                    if(event.offsetX > 10) mapTitle.style.left = event.offsetX + 20 + 'px'
+                }
+                
+                mapWrapper.onmouseleave = function() {
+                    mapTitle.style.display = 'none'
+                }
+            })
+        </script>
     </body>
 </html>

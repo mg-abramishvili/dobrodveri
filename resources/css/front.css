@@ -1,11 +1,23 @@
 @import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+
+*, :after, :before {
+    box-sizing: border-box;
+}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'PT Sans', sans-serif;
     font-size: 17px;
     color: #141621;
 }
 
+p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+p:last-child {
+    margin-bottom: 0;
+}
 
 
 /* CONTAINER */
@@ -282,7 +294,7 @@ header .container {
     margin-top: 40px;
 }
 .product-detail-image-sliders {
-    width: 40%;
+    width: 35%;
 }
 .product-detail-sliders-wrapper {
     display: flex;
@@ -324,7 +336,7 @@ header .container {
     padding: 0;
 }
 .product-detail-slider-mini .actvd {
-    border-color: #df3e3c;
+    box-shadow:inset 0px 0px 0px 1px #df3e3c;
 }
 .product-detail-slider-mini .swiper-slide img {
     width: auto;
@@ -375,7 +387,7 @@ header .container {
     margin-top: 3px;
 }
 .product-detail-desc {
-    width: 60%;
+    width: 65%;
 }
 .product-detail-name {
     display: inline-flex;
@@ -457,9 +469,31 @@ header .container {
 }
 .product-detail-tab {
     display: none;
+    background-color: rgb(248,249,250);
+    padding: 50px 0;
+    font-size: 17px;
+    line-height: 1.75;
 }
 .product-detail-tab-active {
     display: block;
+}
+.product-detail-tab-left {
+    width: 35%;
+    font-weight: 700;
+    font-size: 30px;
+}
+.product-detail-tab-right {
+    width: 65%;
+}
+.product-detail-tab-attributes table {
+    width: 100%;
+}
+.product-detail-tab-attributes table tr td {
+    padding: 8px;
+}
+.product-detail-tab-attributes table tr td:first-child {
+    color: #5d5d64;
+    width: 30%;
 }
 .product-reviews-stars {
     display: inline-flex;
@@ -478,3 +512,35 @@ header .container {
     width: 100%;
 }
 /* PRODUCT PAGE */
+
+
+
+/* MAP */
+.map {
+    height: 400px;
+    position: relative;
+}
+.map iframe {
+    width: 100%;
+    height: 100%;
+}
+#map-wrapper {
+    position: relative;
+    cursor: help;
+    overflow: hidden;
+    height: 100%;
+}
+.map-title {
+    position: absolute;
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 5px;
+    display: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+}
+/* MAP */

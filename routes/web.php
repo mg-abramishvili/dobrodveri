@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 // HOME PAGE
 Route::get('/', function () {
     $categories = Category::all();
-    $products = Product::take(8)->get();
+    $popularProducts = Product::take(8)->get();
     $mainSlider = MainSlider::all();
 
-    return view('home', compact('categories', 'products', 'mainSlider'));
+    return view('home', compact('categories', 'popularProducts', 'mainSlider'));
 });
 
 Route::get('page/{slug}', [App\Http\Controllers\PageController::class, 'page'])->name('page');

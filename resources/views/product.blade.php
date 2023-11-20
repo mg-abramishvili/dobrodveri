@@ -36,8 +36,10 @@
                 @endif
             />
         </div>
+    </div>
 
-        <div class="product-detail-tabs" id="product-detail-tabs">
+    <div class="product-detail-tabs" id="product-detail-tabs">
+        <div class="container">
             <ul class="product-detail-tabs-buttons">
                 <li class="product-detail-tab-button">
                     <button onclick="selectTab('description')">Описание</button>
@@ -52,21 +54,75 @@
                     <button onclick="selectTab('specials')">Акции</button>
                 </li>
             </ul>
+        </div>
+        
+        <div class="product-detail-tab product-detail-tab-active product-detail-tab-description">
+            <div class="container">
+                <div class="product-detail-tab-left">
+                    Описание
+                </div>
 
-            <div class="product-detail-tab product-detail-tab-active product-detail-tab-description">
-                {!! $product["description"] !!}
+                <div class="product-detail-tab-right">
+                    {!! $product["description"] !!}
+                </div>
             </div>
-            <div class="product-detail-tab product-detail-tab-attributes">
-                Характеристики
+        </div>
+        <div class="product-detail-tab product-detail-tab-attributes">
+            <div class="container">
+                <div class="product-detail-tab-left">
+                    Характеристики
+                </div>
+                <div class="product-detail-tab-right">
+                    <table>
+                        <tbody>
+                            @if(isset($product['style']))
+                                <tr>
+                                    <td>Стиль</td>
+                                    <td>
+                                        {{ $product['style'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['type']))
+                                <tr>
+                                    <td>Тип</td>
+                                    <td>
+                                        {{ $product['type'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['construct']))
+                                <tr>
+                                    <td>Конструкция</td>
+                                    <td>
+                                        {{ $product['construct'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['surface']))
+                                <tr>
+                                    <td>Покрытие</td>
+                                    <td>
+                                        {{ $product['surface'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="product-detail-tab product-detail-tab-reviews">
+        </div>
+        <div class="product-detail-tab product-detail-tab-reviews">
+            <div class="container">
                 @foreach($product["reviews"] as $review)
                     {{ $review["text"] }}
                 @endforeach
-
+    
                 <create-product-review :product_id="{{ $product['id'] }}" />
             </div>
-            <div class="product-detail-tab product-detail-tab-specials">
+        </div>
+        <div class="product-detail-tab product-detail-tab-specials">
+            <div class="container">
                 Акции
             </div>
         </div>

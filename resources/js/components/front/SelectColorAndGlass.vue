@@ -16,22 +16,35 @@
             </li>
         </ul>
     </div>
+
+    <div v-if="product.glasses.length" class="product-sizes">
+        <p>Размер</p>
+        <ul class="product-sizes-list">
+            <li v-for="size in product.sizes">
+                <button @click="selectSize(size)" class="product-size-button" :class="{'product-size-button_active': selected.size.id == size.id}">
+                    {{ size.name }}
+                </button>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
     export default {
-        props: ['product', 'color', 'glass', 'innerdecor'],
+        props: ['product', 'sizes', 'color', 'glass', 'innerdecor'],
         data() {
             return {
                 selected: {
                     color: '',
                     glass: '',
+                    size: '',
                 }
             }
         },
         mounted() {
             this.selectColor()
             this.selectGlass()
+            // this.selectSize()
         },
         watch: {
             selected: {
@@ -74,6 +87,17 @@
                     this.selected.glass = glass
                 } else {
                     this.selected.glass = this.product.glasses[0] ? this.product.glasses[0] : null
+                }
+            },
+            selectSize(size) {
+                if(!this.product.sizes.length) {
+                    return
+                }
+
+                if(size) {
+                    this.selected.size = size
+                } else {
+                    this.selected.size = this.product.sizes[0] ? this.product.sizes[0] : null
                 }
             },
             emitSKU(selectedSKU) {
