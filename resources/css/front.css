@@ -446,21 +446,19 @@ header .container {
     margin: 0;
     list-style: none;
 }
+.product-detail-tab-button {
+    margin-right: 20px;
+}
 .product-detail-tab-button button {
     box-shadow: none;
-    border-top: 1px solid;
-    border-bottom: 2px solid;
-    border-right: 1px solid;
-    border-left: 0;
-    border-color: #ddd !important;
-    background-color: #f6f6f6;
-    padding: 14px 26px;
-}
-.product-detail-tab-button:nth-of-type(1) button {
-    border-left: 1px solid;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    padding: 20px 0;
 }
 .product-detail-tab-button button:hover,
-.product-detail-tab-button button:focus {
+.product-detail-tab-button button:focus,
+.product-detail-tab-button-active button {
     cursor: pointer;
     color: #df3e3c;
     border-bottom-color: #df3e3c !important;
@@ -483,6 +481,7 @@ header .container {
     width: 35%;
     font-weight: 700;
     font-size: 30px;
+    line-height: 1;
 }
 .product-detail-tab-right {
     width: 65%;

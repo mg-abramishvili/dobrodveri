@@ -55,7 +55,7 @@
     <div class="product-detail-tabs" id="product-detail-tabs">
         <div class="container">
             <ul class="product-detail-tabs-buttons">
-                <li class="product-detail-tab-button">
+                <li class="product-detail-tab-button product-detail-tab-button-active">
                     <button onclick="selectTab('description')">Описание</button>
                 </li>
                 <li class="product-detail-tab-button">
@@ -153,6 +153,14 @@
         })
 
         document.getElementsByClassName("product-detail-tab-" + selectedTab)[0].classList.add('product-detail-tab-active');
+
+        let productTabsButtons = document.querySelectorAll('.product-detail-tab-button')
+
+        productTabsButtons.forEach(tab => {
+            tab.classList.remove('product-detail-tab-button-active')
+        })
+
+        document.getElementsByClassName("product-detail-tab-button-" + selectedTab)[0].classList.add('product-detail-tab-active');
     }
 
     function goToProductReviews() {
