@@ -12,6 +12,7 @@ class ProductGlassResource extends JsonResource
         return [
             'id' => $this->glass->id,
             'name' => $this->glass->name,
+            'slug' => $this->glass->slug,
             'image' => $this->glass->image,
         ];
     }

@@ -31,7 +31,7 @@
 
 <script>
     export default {
-        props: ['product', 'sizes', 'color', 'glass', 'innerdecor'],
+        props: ['product', 'size', 'color', 'glass', 'innerdecor'],
         data() {
             return {
                 selected: {
@@ -44,7 +44,19 @@
         mounted() {
             this.selectColor()
             this.selectGlass()
-            // this.selectSize()
+            this.selectSize()
+
+            if(this.color && this.product.colors.length) {
+                this.selectColor(this.product.colors.find(c => c.slug == this.color))
+            }
+
+            if(this.glass && this.product.glasses.length) {
+                this.selectGlass(this.product.glasses.find(g => g.slug == this.glass))
+            }
+
+            if(this.size && this.product.sizes.length) {
+                this.selectSize(this.product.sizes.find(s => s.slug == this.size))
+            }
         },
         watch: {
             selected: {
