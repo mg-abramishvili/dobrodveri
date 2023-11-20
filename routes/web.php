@@ -47,6 +47,7 @@ Route::post('_admin/products', [App\Http\Controllers\Admin\ProductController::cl
 Route::put('_admin/product/{id}/update', [App\Http\Controllers\Admin\ProductController::class, 'update']);
 Route::put('_admin/product/{id}/deactivate', [App\Http\Controllers\Admin\ProductController::class, 'deactivate']);
 Route::put('_admin/product/{id}/activate', [App\Http\Controllers\Admin\ProductController::class, 'activate']);
+Route::delete('_admin/product/{id}/delete', [App\Http\Controllers\Admin\ProductController::class, 'delete']);
 
 // ADMIN SKU's
 Route::post('_admin/skus', [App\Http\Controllers\Admin\SkuController::class, 'store']);

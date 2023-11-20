@@ -27,6 +27,12 @@
             </li>
         </ul>
     </div>
+
+    <div class="product-price">
+        <del v-if="priceOld">{{ $filters.currency(priceOld) }}</del>
+        
+        {{ $filters.currency(price) }}
+    </div>
 </template>
 
 <script>
@@ -38,7 +44,9 @@
                     color: '',
                     glass: '',
                     size: '',
-                }
+                },
+                
+                selectedSKU: '',
             }
         },
         mounted() {
@@ -67,16 +75,36 @@
                     if(this.selected.color && this.selected.glass) {
                         selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id && sku.glass_id == this.selected.glass.id)
                         
+                        this.selectedSKU = selectedSKU
+                        
                         return this.emitSKU(selectedSKU)
                     }
 
                     if(this.selected.color) {
                         selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id)
                         
+                        this.selectedSKU = selectedSKU
+                        
                         return this.emitSKU(selectedSKU)
                     }
                 }
             }
+        },
+        computed: {
+            price() {
+                if(this.selectedSKU && this.selectedSKU.price > 0) {
+                    return this.selectedSKU.price
+                } else {
+                    return this.product.price
+                }
+            },
+            priceOld() {
+                if(this.product.factory_coef) {
+                    return Math.round(this.price * this.product.factory_coef / 10) * 10
+                } else {
+                    return this.price
+                }
+            },
         },
         methods: {
             selectColor(color) {

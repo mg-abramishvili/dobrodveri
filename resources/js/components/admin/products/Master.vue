@@ -222,7 +222,7 @@ export default {
         },
         oldPrice() {
             if(this.product.factory && this.product.factory.coef) {
-                return Math.ceil((parseInt(this.price) * 100 / (100 - parseInt(this.product.factory.coef)) / 10)) * 10
+                return Math.round(this.price * this.product.factory.coef / 10) * 10
             } else {
                 return this.price
             }

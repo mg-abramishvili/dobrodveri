@@ -152,4 +152,23 @@ class ProductController extends Controller
 
         $product->save();
     }
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+
+        $product->sizes()->sync([]);
+
+        foreach($prodcut->skus as $sku)
+        {
+            $sku->delete();
+        }
+
+        foreach($prodcut->reviews as $review)
+        {
+            $review->delete();
+        }
+
+        $product->delete();
+    }
 }

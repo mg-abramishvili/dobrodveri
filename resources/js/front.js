@@ -1,6 +1,10 @@
 import './bootstrap'
 
 import { createApp } from 'vue'
+
+// Global Filters
+import globalFilters from './globalFilters'
+
 import mitt from 'mitt'
 
 import Products from './components/front/Products.vue'
@@ -19,5 +23,6 @@ app.component('select-color-glass', SelectColorAndGlass)
 app.component('create-lead', CreateLead)
 app.component('create-product-review', CreateProductReview)
 
+app.config.globalProperties.$filters = globalFilters
 app.config.globalProperties.emitter = emitter
 app.mount('#front')

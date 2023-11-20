@@ -34,7 +34,7 @@
 
                     <div class="mb-4">
                         <label class="form-label">Размер скидки</label>
-                        <input v-model="coef" type="number" min="1" step="1" class="form-control">
+                        <input v-model="coef" type="number" min="1" step=".00001" class="form-control">
                     </div>
                             
                     <button @click="save()" :disabled="!views.saveButton" class="btn btn-primary">Сохранить</button>
