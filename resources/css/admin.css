@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
 @import 'bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
 
 body.admin_panel {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'PT Sans', sans-serif;
     font-size: 17px;
-    color: #242424;
+    color: #333;
     -webkit-font-feature-settings: "lnum";
     -moz-font-feature-settings: "lnum";
     font-feature-settings: "lnum";
