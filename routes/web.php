@@ -10,7 +10,7 @@ Route::get('/', function () {
     return view('home', ['mainSlider' => $mainSlider]);
 });
 
-Route::get('page/{slug}', [App\Http\Controllers\PageController::class, 'page'])->name('page');
+Route::get('p/{slug}', [App\Http\Controllers\PageController::class, 'page'])->name('page');
 
 Route::post('lead', [App\Http\Controllers\LeadController::class, 'store'])->name('lead');
 Route::post('review', [App\Http\Controllers\ReviewController::class, 'store'])->name('review');

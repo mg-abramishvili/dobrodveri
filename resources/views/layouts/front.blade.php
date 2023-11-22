@@ -69,7 +69,13 @@
                             </button>
                         </div>
                         <div class="header-bottom-menu-content">
-                            menu
+                            <ul>
+                                @foreach($pages as $page)
+                                    <li>
+                                        <a href="/p/{{ $page->slug }}/">{{ $page->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="header-bottom-nav">
                             <nav>

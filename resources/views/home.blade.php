@@ -29,7 +29,7 @@
     </div>
 
     <div class="container pt-1 pb-1">
-        <h5 class="title-header">Популярные позиции</h5>
+        <h5 class="title-header title-header-center">Популярные позиции</h5>
 
         <div class="category-products-list">
             @foreach($popularProducts as $product)
