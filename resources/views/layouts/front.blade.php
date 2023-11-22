@@ -18,7 +18,7 @@
                     <div class="container">
                         <div class="header-top-logo">
                             <a href="/">
-                                <img src="/img/logo.svg" alt="">
+                                <img src="/img/logo.svg" alt="Добродвери">
                             </a>
                         </div>
                         <div class="header-top-nav">
@@ -107,7 +107,47 @@
             </main>
 
             <footer>
-
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="footer-about">
+                            <a href="#" class="footer-logo">
+                                <img src="/img/logo-w.svg" alt="Добродвери">
+                            </a>
+    
+                            <p>© 2022-{{ now()->year }} «Добродвери». Все права защищены.</p>
+    
+                            <a href="#" class="footer-policy">Политика конфиденциальности</a>
+                        </div>
+                        <div class="footer-nav">
+                            <ul>
+                                @foreach($categories as $category)
+                                    <li>
+                                        <a href="/catalog/{{ $category->slug }}/">{{ $category->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="footer-socials">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <img src="/img/vk.svg" alt="VK">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="/img/vk.svg" alt="VK">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <p>Информация на сайте не является публичной офертой, носит исключительно информационный характер и может быть изменена по усмотрению компании. Изображения товаров, размещенных на сайте, могут отличаться от оригиналов. Полное или частичное использование материалов данного сайта – запрещено!</p>
+                    </div>
+                </div>
             </footer>
         </div>
         

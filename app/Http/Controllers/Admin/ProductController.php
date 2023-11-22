@@ -11,12 +11,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return Product::where('is_active', true)->get();
+        return Product::where('is_active', true)->orderBy('updated_at', 'desc')->get();
     }
 
     public function indexDeactivated()
     {
-        return Product::where('is_active', false)->get();
+        return Product::where('is_active', false)->orderBy('updated_at', 'desc')->get();
     }
 
     public function product($id)

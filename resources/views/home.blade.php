@@ -28,7 +28,9 @@
         <div class="swiper-button-next home-main-slider-button-next"></div> -->
     </div>
 
-    <div class="container">
+    <div class="container pt-1 pb-1">
+        <h5 class="title-header">Популярные позиции</h5>
+
         <div class="category-products-list">
             @foreach($popularProducts as $product)
                 <div class="products-list-item">
@@ -44,13 +46,15 @@
                         </div>
 
                         <p class="products-list-item-name">
-                            {{ $product['name'] }} {{ $product['view_counter'] }}
+                            {{ $product['name'] }}
                         </p>
                     </a>
                 </div>
             @endforeach
         </div>
     </div>
+
+    @include('how-to-buy')
 @endsection
 
 @section('css')
