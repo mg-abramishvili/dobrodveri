@@ -362,7 +362,8 @@ header .container {
 .container .category-products h1 {
     margin-top: 0;
 }
-.category-products-list {
+.category-products-list,
+.recently-viewed-list {
     display: flex;
     flex-wrap: wrap;
     width: 100%;

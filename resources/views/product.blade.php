@@ -192,6 +192,8 @@
         </div>
     </div>
 
+    @include('recently-viewed')
+
     <div id="modal_gdeKupit" class="modal">
         <div class="modal-content">
             <button onclick="closeModal()" class="modal-close">&times;</button>

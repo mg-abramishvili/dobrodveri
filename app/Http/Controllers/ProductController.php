@@ -7,10 +7,13 @@ use App\Http\Resources\ProductResource;
 use App\Models\Type;
 use App\Models\Style;
 use App\Models\Surface;
+use App\Traits\storeInRecentlyViewed;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    use storeInRecentlyViewed;
+
     public function product($productSlug)
     {
         $product = Product::where('slug', $productSlug)->first();
@@ -29,6 +32,8 @@ class ProductController extends Controller
         $product->save();
 
         $productResource = new ProductResource(Product::where('slug', $productSlug)->first());
+
+        $this->storeInRecentlyViewed(json_encode($productResource));
 
         return view('product', ['product' => json_encode($productResource)]);
     }

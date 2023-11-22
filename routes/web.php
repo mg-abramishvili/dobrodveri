@@ -24,6 +24,11 @@ Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])
 Route::get('_products', [App\Http\Controllers\ProductController::class, 'indexData']);
 Route::get('product/{productSlug}', [App\Http\Controllers\ProductController::class, 'product'])->name('product');
 
+// RECENTLY VIEWED
+Route::get('/rv', function () {
+    dd(session('recentlyViewed'));
+});
+
 // ADMIN
 Route::get('admin', function () {
     return view('layouts.admin');
