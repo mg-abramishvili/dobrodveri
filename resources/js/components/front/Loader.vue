@@ -1,3 +1,3 @@
 <template>
-    Загрузка...
+    <div class="lds-dual-ring"></div>
 </template>

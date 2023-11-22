@@ -306,6 +306,50 @@ header .container {
 }
 .container .category-filter {
     width: 25%;
+    position: relative;
+}
+.overlay {
+    position: absolute;
+    background-color: rgba(255,255,255,0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    height: 100%;
+    z-index: 999;
+}
+.filter-box {
+    background-color: #f6f6f6;
+    border: 1px solid #edeef3;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+.filter-box p {
+    margin-top: 0;
+    font-weight: 700;
+}
+.category-filter-buttons {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.category-filter-button {
+    padding: 12px 22px;
+    box-shadow: none;
+    border: 0;
+}
+.category-filter-button:nth-of-type(1) {
+    background-color: #df3e3c;
+    color: #fff;
+    width: 60%;
+}
+.category-filter-button:nth-of-type(2) {
+    background-color: #ccc;
+    color: #333;
+    width: 40%;
 }
 .container .category-products {
     width: 75%;
@@ -385,7 +429,7 @@ header .container {
     right: 30%;
     position: absolute;
     border-radius: 5px;
-    background-color: #1b53c0;
+    background-color: #df3e3c;
 }
 .range-input {
     position: relative;
@@ -404,7 +448,7 @@ header .container {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    border: 3px solid #1b53c0;
+    border: 3px solid #df3e3c;
     background-color: #fff;
     pointer-events: auto;
     -webkit-appearance: none;
@@ -413,7 +457,7 @@ header .container {
     height: 15px;
     width: 15px;
     border-radius: 50%;
-    border: 3px solid #1b53c0;
+    border: 3px solid #df3e3c;
     background-color: #fff;
     pointer-events: auto;
     -moz-appearance: none;
@@ -1016,3 +1060,37 @@ a.footer-policy:focus {
     color: #df3e3c;
 }
 /* 404 */
+
+
+
+/* LOADER */
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #df3e3c;
+    border-color: #fff #df3e3c #fff #df3e3c;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* LOADER */

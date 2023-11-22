@@ -2,13 +2,16 @@
     <aside class="category-filter">
         <ProductFilter :category="category.id" :types="types" :styles="styles" :surfaces="surfaces" :filterParams="filterParams" />
 
-        <button @click="loadProducts()" class="category-filter-button">Применить фильтр</button>
+        <div v-if="!views.loading" class="category-filter-buttons">
+            <button @click="loadProducts()" class="category-filter-button">Применить фильтр</button>
+            <button @click="resetFilter()" class="category-filter-button">Сбросить фильтр</button>
+        </div>
     </aside>
 
-    <div class="category-products">
+    <div class="category-products" :class="{ 'overlay': views.loading }">
         <Loader v-if="views.loading" />
 
-        <div class="category-products-list">
+        <div v-if="!views.loading" class="category-products-list">
             <div v-for="product in products" class="products-list-item">
                 <a :href="'/product/' + product.slug">
                     <div v-if="product.image" class="products-list-item-image">
@@ -42,16 +45,7 @@ export default {
             styles: [],
             surfaces: [],
 
-            filterParams: {
-                category_id: this.category.id,
-                price_from: 0,
-                price_to: 100000,
-                order: 'price',
-                order_direction: 'asc',
-                types: [],
-                styles: [],
-                surfaces: [],
-            },
+            filterParams: {},
 
             views: {
                 loading: true,
@@ -59,10 +53,12 @@ export default {
         }
     },
     created() {
-        this.loadProducts()
+        this.resetFilter()
     },
     methods: {
         loadProducts() {
+            this.views.loading = true
+            
             axios.get(`/_products`, {
                 params: {
                     category_id: this.filterParams.category_id,
@@ -79,9 +75,21 @@ export default {
                 this.products = response.data.products
 
                 window.scrollTo(0, 0)
-
+                
                 this.views.loading = false
             })
+        },
+        resetFilter() {
+            this.filterParams.category_id = this.category.id
+            this.filterParams.price_from = 0
+            this.filterParams.price_to = 100000
+            this.filterParams.order = 'price'
+            this.filterParams.order_direction = 'asc'
+            this.filterParams.types = []
+            this.filterParams.styles = []
+            this.filterParams.surfaces = []
+
+            this.loadProducts()
         },
     },
     components: {
