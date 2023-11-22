@@ -13,7 +13,7 @@
                         @endif
             
                         <div class="products-list-item-price">
-                            {{ $product['price'] }} <small>₽</small>
+                            @php echo number_format($product['price'],0,","," "); @endphp <small>₽</small>
                         </div>
             
                         <p class="products-list-item-name">

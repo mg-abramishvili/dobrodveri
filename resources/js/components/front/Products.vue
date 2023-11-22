@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="products-list-item-price">
-                        {{ product.price }} <small>₽</small>
+                        {{ $filters.currencyWithourRubSign(product.price) }} <small>₽</small>
                     </div>
 
                     <p class="products-list-item-name">
