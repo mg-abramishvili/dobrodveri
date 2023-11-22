@@ -20,7 +20,7 @@ class ProductController extends Controller
             return view('404');
         }
 
-        $product->view_counter = $product->view_counter + 1;
+        $product->increment('view_counter');
         
         if($product->view_counter >= 50) {
             $product->hit = true;

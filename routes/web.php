@@ -4,14 +4,15 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\MainSlider;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\ProductResource;
 
 // HOME PAGE
 Route::get('/', function () {
     $categories = Category::all();
-    $popularProducts = Product::take(8)->get();
+    $popularProducts = ProductResource::collection(Product::where('view_counter', '>=', 50)->get());
     $mainSlider = MainSlider::all();
 
-    return view('home', compact('categories', 'popularProducts', 'mainSlider'));
+    return view('home', ['categories' => $categories, 'mainSlider' => $mainSlider, 'popularProducts' => json_encode($popularProducts)]);
 });
 
 Route::get('page/{slug}', [App\Http\Controllers\PageController::class, 'page'])->name('page');

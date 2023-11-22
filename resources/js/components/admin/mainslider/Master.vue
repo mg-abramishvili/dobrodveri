@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label">Изображение (2000 &times; 625)</label>
+                        <label class="form-label">Изображение</label>
                         <file-pond
                             name="mainslide_image"
                             ref="mainslide_image"

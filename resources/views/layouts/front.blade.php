@@ -7,6 +7,8 @@
 
         <title>@yield('title')</title>
 
+        @yield('css')
+
         @vite('resources/css/front.css')
     </head>
     <body>
