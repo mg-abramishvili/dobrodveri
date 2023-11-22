@@ -60,6 +60,35 @@
                 @endif
             />
         </div>
+
+        <div class="product-detail-help-buttons">
+            <ul>
+                <li>
+                    <button onclick="openModal('gdeKupit')">
+                        <img src="/img/ico-location.svg" alt="Где купить?">
+                        <span>Где купить?</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="openModal('kakOplatit')">
+                        <img src="/img/ico-card.svg" alt="Как оплатить?">
+                        <span>Как оплатить?</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="openModal('zakazZamer')">
+                        <img src="/img/ico-size.svg" alt="Заказать замер">
+                        <span>Заказать замер</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="openModal('obratZvonok')">
+                        <img src="/img/ico-alarm.svg" alt="Обратный звонок">
+                        <span>Обратный звонок</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="product-detail-tabs" id="product-detail-tabs">
@@ -158,8 +187,16 @@
         </div>
         <div class="product-detail-tab product-detail-tab-specials">
             <div class="container">
-                Акции
+                Акции пока нет.
             </div>
+        </div>
+    </div>
+
+    <div id="modal_gdeKupit" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal()" class="modal-close">&times;</button>
+
+            <p>Где купить текст</p>
         </div>
     </div>
 @endsection
@@ -192,6 +229,34 @@
         setTimeout(() => {
             selectTab('reviews')
         }, 500)
+    }
+</script>
+
+<script>
+    function openModal(modalID) {
+        let modal = document.getElementById("modal_" + modalID)
+
+        if(modal) {
+            modal.style.display = "block"
+        }
+    }
+
+    function closeModal() {
+        let modals = document.querySelectorAll('.modal')
+
+        modals.forEach(modal => {
+            modal.style.display = "none"
+        })
+    }
+
+    window.onclick = function(event) {
+        let modals = document.querySelectorAll('.modal')
+
+        modals.forEach(modal => {
+            if (event.target == modal && modal.style.display == 'block') {
+                modal.style.display = "none"
+            }
+        })
     }
 </script>
 @endsection
