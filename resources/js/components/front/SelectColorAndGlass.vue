@@ -29,9 +29,19 @@
     </div>
 
     <div class="product-price">
-        <del v-if="priceOld">{{ $filters.currency(priceOld) }}</del>
-        
-        {{ $filters.currency(price) }}
+        <del v-if="priceOld">{{ $filters.currencyWithourRubSign(priceOld) }} <i>₽</i></del>
+        <br v-if="priceOld"/>
+        {{ $filters.currencyWithourRubSign(price) }} <i>₽</i>
+    </div>
+
+    <div class="product-order">
+        <button>Заказать</button>
+
+        <div v-if="product.balance" class="product-balance" :class="{'product-balance-green': product.balance == 'В наличии в Уфе'}">
+            <template v-if="product.balance != 'В наличии в Уфе'">срок изготовления:<br/></template>
+
+            {{ product.balance }}
+        </div>
     </div>
 </template>
 

@@ -239,6 +239,10 @@ header .container {
     display: block;
     font-size: 16px;
 }
+.header-bottom-nav nav ul li a:hover,
+.header-bottom-nav nav ul li a:focus {
+    color: #df3e3c;
+}
 .header-bottom-action {
     width: 14%;
     justify-content: flex-end;
@@ -597,7 +601,8 @@ header .container {
 .product-types-list {
     list-style-type: none;
     margin: 0;
-    padding: 0
+    padding: 0;
+    margin-bottom: 20px;
 }
 .product-colors-list li,
 .product-glasses-list li,
@@ -606,6 +611,16 @@ header .container {
     display: inline-block;
     margin-bottom: 5px;
     margin-right: 5px
+}
+.product-colors p,
+.product-glasses p,
+.product-sizes p,
+.product-types p {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
 }
 .product-color-button,
 .product-glass-button,
@@ -635,6 +650,54 @@ header .container {
 .product-size-button_active,
 .product-type-button_active {
     border-color: #df3e3c
+}
+.product-price {
+    color: #222;
+    font-size: 50px;
+    line-height: 1;
+}
+.product-price i {
+    font-style: normal;
+    color: rgb(179, 179, 183);
+    font-weight: 400;
+}
+.product-price del {
+    color: #5d5d64;
+    font-size: 28px;
+    font-weight: 300;
+    position: relative;
+    text-decoration: none;
+}
+.product-price del:before {
+    background-color: #5d5d64;
+    content: "";
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+.product-order {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+}
+.product-order button {
+    width: 180px;
+    max-width: 100%;
+    background-color: #df3e3c;
+    color: #fff;
+    box-shadow: none;
+    border: 0;
+    padding: 14px 28px;
+    margin-right: 15px;
+}
+.product-balance {
+    color: #777;
+}
+.product-balance.product-balance-green {
+    color: green;
 }
 .product-detail-help-buttons {
     width: 17%;
@@ -1017,26 +1080,56 @@ a.footer-policy:focus {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.5);
+    animation: modalBg .15s linear;
+}
+@keyframes modalBg {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 .modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    width: 800px;
+    max-width: 100%;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
+    animation: modalIntro .3s ease-out;
+
+}
+@keyframes modalIntro {
+    0% {
+        margin-top: -300px;
+    }
+    100% {
+        margin-top: 0;
+    }
 }
 .modal-close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    font-size: 35px;
+    line-height: 1px;
+    margin-top: -15px;
+    margin-right: -15px;
+    background-color: #fff;
+    border: 2px solid #df3e3c;
+    border-radius: 100%;
+    color: #df3e3c;
 }
-.modal-close:hover,
-.modal-close:focus {
-    color: #000;
-    text-decoration: none;
+.modal-close:hover {
+    background-color: #df3e3c;
+    color: #fff;
     cursor: pointer;
 }
 /* MODAL */
