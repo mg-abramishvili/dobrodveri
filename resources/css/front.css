@@ -656,6 +656,8 @@ header .container {
 .product-detail-tab {
     display: none;
     background-color: rgb(248,249,250);
+    border-top: 1px solid #edeef3;
+    border-bottom: 1px solid #edeef3;
     padding: 50px 0;
     font-size: 17px;
     line-height: 1.75;
