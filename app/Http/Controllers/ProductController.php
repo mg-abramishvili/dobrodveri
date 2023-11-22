@@ -52,7 +52,7 @@ class ProductController extends Controller
             $query->withFilters($types, $styles, $surfaces);
         }])->get();
 
-        $products = Product::withFilters($types, $styles, $surfaces)->get();
+        $products = ProductResource::collection(Product::withFilters($types, $styles, $surfaces)->get());
 
         return response()->json([
             'types' => $filteredTypes,

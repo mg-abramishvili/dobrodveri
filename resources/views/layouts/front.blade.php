@@ -61,12 +61,15 @@
                 <div class="header-bottom">
                     <div class="container">
                         <div class="header-bottom-menu">
-                            <button>
+                            <button id="menu_button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                                 </svg>
                                 Меню
                             </button>
+                        </div>
+                        <div class="header-bottom-menu-content">
+                            menu
                         </div>
                         <div class="header-bottom-nav">
                             <nav>
@@ -154,6 +157,27 @@
         @vite('resources/js/front.js')
 
         @yield('scripts')
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let menuButton = document.getElementById('menu_button')
+                let menu = document.getElementsByClassName('header-bottom-menu-content')[0]
+    
+                menuButton.onclick = function() {
+                    if(menu.classList.contains('expanded')) {
+                        menu.classList.remove('expanded')
+                    } else {
+                        menu.classList.add('expanded')
+                    }
+                }
+
+                window.addEventListener('click', function(e) {   
+                    if(!menu.contains(e.target) && !menuButton.contains(e.target) && menu.classList.contains('expanded')) {
+                        menu.classList.remove('expanded')
+                    }
+                })
+            })
+        </script>
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {

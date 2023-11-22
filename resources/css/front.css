@@ -117,6 +117,7 @@ header .container {
     text-decoration: none;
     font-size: 14px;
     display: block;
+    padding: 5px 0;
 }
 .header-top-nav nav ul li a:hover,
 .header-top-nav nav ul li a:focus {
@@ -153,18 +154,46 @@ header .container {
     background-color: #f6f6f6;
     display: flex;
     flex-wrap: wrap;
+    border-top: 1px solid #edeef3;
+    border-bottom: 1px solid #edeef3;
+    position: relative;
+    height: 40px;
+}
+.header-bottom .container {
+    position: relative;
 }
 .header-bottom-menu {
     width: 10%;
+    height: 100%;
+}
+.header-bottom-menu-content {
+    display: none;
+    position: absolute;
+    top: 39px;
+    left: 40px;
+    width: 300px;
+    z-index: 10;
+    padding: 30px;
+    background-color: rgba(223, 60, 58, 0.3);
+}
+.header-bottom-menu-content.expanded {
+    display: block;
 }
 .header-bottom-menu button {
     display: flex;
+    height: 100%;
     align-items: center;
     box-shadow: none;
     border: 1px solid #df3e3c;
     background: none;
     color: #df3e3c;
     padding: 3px 8px;
+}
+.header-bottom-menu button:hover,
+.header-bottom-menu button:focus {
+    cursor: pointer;
+    background-color: #df3e3c;
+    color: #fff;
 }
 .header-bottom-menu button svg {
     display: block;
@@ -186,7 +215,7 @@ header .container {
 .header-bottom-nav nav ul li a {
     color: #212121;
     text-decoration: none;
-    padding: 14px 5px;
+    padding: 10px 5px;
     display: block;
     font-size: 16px;
 }
@@ -194,9 +223,12 @@ header .container {
     width: 14%;
     justify-content: flex-end;
     text-align: right;
+    height: 100%;
 }
 .header-bottom-action a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
     background-color: #df3e3c;
     padding: 6px 12px;
     color: #fff;

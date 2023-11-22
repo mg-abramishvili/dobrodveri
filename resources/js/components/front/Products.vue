@@ -11,13 +11,17 @@
         <div class="category-products-list">
             <div v-for="product in products" class="products-list-item">
                 <a :href="'/product/' + product.slug">
-                    <p class="products-list-item-name">
-                        {{ product.name }}
-                    </p>
+                    <div v-if="product.image" class="products-list-item-image">
+                        <img :src="product.image" :alt="product.name">
+                    </div>
 
                     <div class="products-list-item-price">
                         {{ product.price }} <small>₽</small>
                     </div>
+
+                    <p class="products-list-item-name">
+                        {{ product.name }}
+                    </p>
                 </a>
             </div>
         </div>
