@@ -192,6 +192,8 @@
         </div>
     </div>
 
+    @include('popular')
+    
     @include('recently-viewed')
 
     <div id="modal_gdeKupit" class="modal">
