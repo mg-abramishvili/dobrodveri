@@ -318,6 +318,7 @@ header .container {
     width: 100% !important;
     height: 100%;
     z-index: 999;
+    cursor: wait;
 }
 .filter-box {
     background-color: #f6f6f6;
