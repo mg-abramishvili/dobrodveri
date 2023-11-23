@@ -64,31 +64,31 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces, $priceFrom, $priceTo)
-    {
-        return $query
-            ->where('is_active', 1)
-            ->where('category_id', $category_id)
-            ->when(isset($types), function ($query) use ($types) {
-                $query->whereHas('type', function($query) use($types) {
-                    $query->whereIn('slug', $types);
-                });
-            })
-            ->when(isset($styles), function ($query) use ($styles) {
-                $query->whereHas('style', function($query) use($styles) {
-                    $query->whereIn('slug', $styles);
-                });
-            })
-            ->when(isset($surfaces), function ($query) use ($surfaces) {
-                $query->whereHas('surface', function($query) use($surfaces) {
-                    $query->whereIn('slug', $surfaces);
-                });
-            })
-            ->when(isset($priceFrom), function ($query) use ($priceFrom) {
-                $query->where('price', '>=', $priceFrom);
-            })
-            ->when(isset($priceTo), function ($query) use ($priceTo) {
-                $query->where('price', '<=', $priceTo);
-            });
-    }
+    // public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces, $priceFrom, $priceTo)
+    // {
+    //     return $query
+    //         ->where('is_active', 1)
+    //         ->where('category_id', $category_id)
+    //         ->when(isset($types), function ($query) use ($types) {
+    //             $query->whereHas('type', function($query) use($types) {
+    //                 $query->whereIn('slug', $types);
+    //             });
+    //         })
+    //         ->when(isset($styles), function ($query) use ($styles) {
+    //             $query->whereHas('style', function($query) use($styles) {
+    //                 $query->whereIn('slug', $styles);
+    //             });
+    //         })
+    //         ->when(isset($surfaces), function ($query) use ($surfaces) {
+    //             $query->whereHas('surface', function($query) use($surfaces) {
+    //                 $query->whereIn('slug', $surfaces);
+    //             });
+    //         })
+    //         ->when(isset($priceFrom), function ($query) use ($priceFrom) {
+    //             $query->where('price', '>=', $priceFrom);
+    //         })
+    //         ->when(isset($priceTo), function ($query) use ($priceTo) {
+    //             $query->where('price', '<=', $priceTo);
+    //         });
+    // }
 }

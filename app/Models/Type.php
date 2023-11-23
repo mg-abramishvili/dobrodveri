@@ -15,4 +15,9 @@ class Type extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function skus()
+    {
+        return $this->hasManyThrough(Sku::class, Product::class);
+    }
 }

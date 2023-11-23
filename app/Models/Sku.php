@@ -14,6 +14,21 @@ class Sku extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function type()
+    {
+        return $this->hasOneThrough(Type::class, Product::class, 'id', 'id', 'product_id', 'type_id');
+    }
+
+    public function style()
+    {
+        return $this->hasOneThrough(Style::class, Product::class, 'id', 'id', 'product_id', 'style_id');
+    }
+
+    public function surface()
+    {
+        return $this->hasOneThrough(Surface::class, Product::class, 'id', 'id', 'product_id', 'surface_id');
+    }
+
     public function color()
     {
         return $this->belongsTo(Color::class);
@@ -27,5 +42,30 @@ class Sku extends Model
     public function innerdecor()
     {
         return $this->belongsTo(InnerDecor::class, 'inner_decor_id');
+    }
+
+    public function scopeWithFilters($query, $types, $styles, $surfaces, $colors)
+    {
+        return $query
+            ->when(isset($types), function ($query) use ($types) {
+                $query->whereHas('type', function($query) use($types) {
+                    $query->whereIn('types.slug', $types);
+                });
+            })
+            ->when(isset($styles), function ($query) use ($styles) {
+                $query->whereHas('style', function($query) use($styles) {
+                    $query->whereIn('styles.slug', $styles);
+                });
+            })
+            ->when(isset($surfaces), function ($query) use ($surfaces) {
+                $query->whereHas('surface', function($query) use($surfaces) {
+                    $query->whereIn('surfaces.slug', $surfaces);
+                });
+            })
+            ->when(isset($colors), function ($query) use ($colors) {
+                $query->whereHas('color', function($query) use($colors) {
+                    $query->whereIn('colors.slug', $colors);
+                });
+            });
     }
 }

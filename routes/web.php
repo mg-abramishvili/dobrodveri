@@ -22,6 +22,7 @@ Route::get('catalog/{categorySlug}', [App\Http\Controllers\CategoryController::c
 // PRODUCTS
 Route::get('products', [App\Http\Controllers\ProductController::class, 'index']);
 Route::get('_products', [App\Http\Controllers\ProductController::class, 'indexData']);
+Route::get('_product_skus', [App\Http\Controllers\SkuController::class, 'indexData']);
 Route::get('product/{productSlug}', [App\Http\Controllers\ProductController::class, 'product'])->name('product');
 
 // RECENTLY VIEWED

@@ -29,9 +29,9 @@
     </div>
 
     <div class="product-price">
-        <del v-if="priceOld">{{ $filters.currencyWithourRubSign(priceOld) }} <i>₽</i></del>
+        <del v-if="priceOld">{{ $filters.currencyWithoutRubSign(priceOld) }} <i>₽</i></del>
         <br v-if="priceOld"/>
-        {{ $filters.currencyWithourRubSign(price) }} <i>₽</i>
+        {{ $filters.currencyWithoutRubSign(price) }} <i>₽</i>
     </div>
 
     <div class="product-order">
