@@ -64,10 +64,11 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function scopeWithFilters($query, $types, $styles, $surfaces)
+    public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces)
     {
         return $query
             ->where('is_active', 1)
+            ->where('category_id', $category_id)
             ->when(isset($types), function ($query) use ($types) {
                 $query->whereHas('type', function($query) use($types) {
                     $query->whereIn('slug', $types);
