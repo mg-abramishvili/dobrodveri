@@ -64,7 +64,7 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces)
+    public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces, $priceFrom, $priceTo)
     {
         return $query
             ->where('is_active', 1)
@@ -83,6 +83,12 @@ class Product extends Model
                 $query->whereHas('surface', function($query) use($surfaces) {
                     $query->whereIn('slug', $surfaces);
                 });
+            })
+            ->when(isset($priceFrom), function ($query) use ($priceFrom) {
+                $query->where('price', '>=', $priceFrom);
+            })
+            ->when(isset($priceTo), function ($query) use ($priceTo) {
+                $query->where('price', '<=', $priceTo);
             });
     }
 }

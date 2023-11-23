@@ -65,6 +65,8 @@ export default {
                     types: this.filterParams.types,
                     styles: this.filterParams.styles,
                     surfaces: this.filterParams.surfaces,
+                    price_from: this.filterParams.price_from,
+                    price_to: this.filterParams.price_to,
                 }
             })
             .then(response => {

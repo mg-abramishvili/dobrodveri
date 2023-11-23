@@ -44,20 +44,22 @@ class ProductController extends Controller
         $types = $request->types;
         $styles = $request->styles;
         $surfaces = $request->surfaces;
+        $priceFrom = $request->price_from;
+        $priceTo = $request->price_to;
 
-        $filteredTypes = Type::withCount(['products' => function ($query) use($category_id, $types, $styles, $surfaces) {
-            $query->withFilters($category_id, $types, $styles, $surfaces);
+        $filteredTypes = Type::withCount(['products' => function ($query) use($category_id, $types, $styles, $surfaces, $priceFrom, $priceTo) {
+            $query->withFilters($category_id, $types, $styles, $surfaces, $priceFrom, $priceTo);
         }])->get();
 
-        $filteredStyles = Style::withCount(['products' => function ($query) use($category_id, $types, $styles, $surfaces) {
-            $query->withFilters($category_id, $types, $styles, $surfaces);
+        $filteredStyles = Style::withCount(['products' => function ($query) use($category_id, $types, $styles, $surfaces, $priceFrom, $priceTo) {
+            $query->withFilters($category_id, $types, $styles, $surfaces, $priceFrom, $priceTo);
         }])->get();
 
-        $filteredSurfaces = Surface::withCount(['products' => function ($query) use($category_id, $types, $styles, $surfaces) {
-            $query->withFilters($category_id, $types, $styles, $surfaces);
+        $filteredSurfaces = Surface::withCount(['products' => function ($query) use($category_id, $types, $styles, $surfaces, $priceFrom, $priceTo) {
+            $query->withFilters($category_id, $types, $styles, $surfaces, $priceFrom, $priceTo);
         }])->get();
 
-        $products = ProductResource::collection(Product::withFilters($category_id, $types, $styles, $surfaces)->get());
+        $products = ProductResource::collection(Product::withFilters($category_id, $types, $styles, $surfaces, $priceFrom, $priceTo)->get());
 
         return response()->json([
             'types' => $filteredTypes,
