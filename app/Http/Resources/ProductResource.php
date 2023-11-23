@@ -23,7 +23,7 @@ class ProductResource extends JsonResource
             'type' => $this->type ? $this->type->name : null,
             'construct' => $this->construct ? $this->construct->name : null,
             'surface' => $this->surface ? $this->surface->name : null,
-            'factory_coef' => $this->factory->coef,
+            'factory_coef' => $this->factory ? $this->factory->coef : null,
             'sizes' => $this->sizes,
             'price' => $this->price,
             'skus' => $this->skus,
