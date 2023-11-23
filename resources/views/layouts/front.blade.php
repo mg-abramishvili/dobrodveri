@@ -87,10 +87,10 @@
                                         <a href="#">Скрытые двери</a>
                                     </li>
                                     <li>
-                                        <a href="#">Входные двери</a>
+                                        <a href="/catalog/vkhodnyie-dveri/">Входные двери</a>
                                     </li>
                                     <li>
-                                        <a href="#">Фурнитура</a>
+                                        <a href="/catalog/furnitura/">Фурнитура</a>
                                     </li>
                                     <li>
                                         <a href="#">Где купить</a>
