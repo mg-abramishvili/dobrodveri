@@ -14,6 +14,21 @@ use Illuminate\Http\Request;
 
 class SkuController extends Controller
 {
+    public function addToFavorite(Request $request)
+    {
+        // session()->forget('favorites');
+        
+        $favorites = session()->get('favorites', []);
+
+        $sku = Sku::find($request->id);
+
+        if(!isset($favorites[$sku->id])) {
+            $favorites[$sku->id] = new SkuResource($sku);
+        }
+          
+        session()->put('favorites', $favorites);
+    }
+
     public function indexData(Request $request)
     {
         $category_id = $request->category_id;

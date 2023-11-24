@@ -25,10 +25,12 @@ Route::get('_products', [App\Http\Controllers\ProductController::class, 'indexDa
 Route::get('_product_skus', [App\Http\Controllers\SkuController::class, 'indexData']);
 Route::get('product/{productSlug}', [App\Http\Controllers\ProductController::class, 'product'])->name('product');
 
-// RECENTLY VIEWED
-Route::get('/rv', function () {
-    dd(session('recentlyViewed'));
+// FAVORITES
+Route::view('favorites', 'favorites');
+Route::get('_favorites', function () {
+    return session('favorites');
 });
+Route::post('_favorites', [App\Http\Controllers\SkuController::class, 'addToFavorite']);
 
 // ADMIN
 Route::get('admin', function () {

@@ -36,6 +36,7 @@
 
     <div class="product-order">
         <button>Заказать</button>
+        <button @click="addToFavorites()">Добавить в избранное</button>
 
         <div v-if="product.balance" class="product-balance" :class="{'product-balance-green': product.balance == 'В наличии в Уфе'}">
             <template v-if="product.balance != 'В наличии в Уфе'">срок изготовления:<br/></template>
@@ -152,7 +153,17 @@
             },
             emitSKU(selectedSKU) {
                 this.emitter.emit('product-sku-index', this.product.skus.indexOf(selectedSKU))
-            }
+            },
+            addToFavorites() {
+                if(!this.selectedSKU) {
+                    return
+                }
+
+                axios.post('/_favorites', { id: this.selectedSKU.id })
+                .then(response => {
+                    //
+                })
+            },
         }
     }
 </script>

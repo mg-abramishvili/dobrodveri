@@ -32,7 +32,7 @@
 
         <div v-if="!views.loading && productSKUs.length" class="category-products-list">
             <div v-for="sku in productSKUs" class="products-list-item">
-                <a :href="SkuUrl(sku)">
+                <a :href="$filters.SkuUrl(sku)">
                     <div class="products-list-item-image">
                         <img v-if="sku.image" :src="sku.image" :alt="sku.name">
                         <img v-else src="/img/no-image.jpg" :alt="sku.name">
@@ -178,23 +178,6 @@ export default {
             this.page = this.views.pagination.nextPage
 
             this.loadProductSKUs()
-        },
-        SkuUrl(sku) {
-            let urlInitial = '/product/' + sku.slug
-            let urlParams = []
-
-            if(sku.color) {
-                urlParams.push('&color=' + sku.color.slug)
-            }
-            if(sku.glass) {
-                urlParams.push('&glass=' + sku.glass.slug)
-            }
-
-            if(urlParams.length) {
-                return urlInitial + '?' + urlParams.join("")
-            }
-
-            return urlInitial
         },
     },
     components: {

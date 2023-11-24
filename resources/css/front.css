@@ -473,6 +473,28 @@ header .container {
     display: block;
     margin: 0 auto;
 }
+.product-list-item-sku-params {
+    height: 100px;
+    margin-top: 10px;
+}
+.product-list-item-sku-params-i {
+    display: inline-flex;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1;
+    margin: 5px 0;
+}
+.product-list-item-sku-params-i img {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    margin: 0 5px;
+    border: 2px solid #ccc;
+}
 /* PRODUCT LIST */
 
 
