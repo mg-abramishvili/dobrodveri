@@ -105,7 +105,7 @@ export default {
                 return this.$toast.error('Укажите символьный код')
             }
             if(!this.text) {
-                return this.$toast.error('Загрузите картинку')
+                return this.$toast.error('Напишите текст страницы')
             }
             
             this.views.saveButton = false

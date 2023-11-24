@@ -90,9 +90,6 @@ export default {
             if(!this.slug) {
                 return this.$toast.error('Укажите символьный код')
             }
-            if(!this.slug) {
-                return this.$toast.error('Укажите цвет')
-            }
 
             this.views.saveButton = false
 
