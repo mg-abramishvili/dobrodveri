@@ -25,36 +25,41 @@ class SkuController extends Controller
         $colors = $request->colors;
         
         $filteredTypes = Type::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors) {
-            $query->withFilters($types, $styles, $surfaces, $colors);
-        }])->get();
+            $query->withFilters(null, $styles, $surfaces, $colors);
+        }])->orderBy('skus_count', 'desc')->get();
 
         $filteredStyles = Style::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors) {
-            $query->withFilters($types, $styles, $surfaces, $colors);
-        }])->get();
+            $query->withFilters($types, null, $surfaces, $colors);
+        }])->orderBy('skus_count', 'desc')->get();
 
         $filteredSurfaces = Surface::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors) {
-            $query->withFilters($types, $styles, $surfaces, $colors);
-        }])->get();
+            $query->withFilters($types, $styles, null, $colors);
+        }])->orderBy('skus_count', 'desc')->get();
 
         $filteredColors = Color::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors) {
-            $query->withFilters($types, $styles, $surfaces, $colors);
-        }])->get();
+            $query->withFilters($types, $styles, $surfaces, null);
+        }])->orderBy('skus_count', 'desc')->get();
 
-        $perPage = 2;
+        $perPage = 20;
 
-        $skus = Sku::withFilters($types, $styles, $surfaces, $colors);
+        $skus = Sku::select(['skus.*', 'products.price as product_price'])
+                    ->join('products', 'skus.product_id', '=', 'products.id')
+                    ->withFilters($types, $styles, $surfaces, $colors)
+                    ->orderBy('products.price', 'asc');
 
         $pagination['total_pages'] = $skus->count() / $perPage;
         $pagination['current_page'] = (int)$page;
 
-        $skus = SkuResource::collection($skus->skip(($perPage * $page) - $perPage)->take($perPage)->get());
+        $skus = $skus->skip(($perPage * $page) - $perPage)
+                    ->take($perPage)
+                    ->get();
 
         return response()->json([
             'types' => $filteredTypes,
             'styles' => $filteredStyles,
             'surfaces' => $filteredSurfaces,
             'colors' => $filteredColors,
-            'skus' => $skus,
+            'skus' => SkuResource::collection($skus),
             'pagination' => $pagination,
         ]);
     }

@@ -9,12 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::query()
-        ->with([
-            'products' => function($query) {
-                $query->where('is_active', 1);
-            }])
-        ->get();
+        $categories = Category::all();
 
         return view('categories', compact('categories'));
     }
@@ -26,6 +21,10 @@ class CategoryController extends Controller
             ->with([
                 'products' => function($query) {
                     $query->where('is_active', 1);
+                    $query->whereHas('skus');
+                    $query->with('skus');
+                    $query->orderBy('price', 'asc');
+                    $query->paginate(20);
                 }])
             ->first();
 

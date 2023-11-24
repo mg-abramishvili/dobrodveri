@@ -309,7 +309,8 @@ header .container {
     margin-top: 30px;
 }
 .container .category-filter {
-    width: 25%;
+    width: calc(25% - 25px);
+    margin-right: 25px;
     position: relative;
 }
 .overlay {
@@ -333,6 +334,31 @@ header .container {
 .filter-box p {
     margin-top: 0;
     font-weight: 700;
+}
+.filter-box-list-large {
+    height: 250px;
+    overflow-y: auto;
+}
+.filter-box-list img {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+.filter-box-list .form-check {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    width: 100%;
+}
+.filter-box-list .form-check-label {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    line-height: 1;
+}
+.filter-box-list .form-check-label small {
+    font-size: 11px;
+    margin-left: 5px;
 }
 .category-filter-buttons {
     position: sticky;
@@ -371,6 +397,34 @@ header .container {
     flex-wrap: wrap;
     width: 100%;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.pagination button {
+    margin: 0 5px;
+    box-shadow: none;
+    border: 1px solid #df3e3c;
+    padding: 8px 12px;
+    background: none;
+    line-height: 1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.pagination button:hover {
+    background-color: #df3e3c;
+    color: #fff;
+}
+.pagination button:disabled {
+    border-color: #ccc;
+    cursor: auto;
+}
+.pagination button:disabled:hover,
+.pagination button:disabled:focus {
+    background: none;
+    color: #ccc;
+}
 /* CATEGORY */
 
 
@@ -379,17 +433,17 @@ header .container {
 .products-list-item {
     text-align: center;
     width: 25%;
-    padding: 10px;
 }
 .products-list-item a {
     display: block;
     text-decoration: none;
     color: #212121;
-    padding: 10px;
+    padding: 20px;
+    border-radius: 8px;
 }
 .products-list-item a:hover,
 .products-list-item a:focus {
-    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 .products-list-item .products-list-item-name {
     margin: 0;
@@ -472,7 +526,7 @@ header .container {
     -moz-appearance: none;
 }
 .range-price {
-    margin: 30px 0;
+    margin-top: 25px;
     width: 100%;
     display: flex;
     justify-content: center;
