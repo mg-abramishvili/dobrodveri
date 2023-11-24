@@ -371,6 +371,7 @@ header .container {
     padding: 12px 22px;
     box-shadow: none;
     border: 0;
+    cursor: pointer;
 }
 .category-filter-button:nth-of-type(1) {
     background-color: #df3e3c;

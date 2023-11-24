@@ -154,6 +154,8 @@ export default {
 
             // this.loadProducts()
 
+            this.views.loading = true
+
             window.location.href = '/catalog/' + this.category.slug + '/'
         },
         isFilterApplied() {
