@@ -47,6 +47,7 @@ class Sku extends Model
     public function scopeWithFilters($query, $types, $styles, $surfaces, $colors)
     {
         return $query
+            ->where('product.is_active', true)
             ->when(isset($types), function ($query) use ($types) {
                 $query->whereHas('type', function($query) use($types) {
                     $query->whereIn('types.slug', $types);
