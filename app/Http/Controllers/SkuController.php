@@ -47,7 +47,7 @@ class SkuController extends Controller
                     ->withFilters($types, $styles, $surfaces, $colors)
                     ->orderBy('products.price', 'asc');
 
-        $pagination['total_pages'] = $skus->count() / $perPage;
+        $pagination['total_pages'] = round($skus->count() / $perPage);
         $pagination['current_page'] = (int)$page;
 
         $skus = $skus->skip(($perPage * $page) - $perPage)
