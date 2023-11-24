@@ -1,6 +1,6 @@
 <template>
     <aside class="category-filter">
-        <ProductFilter :category_id="category.id" :types="types" :styles="styles" :surfaces="surfaces" :colors="colors" :filterParams="filterParams" />
+        <ProductFilter :category_id="category.id" :types="types" :styles="styles" :surfaces="surfaces" :colors="colors" :glasses="glasses" :filterParams="filterParams" />
 
         <div v-if="!views.loading" class="category-filter-buttons">
             <button @click="loadProductSKUs()" class="category-filter-button">Применить фильтр</button>
@@ -32,7 +32,7 @@
 
         <div v-if="!views.loading && productSKUs.length" class="category-products-list">
             <div v-for="sku in productSKUs" class="products-list-item">
-                <a :href="'/product/' + sku.slug">
+                <a :href="SkuUrl(sku)">
                     <div class="products-list-item-image">
                         <img v-if="sku.image" :src="sku.image" :alt="sku.name">
                         <img v-else src="/img/no-image.jpg" :alt="sku.name">
@@ -73,6 +73,7 @@ export default {
             styles: [],
             surfaces: [],
             colors: [],
+            glasses: [],
 
             filterParams: {},
 
@@ -86,6 +87,7 @@ export default {
                 styles: [],
                 surfaces: [],
                 colors: [],
+                glasses: [],
             },
 
             page: 1,
@@ -119,6 +121,7 @@ export default {
                 params: {
                     category_id: this.filterParams.category_id,
                     colors: this.filterParams.colors,
+                    glasses: this.filterParams.glasses,
                     types: this.filterParams.types,
                     styles: this.filterParams.styles,
                     surfaces: this.filterParams.surfaces,
@@ -127,6 +130,7 @@ export default {
             })
             .then(response => {
                 this.colors = response.data.colors
+                this.glasses = response.data.glasses
                 this.types = response.data.types
                 this.styles = response.data.styles
                 this.surfaces = response.data.surfaces
@@ -174,6 +178,23 @@ export default {
             this.page = this.views.pagination.nextPage
 
             this.loadProductSKUs()
+        },
+        SkuUrl(sku) {
+            let urlInitial = '/product/' + sku.slug
+            let urlParams = []
+
+            if(sku.color) {
+                urlParams.push('&color=' + sku.color.slug)
+            }
+            if(sku.glass) {
+                urlParams.push('&glass=' + sku.glass.slug)
+            }
+
+            if(urlParams.length) {
+                return urlInitial + '?' + urlParams.join("")
+            }
+
+            return urlInitial
         },
     },
     components: {

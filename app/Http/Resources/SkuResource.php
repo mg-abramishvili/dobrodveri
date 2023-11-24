@@ -17,6 +17,7 @@ class SkuResource extends JsonResource
             'type' => $this->product->type,
             'surface' => $this->product->surface,
             'color' => $this->color,
+            'glass' => $this->glass,
             'image' => $this->image,
             'price' => $this->price ? $this->price : $this->product->price,
         ];

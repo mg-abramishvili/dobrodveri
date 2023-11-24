@@ -6,7 +6,9 @@
     </div>
 
     <div class="filter-box">
-        <p class="fw-bold mb-1">Цвет</p>
+        <p v-if="category_id == 1">Цвет</p>
+        <p v-if="category_id == 2">Цвет внутренней панели</p>
+        <p v-if="category_id == 3">Цвет</p>
         
         <div class="filter-box-list filter-box-list-large">
             <template v-for="color in colors">
@@ -20,8 +22,23 @@
         </div>
     </div>
 
+    <div class="filter-box">
+        <p>Цвет стекла</p>
+        
+        <div class="filter-box-list">
+            <template v-for="glass in glasses">
+                <div v-if="glass.skus_count > 0" class="form-check">
+                    <input v-model="selected.glasses" class="form-check-input" type="checkbox" :value="glass.slug" :id="'glass_' + glass.slug" :disabled="glass.skus_count == 0">
+                    <label class="form-check-label" :class="{ 'form-check-label-disabled': glass.skus_count == 0 }" :for="'glass_' + glass.slug">
+                        <img :src="glass.image"/> {{ glass.name }} <small>{{ glass.skus_count }}</small>
+                    </label>
+                </div>
+            </template>
+        </div>
+    </div>
+
     <div v-if="category_id == 1" class="filter-box">
-        <p class="fw-bold mb-1">Тип двери</p>
+        <p>Тип двери</p>
         
         <div class="filter-box-list">
             <template v-for="type in types">
@@ -36,7 +53,7 @@
     </div>
 
     <div v-if="category_id == 1" class="filter-box">
-        <p class="fw-bold mb-1">Стиль</p>
+        <p>Стиль</p>
         
         <div class="filter-box-list">
             <template v-for="style in styles">
@@ -51,7 +68,7 @@
     </div>
 
     <div v-if="category_id == 1" class="filter-box">
-        <p class="fw-bold mb-1">Покрытие</p>
+        <p>Покрытие</p>
         
         <div class="filter-box-list">
             <template v-for="surface in surfaces">
@@ -70,7 +87,7 @@
 import PriceRangeSlider from './PriceRangeSlider.vue'
 
 export default {
-    props: ['category_id', 'types', 'styles', 'surfaces', 'colors', 'filterParams'],
+    props: ['category_id', 'types', 'styles', 'surfaces', 'colors', 'glasses', 'filterParams'],
     data() {
         return {
             selected: {
@@ -82,6 +99,7 @@ export default {
                 styles: [],
                 surfaces: [],
                 colors: [],
+                glasses: [],
             },
 
             views: {
