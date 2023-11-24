@@ -150,6 +150,11 @@ export default {
 
             this.productSKUs = []
 
+            this.types = [],
+            this.styles = [],
+            this.surfaces = [],
+            this.colors = [],
+
             this.page = 1
 
             this.loadProducts()
