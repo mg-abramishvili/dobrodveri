@@ -146,18 +146,15 @@ export default {
             })
         },
         resetFilter() {
-            this.filterParams = JSON.parse(JSON.stringify(this.initialFilterParams))
+            // this.filterParams = JSON.parse(JSON.stringify(this.initialFilterParams))
 
-            this.productSKUs = []
+            // this.productSKUs = []
 
-            this.types = [],
-            this.styles = [],
-            this.surfaces = [],
-            this.colors = [],
+            // this.page = 1
 
-            this.page = 1
+            // this.loadProducts()
 
-            this.loadProducts()
+            windows.location.href = '/catalog/' + this.category.slug + '/'
         },
         isFilterApplied() {
             if(JSON.stringify(this.filterParams) === JSON.stringify(this.initialFilterParams)) {
