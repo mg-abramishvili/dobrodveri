@@ -13,14 +13,14 @@
     "src": "resources/css/front.css"
   },
   "resources/js/admin.css": {
-    "file": "assets/admin-19a3f1ba.css",
+    "file": "assets/admin-3f40aef1.css",
     "src": "resources/js/admin.css"
   },
   "resources/js/admin.js": {
     "css": [
-      "assets/admin-19a3f1ba.css"
+      "assets/admin-3f40aef1.css"
     ],
-    "file": "assets/admin-b7c1a3ca.js",
+    "file": "assets/admin-f86c4bc7.js",
     "imports": [
       "_globalFilters-95fdd815.js"
     ],
