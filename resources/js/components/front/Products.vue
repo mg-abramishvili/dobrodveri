@@ -154,7 +154,7 @@ export default {
 
             // this.loadProducts()
 
-            windows.location.href = '/catalog/' + this.category.slug + '/'
+            window.location.href = '/catalog/' + this.category.slug + '/'
         },
         isFilterApplied() {
             if(JSON.stringify(this.filterParams) === JSON.stringify(this.initialFilterParams)) {
