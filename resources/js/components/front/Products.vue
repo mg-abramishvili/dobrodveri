@@ -148,6 +148,8 @@ export default {
         resetFilter() {
             this.filterParams = JSON.parse(JSON.stringify(this.initialFilterParams))
 
+            this.productSKUs = []
+
             this.page = 1
 
             this.loadProducts()
