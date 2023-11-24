@@ -16,6 +16,10 @@ import Loader from './components/admin/Loader.vue'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 
+// Vue Toast Notification
+import ToastPlugin from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-default.css'
+
 // CKEditor
 import CKEditor from '@ckeditor/ckeditor5-vue'
 
@@ -24,6 +28,9 @@ const app = createApp(App)
             .use(Router)
             .use(VueSweetalert2)
             .use(CKEditor)
+            .use(ToastPlugin, {
+                position: 'top'
+            })
 
 app.config.globalProperties.$filters = globalFilters
 

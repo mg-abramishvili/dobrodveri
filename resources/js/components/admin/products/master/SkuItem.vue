@@ -93,18 +93,7 @@ export default {
                 this.$parent.loadProduct()
             })
             .catch(errors => {
-                let errorMessage = ''
-
-                if(errors.response.data) {
-                    errorMessage = errors.response.data
-                } else {
-                    errorMessage = errors
-                }
-
-                return this.$swal({
-                    text: errorMessage,
-                    icon: 'error',
-                })
+                return this.$toast.error(errors.response.data ? errors.response.data : errors)
             })
         },
         del() {

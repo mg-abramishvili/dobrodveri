@@ -77,10 +77,7 @@ export default {
         },
         del(id) {
             if(this.slides.length == 1) {
-                return this.$swal({
-                    text: 'На сайте должен быть хотя бы 1 слайд',
-                    icon: 'error',
-                })
+                return this.$toast.error('На сайте должен быть хотя бы 1 слайд')
             }
 
             if (confirm("Точно удалить слайд?")) {
@@ -89,10 +86,7 @@ export default {
                     this.loadSlides()
                 })
                 .catch(errors => {
-                    return this.$swal({
-                        html: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },

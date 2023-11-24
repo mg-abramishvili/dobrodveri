@@ -127,10 +127,7 @@ export default {
                 this.views.loading = false
             })
             .catch(errors => {
-                return this.$swal({
-                    text: errors.response.data ? errors.response.data : errors,
-                    icon: 'error',
-                })
+                return this.$toast.error(errors.response.data ? errors.response.data : errors)
             })
         },
         save() {
@@ -139,16 +136,10 @@ export default {
             }
 
             if(!this.header) {
-                return this.$swal({
-                    text: 'Укажите название',
-                    icon: 'error',
-                })
+                return this.$toast.error('Укажите название')
             }
             if(!this.image) {
-                return this.$swal({
-                    text: 'Загрузите изображение',
-                    icon: 'error',
-                })
+                return this.$toast.error('Загрузите изображение')
             }
 
             this.views.saveButton = false
@@ -169,10 +160,7 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
                 
-                    return this.$swal({
-                        text: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
 
@@ -185,10 +173,7 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
                 
-                    return this.$swal({
-                        text: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },
@@ -199,10 +184,7 @@ export default {
                     this.$router.push({ name: 'MainSlider' })
                 })
                 .catch(errors => {
-                    return this.$swal({
-                        html: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },

@@ -119,10 +119,7 @@ export default {
                 this.views.loading = false
             })
             .catch(errors => {
-                return this.$swal({
-                    text: errors.response.data ? errors.response.data : errors,
-                    icon: 'error',
-                })
+                return this.$toast.error(errors.response.data ? errors.response.data : errors)
             })
         },
         slugify() {
@@ -136,22 +133,13 @@ export default {
             }
 
             if(!this.name) {
-                return this.$swal({
-                    text: 'Укажите название',
-                    icon: 'error',
-                })
+                return this.$toast.error('Укажите название')
             }
             if(!this.slug) {
-                return this.$swal({
-                    text: 'Укажите символьный код',
-                    icon: 'error',
-                })
+                return this.$toast.error('Укажите символьный код')
             }
             if(!this.image) {
-                return this.$swal({
-                    text: 'Загрузите картинку',
-                    icon: 'error',
-                })
+                return this.$toast.error('Загрузите картинку')
             }
 
             this.views.saveButton = false
@@ -171,10 +159,7 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
     
-                    return this.$swal({
-                        text: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
 
@@ -187,10 +172,7 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
     
-                    return this.$swal({
-                        text: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },

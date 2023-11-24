@@ -78,10 +78,7 @@ export default {
                     this.loadStyles()
                 })
                 .catch(errors => {
-                    return this.$swal({
-                        html: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },

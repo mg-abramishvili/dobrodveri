@@ -89,10 +89,7 @@ export default {
                     this.loadProducts()
                 })
                 .catch(errors => {
-                    return this.$swal({
-                        text: errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },
@@ -103,10 +100,7 @@ export default {
                     this.loadProducts()
                 })
                 .catch(errors => {
-                    return this.$swal({
-                        text: errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },

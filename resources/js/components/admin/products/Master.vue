@@ -315,28 +315,16 @@ export default {
             }
 
             if(!this.name) {
-                return this.$swal({
-                    text: 'Укажите название',
-                    icon: 'error',
-                })
+                return this.$toast.error('Укажите название')
             }
             if(!this.slug) {
-                return this.$swal({
-                    text: 'Укажите символьный код',
-                    icon: 'error',
-                })
+                return this.$toast.error('Укажите символьный код')
             }
             if(!this.selected.category) {
-                return this.$swal({
-                    text: 'Укажите категорию',
-                    icon: 'error',
-                })
+                return this.$toast.error('Укажите категорию')
             }
             if(this.price <= 0) {
-                return this.$swal({
-                    text: 'Укажите цену',
-                    icon: 'error',
-                })
+                return this.$toast.error('Укажите цену')
             }
 
             this.views.saveButton = false
@@ -382,10 +370,7 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
 
-                    return this.$swal({
-                        text: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
 
@@ -398,10 +383,7 @@ export default {
                 .catch(errors => {
                     this.views.saveButton = true
 
-                    return this.$swal({
-                        text: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },
@@ -412,10 +394,7 @@ export default {
                     this.$router.push({ name: 'Products' })
                 })
                 .catch(errors => {
-                    return this.$swal({
-                        text: errors.response.data ? errors.response.data : errors,
-                        icon: 'error',
-                    })
+                    return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
             }
         },
