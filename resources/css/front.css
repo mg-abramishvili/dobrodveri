@@ -1050,9 +1050,12 @@ header .container {
 .page-folder a:hover {
     color: #df3e3c;
 }
+.page-f-desc {
+    padding: 25px;
+}
 .page-f-name {
     height: 150px;
-    padding: 25px;
+    overflow: hidden;
 }
 .page-cover {
     height: 200px;
