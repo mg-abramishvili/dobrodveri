@@ -33,6 +33,21 @@
                     </div>
 
                     <div class="mb-4">
+                        <div class="form-check">
+                            <input v-model="is_folder1" class="form-check-input" type="checkbox" :value="1" id="is_folder1">
+                            <label class="form-check-label" for="is_folder1">
+                                В папку "Дизайнерам"
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input v-model="is_folder2" class="form-check-input" type="checkbox" :value="1" id="is_folder2">
+                            <label class="form-check-label" for="is_folder2">
+                                В папку "Полезное"
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
                         <label class="form-label">Текст</label>
                         <ckeditor :editor="editor" v-model="text" :config="editorConfig"></ckeditor>
                     </div>
@@ -83,6 +98,8 @@ export default {
             slug: '',
             text: '',
             gallery: [],
+            is_folder1: false,
+            is_folder2: false,
 
             views: {
                 loading: true,
@@ -109,6 +126,22 @@ export default {
             this.views.loading = false
         }
     },
+    watch: {
+        is_folder1: {
+            handler() {
+                if(this.is_folder1 == true) {
+                    this.is_folder2 = false
+                }
+            }
+        },
+        is_folder2: {
+            handler() {
+                if(this.is_folder2 == true) {
+                    this.is_folder1 = false
+                }
+            }
+        }
+    },
     methods: {
         loadPage() {
             axios.get(`/_admin/page/${this.$route.params.id}`)
@@ -118,6 +151,8 @@ export default {
                 this.name = response.data.name
                 this.slug = response.data.slug
                 this.text = response.data.text
+                this.is_folder1 = response.data.is_folder1 == 1 ? true : false
+                this.is_folder2 = response.data.is_folder2 == 1 ? true : false
 
                 if(response.data.gallery) {
                     this.filepond_gallery_edit = response.data.gallery.map(function(element){
@@ -170,6 +205,8 @@ export default {
                 slug: this.slug,
                 text: this.text,
                 gallery: this.gallery,
+                is_folder1: this.is_folder1,
+                is_folder2: this.is_folder2,
             }
 
             if(this.$route.params.id) {

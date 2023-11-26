@@ -922,7 +922,7 @@ header .container {
     margin-right: 10px;
 }
 .breadcrumbs ul li:nth-child(1)::before,
-.breadcrumbs ul li:nth-child(2)::before {
+.breadcrumbs ul .nohash::before {
     content: '';
     margin-right: 0;
 }

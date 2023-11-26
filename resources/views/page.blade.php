@@ -7,6 +7,16 @@
             <li>
                 <a href="/">Главная</a>
             </li>
+            @if($page->is_folder1 == 1)
+                <li>
+                    <a href="/dizaineram">Дизайнерам</a>
+                </li>
+            @endif
+            @if($page->is_folder2 == 1)
+                <li>
+                    <a href="/polezno">Полезно</a>
+                </li>
+            @endif
             <li>
                 <a>{{ $page->name }}</a>
             </li>

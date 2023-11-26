@@ -15,7 +15,7 @@
                     </svg>
                 </a>
             </li>
-            <li>
+            <li class="nohash">
                 <a href="/">Главная</a>
             </li>
             <li>

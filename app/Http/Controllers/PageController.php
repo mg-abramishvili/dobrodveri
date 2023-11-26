@@ -13,4 +13,20 @@ class PageController extends Controller
 
         return view('page', compact('page'));
     }
+
+    public function pageDizaineram()
+    {
+        $pagesF = Page::where('is_folder1', 1)->get();
+        $title = 'Дизайнерам';
+
+        return view('page-folder', compact('pagesF', 'title'));
+    }
+
+    public function pagePolezno()
+    {
+        $pagesF = Page::where('is_folder2', 1)->get();
+        $title = 'Полезно';
+
+        return view('page-folder', compact('pagesF', 'title'));
+    }
 }

@@ -11,6 +11,8 @@ Route::get('/', function () {
 });
 
 Route::get('p/{slug}', [App\Http\Controllers\PageController::class, 'page'])->name('page');
+Route::get('dizaineram', [App\Http\Controllers\PageController::class, 'pageDizaineram']);
+Route::get('polezno', [App\Http\Controllers\PageController::class, 'pagePolezno']);
 
 Route::post('lead', [App\Http\Controllers\LeadController::class, 'store'])->name('lead');
 Route::post('review', [App\Http\Controllers\ReviewController::class, 'store'])->name('review');

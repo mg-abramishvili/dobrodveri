@@ -32,6 +32,8 @@ class PageController extends Controller
         $page->slug = $request->slug;
         $page->text = $request->text;
         $page->gallery = isset($request->gallery) ? $request->gallery : [];
+        $page->is_folder1 = $request->is_folder1;
+        $page->is_folder2 = $request->is_folder2;
 
         $page->save();
     }
@@ -50,6 +52,8 @@ class PageController extends Controller
         $page->slug = $request->slug;
         $page->text = $request->text;
         $page->gallery = isset($request->gallery) ? $request->gallery : [];
+        $page->is_folder1 = $request->is_folder1;
+        $page->is_folder2 = $request->is_folder2;
 
         $page->save();
     }

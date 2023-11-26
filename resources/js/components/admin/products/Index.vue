@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-3 text-end">
-                <router-link :to="{ name: 'ProductMaster' }" class="btn btn-sm btn-primary">Добавить</router-link>
+                <router-link :to="{ name: 'ProductMaster' }" class="btn btn-primary">Добавить</router-link>
             </div>
         </div>
     </div>

@@ -75,6 +75,12 @@
                                         <a href="/p/{{ $page->slug }}/">{{ $page->name }}</a>
                                     </li>
                                 @endforeach
+                                <li>
+                                    <a href="/dizaineram">Дизайнерам</a>
+                                </li>
+                                <li>
+                                    <a href="/polezno/">Полезно</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="header-bottom-nav">
