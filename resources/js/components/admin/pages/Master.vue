@@ -66,7 +66,7 @@
                         />
                     </div>
 
-                    <div class="mb-4 page-gallery">
+                    <div v-if="is_folder1 || is_folder2" class="mb-4 page-gallery">
                         <label class="form-label">Картинка-обложка</label>
                         <file-pond
                             name="page_cover"
