@@ -15,6 +15,9 @@ import ColorMaster from './components/admin/colors/Master.vue'
 import Styles from './components/admin/styles/Index.vue'
 import StyleMaster from './components/admin/styles/Master.vue'
 
+import Sizes from './components/admin/sizes/Index.vue'
+import SizeMaster from './components/admin/sizes/Master.vue'
+
 import Factories from './components/admin/factories/Index.vue'
 import FactoryMaster from './components/admin/factories/Master.vue'
 
@@ -100,6 +103,16 @@ const routes = [
         path: '/admin/style-master/:id?',
         name: 'StyleMaster',
         component: StyleMaster
+    },
+    {
+        path: '/admin/sizes',
+        name: 'Sizes',
+        component: Sizes
+    },
+    {
+        path: '/admin/size-master/:id?',
+        name: 'SizeMaster',
+        component: SizeMaster
     },
     {
         path: '/admin/factories',

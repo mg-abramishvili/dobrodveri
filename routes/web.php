@@ -137,6 +137,10 @@ Route::delete('_admin/glass/{id}/delete', [App\Http\Controllers\Admin\GlassContr
 
 // ADMIN SIZES
 Route::get('_admin/sizes', [App\Http\Controllers\Admin\SizeController::class, 'index']);
+Route::get('_admin/size/{id}', [App\Http\Controllers\Admin\SizeController::class, 'size']);
+Route::post('_admin/sizes', [App\Http\Controllers\Admin\SizeController::class, 'store']);
+Route::put('_admin/size/{id}/update', [App\Http\Controllers\Admin\SizeController::class, 'update']);
+Route::delete('_admin/size/{id}/delete', [App\Http\Controllers\Admin\SizeController::class, 'delete']);
 
 // ADMIN MAINSLIDER
 Route::get('_admin/mainslider', [App\Http\Controllers\Admin\MainSliderController::class, 'index']);

@@ -34,7 +34,7 @@ export default {
             )
         }
       
-        return n_str.join('').replace(/\s+/g, '-').toLocaleLowerCase()
+        return n_str.join('').replace(/\s+/g, '-').replace('×', 'x').toLocaleLowerCase()
     },
     SkuUrl(sku) {
         let urlInitial = '/product/' + sku.slug

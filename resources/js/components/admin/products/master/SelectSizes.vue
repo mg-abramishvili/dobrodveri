@@ -28,7 +28,7 @@ export default {
             axios
             .get(`/_admin/sizes`)
             .then(response => {
-                this.sizes = response.data
+                this.sizes = response.data.filter(size => size.categories.some(sz => sz.id === this.$parent.selected.category))
 
                 this.views.loading = false
             })
