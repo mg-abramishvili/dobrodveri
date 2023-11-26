@@ -20,7 +20,9 @@
             @foreach($pagesF as $page)
                 <a href="/p/{{ $page->slug }}">
                     <div class="page-cover" style="background-image: url({{$page->cover ? $page->cover : '/img/no-image.jpg'}})"></div>
-                    {{ $page->name }}
+                    <div class="page-f-name">
+                        {{ $page->name }}
+                    </div>
                 </a>
             @endforeach
         </div>

@@ -1040,6 +1040,11 @@ header .container {
     display: block;
     color: #212121;
     text-decoration: none;
+    width: calc(25% - 15px);
+}
+.page-f-name {
+    height: 150px;
+    padding: 25px;
 }
 .page-cover {
     height: 200px;
