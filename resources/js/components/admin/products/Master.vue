@@ -82,7 +82,7 @@
             </div>
 
             <div v-show="views.currentTab == 'sizes'" class="box-tab-content">
-                <SelectSizes />
+                <SelectSizes v-if="selected.category" />
             </div>
 
             <div v-show="views.currentTab == 'variations'" class="box-tab-content">
