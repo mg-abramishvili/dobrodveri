@@ -1036,7 +1036,6 @@ header .container {
 .page-folder {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     width: 100%;
 }
 .page-folder a {
@@ -1045,7 +1044,11 @@ header .container {
     color: #212121;
     text-decoration: none;
     width: calc(25% - 15px);
+    margin-right: 30px;
     margin-bottom: 20px;
+}
+.page-folder a:hover {
+    color: #df3e3c;
 }
 .page-f-name {
     height: 150px;
