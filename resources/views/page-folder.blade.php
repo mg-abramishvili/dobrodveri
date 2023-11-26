@@ -16,11 +16,13 @@
     <div class="container page-detail">
         <h1 class="title-header">{{ $title }}</h1>
 
-        @foreach($pagesF as $page)
-            <a href="/p/{{ $page->slug }}">
-                <div class="page-cover" style="background-image: url({{$page->cover ? $page->cover : '/img/no-image.jpg'}})"></div>
-                {{ $page->name }}
-            </a>
-        @endforeach
+        <div class="page-folder">
+            @foreach($pagesF as $page)
+                <a href="/p/{{ $page->slug }}">
+                    <div class="page-cover" style="background-image: url({{$page->cover ? $page->cover : '/img/no-image.jpg'}})"></div>
+                    {{ $page->name }}
+                </a>
+            @endforeach
+        </div>
     </div>
 @endsection

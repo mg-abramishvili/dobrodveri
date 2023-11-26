@@ -1033,6 +1033,14 @@ header .container {
 
 
 /* PAGE */
+.page-folder {
+    display: flex;
+}
+.page-folder a {
+    display: block;
+    color: #212121;
+    text-decoration: none;
+}
 .page-cover {
     height: 200px;
     background-size: cover;
