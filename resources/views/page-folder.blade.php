@@ -22,8 +22,8 @@
                     <div class="page-cover" style="background-image: url({{$page->cover ? $page->cover : '/img/no-image.jpg'}})"></div>
                     <div class="page-f-name">
                         {{ $page->name }}
+                        <div class="page-f-more">Подробнее</div>
                     </div>
-                    <div class="page-f-more">Подробнее</div>
                 </a>
             @endforeach
         </div>
