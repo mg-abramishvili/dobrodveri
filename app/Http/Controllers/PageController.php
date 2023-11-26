@@ -16,7 +16,7 @@ class PageController extends Controller
 
     public function pageDizaineram()
     {
-        $pagesF = Page::where('is_folder1', 1)->get();
+        $pagesF = Page::where('is_folder1', 1)->orderBy('created_at', 'desc')->get();
         $title = 'Дизайнерам';
 
         return view('page-folder', compact('pagesF', 'title'));
@@ -24,7 +24,7 @@ class PageController extends Controller
 
     public function pagePolezno()
     {
-        $pagesF = Page::where('is_folder2', 1)->get();
+        $pagesF = Page::where('is_folder2', 1)->orderBy('created_at', 'desc')->get();
         $title = 'Полезно';
 
         return view('page-folder', compact('pagesF', 'title'));
