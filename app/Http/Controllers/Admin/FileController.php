@@ -117,5 +117,23 @@ class FileController extends Controller
                 'Content-Disposition' => 'inline',
             ]);
         }
+
+        if (request()->file('page_gallery')) {
+            $file1 = request()->file('page_gallery');
+            for ($i = 0; $i < count($file1); $i++) {
+                $file = $file1[$i];
+                $filename = md5(time() . rand(1, 100000)) . '.' . $file->getClientOriginalExtension();
+                // $file->move(public_path() . '/uploads', $filename);
+
+                $img = Image::make($file->path());
+                $img->resize(1100, 1100, function ($const) {
+                        $const->aspectRatio();
+                    })->save(public_path() . '/uploads/page-galleries/' . $filename);
+
+                return \Response::make('/uploads/page-galleries/' . $filename, 200, [
+                    'Content-Disposition' => 'inline',
+                ]);
+            }
+        }
     }
 }

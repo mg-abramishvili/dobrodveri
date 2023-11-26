@@ -135,6 +135,13 @@
                                     </li>
                                 @endforeach
                             </ul>
+                            <ul>
+                                @foreach($pages as $page)
+                                    <li>
+                                        <a href="/p/{{ $page->slug }}">{{ $page->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="footer-socials">
                             <ul>
@@ -207,6 +214,25 @@
                 
                 mapWrapper.onmouseleave = function() {
                     mapTitle.style.display = 'none'
+                }
+            })
+        </script>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', function(){
+                let figures = document.getElementsByTagName('figure')
+                let tables = document.getElementsByTagName('table')
+                
+                for (let figure of figures) {
+                    if(figure.classList.contains('table')) {
+                        figure.classList.remove('table')
+                    }
+                }
+
+                for (let table of tables) {
+                    if(!table.classList.contains('table')) {
+                        table.classList.add('table')
+                    }
                 }
             })
         </script>

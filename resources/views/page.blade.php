@@ -16,6 +16,16 @@
     <div class="container page-detail">
         <h1 class="title-header">{{ $page->name }}</h1>
 
-        {!! $page->text !!}
+        <div class="page-detail-text">
+            {!! $page->text !!}
+        </div>
+
+        @if($page->gallery)
+            <div class="page-detail-gallery">
+                @foreach($page->gallery as $galleryImage)
+                    <img src="{{$galleryImage}}" alt="$page->name">
+                @endforeach
+            </div>
+        @endif
     </div>
 @endsection

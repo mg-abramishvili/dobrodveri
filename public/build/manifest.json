@@ -3,12 +3,12 @@
     "file": "assets/globalFilters-7e76aec4.js"
   },
   "resources/css/admin.css": {
-    "file": "assets/admin-21752259.css",
+    "file": "assets/admin-a5a86395.css",
     "isEntry": true,
     "src": "resources/css/admin.css"
   },
   "resources/css/front.css": {
-    "file": "assets/front-80410db6.css",
+    "file": "assets/front-12f4d874.css",
     "isEntry": true,
     "src": "resources/css/front.css"
   },
@@ -20,7 +20,7 @@
     "css": [
       "assets/admin-3f40aef1.css"
     ],
-    "file": "assets/admin-e816d217.js",
+    "file": "assets/admin-f5bafc68.js",
     "imports": [
       "_globalFilters-7e76aec4.js"
     ],

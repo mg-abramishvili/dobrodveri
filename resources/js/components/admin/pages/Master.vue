@@ -36,6 +36,20 @@
                         <label class="form-label">Текст</label>
                         <ckeditor :editor="editor" v-model="text" :config="editorConfig"></ckeditor>
                     </div>
+
+                    <div class="mb-4 page-gallery">
+                        <label class="form-label">Галерея</label>
+                        <file-pond
+                            name="page_gallery[]"
+                            ref="page_gallery"
+                            label-idle="Выбрать файл"
+                            v-bind:allow-multiple="true"
+                            v-bind:allow-reorder="true"
+                            accepted-file-types="image/jpeg, image/png"
+                            :server="filepondServer"
+                            v-bind:files="filepond_gallery_edit"
+                        />
+                    </div>
                             
                     <button @click="save()" :disabled="!views.saveButton" class="btn btn-primary">Сохранить</button>
                 </div>
@@ -45,6 +59,19 @@
 </template>
 
 <script>
+import vueFilePond from "vue-filepond"
+import "filepond/dist/filepond.min.css"
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
+import FilePondPluginImagePreview from "filepond-plugin-image-preview"
+
+import FilepondServer from "../FilepondServer"
+
+const FilePond = vueFilePond(
+  FilePondPluginFileValidateType,
+  FilePondPluginImagePreview
+)
+
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export default {
@@ -55,11 +82,17 @@ export default {
             name: '',
             slug: '',
             text: '',
+            gallery: [],
 
             views: {
                 loading: true,
                 saveButton: true,
             },
+
+            filepond_gallery: [],
+            filepond_gallery_edit: [],
+
+            filepondServer: FilepondServer,
 
             editor: ClassicEditor,
             editorConfig: {
@@ -86,6 +119,19 @@ export default {
                 this.slug = response.data.slug
                 this.text = response.data.text
 
+                if(response.data.gallery) {
+                    this.filepond_gallery_edit = response.data.gallery.map(function(element){
+                        {
+                            return {
+                                source: element,
+                                options: {
+                                    type: 'local',
+                                }
+                            } 
+                        }
+                    })
+                }
+
                 this.views.loading = false
             })
             .catch(errors => {
@@ -107,13 +153,23 @@ export default {
             if(!this.text) {
                 return this.$toast.error('Напишите текст страницы')
             }
+
+            if(document.getElementsByName("page_gallery[]")) {
+                this.gallery = []
+                document.getElementsByName("page_gallery[]").forEach((galleryItem) => {
+                    if(galleryItem.value) {
+                        this.gallery.push(galleryItem.value)
+                    }
+                })
+            }
             
             this.views.saveButton = false
 
             let postData = {
                 name: this.name,
                 slug: this.slug,
-                text: this.text
+                text: this.text,
+                gallery: this.gallery,
             }
 
             if(this.$route.params.id) {
@@ -143,5 +199,8 @@ export default {
             }
         },
     },
+    components: {
+        FilePond
+    }
 }
 </script>

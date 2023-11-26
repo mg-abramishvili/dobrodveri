@@ -31,6 +31,7 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->slug = $request->slug;
         $page->text = $request->text;
+        $page->gallery = isset($request->gallery) ? $request->gallery : [];
 
         $page->save();
     }
@@ -48,6 +49,7 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->slug = $request->slug;
         $page->text = $request->text;
+        $page->gallery = isset($request->gallery) ? $request->gallery : [];
 
         $page->save();
     }

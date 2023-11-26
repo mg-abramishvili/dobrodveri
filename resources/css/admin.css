@@ -284,6 +284,9 @@ body.admin_panel {
 .tiny_filepond .filepond--item {
     height: 50px !important;
 }
+.page-gallery .filepond--item {
+    width: 24%;
+}
 
 .swal2-styled.swal2-confirm {
     background-color: #0b5ed7 !important;
