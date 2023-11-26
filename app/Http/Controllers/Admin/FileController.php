@@ -135,5 +135,23 @@ class FileController extends Controller
                 ]);
             }
         }
+
+        if (request()->file('page_cover')) {
+            $file = request()->file('page_cover');
+            $filename = time().'.'.$file->extension();
+
+            if (!file_exists(public_path() . '/uploads/page-covers')) {
+                mkdir(public_path() . '/uploads/page-covers', 0755, true);
+            }
+
+            $img = Image::make($file->path());
+            $img->resize(600, 600, function ($const) {
+                $const->aspectRatio();
+            })->save(public_path() . '/uploads/page-covers/' . $filename);
+
+            return \Response::make('/uploads/page-covers/' . $filename, 200, [
+                'Content-Disposition' => 'inline',
+            ]);
+        }
     }
 }

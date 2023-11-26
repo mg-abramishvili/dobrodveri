@@ -65,6 +65,20 @@
                             v-bind:files="filepond_gallery_edit"
                         />
                     </div>
+
+                    <div class="mb-4 page-gallery">
+                        <label class="form-label">Картинка-обложка</label>
+                        <file-pond
+                            name="page_cover"
+                            ref="page_cover"
+                            label-idle="Выбрать файл"
+                            v-bind:allow-multiple="false"
+                            v-bind:allow-reorder="false"
+                            accepted-file-types="image/jpeg, image/png"
+                            :server="filepondServer"
+                            v-bind:files="filepond_cover_edit"
+                        />
+                    </div>
                             
                     <button @click="save()" :disabled="!views.saveButton" class="btn btn-primary">Сохранить</button>
                 </div>
@@ -98,6 +112,7 @@ export default {
             slug: '',
             text: '',
             gallery: [],
+            cover: '',
             is_folder1: false,
             is_folder2: false,
 
@@ -106,6 +121,8 @@ export default {
                 saveButton: true,
             },
 
+            filepond_cover: [],
+            filepond_cover_edit: [],
             filepond_gallery: [],
             filepond_gallery_edit: [],
 
@@ -167,6 +184,17 @@ export default {
                     })
                 }
 
+                if(response.data.cover) {
+                    this.filepond_cover_edit = [
+                        {
+                            source: response.data.cover,
+                            options: {
+                                type: 'local',
+                            }
+                        }
+                    ]
+                }
+
                 this.views.loading = false
             })
             .catch(errors => {
@@ -197,6 +225,10 @@ export default {
                     }
                 })
             }
+
+            if(document.getElementsByName("page_cover")[0]) {
+                this.cover = document.getElementsByName("page_cover")[0].value
+            }
             
             this.views.saveButton = false
 
@@ -205,6 +237,7 @@ export default {
                 slug: this.slug,
                 text: this.text,
                 gallery: this.gallery,
+                cover: this.cover,
                 is_folder1: this.is_folder1,
                 is_folder2: this.is_folder2,
             }

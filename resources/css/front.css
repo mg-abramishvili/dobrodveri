@@ -1033,6 +1033,11 @@ header .container {
 
 
 /* PAGE */
+.page-cover {
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+}
 .page-detail {
     margin-top: 30px;
     margin-bottom: 50px;
