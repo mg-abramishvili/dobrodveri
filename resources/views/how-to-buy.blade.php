@@ -1,6 +1,6 @@
 <div class="how-to-buy">
     <div class="container pt-1 pb-1">
-        <h5 class="title-header">Как купить дверь?</h5>
+        <h5 class="title-header title-header-center">Как купить дверь?</h5>
 
         <ul class="how-to-buy-list">
             <li class="how-to-buy-item">

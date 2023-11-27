@@ -27,6 +27,8 @@
     @include('popular')
 
     @include('how-to-buy')
+
+    @include('dogovor')
 @endsection
 
 @section('css')

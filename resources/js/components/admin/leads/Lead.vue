@@ -37,7 +37,18 @@
 
                     <p class="mb-0">
                         <strong>Сообщение:</strong>
-                        {{ lead.message }}
+
+                        <template v-if="lead.subject != 'Квиз'">
+                            {{ lead.message }}
+                        </template>
+
+                        <template v-if="lead.subject == 'Квиз'">
+                            <ul style="margin: 0; padding: 0; list-style: none;">
+                                <li v-for="q in JSON.parse(lead.message)">
+                                    <i style="color: #777; font-style: normal;">{{q.questionTitle}}</i>: {{ q.answer }}<br>
+                                </li>
+                            </ul>
+                        </template>
                     </p>
                 </div>
             </div>

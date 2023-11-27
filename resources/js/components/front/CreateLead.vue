@@ -10,8 +10,6 @@
             <span>Заявка успешно отправлена!</span>
         </div>
 
-        <input v-model="subject" type="hidden" class="form-control">
-
         <div class="mb-4">
             <label class="form-label">Имя</label>
             <input v-model="name" placeholder="Иван Иванов" type="text" class="form-control">
@@ -43,10 +41,9 @@
 
 <script>
 export default {
-    props: ['subject', 'product', 'params', 'price'],
+    props: ['subject', 'quiz', 'product', 'params', 'price'],
     data() {
         return {
-            subject: '',
             name: '',
             phone: '',
             message: '',
@@ -108,6 +105,10 @@ export default {
 
             if(this.subject == 'Заказ') {
                 this.message = this.messageOrder
+            }
+
+            if(this.subject == 'Квиз') {
+                this.message = JSON.stringify(this.quiz)
             }
 
             if(!this.message) {

@@ -171,6 +171,16 @@
                     </div>
                 </div>
             </footer>
+
+            <button onclick="openModal('Quiz')">Опрос</button>
+            
+            <div id="modal_Quiz" class="modal">
+                <div class="modal-content">
+                    <button onclick="closeModal()" class="modal-close">&times;</button>
+    
+                    <quiz />
+                </div>
+            </div>
         </div>
         
         @vite('resources/js/front.js')
@@ -241,6 +251,34 @@
                     }
                 }
             })
+        </script>
+
+        <script>
+            function openModal(modalID) {
+                let modal = document.getElementById("modal_" + modalID)
+
+                if(modal) {
+                    modal.style.display = "block"
+                }
+            }
+
+            function closeModal() {
+                let modals = document.querySelectorAll('.modal')
+
+                modals.forEach(modal => {
+                    modal.style.display = "none"
+                })
+            }
+
+            window.onclick = function(event) {
+                let modals = document.querySelectorAll('.modal')
+
+                modals.forEach(modal => {
+                    if (event.target == modal && modal.style.display == 'block') {
+                        modal.style.display = "none"
+                    }
+                })
+            }
         </script>
     </body>
 </html>

@@ -235,32 +235,4 @@
         }, 500)
     }
 </script>
-
-<script>
-    function openModal(modalID) {
-        let modal = document.getElementById("modal_" + modalID)
-
-        if(modal) {
-            modal.style.display = "block"
-        }
-    }
-
-    function closeModal() {
-        let modals = document.querySelectorAll('.modal')
-
-        modals.forEach(modal => {
-            modal.style.display = "none"
-        })
-    }
-
-    window.onclick = function(event) {
-        let modals = document.querySelectorAll('.modal')
-
-        modals.forEach(modal => {
-            if (event.target == modal && modal.style.display == 'block') {
-                modal.style.display = "none"
-            }
-        })
-    }
-</script>
 @endsection
