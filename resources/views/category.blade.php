@@ -22,32 +22,36 @@
                 order_direction="{{ request()->order_direction }}"
             @endif
 
-            @if(request()->types)
-                types="{{ request()->types }}"
+            @if(request()->type)
+                type="{{ request()->type }}"
             @endif
 
-            @if(request()->innerdecors)
-                innerdecors="{{ request()->innerdecors }}"
+            @if(request()->style)
+                style="{{ request()->style }}"
             @endif
 
-            @if(request()->furnituretypes)
-                furnituretypes="{{ request()->furnituretypes }}"
+            @if(request()->innerdecor)
+                innerdecor="{{ request()->innerdecor }}"
             @endif
 
-            @if(request()->purposes)
-                purposes="{{ request()->purposes }}"
+            @if(request()->furnituretype)
+                furnituretype="{{ request()->furnituretype }}"
             @endif
 
-            @if(request()->surafces)
-                surafces="{{ request()->surafces }}"
+            @if(request()->purpose)
+                purpose="{{ request()->purpose }}"
             @endif
 
-            @if(request()->colors)
-                colors="{{ request()->colors }}"
+            @if(request()->surface)
+                surface="{{ request()->surface }}"
             @endif
 
-            @if(request()->glasses)
-                glasses="{{ request()->glasses }}"
+            @if(request()->color)
+                color="{{ request()->color }}"
+            @endif
+
+            @if(request()->glass)
+                glass="{{ request()->glass }}"
             @endif
         />
     </div>

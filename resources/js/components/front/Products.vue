@@ -63,7 +63,7 @@ import ProductFilter from './ProductFilter.vue'
 import Loader from './Loader.vue'
 
 export default {
-    props: ['category'],
+    props: ['category', 'color', 'glass', 'type', 'style', 'surface', 'price_from', 'price_to', 'order', 'order_direction', 'innerdecor', 'furnituretype', 'purpose'],
     data() {
         return {
             product: [],
@@ -105,6 +105,25 @@ export default {
     },
     created() {
         this.filterParams = JSON.parse(JSON.stringify(this.initialFilterParams))
+        
+        if(this.price_from) {
+            this.filterParams.price_from = this.price_from
+        }
+        if(this.price_to) {
+            this.filterParams.price_to = this.price_to
+        }
+
+        if(this.color && this.color.split(',').length) {
+            this.color.split(',').forEach(c => {
+                this.filterParams.colors.push(c)
+            })
+        }
+
+        if(this.glass && this.glass.split(',').length) {
+            this.glass.split(',').forEach(c => {
+                this.filterParams.glasses.push(c)
+            })
+        }
 
         this.loadProducts()
     },
@@ -142,6 +161,8 @@ export default {
 
                 if(!this.isFilterApplied()) {
                     this.productSKUs = response.data.skus
+
+                    this.genURL()
                 }
 
                 window.scrollTo(0, 0)
@@ -150,14 +171,6 @@ export default {
             })
         },
         resetFilter() {
-            // this.filterParams = JSON.parse(JSON.stringify(this.initialFilterParams))
-
-            // this.productSKUs = []
-
-            // this.page = 1
-
-            // this.loadProducts()
-
             this.views.loading = true
 
             window.location.href = '/catalog/' + this.category.slug + '/'
@@ -178,6 +191,39 @@ export default {
             this.page = this.views.pagination.nextPage
 
             this.loadProductSKUs()
+        },
+        genURL() {
+            let filterParamsURL = []
+
+            if(this.filterParams.price_from.length) {
+                filterParamsURL.push('&price_from=' + this.filterParams.price_from)
+            }
+
+            if(this.filterParams.price_to.length) {
+                filterParamsURL.push('&price_to=' + this.filterParams.price_to)
+            }
+
+            if(this.filterParams.types.length) {
+                filterParamsURL.push('&type=' + this.filterParams.types.join(','))
+            }
+
+            if(this.filterParams.styles.length) {
+                filterParamsURL.push('&style=' + this.filterParams.styles.join(','))
+            }
+
+            if(this.filterParams.surfaces.length) {
+                filterParamsURL.push('&surface=' + this.filterParams.surfaces.join(','))
+            }
+
+            if(this.filterParams.colors.length) {
+                filterParamsURL.push('&color=' + this.filterParams.colors.join(','))
+            }
+
+            if(this.filterParams.glasses.length) {
+                filterParamsURL.push('&glass=' + this.filterParams.glasses.join(','))
+            }
+
+            history.pushState(null, null, '?' + filterParamsURL.join(""))
         },
     },
     components: {
