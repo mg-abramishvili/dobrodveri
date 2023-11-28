@@ -293,5 +293,17 @@
                 })
             }
         </script>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                let quizBanner = document.getElementsByClassName('quiz-banner')[0]
+
+                setTimeout(() => {
+                    if(quizBanner) {
+                        quizBanner.style.display = 'block'
+                    }
+                }, 30000)
+            }
+        </script>
     </body>
 </html>

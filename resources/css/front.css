@@ -1301,6 +1301,7 @@ a.footer-policy:focus {
     right: 0;
     background-color: #e9a854;
     z-index: 10;
+    display: none;
 }
 .quiz-banner .container {
     align-items: center;
