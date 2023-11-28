@@ -303,7 +303,7 @@
                         quizBanner.style.display = 'block'
                     }
                 }, 30000)
-            }
+            })
         </script>
     </body>
 </html>
