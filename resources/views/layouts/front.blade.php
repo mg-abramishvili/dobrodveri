@@ -105,7 +105,7 @@
                             </nav>
                         </div>
                         <div class="header-bottom-action">
-                            <a href="#">Заказать замер</a>
+                            <a onclick="openModal('LeadZamer')">Заказать замер</a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                     <div class="container">
                         <div class="footer-about">
                             <a href="#" class="footer-logo">
-                                <img src="/img/logo-w.svg" alt="Добродвери">
+                                <img src="/img/logo.svg" alt="Добродвери">
                             </a>
     
                             <p>© 2022-{{ now()->year }} «Добродвери». Все права защищены.</p>
@@ -171,8 +171,21 @@
                     </div>
                 </div>
             </footer>
+            
+            <div class="quiz-banner">
+                <div class="container">
+                    <p>Ответьте на 4 вопроса и узнайте стоимость и сроки!</p>
+                    <button onclick="openModal('Quiz')">Пройти тест</button>
+                </div>
+            </div>
 
-            <button onclick="openModal('Quiz')">Опрос</button>
+            <div id="modal_LeadZamer" class="modal">
+                <div class="modal-content">
+                    <button onclick="closeModal()" class="modal-close">&times;</button>
+    
+                    <create-lead subject="Заказ замера" />
+                </div>
+            </div>
             
             <div id="modal_Quiz" class="modal">
                 <div class="modal-content">

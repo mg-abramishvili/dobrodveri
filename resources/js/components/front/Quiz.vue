@@ -1,5 +1,5 @@
 <template>
-    <div class="quiz">{{ quizResult }}
+    <div class="quiz">
         <div v-show="currentQuestion == question.id" v-for="question in questions" class="quiz-question">
             <h5>{{ question.title }}</h5>
             <ul>
@@ -7,13 +7,13 @@
             </ul>
 
             <button v-if="currentQuestion != 1" @click="prevQuestion()">Назад</button>
-            <button @click="nextQuestion()">Дальше</button>
+            <button :disabled="!views.nextButton" @click="nextQuestion(question)">Дальше</button>
         </div>
 
         <div v-show="currentQuestion == 100" class="quiz-form">
-            <button @click="prevQuestion()">Назад</button>
+            <button @click="prevQuestion()">&larr; Назад</button>
 
-            <CreateLead :subject="'Квиз'" :quiz="quizResult" />
+            <CreateLead :subject="'Заявка по результату опроса'" :quiz="quizResult" />
         </div>
     </div>
 </template>
@@ -148,7 +148,7 @@ export default {
                             image: null,
                         },
                         {
-                            title: 'Еще не определился(-ась)',
+                            title: 'Еще не определился (-ась)',
                             image: null,
                         },
                     ],
@@ -158,6 +158,10 @@ export default {
             name: '',
             tel: '',
             quizResult: [],
+
+            views: {
+                nextButton: false,
+            },
         }
     },
     methods: {
@@ -172,7 +176,27 @@ export default {
                 this.currentQuestion = prevQuestion.id
             }
         },
-        nextQuestion() {
+        nextQuestion(question) {
+            this.views.nextButton = false
+
+            let quizResultQuestion = this.quizResult.find(q => q.id == question.id)
+
+            if(!quizResultQuestion) {
+                return
+            }
+
+            if(!question.multipleAnswer) {
+                if(!quizResultQuestion.answer.length) {
+                    return
+                }
+            }
+
+            if(question.multipleAnswer) {
+                if(!Array.isArray(quizResultQuestion.answer) || Array.isArray(quizResultQuestion.answer) && !quizResultQuestion.answer.length) {
+                    return
+                }
+            }
+
             let nextQuestion = this.questions.find(q => q.id == this.currentQuestion + 1)
 
             if(nextQuestion) {
@@ -185,11 +209,13 @@ export default {
             let quizResultQuestion = this.quizResult.find(q => q.id == question.id)
 
             if(!quizResultQuestion) {
-                return this.quizResult.push({
+                this.quizResult.push({
                     id: question.id,
                     questionTitle: question.title,
                     answer: question.multipleAnswer ? answer.title.split(",") : answer.title
                 })
+
+                return this.views.nextButton = true
             }
 
             if(!question.multipleAnswer) {
@@ -208,6 +234,8 @@ export default {
                     quizResultQuestion.answer.push(answer.title)
                 }
             }
+
+            this.views.nextButton = true
         },
         isAnswerIsActive(question, answer) {
             let quizResultQuestion = this.quizResult.find(q => q.id == question.id)
@@ -241,6 +269,6 @@ export default {
 
 <style scoped>
     .active {
-        border: 2px solid red;
+        border: 2px solid #e9a854;
     }
 </style>

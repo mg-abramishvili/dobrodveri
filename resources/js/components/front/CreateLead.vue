@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="lead-form">
         <div v-if="errors.length" class="alert alert-danger mb-4" role="alert">
             <span v-for="error in errors">
                 {{ error }}<br>
@@ -9,6 +9,8 @@
         <div v-if="views.success" class="alert alert-success mb-4" role="alert">
             <span>Заявка успешно отправлена!</span>
         </div>
+
+        <span class="modal-title">{{ subject }}</span>
 
         <div class="mb-4">
             <label class="form-label">Имя</label>
@@ -22,12 +24,12 @@
 
         <div v-if="subject == 'Заказ замера'" class="mb-4">
             <label class="form-label">Адрес</label>
-            <textarea v-model="message" class="form-control"></textarea>
+            <input v-model="message" type="text" class="form-control" />
         </div>
 
         <div v-if="subject == 'Сообщение директору'" class="mb-4">
             <label class="form-label">Сообщение</label>
-            <textarea v-model="message" class="form-control"></textarea>
+            <textarea v-model="message" class="form-control" style="resize: vertical"></textarea>
         </div>
 
         <div v-if="subject == 'Заказ'" class="mb-4">
@@ -59,7 +61,6 @@ export default {
     computed: {
         messageOrder() {
             if(this.subject == 'Заказ') {
-                console.log('ok')
                 let msg = []
                 let productName = this.product.name
                 let productPrice = this.product.price
@@ -107,14 +108,12 @@ export default {
                 this.message = this.messageOrder
             }
 
-            if(this.subject == 'Квиз') {
+            if(this.subject == 'Заявка по результату опроса') {
                 this.message = JSON.stringify(this.quiz)
             }
 
             if(!this.message) {
                 if(this.subject == 'Заказ замера') {
-                    this.errors.push('Укажите адрес')
-                } else {
                     this.message = '-'
                 }
             }
