@@ -302,7 +302,7 @@
                     if(quizBanner) {
                         quizBanner.style.display = 'block'
                     }
-                }, 30000)
+                }, 15000)
             })
         </script>
     </body>
