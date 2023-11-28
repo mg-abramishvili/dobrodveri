@@ -12,10 +12,10 @@
                     <div class="how-to-buy-item-icon-count">1</div>
                 </div>
                 <div class="how-to-buy-item-title">
-                    Оставьте заявку на бесплатный замер
+                    Оставьте заявку на замер
                 </div>
                 <div class="how-to-buy-item-text">
-                    Назначьте удобную дату и время
+                    Назначьте удобную дату и время для бесплатного замера.
                 </div>
             </li>
 

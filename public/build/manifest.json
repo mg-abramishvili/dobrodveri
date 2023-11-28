@@ -8,9 +8,25 @@
     "src": "resources/css/admin.css"
   },
   "resources/css/front.css": {
-    "file": "assets/front-9a417a22.css",
+    "file": "assets/front-0a44a9b8.css",
     "isEntry": true,
     "src": "resources/css/front.css"
+  },
+  "resources/fonts/pt-root-ui_bold.woff": {
+    "file": "assets/pt-root-ui_bold-ed5bd3ca.woff",
+    "src": "resources/fonts/pt-root-ui_bold.woff"
+  },
+  "resources/fonts/pt-root-ui_bold.woff2": {
+    "file": "assets/pt-root-ui_bold-5f55c1b9.woff2",
+    "src": "resources/fonts/pt-root-ui_bold.woff2"
+  },
+  "resources/fonts/pt-root-ui_regular.woff": {
+    "file": "assets/pt-root-ui_regular-c0279afe.woff",
+    "src": "resources/fonts/pt-root-ui_regular.woff"
+  },
+  "resources/fonts/pt-root-ui_regular.woff2": {
+    "file": "assets/pt-root-ui_regular-5a690dcc.woff2",
+    "src": "resources/fonts/pt-root-ui_regular.woff2"
   },
   "resources/js/admin.css": {
     "file": "assets/admin-3f40aef1.css",
@@ -35,7 +51,7 @@
     "css": [
       "assets/front-9ecf4438.css"
     ],
-    "file": "assets/front-144a5af5.js",
+    "file": "assets/front-5bf46d31.js",
     "imports": [
       "_globalFilters-7e76aec4.js"
     ],
