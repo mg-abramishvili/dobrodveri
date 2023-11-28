@@ -131,7 +131,7 @@
     
                             <p>© 2022-{{ now()->year }} «Добродвери». Все права защищены.</p>
     
-                            <a href="#" class="footer-policy">Политика конфиденциальности</a>
+                            <a href="/policy" class="footer-policy">Политика конфиденциальности</a>
                         </div>
                         <div class="footer-nav">
                             <ul>

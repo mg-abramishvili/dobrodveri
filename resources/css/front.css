@@ -1413,6 +1413,12 @@ a.footer-policy:focus {
 .lead-form .alert.alert-success {
     background-color: rgba(0, 128, 0, 0.25);
 }
+.lead-form small {
+    display: block;
+    margin-top: 15px;
+    color: #777;
+    font-size: 13px;
+}
 /* LEAD FORM */
 
 

@@ -38,6 +38,8 @@
         </div>
 
         <button @click="save()" :disabled="!views.submitButton" class="btn btn-standard">Отправить</button>
+
+        <small>Нажимая кнопку «Отправить» вы соглашаетесь с <a href="/policy" target="_blank">политикой конфиденциальности</a></small>
     </div>
 </template>
 

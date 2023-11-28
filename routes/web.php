@@ -34,6 +34,8 @@ Route::get('_favorites', function () {
 });
 Route::post('_favorites', [App\Http\Controllers\SkuController::class, 'addToFavorite']);
 
+Route::view('policy', 'policy');
+
 // ADMIN
 Route::get('admin', function () {
     return view('layouts.admin');
