@@ -14,9 +14,10 @@ class ProductController extends Controller
 {
     use storeInRecentlyViewed;
 
-    public function indexData()
+    public function indexData(Request $request)
     {
         $products = Product::query()
+                    ->where('category_id', $request->category_id)
                     ->where('is_active', 1)
                     ->whereHas('skus')
                     ->with('skus')

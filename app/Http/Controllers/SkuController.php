@@ -41,31 +41,31 @@ class SkuController extends Controller
         $colors = $request->colors;
         $glasses = $request->glasses;
         
-        $filteredTypes = Type::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters(null, $styles, $surfaces, $colors, $glasses);
+        $filteredTypes = Type::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
+            $query->withFilters($category_id, null, $styles, $surfaces, $colors, $glasses);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredStyles = Style::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($types, null, $surfaces, $colors, $glasses);
+        $filteredStyles = Style::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
+            $query->withFilters($category_id, $types, null, $surfaces, $colors, $glasses);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredSurfaces = Surface::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($types, $styles, null, $colors, $glasses);
+        $filteredSurfaces = Surface::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
+            $query->withFilters($category_id, $types, $styles, null, $colors, $glasses);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredColors = Color::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($types, $styles, $surfaces, null, $glasses);
+        $filteredColors = Color::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
+            $query->withFilters($category_id, $types, $styles, $surfaces, null, $glasses);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredGlasses = Glass::withCount(['skus' => function ($query) use($types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($types, $styles, $surfaces, $colors, null);
+        $filteredGlasses = Glass::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
+            $query->withFilters($category_id, $types, $styles, $surfaces, $colors, null);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $perPage = 20;
+        $perPage = 1;
 
         $skus = Sku::select(['skus.*', 'products.price as product_price'])
                     ->join('products', 'skus.product_id', '=', 'products.id')
-                    ->withFilters($types, $styles, $surfaces, $colors, $glasses)
+                    ->withFilters($category_id, $types, $styles, $surfaces, $colors, $glasses)
                     ->orderBy('products.price', 'asc');
 
         $pagination['total_pages'] = round($skus->count() / $perPage);

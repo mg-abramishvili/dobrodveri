@@ -44,9 +44,10 @@ class Sku extends Model
         return $this->belongsTo(InnerDecor::class, 'inner_decor_id');
     }
 
-    public function scopeWithFilters($query, $types, $styles, $surfaces, $colors, $glasses)
+    public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces, $colors, $glasses)
     {
         return $query
+            ->whereRelation('product', 'category_id', $category_id)
             ->whereRelation('product', 'is_active', true)
             ->when(isset($types), function ($query) use ($types) {
                 $query->whereHas('type', function($query) use($types) {

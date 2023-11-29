@@ -35,14 +35,18 @@
             </div>
         </div>
 
-        <!-- <ProductsPagination />
+        <div v-if="!views.loading && pagination.totalPages > 1" class="pagination">
+            <button @click="prevPage()" :disabled="!pagination.prevPage">
+                &larr;
+            </button>
 
-        <SkusPagination /> -->
+            <button>
+                {{ pagination.currentPage }}
+            </button>
 
-        <div v-if="!views.loading && productSKUs.length" class="pagination">
-            <button @click="prevPage()" :disabled="!views.pagination.prevPage">&larr;</button>
-            <button>{{ views.pagination.currentPage }}</button>
-            <button @click="nextPage()" :disabled="!views.pagination.nextPage">&rarr;</button>
+            <button @click="nextPage()" :disabled="!pagination.nextPage">
+                &rarr;
+            </button>
         </div>
     </div>
 </template>
@@ -96,55 +100,65 @@ export default {
                 glasses: [],
             },
 
-            page: 1,
+            pagination: {
+                currentPage: 1,
+                prevPage: null,
+                nextPage: null,
+                totalPages: null,
+            },
             
             views: {
                 loading: true,
-                pagination: {
-                    prevPage: null,
-                    nextPage: null,
-                    currentPage: 1,
-                    totalPages: null,
-                },
             }
         }
     },
     created() {
         this.filterParams = JSON.parse(JSON.stringify(this.initialFilterParams))
         
-        if(this.price_from) {
-            this.filterParams.price_from = this.price_from
-        }
-        if(this.price_to) {
-            this.filterParams.price_to = this.price_to
-        }
-
-        if(this.color && this.color.split(',').length) {
-            this.color.split(',').forEach(c => {
-                this.filterParams.colors.push(c)
-            })
-        }
-
-        if(this.glass && this.glass.split(',').length) {
-            this.glass.split(',').forEach(c => {
-                this.filterParams.glasses.push(c)
-            })
-        }
-
-        this.loadProducts()
+        this.loadRequestedFilterParams()
     },
     methods: {
-        loadProducts(page) {
-            if(!page) { page = 1 }
+        loadRequestedFilterParams() {
+            if(this.price_from) {
+                this.filterParams.price_from = this.price_from
+            }
+            if(this.price_to) {
+                this.filterParams.price_to = this.price_to
+            }
 
-            axios.get(`/_products?page=${page}`)
+            if(this.color && this.color.split(',').length) {
+                this.color.split(',').forEach(c => {
+                    this.filterParams.colors.push(c)
+                })
+            }
+
+            if(this.glass && this.glass.split(',').length) {
+                this.glass.split(',').forEach(c => {
+                    this.filterParams.glasses.push(c)
+                })
+            }
+
+            this.loadProducts()
+        },
+        loadProducts(page) {
+            axios.get(`/_products`, {
+                params: {
+                    category_id: this.filterParams.category_id,
+                    page: page ? page : 1,
+                }
+            })
             .then(response => {
                 this.products = response.data.data
+
+                this.setPagination(
+                    response.data.total,
+                    response.data.current_page
+                )
 
                 this.loadProductSKUs()
             })
         },
-        loadProductSKUs() {
+        loadProductSKUs(page) {
             this.views.loading = true
 
             axios.get(`/_product_skus`, {
@@ -155,7 +169,7 @@ export default {
                     types: this.filterParams.types,
                     styles: this.filterParams.styles,
                     surfaces: this.filterParams.surfaces,
-                    page: this.page,
+                    page: page ? page : 1,
                 }
             })
             .then(response => {
@@ -164,14 +178,14 @@ export default {
                 this.types = response.data.types
                 this.styles = response.data.styles
                 this.surfaces = response.data.surfaces
-
-                this.views.pagination.totalPages = response.data.pagination.total_pages
-                this.views.pagination.currentPage = response.data.pagination.current_page
-                this.views.pagination.prevPage = this.views.pagination.currentPage > 1 ? this.views.pagination.currentPage - 1 : null
-                this.views.pagination.nextPage = this.views.pagination.currentPage < this.views.pagination.totalPages ? this.views.pagination.currentPage + 1 : null
-
+                
                 if(!this.isFilterApplied()) {
                     this.productSKUs = response.data.skus
+
+                    this.setPagination(
+                        response.data.pagination.total_pages,
+                        response.data.pagination.current_page
+                    )
 
                     this.genURL()
                 }
@@ -186,6 +200,12 @@ export default {
 
             window.location.href = '/catalog/' + this.category.slug + '/'
         },
+        setPagination(totalPages, currentPage) {
+            this.pagination.totalPages = totalPages
+            this.pagination.currentPage = currentPage
+            this.pagination.prevPage = this.pagination.currentPage > 1 ? this.pagination.currentPage - 1 : null
+            this.pagination.nextPage = this.pagination.currentPage < this.pagination.totalPages ? this.pagination.currentPage + 1 : null
+        },
         isFilterApplied() {
             if(JSON.stringify(this.filterParams) === JSON.stringify(this.initialFilterParams)) {
                 return true
@@ -194,14 +214,23 @@ export default {
             return false
         },
         prevPage() {
-            this.page = this.views.pagination.prevPage
+            this.pagination.currentPage = this.pagination.prevPage
 
-            this.loadProductSKUs()
+            this.goToPage(this.pagination.prevPage)
         },
         nextPage() {
-            this.page = this.views.pagination.nextPage
+            this.pagination.currentPage = this.pagination.nextPage
 
-            this.loadProductSKUs()
+            this.goToPage(this.pagination.nextPage)
+        },
+        goToPage(page) {
+            if(!this.productSKUs.length) {
+                return this.loadProducts(page)
+            }
+
+            if(this.productSKUs.length) {
+                return this.loadProductSKUs(page)
+            }
         },
         genURL() {
             let filterParamsURL = []
