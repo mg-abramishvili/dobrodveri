@@ -34,7 +34,7 @@
 
         <div v-if="subject == 'Заказ'" class="mb-4">
             <label class="form-label">Заказ</label>
-            <textarea v-model="messageOrder" class="form-control" disabled></textarea>
+            <textarea v-model="messageOrder" class="form-control"  style="resize: vertical" disabled></textarea>
         </div>
 
         <button @click="save()" :disabled="!views.submitButton" class="btn btn-standard">Отправить</button>
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-    props: ['subject', 'quiz', 'product', 'params', 'price'],
+    props: ['subject', 'quiz', 'product', 'sku', 'params', 'size', 'price'],
     data() {
         return {
             name: '',
@@ -65,11 +65,11 @@ export default {
             if(this.subject == 'Заказ') {
                 let msg = []
                 let productName = this.product.name
-                let productPrice = this.product.price
-                let paramsColor = this.params.color
-                let paramsSize = this.params.size
-                let paramsInnerDecor = this.params.innerdecor
-                let paramsGlass = this.params.glass
+                let productPrice = this.sku.price ? this.sku.price : this.product.price
+                let paramsColor = this.sku.color.name
+                let paramsSize = this.size
+                let paramsInnerDecor = this.sku.innerdecor ? this.sku.innerdecor.name : null
+                let paramsGlass = this.sku.glass ? this.sku.glass.name : null
 
                 msg.push(productName)
 
