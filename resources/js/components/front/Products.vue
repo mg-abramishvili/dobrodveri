@@ -159,6 +159,8 @@ export default {
             })
         },
         loadProductSKUs(page) {
+            window.scrollTo(0, 0)
+            
             this.views.loading = true
 
             axios.get(`/_product_skus`, {
@@ -189,8 +191,6 @@ export default {
 
                     this.genURL()
                 }
-
-                window.scrollTo(0, 0)
                 
                 this.views.loading = false
             })
