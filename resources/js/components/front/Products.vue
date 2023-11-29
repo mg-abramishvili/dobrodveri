@@ -141,6 +141,10 @@ export default {
             this.loadProducts()
         },
         loadProducts(page) {
+            window.scrollTo(0, 0)
+            
+            this.views.loading = true
+            
             axios.get(`/_products`, {
                 params: {
                     category_id: this.filterParams.category_id,
