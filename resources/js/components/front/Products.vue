@@ -151,7 +151,7 @@ export default {
                 this.products = response.data.data
 
                 this.setPagination(
-                    response.data.total,
+                    response.data.last_page,
                     response.data.current_page
                 )
 
