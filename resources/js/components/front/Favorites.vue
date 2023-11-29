@@ -1,6 +1,6 @@
 <template>
     <div v-if="!views.loading" class="category-products-list favorites-products-list">
-        <div v-for="sku in skus" class="products-list-item">
+        <div v-if="skus" v-for="sku in skus" class="products-list-item">
             <a :href="$filters.SkuUrl(sku)">
                 <div class="products-list-item-image">
                     <img v-if="sku.image" :src="sku.image" :alt="sku.name">
@@ -29,6 +29,8 @@
                 </div>
             </a>
         </div>
+
+        <p v-if="!skus">Товаров в избранном нет.</p>
     </div>
 </template>
 

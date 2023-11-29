@@ -113,6 +113,7 @@ header .container {
 }
 .header-top-nav nav ul li {
     margin: 0 15px;
+    position: relative;
 }
 .header-top-nav nav ul li a {
     text-align: center;
@@ -121,6 +122,7 @@ header .container {
     font-size: 14px;
     display: block;
     padding: 5px 0;
+    cursor: pointer;
 }
 .header-top-nav nav ul li a:hover,
 .header-top-nav nav ul li a:focus {
@@ -132,6 +134,59 @@ header .container {
     height: 22px;
     margin: 0 auto;
     margin-bottom: 5px;
+}
+.search-form {
+    width: 350px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 90px;
+    display: none;
+}
+.search-form input[type="text"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.search-form input[type="text"]:focus {
+    outline: none;
+    border-color: #e9a854;
+}
+.search-form button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 13px;
+    background-color: #e9a854;
+    line-height: 1;
+    height: 100%;
+    padding: 0 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+.favorites-coutner {
+    background-color: #e9a854;
+    color: #fff;
+    font-weight: 700;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    right: 15px;
 }
 .header-top-tel {
     width: 17%;
@@ -1234,6 +1289,15 @@ header .container {
 
 
 
+/* PAGE SEARCH */
+.page-search {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+/* PAGE SEARCH */
+
+
+
 /* FOOTER */
 .footer-top {
     background-color: #F5F5F6;
@@ -1320,28 +1384,32 @@ a.footer-policy:focus {
 /* QUIZ */
 .quiz-banner {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #e9a854;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 6px;
+    background-color: rgba(204, 219, 230, 0.9);
     z-index: 10;
     display: none;
+    font-weight: 700;
 }
 .quiz-banner .container {
     align-items: center;
     justify-content: center;
+    width: 700px;
+    padding: 0;
 }
 .quiz-banner p {
     margin: 0;
-    margin-right: 20px;
-    text-align: right;
+    width: 70%;
 }
 .quiz-banner button {
     background: none;
     box-shadow: none;
-    border: 2px solid #fff;
-    margin: 10px 0;
-    padding: 10px 20px;
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin: 12px 0;
+    background-color: #e9a854;
 }
 .quiz-banner button:hover {
     cursor: pointer;

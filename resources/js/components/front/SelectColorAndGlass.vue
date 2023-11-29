@@ -171,7 +171,7 @@
 
                 axios.post('/_favorites', { id: this.selectedSKU.id })
                 .then(response => {
-                    //
+                    this.emitter.emit('favorite-count', 'New Favorite Item Added!')
                 })
             },
         }

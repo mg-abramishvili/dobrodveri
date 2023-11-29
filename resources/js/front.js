@@ -13,6 +13,7 @@ import SelectColorAndGlass from './components/front/SelectColorAndGlass.vue'
 import CreateLead from './components/front/CreateLead.vue'
 import CreateProductReview from './components/front/CreateProductReview.vue'
 import Favorites from './components/front/Favorites.vue'
+import FavoritesCounter from './components/front/FavoritesCounter.vue'
 import Quiz from './components/front/Quiz.vue'
 
 const emitter = mitt()
@@ -25,6 +26,7 @@ app.component('select-color-glass', SelectColorAndGlass)
 app.component('create-lead', CreateLead)
 app.component('create-product-review', CreateProductReview)
 app.component('favorites', Favorites)
+app.component('favorites-counter', FavoritesCounter)
 app.component('quiz', Quiz)
 
 app.config.globalProperties.$filters = globalFilters

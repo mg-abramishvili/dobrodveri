@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\MainSlider;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 // HOME PAGE
 Route::get('/', function () {
@@ -35,6 +37,12 @@ Route::get('_favorites', function () {
 Route::post('_favorites', [App\Http\Controllers\SkuController::class, 'addToFavorite']);
 
 Route::view('policy', 'policy');
+
+Route::get('search', function (Request $request) {
+    $products = Product::where('name','LIKE',"%{$request->q}%")->get();
+
+    return view('search', compact('products'));
+});
 
 // ADMIN
 Route::get('admin', function () {
