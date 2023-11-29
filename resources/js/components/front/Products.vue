@@ -1,10 +1,22 @@
 <template>
     <aside class="category-filter">
-        <ProductFilter :category_id="category.id" :types="types" :styles="styles" :surfaces="surfaces" :colors="colors" :glasses="glasses" :filterParams="filterParams" />
+        <ProductFilter
+            :category_id="category.id"
+            :types="types"
+            :styles="styles"
+            :surfaces="surfaces" :colors="colors"
+            :glasses="glasses"
+            :filterParams="filterParams"
+        />
 
         <div v-if="!views.loading" class="category-filter-buttons">
-            <button @click="loadProductSKUs()" class="category-filter-button">Применить фильтр</button>
-            <button @click="resetFilter()" class="category-filter-button">Сбросить фильтр</button>
+            <button @click="loadProductSKUs()" class="category-filter-button">
+                Применить фильтр
+            </button>
+
+            <button @click="resetFilter()" class="category-filter-button">
+                Сбросить фильтр
+            </button>
         </div>
     </aside>
 
@@ -13,41 +25,19 @@
 
         <div v-if="!views.loading && !productSKUs.length" class="category-products-list">
             <div v-for="product in products" class="products-list-item">
-                <a :href="'/product/' + product.slug">
-                    <div class="products-list-item-image">
-                        <img v-if="product.skus[0].image" :src="product.skus[0].image" :alt="product.name">
-                        <img v-else src="/img/no-image.jpg" :alt="product.name">
-                    </div>
-
-                    <div class="products-list-item-price">
-                        {{ $filters.currencyWithoutRubSign(product.price) }} <small>₽</small>
-                    </div>
-
-                    <p class="products-list-item-name">
-                        {{ product.name }}
-                    </p>
-                </a>
+                <ProductListItem :product="product" />
             </div>
         </div>
 
         <div v-if="!views.loading && productSKUs.length" class="category-products-list">
             <div v-for="sku in productSKUs" class="products-list-item">
-                <a :href="$filters.SkuUrl(sku)">
-                    <div class="products-list-item-image">
-                        <img v-if="sku.image" :src="sku.image" :alt="sku.name">
-                        <img v-else src="/img/no-image.jpg" :alt="sku.name">
-                    </div>
-
-                    <div class="products-list-item-price">
-                        {{ $filters.currencyWithoutRubSign(sku.price) }} <small>₽</small>
-                    </div>
-
-                    <p class="products-list-item-name">
-                        {{ sku.name }}
-                    </p>
-                </a>
+                <SkuListItem :sku="sku" />
             </div>
         </div>
+
+        <!-- <ProductsPagination />
+
+        <SkusPagination /> -->
 
         <div v-if="!views.loading && productSKUs.length" class="pagination">
             <button @click="prevPage()" :disabled="!views.pagination.prevPage">&larr;</button>
@@ -59,11 +49,27 @@
 
 <script>
 import ProductFilter from './ProductFilter.vue'
-
+import ProductListItem from './products/ProductListItem.vue'
+import SkuListItem from './products/SkuListItem.vue'
 import Loader from './Loader.vue'
 
 export default {
-    props: ['category', 'color', 'glass', 'type', 'style', 'surface', 'price_from', 'price_to', 'order', 'order_direction', 'innerdecor', 'furnituretype', 'purpose'],
+    props: [
+        'category',
+        'category_products',
+        'color',
+        'glass',
+        'type',
+        'style',
+        'surface',
+        'price_from',
+        'price_to',
+        'order',
+        'order_direction',
+        'innerdecor',
+        'furnituretype',
+        'purpose',
+    ],
     data() {
         return {
             product: [],
@@ -128,10 +134,15 @@ export default {
         this.loadProducts()
     },
     methods: {
-        loadProducts() {
-            this.products = this.category.products
-            
-            this.loadProductSKUs()
+        loadProducts(page) {
+            if(!page) { page = 1 }
+
+            axios.get(`/_products?page=${page}`)
+            .then(response => {
+                this.products = response.data.data
+
+                this.loadProductSKUs()
+            })
         },
         loadProductSKUs() {
             this.views.loading = true
@@ -228,6 +239,8 @@ export default {
     },
     components: {
         ProductFilter,
+        ProductListItem,
+        SkuListItem,
         Loader
     },
 }

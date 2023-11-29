@@ -16,18 +16,8 @@ class CategoryController extends Controller
 
     public function category($categorySlug)
     {
-        $category = Category::query()
-            ->where('slug', $categorySlug)
-            ->with([
-                'products' => function($query) {
-                    $query->where('is_active', 1);
-                    $query->whereHas('skus');
-                    $query->with('skus');
-                    $query->orderBy('price', 'asc');
-                    $query->paginate(20);
-                }])
-            ->first();
-
+        $category = Category::where('slug', $categorySlug)->first();
+                            
         return view('category', compact('category'));
     }
 }

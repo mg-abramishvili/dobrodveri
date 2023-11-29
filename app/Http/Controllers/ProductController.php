@@ -14,6 +14,18 @@ class ProductController extends Controller
 {
     use storeInRecentlyViewed;
 
+    public function indexData()
+    {
+        $products = Product::query()
+                    ->where('is_active', 1)
+                    ->whereHas('skus')
+                    ->with('skus')
+                    ->orderBy('price', 'asc')
+                    ->paginate(1);
+        
+        return $products;
+    }
+
     public function product($productSlug)
     {
         $product = Product::where('slug', $productSlug)->first();
