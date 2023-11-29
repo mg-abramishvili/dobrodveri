@@ -22,7 +22,7 @@ class ProductController extends Controller
                     ->whereHas('skus')
                     ->with('skus')
                     ->orderBy('price', 'asc')
-                    ->paginate(1);
+                    ->paginate(20);
         
         return $products;
     }
