@@ -41,11 +41,17 @@
             </svg>
             Заказать
         </button>
-        <button @click="addToFavorites()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-            </svg>
-            В избранное
+        <button @click="addToFavorites()" :disabled="!views.addToFavoritesButton">
+            <template v-if="views.addToFavoritesButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                </svg>
+                В избранное
+            </template>
+
+            <template v-if="!views.addToFavoritesButton">
+                <LoaderSpinner />
+            </template>
         </button>
 
         <div v-if="product.balance" class="product-balance" :class="{'product-balance-green': product.balance == 'В наличии в Уфе'}">
@@ -57,123 +63,138 @@
 </template>
 
 <script>
-    export default {
-        props: ['product', 'size', 'color', 'glass', 'innerdecor'],
-        data() {
-            return {
-                selected: {
-                    color: '',
-                    glass: '',
-                    size: '',
-                },
-                
-                selectedSKU: '',
-            }
-        },
-        mounted() {
-            this.selectColor()
-            this.selectGlass()
-            this.selectSize()
+import LoaderSpinner from './LoaderSpinner.vue'
 
-            if(this.color && this.product.colors.length) {
-                this.selectColor(this.product.colors.find(c => c.slug == this.color))
-            }
-
-            if(this.glass && this.product.glasses.length) {
-                this.selectGlass(this.product.glasses.find(g => g.slug == this.glass))
-            }
-
-            if(this.size && this.product.sizes.length) {
-                this.selectSize(this.product.sizes.find(s => s.slug == this.size))
-            }
-        },
-        watch: {
+export default {
+    props: ['product', 'size', 'color', 'glass', 'innerdecor'],
+    data() {
+        return {
             selected: {
-                deep: true,
-                handler() {
-                    let selectedSKU
+                color: '',
+                glass: '',
+                size: '',
+            },
+            
+            selectedSKU: '',
 
-                    if(this.selected.color && this.selected.glass) {
-                        selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id && sku.glass_id == this.selected.glass.id)
-                        
-                        this.selectedSKU = selectedSKU
-                        
-                        return this.emitSKU(selectedSKU)
-                    }
+            views: {
+                addToFavoritesButton: true,
+            }
+        }
+    },
+    mounted() {
+        this.selectColor()
+        this.selectGlass()
+        this.selectSize()
 
-                    if(this.selected.color) {
-                        selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id)
-                        
-                        this.selectedSKU = selectedSKU
-                        
-                        return this.emitSKU(selectedSKU)
-                    }
+        if(this.color && this.product.colors.length) {
+            this.selectColor(this.product.colors.find(c => c.slug == this.color))
+        }
+
+        if(this.glass && this.product.glasses.length) {
+            this.selectGlass(this.product.glasses.find(g => g.slug == this.glass))
+        }
+
+        if(this.size && this.product.sizes.length) {
+            this.selectSize(this.product.sizes.find(s => s.slug == this.size))
+        }
+    },
+    watch: {
+        selected: {
+            deep: true,
+            handler() {
+                let selectedSKU
+
+                if(this.selected.color && this.selected.glass) {
+                    selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id && sku.glass_id == this.selected.glass.id)
+                    
+                    this.selectedSKU = selectedSKU
+                    
+                    return this.emitSKU(selectedSKU)
+                }
+
+                if(this.selected.color) {
+                    selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id)
+                    
+                    this.selectedSKU = selectedSKU
+                    
+                    return this.emitSKU(selectedSKU)
                 }
             }
-        },
-        computed: {
-            price() {
-                if(this.selectedSKU && this.selectedSKU.price > 0) {
-                    return this.selectedSKU.price
-                } else {
-                    return this.product.price
-                }
-            },
-            priceOld() {
-                if(this.product.factory_coef) {
-                    return Math.round(this.price * this.product.factory_coef / 10) * 10
-                } else {
-                    return this.price
-                }
-            },
-        },
-        methods: {
-            selectColor(color) {
-                if(!this.product.colors.length) {
-                    return
-                }
-
-                if(color) {
-                    this.selected.color = color
-                } else {
-                    this.selected.color = this.product.colors[0] ? this.product.colors[0] : null
-                }
-            },
-            selectGlass(glass) {
-                if(!this.product.glasses.length) {
-                    return
-                }
-
-                if(glass) {
-                    this.selected.glass = glass
-                } else {
-                    this.selected.glass = this.product.glasses[0] ? this.product.glasses[0] : null
-                }
-            },
-            selectSize(size) {
-                if(!this.product.sizes.length) {
-                    return
-                }
-
-                if(size) {
-                    this.selected.size = size
-                } else {
-                    this.selected.size = this.product.sizes[0] ? this.product.sizes[0] : null
-                }
-            },
-            emitSKU(selectedSKU) {
-                this.emitter.emit('product-sku-index', this.product.skus.indexOf(selectedSKU))
-            },
-            addToFavorites() {
-                if(!this.selectedSKU) {
-                    return
-                }
-
-                axios.post('/_favorites', { id: this.selectedSKU.id })
-                .then(response => {
-                    this.emitter.emit('favorite-count', 'New Favorite Item Added!')
-                })
-            },
         }
+    },
+    computed: {
+        price() {
+            if(this.selectedSKU && this.selectedSKU.price > 0) {
+                return this.selectedSKU.price
+            } else {
+                return this.product.price
+            }
+        },
+        priceOld() {
+            if(this.product.factory_coef) {
+                return Math.round(this.price * this.product.factory_coef / 10) * 10
+            } else {
+                return this.price
+            }
+        },
+    },
+    methods: {
+        selectColor(color) {
+            if(!this.product.colors.length) {
+                return
+            }
+
+            if(color) {
+                this.selected.color = color
+            } else {
+                this.selected.color = this.product.colors[0] ? this.product.colors[0] : null
+            }
+        },
+        selectGlass(glass) {
+            if(!this.product.glasses.length) {
+                return
+            }
+
+            if(glass) {
+                this.selected.glass = glass
+            } else {
+                this.selected.glass = this.product.glasses[0] ? this.product.glasses[0] : null
+            }
+        },
+        selectSize(size) {
+            if(!this.product.sizes.length) {
+                return
+            }
+
+            if(size) {
+                this.selected.size = size
+            } else {
+                this.selected.size = this.product.sizes[0] ? this.product.sizes[0] : null
+            }
+        },
+        emitSKU(selectedSKU) {
+            this.emitter.emit('product-sku-index', this.product.skus.indexOf(selectedSKU))
+        },
+        addToFavorites() {
+            if(!this.selectedSKU) {
+                return
+            }
+
+            this.views.addToFavoritesButton = false
+
+            axios.post('/_favorites', { id: this.selectedSKU.id })
+            .then(response => {
+                this.emitter.emit('favorite-count', 'New Favorite Item Added!')
+
+                setTimeout(() => {
+                    this.views.addToFavoritesButton = true
+                }, 1000)
+            })
+        },
+    },
+    components: {
+        LoaderSpinner
     }
+}
 </script>

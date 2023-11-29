@@ -830,7 +830,8 @@ header .container {
     color: #fff;
     box-shadow: none;
     border: 0;
-    padding: 14px 28px;
+    padding: 0 28px;
+    height: 45px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -881,7 +882,8 @@ header .container {
     width: 25px;
 }
 .product-detail-help-buttons ul li button span {
-    border-bottom: 1px dashed;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 2px;
     color: #151528;
     font-size: 14px;
 }
@@ -893,6 +895,7 @@ header .container {
 .product-detail-help-buttons ul li button:hover span,
 .product-detail-help-buttons ul li button:focus span {
     color: #e9a854;
+    border-color: #e9a854;
 }
 .product-detail-tabs-buttons {
     display: flex;

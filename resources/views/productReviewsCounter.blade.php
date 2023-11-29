@@ -46,7 +46,7 @@
         </symbol>
       </defs>
     
-      <use xlink:href="#stars" fill="#df3e3c" stroke="#444" mask="url(#perc)"></use>
+      <use xlink:href="#stars" fill="#e9a854" stroke="transparent" mask="url(#perc)"></use>
     </svg> {{ round($rating, 1) }}
     @endif
 
