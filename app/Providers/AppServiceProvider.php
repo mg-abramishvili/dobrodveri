@@ -30,9 +30,13 @@ class AppServiceProvider extends ServiceProvider
 
         if (Schema::hasTable('products'))
         {
-            $popularProducts = ProductResource::collection(Product::where('is_active', 1)->where('view_counter', '>=', 50)->orderBy('view_counter', 'desc')->take(8)->get());
+            $popularProducts = Product::where('is_active', 1)
+                                        // ->where('view_counter', '>=', 50)
+                                        ->orderBy('view_counter', 'desc')
+                                        ->take(12)
+                                        ->get();
 
-            $shareData['popularProducts'] = json_encode($popularProducts);
+            $shareData['popularProducts'] = json_encode(ProductResource::collection($popularProducts));
         }
 
         if (Schema::hasTable('pages'))
