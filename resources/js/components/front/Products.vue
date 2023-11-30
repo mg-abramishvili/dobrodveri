@@ -45,19 +45,7 @@
             По вашему запросу товары не найдены.
         </p>
 
-        <div v-if="pagination.totalPages > 1" class="pagination">
-            <button @click="prevPage()" :disabled="!pagination.prevPage">
-                &larr;
-            </button>
-
-            <button>
-                {{ pagination.currentPage }}
-            </button>
-
-            <button @click="nextPage()" :disabled="!pagination.nextPage">
-                &rarr;
-            </button>
-        </div>
+        <Pagination v-if="pagination.totalPages > 1" :pagination="pagination" />
     </div>
 </template>
 
@@ -67,6 +55,7 @@ import ProductFilter from './ProductFilter.vue'
 import ProductListItem from './products/ProductListItem.vue'
 import SkuListItem from './products/SkuListItem.vue'
 import AppliedFiltersRemover from './products/AppliedFiltersRemover.vue'
+import Pagination from './products/Pagination.vue'
 
 export default {
     props: [
@@ -290,6 +279,7 @@ export default {
         ProductListItem,
         SkuListItem,
         AppliedFiltersRemover,
+        Pagination,
         Loader
     },
 }
