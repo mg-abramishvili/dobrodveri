@@ -1301,6 +1301,57 @@ header .container {
 
 
 
+/* PAGE PROMOS */
+.page-promos,
+.page-promo {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.promos-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.promo-list-item {
+    width: calc(33.3333% - 20px);
+    display: block;
+    text-decoration: none;
+    color: #151528;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.promo-list-item-image {
+    height: 250px;
+    background-size: cover;
+    background-position: center center;
+}
+.promo-list-item-desc {
+    padding: 15px;
+    background-color: rgb(245, 245, 246);
+}
+.promo-list-item-desc h5 {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 0;
+}
+.page-promo img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 400px;
+}
+.page-promo-text {
+    width: 100%;
+}
+/* PAGE PROMOS */
+
+
+
 /* FOOTER */
 .footer-top {
     background-color: #F5F5F6;

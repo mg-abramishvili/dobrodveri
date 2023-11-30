@@ -62,7 +62,7 @@ export default {
             filepond_image: [],
             filepond_image_edit: [],
 
-            filepondServer: FilepondServer,
+            filepondServer: FilepondServer(this.product.id),
         }
     },
     created() {

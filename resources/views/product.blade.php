@@ -24,9 +24,6 @@
             <li>
                 <a href="/catalog/{{ $product["category"]["slug"] }}/">{{ $product["category"]["name"] }}</a>
             </li>
-            <li>
-                <a>{{ $product["name"] }}</a>
-            </li>
         </ul>
     </div>
 

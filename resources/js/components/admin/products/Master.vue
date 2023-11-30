@@ -207,7 +207,7 @@ export default {
                 toolbar: [ 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'insertTable', '|', 'undo', 'redo' ],
             },
 
-            filepondServer: FilepondServer,
+            filepondServer: FilepondServer(),
         };
     },
     computed: {

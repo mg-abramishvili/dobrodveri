@@ -2,17 +2,6 @@
 @section('title', 'Политика конфиденциальности - Добродвери')
 @section('description', 'Политика конфиденциальности - Добродвери')
 @section('content')
-    <div class="container breadcrumbs">
-        <ul>
-            <li>
-                <a href="/">Главная</a>
-            </li>
-            <li>
-                <a>Политика конфиденциальности сайта добродвери.рф</a>
-            </li>
-        </ul>
-    </div>
-
     <div class="container page-detail">
         <h1 class="title-header">Политика конфиденциальности сайта добродвери.рф</h1>
 

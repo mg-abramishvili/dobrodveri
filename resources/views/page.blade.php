@@ -17,9 +17,6 @@
                     <a href="/polezno">Полезно</a>
                 </li>
             @endif
-            <li>
-                <a>{{ $page->name }}</a>
-            </li>
         </ul>
     </div>
 

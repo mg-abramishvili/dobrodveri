@@ -126,7 +126,7 @@ export default {
             filepond_gallery: [],
             filepond_gallery_edit: [],
 
-            filepondServer: FilepondServer,
+            filepondServer: FilepondServer(),
 
             editor: ClassicEditor,
             editorConfig: {

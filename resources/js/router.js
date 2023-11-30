@@ -53,6 +53,9 @@ import Reviews from './components/admin/reviews/Index.vue'
 import Pages from './components/admin/pages/Index.vue'
 import PageMaster from './components/admin/pages/Master.vue'
 
+import Promos from './components/admin/promos/Index.vue'
+import PromoMaster from './components/admin/promos/Master.vue'
+
 const routes = [
     {
         path: '/admin',
@@ -228,6 +231,16 @@ const routes = [
         path: '/admin/page-master/:id?',
         name: 'PageMaster',
         component: PageMaster
+    },
+    {
+        path: '/admin/promos',
+        name: 'Promos',
+        component: Promos
+    },
+    {
+        path: '/admin/promo-master/:id?',
+        name: 'PromoMaster',
+        component: PromoMaster
     },
 ];
 

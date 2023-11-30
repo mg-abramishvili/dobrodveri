@@ -84,7 +84,7 @@ export default {
                 saveButton: true,
             },
 
-            filepondServer: FilepondServer
+            filepondServer: FilepondServer(),
         }
     },
     created() {

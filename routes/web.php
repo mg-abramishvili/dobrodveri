@@ -2,6 +2,7 @@
 
 use App\Models\MainSlider;
 use App\Models\Product;
+use App\Models\Promo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,20 @@ Route::get('search', function (Request $request) {
 
     return view('search', compact('products'));
 });
+
+Route::get('promos', function () {
+    $promos = Promo::orderBy('created_at', 'desc')->get();
+
+    return view('promos', compact('promos'));
+});
+
+Route::get('promo/{id}', function ($id) {
+    $promo = Promo::findOrFail($id);
+
+    return view('promo', compact('promo'));
+});
+
+
 
 // ADMIN
 Route::get('admin', function () {
@@ -159,6 +174,13 @@ Route::post('_admin/mainslides', [App\Http\Controllers\Admin\MainSliderControlle
 Route::get('_admin/mainslide/{id}', [App\Http\Controllers\Admin\MainSliderController::class, 'slide']);
 Route::put('_admin/mainslide/{id}/update', [App\Http\Controllers\Admin\MainSliderController::class, 'update']);
 Route::delete('_admin/mainslide/{id}/delete', [App\Http\Controllers\Admin\MainSliderController::class, 'delete']);
+
+// ADMIN PROMOS
+Route::get('_admin/promos', [App\Http\Controllers\Admin\PromoController::class, 'index']);
+Route::post('_admin/promos', [App\Http\Controllers\Admin\PromoController::class, 'store']);
+Route::get('_admin/promo/{id}', [App\Http\Controllers\Admin\PromoController::class, 'promo']);
+Route::put('_admin/promo/{id}/update', [App\Http\Controllers\Admin\PromoController::class, 'update']);
+Route::delete('_admin/promo/{id}/delete', [App\Http\Controllers\Admin\PromoController::class, 'delete']);
 
 // ADMIN LEADS
 Route::get('_admin/leads', [App\Http\Controllers\Admin\LeadController::class, 'index']);

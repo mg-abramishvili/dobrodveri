@@ -153,5 +153,23 @@ class FileController extends Controller
                 'Content-Disposition' => 'inline',
             ]);
         }
+
+        if (request()->file('promo_image')) {
+            $file = request()->file('promo_image');
+            $filename = time().'.'.$file->extension();
+
+            if (!file_exists(public_path() . '/uploads/promos')) {
+                mkdir(public_path() . '/uploads/promos', 0755, true);
+            }
+
+            $img = Image::make($file->path());
+            $img->resize(900, 900, function ($const) {
+                $const->aspectRatio();
+            })->save(public_path() . '/uploads/promos/' . $filename);
+
+            return \Response::make('/uploads/promos/' . $filename, 200, [
+                'Content-Disposition' => 'inline',
+            ]);
+        }
     }
 }

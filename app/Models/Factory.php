@@ -15,4 +15,9 @@ class Factory extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function promos()
+    {
+        return $this->belongsToMany(Promo::class);
+    }
 }
