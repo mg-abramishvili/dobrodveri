@@ -99,7 +99,7 @@
                                         <a href="/catalog/mezhkomnatnye-dveri/">Межкомнатные двери</a>
                                     </li>
                                     <li>
-                                        <a href="#">Скрытые двери</a>
+                                        <a href="/catalog/mezhkomnatnye-dveri/?type=dver-skrytaya">Скрытые двери</a>
                                     </li>
                                     <li>
                                         <a href="/catalog/vkhodnyie-dveri/">Входные двери</a>
