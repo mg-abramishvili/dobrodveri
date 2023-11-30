@@ -5,6 +5,6 @@
     <div class="container page-detail">
         <h1 class="title-header">Избранные товары</h1>
 
-            <favorites />
+        <favorites />
     </div>
 @endsection

@@ -55,4 +55,6 @@
             @endif
         />
     </div>
+
+    @include('recently-viewed')
 @endsection
