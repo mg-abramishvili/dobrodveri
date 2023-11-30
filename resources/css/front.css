@@ -362,12 +362,15 @@ header .container {
 /* CATEGORY */
 .category {
     margin-top: 30px;
+    position: relative;
 }
 .container .category-filter {
     width: calc(25% - 25px);
     margin-right: 25px;
     position: relative;
     background-color: rgb(245, 245, 246);
+    padding-top: 30px;
+    margin-bottom: 50px;
 }
 .overlay {
     position: absolute;
@@ -384,11 +387,12 @@ header .container {
 .filter-box {
     /* background-color: #f6f6f6;
     border: 1px solid #edeef3; */
-    padding: 30px;
-    /* margin-bottom: 25px; */
+    padding: 0 30px;
+    margin-bottom: 40px;
 }
 .filter-box p {
     margin-top: 0;
+    margin-bottom: 10px;
     font-weight: 700;
 }
 .filter-box-list-large {
@@ -416,6 +420,49 @@ header .container {
 .filter-box-list .form-check-label small {
     font-size: 11px;
     margin-left: 5px;
+}
+.applied-filters-remover {
+    margin-bottom: 25px;
+}
+.applied-filters-remover ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.applied-filters-remover ul li {
+    background-color: rgb(245, 245, 246);
+    background-color: rgba(232, 168, 84, 0.25);
+    font-size: 14px;
+    padding: 6px 6px 6px 12px;
+    margin-right: 10px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.applied-filters-remover ul li button {
+    background: none;
+    font-weight: 700;
+    font-size: 30px;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    padding: 5px;
+}
+.applied-filters-remover ul li button svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-left: 3px;
+    color: #777;
+}
+.applied-filters-remover ul li button:hover svg {
+    color: #000;
 }
 .category-filter-buttons {
     position: sticky;
@@ -459,6 +506,7 @@ header .container {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    margin-bottom: 50px;
 }
 .pagination button {
     margin: 0 5px;
@@ -558,7 +606,8 @@ header .container {
 
 /* CATEGORY FILTER */
 .form-check-label-disabled {
-    color: #999;
+    color: #151528;
+    opacity: 0.5;
 }
 .range-slider {
     height: 3px;

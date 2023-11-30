@@ -1,4 +1,10 @@
 <template>
+    <h1 class="title-header">{{ category.name }}</h1>
+
+    <div class="overlay" v-if="views.loading">
+        <Loader />
+    </div>
+
     <aside class="category-filter">
         <ProductFilter
             :category_id="category.id"
@@ -9,7 +15,7 @@
             :filterParams="filterParams"
         />
 
-        <div v-if="!views.loading" class="category-filter-buttons">
+        <!-- <div class="category-filter-buttons">
             <button @click="loadProductSKUs()" class="category-filter-button">
                 Применить фильтр
             </button>
@@ -17,25 +23,29 @@
             <button @click="resetFilter()" class="category-filter-button">
                 Сбросить фильтр
             </button>
-        </div>
+        </div> -->
     </aside>
 
-    <div class="category-products" :class="{ 'overlay': views.loading }">
-        <Loader v-if="views.loading" />
+    <div v-if="!views.loading" class="category-products">
+        <!-- <AppliedFiltersRemover v-if="views.aplliedFiltersRemover" :filterParams="filterParams" /> -->
 
-        <div v-if="!views.loading && !productSKUs.length" class="category-products-list">
+        <div v-if="products.length && !productSKUs.length" class="category-products-list">
             <div v-for="product in products" class="products-list-item">
                 <ProductListItem :product="product" />
             </div>
         </div>
 
-        <div v-if="!views.loading && productSKUs.length" class="category-products-list">
+        <div v-if="productSKUs.length && !products.length" class="category-products-list">
             <div v-for="sku in productSKUs" class="products-list-item">
                 <SkuListItem :sku="sku" />
             </div>
         </div>
 
-        <div v-if="!views.loading && pagination.totalPages > 1" class="pagination">
+        <p v-if="!productSKUs.length && !products.length">
+            По вашему запросу товары не найдены.
+        </p>
+
+        <div v-if="pagination.totalPages > 1" class="pagination">
             <button @click="prevPage()" :disabled="!pagination.prevPage">
                 &larr;
             </button>
@@ -52,10 +62,11 @@
 </template>
 
 <script>
+import Loader from './Loader.vue'
 import ProductFilter from './ProductFilter.vue'
 import ProductListItem from './products/ProductListItem.vue'
 import SkuListItem from './products/SkuListItem.vue'
-import Loader from './Loader.vue'
+import AppliedFiltersRemover from './products/AppliedFiltersRemover.vue'
 
 export default {
     props: [
@@ -109,6 +120,7 @@ export default {
             
             views: {
                 loading: true,
+                aplliedFiltersRemover: false,
             }
         }
     },
@@ -141,7 +153,7 @@ export default {
             this.loadProducts()
         },
         loadProducts(page) {
-            window.scrollTo(0, 0)
+            // window.scrollTo(0, 0)
             
             this.views.loading = true
             
@@ -163,7 +175,7 @@ export default {
             })
         },
         loadProductSKUs(page) {
-            window.scrollTo(0, 0)
+            // window.scrollTo(0, 0)
             
             this.views.loading = true
 
@@ -186,6 +198,7 @@ export default {
                 this.surfaces = response.data.surfaces
                 
                 if(!this.isFilterApplied()) {
+                    this.products = []
                     this.productSKUs = response.data.skus
 
                     this.setPagination(
@@ -194,14 +207,14 @@ export default {
                     )
 
                     this.genURL()
+
+                    this.views.aplliedFiltersRemover = true
                 }
                 
                 this.views.loading = false
             })
         },
         resetFilter() {
-            this.views.loading = true
-
             window.location.href = '/catalog/' + this.category.slug + '/'
         },
         setPagination(totalPages, currentPage) {
@@ -274,6 +287,7 @@ export default {
         ProductFilter,
         ProductListItem,
         SkuListItem,
+        AppliedFiltersRemover,
         Loader
     },
 }

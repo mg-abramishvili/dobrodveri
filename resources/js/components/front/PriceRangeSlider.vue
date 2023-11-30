@@ -4,8 +4,8 @@
             <span class="range-selected"></span>
         </div>
         <div class="range-input">
-            <input type="range" v-model="minRange" class="min" min="0" max="100000" step="10">
-            <input type="range" v-model="maxRange" class="max" min="0" max="100000" step="10">
+            <input type="range" @change="changeMinRange()" v-model="minRange" class="min" min="0" max="100000" step="10">
+            <input type="range" @change="changeMaxRange()" v-model="maxRange" class="max" min="0" max="100000" step="10">
         </div>
         <div class="range-price">      
             <label for="min">от</label>
@@ -26,30 +26,6 @@ export default {
             rangeMin: 10,
         }
     },
-    watch: {
-        minRange: {
-            handler() {
-                if(this.maxRange - this.minRange < this.rangeMin) {
-                    this.minRange = this.maxRange - this.rangeMin;
-                }
-
-                this.$parent.selected.price_from = this.minRange
-
-                this.styleRange()
-            }
-        },
-        maxRange: {
-            handler() {
-                if(this.maxRange - this.minRange < this.rangeMin) {
-                    this.maxRange = this.minRange;
-                }
-
-                this.$parent.selected.price_to = this.maxRange
-
-                this.styleRange()
-            }
-        }
-    },
     mounted() {
         this.minRange = this.min
         this.maxRange = this.max
@@ -57,6 +33,24 @@ export default {
         this.styleRange()
     },
     methods: {
+        changeMinRange() {
+            if(this.maxRange - this.minRange < this.rangeMin) {
+                this.minRange = this.maxRange - this.rangeMin;
+            }
+
+            this.$parent.selected.price_from = this.minRange
+
+            this.styleRange()
+        },
+        changeMaxRange() {
+            if(this.maxRange - this.minRange < this.rangeMin) {
+                this.maxRange = this.minRange;
+            }
+
+            this.$parent.selected.price_to = this.maxRange
+
+            this.styleRange()
+        },
         styleRange() {
             const range = document.querySelector(".range-selected")
 
