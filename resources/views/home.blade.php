@@ -29,6 +29,8 @@
     @include('how-to-buy')
 
     @include('dogovor')
+
+    @include('zamer')
 @endsection
 
 @section('css')
