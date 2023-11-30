@@ -363,6 +363,7 @@ header .container {
 .category {
     margin-top: 30px;
     position: relative;
+    align-items: flex-start;
 }
 .container .category-filter {
     width: calc(25% - 25px);
