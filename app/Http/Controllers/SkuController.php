@@ -61,7 +61,7 @@ class SkuController extends Controller
             $query->withFilters($category_id, $types, $styles, $surfaces, $colors, null);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $perPage = 20;
+        $perPage = 30;
 
         $skus = Sku::select(['skus.*', 'products.price as product_price'])
                     ->join('products', 'skus.product_id', '=', 'products.id')
