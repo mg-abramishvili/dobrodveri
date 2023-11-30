@@ -35,7 +35,7 @@ trait StoreInRecentlyViewed {
         }
         
         if(count($recentlyViewed) >= 12) {
-            array_pop($recentlyViewed);
+            array_shift($recentlyViewed);
         }
 
         $recentlyViewed[] = $product;
