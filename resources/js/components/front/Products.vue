@@ -127,6 +127,18 @@ export default {
                 this.filterParams.price_to = this.price_to
             }
 
+            if(this.type && this.type.split(',').length) {
+                this.type.split(',').forEach(c => {
+                    this.filterParams.types.push(c)
+                })
+            }
+
+            if(this.style && this.style.split(',').length) {
+                this.style.split(',').forEach(c => {
+                    this.filterParams.styles.push(c)
+                })
+            }
+
             if(this.color && this.color.split(',').length) {
                 this.color.split(',').forEach(c => {
                     this.filterParams.colors.push(c)
