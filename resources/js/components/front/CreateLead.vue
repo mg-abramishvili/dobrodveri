@@ -1,15 +1,5 @@
 <template>
     <div class="lead-form">
-        <div v-if="errors.length" class="alert alert-danger mb-4" role="alert">
-            <span v-for="error in errors">
-                {{ error }}<br>
-            </span>
-        </div>
-
-        <div v-if="views.success" class="alert alert-success mb-4" role="alert">
-            <span>Заявка успешно отправлена!</span>
-        </div>
-
         <span class="modal-title">{{ subject }}</span>
 
         <div class="mb-4">
@@ -38,6 +28,16 @@
         </div>
 
         <button @click="save()" :disabled="!views.submitButton" class="btn btn-standard">Отправить</button>
+
+        <div v-if="errors.length" class="alert alert-danger mb-4" role="alert">
+            <span v-for="error in errors">
+                {{ error }}<br>
+            </span>
+        </div>
+
+        <div v-if="views.success" class="alert alert-success mb-4" role="alert">
+            <span>Заявка успешно отправлена!</span>
+        </div>
 
         <small>Нажимая кнопку «Отправить» вы соглашаетесь с <a href="/policy" target="_blank">политикой конфиденциальности</a></small>
     </div>
