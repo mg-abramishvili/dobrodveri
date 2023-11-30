@@ -33,8 +33,12 @@ trait StoreInRecentlyViewed {
                 unset($recentlyViewed[$index]);
             }
         }
-
-        
+        return count($recentlyViewed);
+        // if(count($recentlyViewed) >= 12) {
+        //     $recentlyViewed = array_pop($recentlyViewed);
+        // } else {
+        //     $recentlyViewed[] = $product;
+        // }
 
         session([ 'recentlyViewed' => $recentlyViewed ]);
     }
