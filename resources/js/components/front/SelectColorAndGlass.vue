@@ -142,8 +142,6 @@ export default {
         priceOld() {
             if(this.product.factory_coef) {
                 return Math.round(this.price * this.product.factory_coef / 10) * 10
-            } else {
-                return this.price
             }
         },
     },
