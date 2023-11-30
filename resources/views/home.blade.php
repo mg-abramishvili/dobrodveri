@@ -35,13 +35,7 @@
     @include('gallery')
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="/css/swiper-bundle.min.css" />
-@endsection
-
 @section('scripts')
-    <script src="/js/swiper-bundle.min.js"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const swiper = new Swiper('.home-main-slider', {

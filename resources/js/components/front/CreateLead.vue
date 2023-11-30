@@ -115,7 +115,7 @@ export default {
             }
 
             if(!this.message) {
-                if(this.subject == 'Заказ замера') {
+                if(this.subject == 'Заказ замера' || this.subject == 'Обратный звонок') {
                     this.message = '-'
                 }
             }

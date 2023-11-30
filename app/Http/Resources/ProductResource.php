@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\ProductColorResource;
 use App\Http\Resources\ProductGlassResource;
 use App\Http\Resources\ProductReviewResource;
+use App\Models\Promo;
 
 class ProductResource extends JsonResource
 {
@@ -33,6 +34,7 @@ class ProductResource extends JsonResource
             'rating' => $this->reviews->where('is_active', 1)->count() ? $this->reviews->where('is_active', 1)->sum('rating') / $this->reviews->where('is_active', 1)->count() : null,
             'balance' => $this->balance,
             'view_counter' => $this->view_counter,
+            'promos' => Promo::whereRelation('factories', 'factories.id', $this->factory_id)->orWhereDoesntHave('factories')->orderBy('created_at', 'desc')->get(),
         ];
     }
 }

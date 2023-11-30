@@ -45,6 +45,16 @@
                             v-bind:files="filepond_image_edit"
                         />
                     </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Применить к фабрикам <i style="color: green;">Если акция относится ко всем фабрикам - просто не отмечайте галочки</i></label>
+                        <div v-for="factory in factories" class="form-check">
+                            <input v-model="selected.factories" class="form-check-input" type="checkbox" :value="factory.id" :id="factory.id">
+                            <label class="form-check-label" :for="factory.id">
+                                {{ factory.name }}
+                            </label>
+                        </div>
+                    </div>
                             
                     <button @click="save()" :disabled="!views.saveButton" class="btn btn-primary">Сохранить</button>
                 </div>
@@ -74,6 +84,12 @@ export default {
         return {
             promo: {},
 
+            factories: [],
+
+            selected: {
+                factories: [],
+            },
+
             name: '',
             description: '',
             image: '',
@@ -95,15 +111,23 @@ export default {
         }
     },
     created() {
-        if(this.$route.params.id) {
-            this.loadPromo()
-        }
-        
-        if(!this.$route.params.id) {
-            this.views.loading = false
-        }
+        this.loadFactories()
     },
     methods: {
+        loadFactories() {
+            axios.get('/_admin/factories')
+            .then(response => {
+                this.factories = response.data
+
+                if(this.$route.params.id) {
+                    this.loadPromo()
+                }
+                
+                if(!this.$route.params.id) {
+                    this.views.loading = false
+                }
+            })
+        },
         loadPromo() {
             axios.get(`/_admin/promo/${this.$route.params.id}`)
             .then(response => {
@@ -111,6 +135,7 @@ export default {
 
                 this.name = response.data.name
                 this.description = response.data.description
+                this.selected.factories = response.data.factories.map(factory => factory.id)
                 
                 if(response.data.image) {
                     this.filepond_image_edit = [
@@ -149,7 +174,8 @@ export default {
             let postData = {
                 name: this.name,
                 description: this.description,
-                image: this.image
+                image: this.image,
+                factories: this.selected.factories,
             }
 
             if(this.$route.params.id) {

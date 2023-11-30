@@ -7,6 +7,7 @@
 
         <title>@yield('title')</title>
 
+        <link rel="stylesheet" href="/css/swiper-bundle.min.css" />
         @yield('css')
 
         @vite('resources/css/front.css')
@@ -188,6 +189,14 @@
                 </div>
             </div>
 
+            <div id="modal_Lead" class="modal">
+                <div class="modal-content">
+                    <button onclick="closeModal()" class="modal-close">&times;</button>
+    
+                    <create-lead subject="Обратный звонок" />
+                </div>
+            </div>
+
             <div id="modal_LeadZamer" class="modal">
                 <div class="modal-content">
                     <button onclick="closeModal()" class="modal-close">&times;</button>
@@ -207,6 +216,8 @@
         
         @vite('resources/js/front.js')
 
+        <script src="/js/swiper-bundle.min.js"></script>
+        
         @yield('scripts')
 
         <script>

@@ -15,7 +15,7 @@ class PromoController extends Controller
 
     public function promo($id)
     {
-        return Promo::find($id);
+        return Promo::with('factories')->find($id);
     }
 
     public function store(Request $request)
@@ -33,6 +33,8 @@ class PromoController extends Controller
         $promo->image = $request->image;
 
         $promo->save();
+
+        $promo->factories()->sync($request->factories);
     }
 
     public function update($id, Request $request)
@@ -50,6 +52,8 @@ class PromoController extends Controller
         $promo->image = $request->image;
 
         $promo->save();
+
+        $promo->factories()->sync($request->factories);
     }
 
     public function delete($id)
