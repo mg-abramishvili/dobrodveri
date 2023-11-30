@@ -241,6 +241,8 @@ export default {
             this.goToPage(this.pagination.nextPage)
         },
         goToPage(page) {
+            window.scrollTo(0, 0)
+            
             if(!this.productSKUs.length) {
                 return this.loadProducts(page)
             }
