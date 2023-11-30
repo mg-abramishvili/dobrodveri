@@ -330,5 +330,19 @@
                 }
             }
         </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const swiper = new Swiper('.gallery-slider', {
+                    loop: true,
+                    slidesPerView: 4,
+
+                    navigation: {
+                        nextEl: '.gallery-slider-button-next',
+                        prevEl: '.gallery-slider-button-prev',
+                    },
+                })
+            })
+        </script>
     </body>
 </html>

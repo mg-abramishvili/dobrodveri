@@ -31,6 +31,8 @@
     @include('dogovor')
 
     @include('zamer')
+
+    @include('gallery')
 @endsection
 
 @section('css')
