@@ -283,7 +283,7 @@ export default {
                 filterParamsURL.push('&glass=' + this.filterParams.glasses.join(','))
             }
 
-            history.pushState(null, null, '/?' + filterParamsURL.join(""))
+            history.pushState(null, null, '?' + filterParamsURL.join(""))
         },
     },
     components: {
