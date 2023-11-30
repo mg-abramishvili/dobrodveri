@@ -34,7 +34,7 @@ trait StoreInRecentlyViewed {
             }
         }
         
-        if(count($recentlyViewed) >= 4) {
+        if(count($recentlyViewed) == 4) {
             array_shift($recentlyViewed);
         }
 
