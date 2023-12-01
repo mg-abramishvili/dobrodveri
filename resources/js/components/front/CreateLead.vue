@@ -19,12 +19,12 @@
 
         <div v-if="subject == 'Сообщение директору'" class="mb-4">
             <label class="form-label">Сообщение</label>
-            <textarea v-model="message" class="form-control" style="resize: vertical"></textarea>
+            <textarea v-model="message" class="form-control form-control-textarea"></textarea>
         </div>
 
         <div v-if="subject == 'Заказ'" class="mb-4">
             <label class="form-label">Заказ</label>
-            <textarea v-model="messageOrder" class="form-control"  style="resize: vertical" disabled></textarea>
+            <textarea v-model="messageOrder" class="form-control form-control-textarea" disabled></textarea>
         </div>
 
         <button @click="save()" :disabled="!views.submitButton" class="btn btn-standard">Отправить</button>

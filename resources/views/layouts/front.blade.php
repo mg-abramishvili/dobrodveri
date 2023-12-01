@@ -204,6 +204,14 @@
                     <create-lead subject="Заказ замера" />
                 </div>
             </div>
+
+            <div id="modal_Director" class="modal">
+                <div class="modal-content">
+                    <button onclick="closeModal()" class="modal-close">&times;</button>
+    
+                    <create-lead subject="Сообщение директору" />
+                </div>
+            </div>
             
             <div id="modal_Quiz" class="modal">
                 <div class="modal-content">

@@ -1689,6 +1689,10 @@ a.footer-policy:focus {
     height: 40px;
     line-height: 40px;
 }
+.lead-form .form-control-textarea {
+    height: 100px;
+    resize: vertical;
+}
 .lead-form button {
     background-color: #e9a854;
     padding: 10px 20px;
@@ -1711,6 +1715,44 @@ a.footer-policy:focus {
     font-size: 13px;
 }
 /* LEAD FORM */
+
+
+
+/* DIRECTOR */
+.director {
+    line-height: 1.7;
+    background-color: rgb(245, 245, 246);
+}
+.director .container {
+    align-items: center;
+}
+.director-left {
+    width: 75%;
+    padding-right: 200px;
+}
+.director-right {
+    width: 25%;
+    text-align: right;
+}
+.director-right img {
+    width: 100%;
+    border-radius: 100%;
+}
+.director p:last-child {
+    margin-bottom: 0;
+}
+.director a {
+    display: inline-block;
+    margin-top: 25px;
+    background-color: #e9a854;
+    padding: 12px 20px;
+    box-shadow: none;
+    border: 0;
+    border-radius: 5px;
+    line-height: 1;
+    cursor: pointer;
+}
+/* DIRECOTR */
 
 
 

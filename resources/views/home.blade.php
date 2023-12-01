@@ -33,6 +33,8 @@
     @include('zamer')
 
     @include('gallery')
+
+    @include('director')
 @endsection
 
 @section('scripts')
