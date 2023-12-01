@@ -169,13 +169,15 @@
                 </div>
                 <div class="product-detail-tab-right">
                     <div class="product-reviews">
-                        @foreach($product["reviews"] as $review)
+                        @forelse($product["reviews"] as $review)
                             <div class="product-review">
                                 <div class="product-review-name">{{ $review["name"] }}</div>
                                 <div class="product-review-rating">Оценка: <strong>{{ $review["rating"] }}</strong></div>
                                 <div class="product-review-text">{{ $review["text"] }}</div>
                             </div>
-                        @endforeach
+                        @empty
+                            <p>Пока нет отзывов на этот товар.</p>
+                        @endforelse
                     </div>
 
                     <create-product-review :product_id="{{ $product['id'] }}" />
@@ -184,13 +186,21 @@
         </div>
         <div class="product-detail-tab product-detail-tab-specials">
             <div class="container">
-                @forelse($product['promos'] as $promo)
-                    <a href="/promo/{{ $promo['id'] }}">
-                        {{ $promo['name'] }}
-                    </a>
-                @empty
-                    Акций для этого товара пока нет.
-                @endforelse
+                <div class="promos-list">
+                    @forelse($product['promos'] as $promo)
+                        <a href="/promo/{{ $promo['id'] }}" class="promo-list-item">
+                            <div class="promo-list-item-image" style="background-image: url({{ $promo['image'] ? $promo['image'] : '/img/no-image.jpg' }});"></div>
+                            
+                            <div class="promo-list-item-desc">
+                                <h5>
+                                    {{ $promo['name'] }}
+                                </h5>
+                            </div>
+                        </a>
+                    @empty
+                        Акций для этого товара пока нет.
+                    @endforelse
+                </div>
             </div>
         </div>
     </div>

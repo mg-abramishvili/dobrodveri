@@ -174,6 +174,18 @@ header .container {
     border-radius: 4px;
     color: #fff;
 }
+.search-product-item {
+    margin-bottom: 20px;
+}
+.search-product-item:before {
+    content: '- ';
+}
+.search-product-item a {
+    color: #151528;
+    display: inline-block;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+}
 .favorites-coutner {
     background-color: #e9a854;
     color: #fff;
@@ -1098,6 +1110,85 @@ header .container {
     width: 100%;
     margin-top: 10px;
 }
+.review_form {
+    margin-top: 25px;
+    background-color: rgba(233, 168, 83, 0.15);
+    padding: 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.review_form h5 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 20px;
+    width: 100%;
+}
+.review_form .alert {
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 15px;
+    font-size: 14px;
+}
+.review_form .alert.alert-danger {
+    background-color: rgba(255, 0, 0, 0.15);
+}
+.review_form .alert.alert-success {
+    background-color: rgba(0,128,0,0.15);
+}
+.review_form label {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+}
+.review-form-name {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 25px;
+}
+.review-form-name input {
+    border: 1px solid #ccc;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-radius: 4px;
+    width: 100%;
+}
+.review-form-stars {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.review-form-stars label {
+    width: 100%;
+}
+.review-form-stars .form-check-inline {
+    width: 20%;
+}
+.review-form-text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+.review-form-text textarea {
+    resize: vertical;
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+.review_form button.btn {
+    margin-top: 25px;
+    box-shadow: none;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: #e9a854;
+}
 /* PRODUCT PAGE */
 
 
@@ -1369,6 +1460,7 @@ header .container {
     color: #151528;
     margin-bottom: 20px;
     margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 .promo-list-item-image {
     height: 250px;
