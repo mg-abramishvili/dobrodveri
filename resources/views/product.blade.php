@@ -208,22 +208,6 @@
     @include('popular')
     
     @include('recently-viewed')
-
-    <div id="modal_gdeKupit" class="modal">
-        <div class="modal-content">
-            <button onclick="closeModal()" class="modal-close">&times;</button>
-
-            <p>Где купить текст</p>
-        </div>
-    </div>
-
-    <div id="modal_kakOplatit" class="modal">
-        <div class="modal-content">
-            <button onclick="closeModal()" class="modal-close">&times;</button>
-
-            <p>Как оплатить текст</p>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')

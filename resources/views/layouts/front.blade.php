@@ -62,7 +62,7 @@
                             </nav>
                         </div>
                         <div class="header-top-tel">
-                            <a href="#">8 937 850 40 40</a>
+                            <a href="tel:+79378504040">8 937 850 40 40</a>
                             <span>Ежедневно с 10:00 до 20:00</span>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                                         <a href="/catalog/furnitura/">Фурнитура</a>
                                     </li>
                                     <li>
-                                        <a href="#">Где купить</a>
+                                        <a onclick="openModal('gdeKupit')" style="cursor: pointer;">Где купить</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -218,6 +218,22 @@
                     <button onclick="closeModal()" class="modal-close">&times;</button>
     
                     <quiz />
+                </div>
+            </div>
+
+            <div id="modal_gdeKupit" class="modal">
+                <div class="modal-content">
+                    <button onclick="closeModal()" class="modal-close">&times;</button>
+
+                    <p>Где купить текст</p>
+                </div>
+            </div>
+
+            <div id="modal_kakOplatit" class="modal">
+                <div class="modal-content">
+                    <button onclick="closeModal()" class="modal-close">&times;</button>
+
+                    <p>Как оплатить текст</p>
                 </div>
             </div>
         </div>
