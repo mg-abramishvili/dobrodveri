@@ -101,7 +101,7 @@ header .container {
     max-width: 100%;
 }
 .header-top-nav {
-    width: 63%;
+    width: 61%;
     display: flex;
     justify-content: flex-end;
 }
@@ -201,7 +201,7 @@ header .container {
     right: 15px;
 }
 .header-top-tel {
-    width: 17%;
+    width: 19%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
