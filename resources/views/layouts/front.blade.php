@@ -78,22 +78,20 @@
                                 Меню
                             </button>
                         </div>
+                        
                         <div class="header-bottom-menu-content">
                             <ul>
                                 @foreach($pages as $page)
                                     <li>
-                                        <a href="/p/{{ $page->slug }}/">{{ $page->name }}</a>
+                                        <a href="/p/{{ $page->slug }}/" @if(request()->path() == 'p/' . $page->slug) class="visited" @endif>{{ $page->name }}</a>
                                     </li>
                                 @endforeach
                                 <li>
-                                    <a href="/dizaineram">Дизайнерам</a>
-                                </li>
-                                <li>
-                                    <a href="/polezno/">Полезно</a>
+                                    <a href="/polezno/" @if(request()->path() == 'polezno') class="visited" @endif>Полезно</a>
                                 </li>
                                 @foreach($pagesAbout as $page)
                                     <li>
-                                        <a href="/p/{{ $page->slug }}/">{{ $page->name }}</a>
+                                        <a href="/p/{{ $page->slug }}/" @if(request()->path() == 'p/' . $page->slug) class="visited" @endif>{{ $page->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
