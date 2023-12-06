@@ -23,7 +23,7 @@
             <span
                 v-if="product.colors.length > product.colors.slice(0,3).length"
                 class="products-list-item-colors-more">
-                    {{ '+' + product.colors.length - product.colors.slice(0,3).length }}
+                    +{{ product.colors.length - product.colors.slice(0,3).length }}
             </span>
         </div>
     </a>
