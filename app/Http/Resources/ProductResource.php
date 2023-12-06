@@ -20,6 +20,7 @@ class ProductResource extends JsonResource
             'category' => $this->category,
             'description' => $this->description,
             'image' => $this->skus->count() && $this->skus->first()->image ? $this->skus->first()->image : null,
+            'vkhod_image' => $this->vkhod_image,
             'style' => $this->style ? $this->style->name : null,
             'type' => $this->type ? $this->type->name : null,
             'construct' => $this->construct ? $this->construct->name : null,
