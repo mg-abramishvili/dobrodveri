@@ -6,7 +6,7 @@
         </div>
 
         <div class="products-list-item-price">
-            {{ $filters.currencyWithoutRubSign(product.price) }} <small>₽</small>
+            {{ $filters.currencyWithoutRubSign(price) }} <small>₽</small>
         </div>
 
         <p class="products-list-item-name">
@@ -17,6 +17,15 @@
 
 <script>
 export default {
-    props: ['product'],   
+    props: ['product'],
+    computed: {
+        price() {
+            if(this.product.skus && this.product.skus.length) {
+                return this.product.skus[0].price ? this.product.skus[0].price : this.product.price
+            }
+
+            return this.product.price
+        },
+    }
 }
 </script>

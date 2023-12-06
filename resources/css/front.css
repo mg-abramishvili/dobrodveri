@@ -126,7 +126,7 @@ header .container {
 }
 .header-top-nav nav ul li a:hover,
 .header-top-nav nav ul li a:focus {
-    color: #e9a854;
+    color: #FF9414;
 }
 .header-top-nav nav ul li a svg {
     display: block;
@@ -154,7 +154,7 @@ header .container {
 }
 .search-form input[type="text"]:focus {
     outline: none;
-    border-color: #e9a854;
+    border-color: #FF9414;
 }
 .search-form button {
     position: absolute;
@@ -167,7 +167,7 @@ header .container {
     text-transform: uppercase;
     font-weight: 700;
     font-size: 13px;
-    background-color: #e9a854;
+    background-color: #FF9414;
     line-height: 1;
     height: 100%;
     padding: 0 10px;
@@ -187,7 +187,7 @@ header .container {
     text-decoration: none;
 }
 .favorites-coutner {
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
     font-weight: 700;
     width: 15px;
@@ -212,7 +212,7 @@ header .container {
     text-decoration: none;
     font-size: 26px;
     font-weight: 700;
-    color: #e9a854;
+    color: #FF9414;
 }
 .header-top-tel span {
     width: 100%;
@@ -244,7 +244,7 @@ header .container {
     width: 300px;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.95);
-    border: 1px solid #e9a854;
+    border: 1px solid #FF9414;
 }
 .header-bottom-menu-content ul {
     list-style: none;
@@ -259,7 +259,7 @@ header .container {
 }
 .header-bottom-menu-content ul li a:hover,
 .header-bottom-menu-content ul li a:focus {
-    color: #e9a854;
+    color: #FF9414;
     background-color: #f5f5f5;
 }
 .header-bottom-menu-content.expanded {
@@ -270,15 +270,15 @@ header .container {
     height: 100%;
     align-items: center;
     box-shadow: none;
-    border: 1px solid #e9a854;
+    border: 1px solid #FF9414;
     background: none;
-    color: #e9a854;
+    color: #FF9414;
     padding: 3px 8px;
 }
 .header-bottom-menu button:hover,
 .header-bottom-menu button:focus {
     cursor: pointer;
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
 }
 .header-bottom-menu button svg {
@@ -307,7 +307,7 @@ header .container {
 }
 .header-bottom-nav nav ul li a:hover,
 .header-bottom-nav nav ul li a:focus {
-    color: #e9a854;
+    color: #FF9414;
 }
 .header-bottom-action {
     width: 14%;
@@ -319,7 +319,7 @@ header .container {
     display: inline-flex;
     align-items: center;
     height: 100%;
-    background-color: #e9a854;
+    background-color: #FF9414;
     padding: 6px 12px;
     color: #fff;
     text-decoration: none;
@@ -361,7 +361,7 @@ header .container {
     margin: 0;
 }
 .home-main-slider-item-inner a {
-    background-color: #e9a854;
+    background-color: #FF9414;
     padding: 6px 12px;
     color: #fff;
     text-decoration: none;
@@ -491,7 +491,7 @@ header .container {
     cursor: pointer;
 }
 .category-filter-button:nth-of-type(1) {
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
     width: 60%;
 }
@@ -524,7 +524,7 @@ header .container {
 .pagination button {
     margin: 0 5px;
     box-shadow: none;
-    border: 1px solid #e9a854;
+    border: 1px solid #FF9414;
     padding: 8px 12px;
     background: none;
     line-height: 1;
@@ -532,7 +532,7 @@ header .container {
     cursor: pointer;
 }
 .pagination button:hover {
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
 }
 .pagination button:disabled {
@@ -573,7 +573,7 @@ header .container {
 }
 .products-list-item-price {
     font-weight: 700;
-    color: #e9a854;
+    color: #FF9414;
 }
 .products-list-item-price small {
     color: #60605e;
@@ -634,7 +634,7 @@ header .container {
     right: 30%;
     position: absolute;
     border-radius: 5px;
-    background-color: #e9a854;
+    background-color: #FF9414;
 }
 .range-input {
     position: relative;
@@ -653,7 +653,7 @@ header .container {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    border: 3px solid #e9a854;
+    border: 3px solid #FF9414;
     background-color: #fff;
     pointer-events: auto;
     -webkit-appearance: none;
@@ -662,7 +662,7 @@ header .container {
     height: 15px;
     width: 15px;
     border-radius: 50%;
-    border: 3px solid #e9a854;
+    border: 3px solid #FF9414;
     background-color: #fff;
     pointer-events: auto;
     -moz-appearance: none;
@@ -738,7 +738,7 @@ header .container {
     padding: 0;
 }
 .product-detail-slider-mini .actvd {
-    box-shadow:inset 0px 0px 0px 1px #e9a854;
+    box-shadow:inset 0px 0px 0px 1px #FF9414;
 }
 .product-detail-slider-mini .swiper-slide img {
     width: auto;
@@ -763,7 +763,7 @@ header .container {
 }
 .product-detail-slider-mini .button-prev,
 .product-detail-slider-mini .button-next {
-    background-color: #e9a854;
+    background-color: #FF9414;
     width: 30px;
     height: 30px;
     padding: 0;
@@ -851,7 +851,7 @@ header .container {
 .product-glass-button_active,
 .product-size-button_active,
 .product-type-button_active {
-    border-color: #e9a854
+    border-color: #FF9414
 }
 .product-price {
     color: #222;
@@ -888,7 +888,7 @@ header .container {
 .product-order button {
     width: 180px;
     max-width: 100%;
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
     box-shadow: none;
     border: 0;
@@ -906,7 +906,7 @@ header .container {
     background-color: rgb(245, 245, 246);
 }
 .product-order button:nth-child(2):hover {
-    color: #e9a854;
+    color: #FF9414;
 }
 .product-order button svg {
     display: block;
@@ -952,12 +952,12 @@ header .container {
 .product-detail-help-buttons ul li button:hover,
 .product-detail-help-buttons ul li button:focus {
     cursor: pointer;
-    border-color: #e9a854;
+    border-color: #FF9414;
 }
 .product-detail-help-buttons ul li button:hover span,
 .product-detail-help-buttons ul li button:focus span {
-    color: #e9a854;
-    border-color: #e9a854;
+    color: #FF9414;
+    border-color: #FF9414;
 }
 .product-detail-tabs-buttons {
     display: flex;
@@ -979,8 +979,8 @@ header .container {
 .product-detail-tab-button button:focus,
 .product-detail-tab-button-active button {
     cursor: pointer;
-    color: #e9a854;
-    border-bottom-color: #e9a854 !important;
+    color: #FF9414;
+    border-bottom-color: #FF9414 !important;
 }
 .product-detail-tabs {
     width: 100%;
@@ -1037,7 +1037,7 @@ header .container {
     color: rgb(93, 93, 100);
 }
 .product-reviews-stars span:hover {
-    color: #e9a854;
+    color: #FF9414;
 }
 .breadcrumbs {
     margin-top: 30px;
@@ -1083,7 +1083,7 @@ header .container {
 }
 .breadcrumbs-arrow-back a svg {
     display: block;
-    color: #e9a854;
+    color: #FF9414;
     width: 35px;
     height: 35px;
 }
@@ -1105,7 +1105,7 @@ header .container {
     text-align: right;
 }
 .product-review-rating strong {
-    color: #e9a854;
+    color: #FF9414;
 }
 .product-review-text {
     width: 100%;
@@ -1188,7 +1188,9 @@ header .container {
     border: 0;
     border-radius: 5px;
     padding: 10px 20px;
-    background-color: #e9a854;
+    background-color: #FF9414;
+    color: #fff;
+    cursor: pointer;
 }
 /* PRODUCT PAGE */
 
@@ -1216,7 +1218,7 @@ header .container {
 .how-to-buy-item-icon {
     width: 100px;
     height: 100px;
-    border: 2px solid #e9a854;
+    border: 2px solid #FF9414;
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -1226,7 +1228,7 @@ header .container {
 }
 .how-to-buy-item-icon svg {
     display: block;
-    color: #e9a854;
+    color: #FF9414;
     width: 50px;
     height: 50px;
     margin: 0 auto;
@@ -1237,7 +1239,7 @@ header .container {
     top: 50%;
     transform: translateY(-50%);
     margin-left: -15px;
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
     width: 30px;
     height: 30px;
@@ -1289,7 +1291,7 @@ header .container {
     margin-bottom: 0;
 }
 .dogovor-left ul li span {
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
     width: 35px;
     height: 35px;
@@ -1331,7 +1333,7 @@ header .container {
     margin-bottom: 20px;
 }
 .page-folder a:hover {
-    color: #e9a854;
+    color: #FF9414;
 }
 .page-f-desc {
     padding: 25px;
@@ -1346,7 +1348,7 @@ header .container {
     background-position: center center;
 }
 .page-f-more {
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
     border-radius: 5px;
     padding: 8px 16px;
@@ -1381,7 +1383,7 @@ header .container {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: white;
 }
 .page-detail-gallery {
@@ -1497,8 +1499,8 @@ header .container {
 
 /* ZAMER FORM */
 .zamer-form {
-    background-color: #e9a854;
-    background-image: linear-gradient(to right, #efd9bc, #e9a854);
+    background-color: #FF9414;
+    background-image: linear-gradient(to right, #efd9bc, #FF9414);
 }
 .zamer-form .container {
     align-items: center;
@@ -1583,7 +1585,7 @@ header .container {
 .gallery-slider .swiper-button-next:after,
 .gallery-slider .swiper-button-prev:after {
     font-size: 30px;
-    color: #e9a854;
+    color: #FF9414;
 }
 /* GALLERY */
 
@@ -1613,11 +1615,11 @@ header .container {
     width: 100%;
 }
 a.footer-policy {
-    border-bottom: 1px solid #e9a854;
+    border-bottom: 1px solid #FF9414;
 }
 a.footer-policy:hover,
 a.footer-policy:focus {
-    color: #e9a854;
+    color: #FF9414;
 }
 .footer-nav {
     width: 50%;
@@ -1637,11 +1639,11 @@ a.footer-policy:focus {
     margin-bottom: 0;
 }
 .footer-nav ul li a {
-    border-bottom: 1px solid #e9a854;
+    border-bottom: 1px solid #FF9414;
 }
 .footer-nav ul li a:hover,
 .footer-nav ul li a:focus {
-    color: #e9a854;
+    color: #FF9414;
 }
 .footer-socials {
     width: 25%;
@@ -1700,7 +1702,8 @@ a.footer-policy:focus {
     border-radius: 6px;
     padding: 8px 16px;
     margin: 12px 0;
-    background-color: #e9a854;
+    background-color: #FF9414;
+    color: #fff;
 }
 .quiz-banner button:hover {
     cursor: pointer;
@@ -1744,7 +1747,7 @@ a.footer-policy:focus {
     box-shadow: none;
     border: 0;
     background: none;
-    border: 1px solid #e9a854;
+    border: 1px solid #FF9414;
     border-radius: 5px;
     padding: 6px 12px;
     cursor: pointer;
@@ -1760,7 +1763,7 @@ a.footer-policy:focus {
 
 /* LEAD FORM */
 .lead-form {
-    border: 1px solid #e9a854;
+    border: 1px solid #FF9414;
     padding: 40px;
 }
 .lead-form .mb-4 {
@@ -1787,7 +1790,7 @@ a.footer-policy:focus {
     resize: vertical;
 }
 .lead-form button {
-    background-color: #e9a854;
+    background-color: #FF9414;
     padding: 10px 20px;
     border: 0;
     border-radius: 6px;
@@ -1837,7 +1840,7 @@ a.footer-policy:focus {
 .director a {
     display: inline-block;
     margin-top: 25px;
-    background-color: #e9a854;
+    background-color: #FF9414;
     padding: 12px 20px;
     box-shadow: none;
     border: 0;
@@ -1911,12 +1914,12 @@ a.footer-policy:focus {
     margin-top: -15px;
     margin-right: -15px;
     background-color: #fff;
-    border: 2px solid #e9a854;
+    border: 2px solid #FF9414;
     border-radius: 100%;
-    color: #e9a854;
+    color: #FF9414;
 }
 .modal-close:hover {
-    background-color: #e9a854;
+    background-color: #FF9414;
     color: #fff;
     cursor: pointer;
 }
@@ -1939,7 +1942,7 @@ a.footer-policy:focus {
     margin-bottom: 20px;
 }
 .p404 a {
-    color: #e9a854;
+    color: #FF9414;
 }
 /* 404 */
 
@@ -1963,8 +1966,8 @@ a.footer-policy:focus {
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid #e9a854;
-    border-color: #fff #e9a854 #fff #e9a854;
+    border: 6px solid #FF9414;
+    border-color: #fff #FF9414 #fff #FF9414;
     animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
