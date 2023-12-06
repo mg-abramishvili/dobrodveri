@@ -29,8 +29,11 @@
             :space-between="0"
             @swiper="OnSwiperBig"
             class="product-detail-slider"
+            :class="{'product-detail-slider-vkhod': product.category_id == 2}"
         >
             <swiper-slide v-for="(sku, index) in product.skus">
+                <img v-if="product.vkhod_image" :src="product.vkhod_image" alt="">
+
                 <img v-if="sku.image" :src="sku.image" alt="">
                 <img v-else src="/img/no-image.jpg" alt="">
             </swiper-slide>
