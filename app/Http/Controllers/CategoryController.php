@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Traits\getProducts;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    use getProducts;
+
     public function index()
     {
         $categories = Category::all();
@@ -14,10 +17,16 @@ class CategoryController extends Controller
         return view('categories', compact('categories'));
     }
 
-    public function category($categorySlug)
+    public function category($categorySlug, Request $request)
     {
+        $page = $request->page ? $request->page : 1;
+
+        $perPage = 30;
+
         $category = Category::where('slug', $categorySlug)->first();
-                            
-        return view('category', compact('category'));
+
+        $productsWithPagination = $this->getProducts($category->id, $page, $perPage)->getContent();
+
+        return view('category', ['category' => $category, 'productsWithPagination' => $productsWithPagination]);
     }
 }

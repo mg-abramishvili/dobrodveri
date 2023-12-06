@@ -13,21 +13,24 @@ Route::get('/', function () {
     return view('home', ['mainSlider' => $mainSlider]);
 });
 
-Route::get('p/{slug}', [App\Http\Controllers\PageController::class, 'page'])->name('page');
-Route::get('dizaineram', [App\Http\Controllers\PageController::class, 'pageDizaineram']);
+Route::get('p/{slug}', [App\Http\Controllers\PageController::class, 'page']);
 Route::get('polezno', [App\Http\Controllers\PageController::class, 'pagePolezno']);
 
-Route::post('lead', [App\Http\Controllers\LeadController::class, 'store'])->name('lead');
-Route::post('review', [App\Http\Controllers\ReviewController::class, 'store'])->name('review');
+Route::post('lead', [App\Http\Controllers\LeadController::class, 'store']);
+Route::post('review', [App\Http\Controllers\ReviewController::class, 'store']);
 
-// CATALOG
-Route::get('catalog', [App\Http\Controllers\CategoryController::class, 'index'])->name('catalog');
-Route::get('catalog/{categorySlug}', [App\Http\Controllers\CategoryController::class, 'category'])->name('category');
+// CATEGORIES
+Route::get('catalog', [App\Http\Controllers\CategoryController::class, 'index']);
+Route::get('catalog/{categorySlug}', [App\Http\Controllers\CategoryController::class, 'category']);
 
 // PRODUCTS
-Route::get('_products', [App\Http\Controllers\ProductController::class, 'indexData']);
+Route::get('product/{productSlug}', [App\Http\Controllers\ProductController::class, 'product']);
+
+// PRODUCT SKUS
 Route::get('_product_skus', [App\Http\Controllers\SkuController::class, 'indexData']);
-Route::get('product/{productSlug}', [App\Http\Controllers\ProductController::class, 'product'])->name('product');
+
+// FILTER DATA
+Route::get('_product_filter', [App\Http\Controllers\ProductFilterController::class, 'indexData']);
 
 // FAVORITES
 Route::view('favorites', 'favorites');

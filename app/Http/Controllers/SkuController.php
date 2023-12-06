@@ -53,26 +53,6 @@ class SkuController extends Controller
         $priceTo = $request->price_to;
         $colors = $request->colors;
         $glasses = $request->glasses;
-        
-        $filteredTypes = Type::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, null, $styles, $surfaces, $colors, $glasses);
-        }])->orderBy('skus_count', 'desc')->get();
-
-        $filteredStyles = Style::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, null, $surfaces, $colors, $glasses);
-        }])->orderBy('skus_count', 'desc')->get();
-
-        $filteredSurfaces = Surface::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, $styles, null, $colors, $glasses);
-        }])->orderBy('skus_count', 'desc')->get();
-
-        $filteredColors = Color::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, $styles, $surfaces, null, $glasses);
-        }])->orderBy('skus_count', 'desc')->get();
-
-        $filteredGlasses = Glass::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, $styles, $surfaces, $colors, null);
-        }])->orderBy('skus_count', 'desc')->get();
 
         $perPage = 30;
 
@@ -89,11 +69,6 @@ class SkuController extends Controller
                     ->get();
 
         return response()->json([
-            'types' => $filteredTypes,
-            'styles' => $filteredStyles,
-            'surfaces' => $filteredSurfaces,
-            'colors' => $filteredColors,
-            'glasses' => $filteredGlasses,
             'skus' => SkuResource::collection($skus),
             'pagination' => $pagination,
         ]);

@@ -81,20 +81,46 @@
             </template>
         </div>
     </div>
+
+    <div class="category-filter-buttons">
+        <button @click="applyFilter()" class="category-filter-button">
+            Применить фильтр
+        </button>
+
+        <button @click="resetFilter()" class="category-filter-button">
+            Сбросить фильтр
+        </button>
+    </div>
 </template>
 
 <script>
 import PriceRangeSlider from './PriceRangeSlider.vue'
 
 export default {
-    props: ['category_id', 'types', 'styles', 'surfaces', 'colors', 'glasses', 'filterParams'],
+    props: [
+        'category_id',
+        'reqTypes',
+        'reqStyles',
+        'reqSurfaces',
+        'reqColors',
+        'reqGlasses',
+    ],
     data() {
         return {
-            selected: {
-                price_from: '',
-                price_to: '',
-                order: '',
-                order_direction: '',
+            types: [],
+            styles: [],
+            surfaces: [],
+            colors: [],
+            glasses: [],
+
+            selected: {},
+
+            initialFilterParams: {
+                category_id: this.category_id,
+                price_from: 0,
+                price_to: 100000,
+                order: 'price',
+                order_direction: 'asc',
                 types: [],
                 styles: [],
                 surfaces: [],
@@ -103,21 +129,50 @@ export default {
             },
 
             views: {
-                loading: false,
+                loading: true,
             }
         }
     },
     created() {
-        this.selected = this.filterParams
+        this.selected = JSON.parse(JSON.stringify(this.initialFilterParams))
+
+        this.loadFilter()
     },
     mounted() {
         this.$watch('selected', function() {
-            this.$parent.filterParams = this.selected
-
-            this.$parent.loadProductSKUs()
+            this.loadFilter()
         }, {
             deep: true
         })
+    },
+    methods: {
+        loadFilter() {
+            axios.get(`/_product_filter`, {
+                params: {
+                    category_id: this.selected.category_id,
+                    colors: this.selected.colors,
+                    glasses: this.selected.glasses,
+                    types: this.selected.types,
+                    styles: this.selected.styles,
+                    surfaces: this.selected.surfaces,
+                }
+            })
+            .then(response => {
+                this.types = response.data.types
+                this.styles = response.data.styles
+                this.surfaces = response.data.surfaces
+                this.colors = response.data.colors
+                this.glasses = response.data.glasses
+
+                this.views.loading = false
+            })
+        },
+        applyFilter() {
+            this.emitter.emit('product-filter', this.selected)
+        },
+        resetFilter() {
+            this.selected = JSON.parse(JSON.stringify(this.initialFilterParams))
+        },
     },
     components: {
         PriceRangeSlider

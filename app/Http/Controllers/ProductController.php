@@ -4,41 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Http\Resources\ProductResource;
-use App\Http\Resources\ProductsResource;
-use App\Models\Type;
-use App\Models\Style;
-use App\Models\Surface;
 use App\Traits\storeInRecentlyViewed;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     use storeInRecentlyViewed;
-
-    public function indexData(Request $request)
-    {
-        $page = $request->page ? $request->page : 1;
-
-        $perPage = 30;
-
-        $products = Product::query()
-                    ->where('category_id', $request->category_id)
-                    ->where('is_active', 1)
-                    ->whereHas('skus');
-        
-        $pagination['total_pages'] = round($products->count() / $perPage);
-        $pagination['current_page'] = (int)$page;
-
-        $products = $products->orderBy('price', 'asc')
-                    ->skip(($perPage * $page) - $perPage)
-                    ->take($perPage)
-                    ->get();
-        
-        return response()->json([
-            'products' => ProductsResource::collection($products),
-            'pagination' => $pagination,
-        ]);
-    }
 
     public function product($productSlug)
     {
