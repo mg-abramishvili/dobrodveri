@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductsResource;
 use App\Models\Type;
 use App\Models\Style;
 use App\Models\Surface;
@@ -34,7 +35,7 @@ class ProductController extends Controller
                     ->get();
         
         return response()->json([
-            'products' => ProductResource::collection($products),
+            'products' => ProductsResource::collection($products),
             'pagination' => $pagination,
         ]);
     }

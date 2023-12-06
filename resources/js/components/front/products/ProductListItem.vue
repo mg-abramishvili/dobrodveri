@@ -1,7 +1,7 @@
 <template>
     <a :href="'/product/' + product.slug">
         <div class="products-list-item-image">
-            <img v-if="product.skus[0].image" :src="product.skus[0].image" :alt="product.name">
+            <img v-if="product.image" :src="product.image" :alt="product.name">
             <img v-else src="/img/no-image.jpg" :alt="product.name">
         </div>
 
