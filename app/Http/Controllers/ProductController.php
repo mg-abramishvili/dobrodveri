@@ -23,7 +23,8 @@ class ProductController extends Controller
         $products = Product::query()
                     ->where('category_id', $request->category_id)
                     ->where('is_active', 1)
-                    ->whereHas('skus');
+                    ->whereHas('skus')
+                    ->get();
         
         $pagination['total_pages'] = round($products->count() / $perPage);
         $pagination['current_page'] = (int)$page;
