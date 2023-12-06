@@ -130,6 +130,7 @@ class ProductController extends Controller
 
             $sku->price = $skuItem['price'];
             $sku->image = $skuItem['image'];
+            $sku->order = $skuItem['order'];
 
             $sku->save();
         }

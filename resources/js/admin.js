@@ -1,4 +1,5 @@
 import './bootstrap'
+import './bootstrap.min'
 
 import { createApp } from 'vue'
 

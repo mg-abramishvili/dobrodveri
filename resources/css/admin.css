@@ -297,9 +297,40 @@ body.admin_panel {
 }
 
 .sku-item {
-    border: 2px solid #eee;
-    padding: 15px 25px;
-    margin-top: 15px;
+    border: 1px solid #ccc;
+    height: 90px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+.sku-item-pic {
+    width: 15%;
+    height: 100%;
+    position: relative;
+}
+.sku-item-pic img {
+    display: block;
+    margin: 0 auto;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+.sku-item-color {
+    width: 30%;
+    padding-left: 50px;
+}
+.sku-item-glass {
+    width: 30%;
+}
+.sku-item-price {
+    width: 15%;
+}
+.sku-item-del {
+    text-align: right;
+    width: 10%;
 }
 
 .sku-generator {
@@ -308,4 +339,12 @@ body.admin_panel {
     border-radius: 5px;
     margin-top: 15px;
     margin-bottom: 25px;
+}
+
+.ghost {
+    background-color: #eee;
+    cursor: move;
+}
+.sortable-drag {
+    display: none;
 }

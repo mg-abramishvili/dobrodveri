@@ -1,9 +1,9 @@
 {
-  "_globalFilters-0e6c59aa.js": {
-    "file": "assets/globalFilters-0e6c59aa.js"
+  "_globalFilters-39cfcad1.js": {
+    "file": "assets/globalFilters-39cfcad1.js"
   },
   "resources/css/admin.css": {
-    "file": "assets/admin-a5a86395.css",
+    "file": "assets/admin-77fb7a22.css",
     "isEntry": true,
     "src": "resources/css/admin.css"
   },
@@ -36,9 +36,9 @@
     "css": [
       "assets/admin-3f40aef1.css"
     ],
-    "file": "assets/admin-d1d9fa18.js",
+    "file": "assets/admin-6a1ac3ab.js",
     "imports": [
-      "_globalFilters-0e6c59aa.js"
+      "_globalFilters-39cfcad1.js"
     ],
     "isEntry": true,
     "src": "resources/js/admin.js"
@@ -51,9 +51,9 @@
     "css": [
       "assets/front-51439c61.css"
     ],
-    "file": "assets/front-9e800ade.js",
+    "file": "assets/front-af35a042.js",
     "imports": [
-      "_globalFilters-0e6c59aa.js"
+      "_globalFilters-39cfcad1.js"
     ],
     "isEntry": true,
     "src": "resources/js/front.js"

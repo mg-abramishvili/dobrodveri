@@ -1,56 +1,44 @@
 <template>
     <div class="sku-item" :id="'sku_' + sku.id">
-        <div class="row align-items-center">
-            <div class="col-2">
-                <file-pond
-                    name="image"
-                    ref="image"
-                    label-idle="Выбрать файл"
-                    v-bind:allow-multiple="false"
-                    v-bind:allow-reorder="false"
-                    accepted-file-types="image/jpeg, image/png"
-                    :server="filepondServer"
-                    v-bind:files="filepond_image_edit"
-                />
-            </div>
-            <div class="col-2">
-                <span class="d-block fw-bolder text-muted"><small>цвет</small></span>
-                {{ sku.color.name }}
-            </div>
-            <div class="col-3">
-                <template v-if="sku.glass">
-                    <span class="d-block fw-bolder text-muted"><small>остекление</small></span>
-                    {{ sku.glass.name }}
-                </template>
-                <template v-if="sku.innerdecor">
-                    <span class="d-block fw-bolder text-muted"><small>внутр.отделка</small></span>
-                    {{ sku.innerdecor.name }}
-                </template>
-            </div>
-            <div class="col-2">
-                <input v-model="price" type="number" name="price" class="form-control" placeholder="цена">
-            </div>
-            <div class="col-3 text-end">
-                <!-- <button @click="save()" class="btn btn-sm btn-outline-primary">Сохранить</button> -->
-                <button @click="del()" class="btn btn-sm btn-outline-danger ms-1">Удалить</button>
-            </div>
+        <div class="sku-item-pic">
+            <img
+            :src="image ? image : '/img/no-image.jpg'"
+            data-bs-toggle="offcanvas"
+            :data-bs-target="'#offcanvas' + sku.id"
+            />
+
+            <SkuItemPic :sku="sku" :product="product" />
+        </div>
+        <div class="sku-item-color">
+            <span class="d-block fw-bolder text-muted"><small>цвет</small></span>
+            {{ sku.color.name }}
+        </div>
+        <div class="sku-item-glass">
+            <template v-if="sku.glass">
+                <span class="d-block fw-bolder text-muted"><small>остекление</small></span>
+                {{ sku.glass.name }}
+            </template>
+            <template v-if="sku.innerdecor">
+                <span class="d-block fw-bolder text-muted"><small>внутр.отделка</small></span>
+                {{ sku.innerdecor.name }}
+            </template>
+        </div>
+        <div class="sku-item-price">
+            <input v-model="price" type="number" name="price" class="form-control" placeholder="цена">
+        </div>
+        <div class="sku-item-del">
+            <button @click="del()" class="btn btn-sm btn-outline-danger ms-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                </svg>
+            </button>
         </div>
     </div>
 </template>
 
 <script>
-import vueFilePond from "vue-filepond";
-import "filepond/dist/filepond.min.css";
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
-import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-
-import FilepondServer from '../../FilepondServer.js'
-
-const FilePond = vueFilePond(
-  FilePondPluginFileValidateType,
-  FilePondPluginImagePreview
-);
+import SkuItemPic from './SkuItemPic.vue'
 
 export default {
     props: ['sku', 'product'],
@@ -58,55 +46,22 @@ export default {
         return {
             price: '',
             image: '',
-
-            filepond_image: [],
-            filepond_image_edit: [],
-
-            filepondServer: FilepondServer(this.product.id),
-        }
+        };
     },
     created() {
         this.price = this.sku.price
-        
-        if(this.sku.image) {
-            this.filepond_image_edit = [
-                {
-                    source: this.sku.image,
-                    options: {
-                        type: 'local',
-                    }
-                }
-            ]
-        }
+        this.image = this.sku.image
     },
     methods: {
-        save() {
-            if(document.querySelector(`#sku_${this.sku.id} input[name='image']`)) {
-                this.image = document.querySelector(`#sku_${this.sku.id} input[name='image']`).value
-            }
-
-            axios.put(`/_admin/sku/${this.sku.id}/update`, {
-                price: this.price,
-                image: this.image,
-            })
-            .then(response => {
-                this.$parent.loadProduct()
-            })
-            .catch(errors => {
-                return this.$toast.error(errors.response.data ? errors.response.data : errors)
-            })
-        },
         del() {
             if (confirm("Точно удалить?")) {
                 axios.delete(`/_admin/sku/${this.sku.id}/delete`)
-                .then(response => {
-                    this.$parent.loadProduct()
-                })
+                    .then(response => {
+                    this.$parent.loadProduct();
+                });
             }
         },
     },
-    components: {
-        FilePond,
-    },
+    components: { SkuItemPic }
 }
 </script>

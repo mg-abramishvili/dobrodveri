@@ -16,7 +16,7 @@ class Product extends Model
 
     public function skus()
     {
-        return $this->hasMany(Sku::class);
+        return $this->hasMany(Sku::class)->orderBy('order', 'asc');
     }
 
     public function sizes()

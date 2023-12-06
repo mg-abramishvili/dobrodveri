@@ -17,7 +17,7 @@
         </ul>
     </div>
 
-    <div v-if="product.glasses.length" class="product-sizes">
+    <div v-if="product.sizes.length" class="product-sizes">
         <p>Размер</p>
         <ul class="product-sizes-list">
             <li v-for="size in product.sizes">

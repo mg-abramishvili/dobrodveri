@@ -111,7 +111,16 @@
                 <SkuGenerator v-if="views.skuGenerator" :product="product" />
 
                 <div v-if="product.skus" class="mb-4">
-                    <SkuItem v-for="sku in product.skus" :key="sku.id" :sku="sku" :product="product" />
+                    <draggable 
+                        :list="product.skus"
+                        :force-fallback="true"
+                        ghost-class="ghost"
+                        @change="onOrderChange"
+                        item-key="id">
+                        <template #item="{element}">
+                            <SkuItem :sku="element" :product="product" />
+                        </template>
+                    </draggable>
                 </div>
             </div>
 
@@ -152,6 +161,8 @@ const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview
 )
+
+import draggable from 'vuedraggable'
 
 export default {
     data() {
@@ -309,7 +320,7 @@ export default {
     
                 this.product.skus.forEach(sku => {
                     if(document.querySelector(`#sku_${sku.id} input[name='image']`)) {
-                        this.skuItems.push({ 'id': sku.id, 'image': document.querySelector(`#sku_${sku.id} input[name='image']`).value, 'price': document.querySelector(`#sku_${sku.id} input[name='price']`).value })
+                        this.skuItems.push({ 'id': sku.id, 'order': sku.order, 'image': document.querySelector(`#sku_${sku.id} input[name='image']`).value, 'price': document.querySelector(`#sku_${sku.id} input[name='price']`).value })
                     }
                 })
             }
@@ -398,6 +409,9 @@ export default {
                 })
             }
         },
+        onOrderChange() {
+            this.product.skus.forEach((sku, index) => (sku.order = index))
+        },
     },
     components: {
         SelectType,
@@ -414,7 +428,8 @@ export default {
         Markers,
         SkuGenerator,
         SkuItem,
-        FilePond
+        FilePond,
+        draggable
     }
 }
 </script>
