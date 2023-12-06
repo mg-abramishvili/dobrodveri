@@ -86,7 +86,11 @@ export default {
             this.pagination.nextPage = this.pagination.currentPage < this.pagination.totalPages ? this.pagination.currentPage + 1 : null
         },
         removeProductsDOM() {
-            document.getElementById('category-products-list').remove()
+            let productDOM = document.getElementById('category-products-list')
+
+            if(productDOM) {
+                productDOM.remove()
+            }
         }
     },
     components: {
