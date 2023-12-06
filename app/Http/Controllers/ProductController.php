@@ -36,13 +36,13 @@ class ProductController extends Controller
             return view('404');
         }
 
+        $product->timestamps = false;
         $product->increment('view_counter');
         
         if($product->view_counter >= 50) {
             $product->hit = true;
         }
         
-        $product->timestamps = false;
         $product->save();
 
         $productResource = new ProductResource(Product::where('slug', $productSlug)->first());
