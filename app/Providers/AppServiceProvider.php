@@ -31,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
         if (Schema::hasTable('products'))
         {
             $popularProducts = Product::where('is_active', 1)
+                                        ->where('category_id', 1)
+                                        ->orWhere('category_id', 2)
                                         // ->where('view_counter', '>=', 50)
                                         ->orderBy('view_counter', 'desc')
                                         ->take(12)
