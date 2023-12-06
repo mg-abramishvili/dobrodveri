@@ -21,6 +21,7 @@
         @endguest
 
         @if(Route::currentRouteName() != 'login')
+            <script src="/js/bootstrap.min.js"></script>
             @vite('resources/js/admin.js')
         @endif
         
