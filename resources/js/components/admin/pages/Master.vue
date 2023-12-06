@@ -34,12 +34,6 @@
 
                     <div class="mb-4">
                         <div class="form-check">
-                            <input v-model="is_folder1" class="form-check-input" type="checkbox" :value="1" id="is_folder1">
-                            <label class="form-check-label" for="is_folder1">
-                                В папку "Дизайнерам"
-                            </label>
-                        </div>
-                        <div class="form-check">
                             <input v-model="is_folder2" class="form-check-input" type="checkbox" :value="1" id="is_folder2">
                             <label class="form-check-label" for="is_folder2">
                                 В папку "Полезное"
