@@ -39,16 +39,16 @@ class AppServiceProvider extends ServiceProvider
             $shareData['popularProducts'] = json_encode(ProductResource::collection($popularProducts));
         }
 
-        if (Schema::hasTable('pages'))
-        {
-            $pages = Page::where('is_folder1', false)
-                            ->where('is_folder2', false)
-                            ->orderBy('order', 'asc')
-                            ->get();
+        // if (Schema::hasTable('pages'))
+        // {
+        //     $pages = Page::where('is_folder1', false)
+        //                     ->where('is_folder2', false)
+        //                     ->orderBy('order', 'asc')
+        //                     ->get();
             
-            $shareData['pages'] = $pages;
-        }
+        //     $shareData['pages'] = $pages;
+        // }
         
-        View::share($shareData);
+        // View::share($shareData);
     }
 }
