@@ -23,14 +23,15 @@ class ProductController extends Controller
         $products = Product::query()
                     ->where('category_id', $request->category_id)
                     ->where('is_active', 1)
-                    ->whereHas('skus')
-                    ->orderBy('price', 'asc')
-                    ->skip(($perPage * $page) - $perPage)
-                    ->take($perPage)
-                    ->get();
+                    ->whereHas('skus');
         
         $pagination['total_pages'] = round($products->count() / $perPage);
         $pagination['current_page'] = (int)$page;
+
+        $products = $products->orderBy('price', 'asc')
+                    ->skip(($perPage * $page) - $perPage)
+                    ->take($perPage)
+                    ->get();
         
         return response()->json([
             'products' => ProductResource::collection($products),
