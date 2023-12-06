@@ -729,6 +729,9 @@ header .container {
     display: block;
     margin: 0 auto;
 }
+.product-detail-slider-vkhod .swiper-slide img {
+    max-width: 50%;
+}
 .swiper.product-detail-slider-mini {
     height: 500px;
     width: 80px;
