@@ -602,9 +602,13 @@ header .container {
     margin: 0 auto;
 }
 .products-list-item-colors {
+    display: none;
     position: absolute;
     top: 20px;
     right: 20px;
+}
+.products-list-item a:hover .products-list-item-colors {
+    display: block;
 }
 .products-list-item-colors ul {
     padding: 0;
