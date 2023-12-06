@@ -1,6 +1,6 @@
 {
-  "_globalFilters-39cfcad1.js": {
-    "file": "assets/globalFilters-39cfcad1.js"
+  "_globalFilters-7641865a.js": {
+    "file": "assets/globalFilters-7641865a.js"
   },
   "resources/css/admin.css": {
     "file": "assets/admin-77fb7a22.css",
@@ -8,7 +8,7 @@
     "src": "resources/css/admin.css"
   },
   "resources/css/front.css": {
-    "file": "assets/front-7de3670c.css",
+    "file": "assets/front-19cef1cf.css",
     "isEntry": true,
     "src": "resources/css/front.css"
   },
@@ -19,6 +19,14 @@
   "resources/fonts/pt-root-ui_bold.woff2": {
     "file": "assets/pt-root-ui_bold-5f55c1b9.woff2",
     "src": "resources/fonts/pt-root-ui_bold.woff2"
+  },
+  "resources/fonts/pt-root-ui_medium.woff": {
+    "file": "assets/pt-root-ui_medium-344909a4.woff",
+    "src": "resources/fonts/pt-root-ui_medium.woff"
+  },
+  "resources/fonts/pt-root-ui_medium.woff2": {
+    "file": "assets/pt-root-ui_medium-098d21d8.woff2",
+    "src": "resources/fonts/pt-root-ui_medium.woff2"
   },
   "resources/fonts/pt-root-ui_regular.woff": {
     "file": "assets/pt-root-ui_regular-c0279afe.woff",
@@ -36,9 +44,9 @@
     "css": [
       "assets/admin-3f40aef1.css"
     ],
-    "file": "assets/admin-518af00d.js",
+    "file": "assets/admin-ddf0242e.js",
     "imports": [
-      "_globalFilters-39cfcad1.js"
+      "_globalFilters-7641865a.js"
     ],
     "isEntry": true,
     "src": "resources/js/admin.js"
@@ -51,9 +59,9 @@
     "css": [
       "assets/front-51439c61.css"
     ],
-    "file": "assets/front-d64dd3b0.js",
+    "file": "assets/front-9df8b15a.js",
     "imports": [
-      "_globalFilters-39cfcad1.js"
+      "_globalFilters-7641865a.js"
     ],
     "isEntry": true,
     "src": "resources/js/front.js"
