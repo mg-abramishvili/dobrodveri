@@ -16,15 +16,26 @@ class ProductController extends Controller
 
     public function indexData(Request $request)
     {
+        $page = $request->page ? $request->page : 1;
+
+        $perPage = 30;
+
         $products = Product::query()
                     ->where('category_id', $request->category_id)
                     ->where('is_active', 1)
                     ->whereHas('skus')
-                    ->with('skus')
                     ->orderBy('price', 'asc')
-                    ->paginate(30);
+                    ->skip(($perPage * $page) - $perPage)
+                    ->take($perPage)
+                    ->get();
         
-        return $products;
+        $pagination['total_pages'] = round($products->count() / $perPage);
+        $pagination['current_page'] = (int)$page;
+        
+        return response()->json([
+            'products' => ProductResource::collection($products),
+            'pagination' => $pagination,
+        ]);
     }
 
     public function product($productSlug)

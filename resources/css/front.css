@@ -568,6 +568,7 @@ header .container {
     color: #151528;
     padding: 20px;
     border-radius: 8px;
+    position: relative;
 }
 .products-list-item a:hover,
 .products-list-item a:focus {
@@ -599,6 +600,22 @@ header .container {
     max-height: 100%;
     display: block;
     margin: 0 auto;
+}
+.products-list-item-colors {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.products-list-item-colors ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.products-list-item-colors ul li img {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    border: 2px solid #ccc;
 }
 .product-list-item-sku-params {
     height: 100px;

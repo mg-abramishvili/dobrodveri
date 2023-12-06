@@ -12,6 +12,20 @@
         <p class="products-list-item-name">
             {{ product.name }}
         </p>
+
+        <div v-if="product.colors && product.colors.length" class="products-list-item-colors">
+            <ul>
+                <li v-for="color in product.colors.slice(0,3)">
+                    <img :src="color.image" />
+                </li>
+            </ul>
+
+            <span
+                v-if="product.colors.length > product.colors.slice(0,3)"
+                class="products-list-item-colors-more">
+                    {{ '+' + product.colors.length - product.colors.slice(0,3).length }}
+            </span>
+        </div>
     </a>
 </template>
 

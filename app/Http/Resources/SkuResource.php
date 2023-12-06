@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ProductColorResource;
 
 class SkuResource extends JsonResource
 {
@@ -20,6 +21,7 @@ class SkuResource extends JsonResource
             'glass' => $this->glass,
             'image' => $this->image,
             'price' => $this->price ? $this->price : $this->product->price,
+            'all_colors' => ProductColorResource::collection($this->product->skus->unique('color_id')->values()->all()),
         ];
     }
 }
