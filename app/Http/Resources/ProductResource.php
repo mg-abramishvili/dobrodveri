@@ -26,7 +26,7 @@ class ProductResource extends JsonResource
             'surface' => $this->surface ? $this->surface->name : null,
             'factory_coef' => $this->factory ? $this->factory->coef : null,
             'sizes' => $this->sizes,
-            'price' => $this->price,
+            'price' => $this->skus->count() && $this->skus->first()->price ? $this->skus->first()->price : $this->price,
             'skus' => $this->skus->load('color', 'glass', 'innerdecor'),
             'colors' => ProductColorResource::collection($this->skus->unique('color_id')->values()->all()),
             'glasses' => ProductGlassResource::collection($this->skus->where('glass_id', '!=', null)->unique('glass_id')->values()->all()),
