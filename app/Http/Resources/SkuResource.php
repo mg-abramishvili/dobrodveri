@@ -10,6 +10,19 @@ class SkuResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        $linkInitial = "/" . "product" . "/" . $this->product->slug;
+        $linkParams = [];
+        
+        if($this->color) {
+            $linkParams[] = '&color=' . $this->color->slug;
+        }
+        if($this->glass) {
+            $linkParams[] = '&glass=' . $this->glass->slug;
+        }
+        
+        $link = count($linkParams) > 0 ? $linkInitial . '?' . implode("", $linkParams) : $linkInitial;
+
+
         return [
             'id' => $this->id,
             'name' => $this->product->name,
@@ -22,6 +35,7 @@ class SkuResource extends JsonResource
             'image' => $this->image,
             'price' => $this->price ? $this->price : $this->product->price,
             'all_colors' => ProductColorResource::collection($this->product->skus->unique('color_id')->values()->all()),
+            'link' => $link,
         ];
     }
 }

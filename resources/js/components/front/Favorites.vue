@@ -1,7 +1,7 @@
 <template>
     <div v-if="!views.loading" class="category-products-list favorites-products-list">
         <div v-if="skus" v-for="sku in skus" class="products-list-item">
-            <a :href="$filters.SkuUrl(sku)">
+            <a :href="sku.link">
                 <div class="products-list-item-image">
                     <img v-if="sku.image" :src="sku.image" :alt="sku.name">
                     <img v-else src="/img/no-image.jpg" :alt="sku.name">

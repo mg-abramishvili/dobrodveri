@@ -44,34 +44,44 @@ class Sku extends Model
         return $this->belongsTo(InnerDecor::class, 'inner_decor_id');
     }
 
-    public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces, $colors, $glasses)
+    public function getPriceSortAttribute()
+    {
+        return $this->price ? $this->price : $this->product->price;
+    }
+
+    public function getPopularSortAttribute()
+    {
+        return $this->product->view_counter;
+    }
+
+    public function scopeWithFilters($query, $filterParams)
     {
         return $query
-            ->whereRelation('product', 'category_id', $category_id)
+            ->whereRelation('product', 'category_id', $filterParams['category_id'])
             ->whereRelation('product', 'is_active', true)
-            ->when(isset($types), function ($query) use ($types) {
-                $query->whereHas('type', function($query) use($types) {
-                    $query->whereIn('types.slug', $types);
+            ->when(isset($filterParams['types']), function ($query) use ($filterParams) {
+                $query->whereHas('type', function($query) use($filterParams) {
+                    $query->whereIn('types.slug', $filterParams['types']);
                 });
             })
-            ->when(isset($styles), function ($query) use ($styles) {
-                $query->whereHas('style', function($query) use($styles) {
-                    $query->whereIn('styles.slug', $styles);
+            ->when(isset($filterParams['styles']), function ($query) use ($filterParams) {
+                $query->whereHas('style', function($query) use($filterParams) {
+                    $query->whereIn('styles.slug', $filterParams['styles']);
                 });
             })
-            ->when(isset($surfaces), function ($query) use ($surfaces) {
-                $query->whereHas('surface', function($query) use($surfaces) {
-                    $query->whereIn('surfaces.slug', $surfaces);
+            ->when(isset($filterParams['surfaces']), function ($query) use ($filterParams) {
+                $query->whereHas('surface', function($query) use($filterParams) {
+                    $query->whereIn('surfaces.slug', $filterParams['surfaces']);
                 });
             })
-            ->when(isset($colors), function ($query) use ($colors) {
-                $query->whereHas('color', function($query) use($colors) {
-                    $query->whereIn('colors.slug', $colors);
+            ->when(isset($filterParams['colors']), function ($query) use ($filterParams) {
+                $query->whereHas('color', function($query) use($filterParams) {
+                    $query->whereIn('colors.slug', $filterParams['colors']);
                 });
             })
-            ->when(isset($glasses), function ($query) use ($glasses) {
-                $query->whereHas('glass', function($query) use($glasses) {
-                    $query->whereIn('glasses.slug', $glasses);
+            ->when(isset($filterParams['glasses']), function ($query) use ($filterParams) {
+                $query->whereHas('glass', function($query) use($filterParams) {
+                    $query->whereIn('glasses.slug', $filterParams['glasses']);
                 });
             });
     }

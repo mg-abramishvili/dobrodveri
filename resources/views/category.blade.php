@@ -1,5 +1,6 @@
 @php
     $productsWithPagination = json_decode($productsWithPagination, true);
+    $skusWithPagination = json_decode($skusWithPagination, true);
 @endphp
 
 @extends('layouts.front')
@@ -14,58 +15,52 @@
                 :category_id="{{ $category->id }}"
 
                 @if(request()->price_from)
-                    reqPriceFrom="{{ request()->price_from }}"
+                    req_price_from="{{ request()->price_from }}"
                 @endif
 
                 @if(request()->price_to)
-                    reqPriceTo="{{ request()->price_to }}"
-                @endif
-
-                @if(request()->order)
-                    reqOrder="{{ request()->order }}"
-                @endif
-                
-                @if(request()->order_direction)
-                    reqOrderDirection="{{ request()->order_direction }}"
+                    req_price_to="{{ request()->price_to }}"
                 @endif
 
                 @if(request()->type)
-                    reqType="{{ request()->type }}"
+                    req_type="{{ request()->type }}"
                 @endif
 
                 @if(request()->style)
-                    reqStyle="{{ request()->style }}"
+                    req_style="{{ request()->style }}"
                 @endif
 
                 @if(request()->innerdecor)
-                    reqInnerDecor="{{ request()->innerdecor }}"
+                    req_inner_decor="{{ request()->innerdecor }}"
                 @endif
 
                 @if(request()->furnituretype)
-                    reqFurnitureType="{{ request()->furnituretype }}"
-                @endif
-
-                @if(request()->purpose)
-                    reqPurpose="{{ request()->purpose }}"
+                    req_furniture_type="{{ request()->furnituretype }}"
                 @endif
 
                 @if(request()->surface)
-                    reqSurface="{{ request()->surface }}"
+                    req_surface="{{ request()->surface }}"
                 @endif
 
                 @if(request()->color)
-                    reqColor="{{ request()->color }}"
+                    req_color="{{ request()->color }}"
                 @endif
 
                 @if(request()->glass)
-                    reqGlass="{{ request()->glass }}"
+                    req_glass="{{ request()->glass }}"
                 @endif
             />
         </aside>
 
         <div class="category-products">
             <div id="category-products-list" class="category-products-list">
-                @each('product-list-item', $productsWithPagination['products'], 'product')
+                @if($productsWithPagination)
+                    @each('product-list-item', $productsWithPagination['products'], 'product')
+                @endif
+
+                @if($skusWithPagination)
+                    @each('product-list-item-sku', $skusWithPagination['skus'], 'sku')
+                @endif
             </div>
 
             <products />

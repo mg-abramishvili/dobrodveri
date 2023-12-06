@@ -99,11 +99,15 @@ import PriceRangeSlider from './PriceRangeSlider.vue'
 export default {
     props: [
         'category_id',
-        'reqTypes',
-        'reqStyles',
-        'reqSurfaces',
-        'reqColors',
-        'reqGlasses',
+        'req_price_from',
+        'req_price_to',
+        'req_type',
+        'req_style',
+        'req_surface',
+        'req_inner_decor',
+        'req_furniture_type',
+        'req_color',
+        'req_glass',
     ],
     data() {
         return {
@@ -119,8 +123,6 @@ export default {
                 category_id: this.category_id,
                 price_from: 0,
                 price_to: 100000,
-                order: 'price',
-                order_direction: 'asc',
                 types: [],
                 styles: [],
                 surfaces: [],
@@ -136,7 +138,7 @@ export default {
     created() {
         this.selected = JSON.parse(JSON.stringify(this.initialFilterParams))
 
-        this.loadFilter()
+        this.loadRequestedFilterParams()
     },
     mounted() {
         this.$watch('selected', function() {
@@ -146,6 +148,41 @@ export default {
         })
     },
     methods: {
+        loadRequestedFilterParams() {
+            if(this.req_price_from) {
+                this.selected.price_from = this.req_price_from
+            }
+            
+            if(this.req_price_to) {
+                this.selected.price_to = this.req_price_to
+            }
+
+            if(this.req_type && this.req_type.split(',').length) {
+                this.req_type.split(',').forEach(c => {
+                    this.selected.types.push(c)
+                })
+            }
+
+            if(this.req_style && this.req_style.split(',').length) {
+                this.req_style.split(',').forEach(c => {
+                    this.selected.styles.push(c)
+                })
+            }
+            
+            if(this.req_color && this.req_color.split(',').length) {
+                this.req_color.split(',').forEach(c => {
+                    this.selected.colors.push(c)
+                })
+            }
+
+            if(this.req_glass && this.req_glass.split(',').length) {
+                this.req_glass.split(',').forEach(c => {
+                    this.selected.glasses.push(c)
+                })
+            }
+
+            this.loadFilter()
+        },
         loadFilter() {
             axios.get(`/_product_filter`, {
                 params: {
@@ -169,9 +206,44 @@ export default {
         },
         applyFilter() {
             this.emitter.emit('product-filter', this.selected)
+
+            this.genURL()
         },
         resetFilter() {
             this.selected = JSON.parse(JSON.stringify(this.initialFilterParams))
+        },
+        genURL() {
+            let filterParamsURL = []
+
+            if(this.selected.price_from.length) {
+                filterParamsURL.push('&price_from=' + this.selected.price_from)
+            }
+
+            if(this.selected.price_to.length) {
+                filterParamsURL.push('&price_to=' + this.selected.price_to)
+            }
+
+            if(this.selected.types.length) {
+                filterParamsURL.push('&type=' + this.selected.types.join(','))
+            }
+
+            if(this.selected.styles.length) {
+                filterParamsURL.push('&style=' + this.selected.styles.join(','))
+            }
+
+            if(this.selected.surfaces.length) {
+                filterParamsURL.push('&surface=' + this.selected.surfaces.join(','))
+            }
+
+            if(this.selected.colors.length) {
+                filterParamsURL.push('&color=' + this.selected.colors.join(','))
+            }
+
+            if(this.selected.glasses.length) {
+                filterParamsURL.push('&glass=' + this.selected.glasses.join(','))
+            }
+
+            history.pushState(null, null, '?' + filterParamsURL.join(""))
         },
     },
     components: {

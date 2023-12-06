@@ -36,21 +36,4 @@ export default {
       
         return n_str.join('').replace(/\s+/g, '-').replace('×', 'x').toLocaleLowerCase()
     },
-    SkuUrl(sku) {
-        let urlInitial = '/product/' + sku.slug
-        let urlParams = []
-
-        if(sku.color) {
-            urlParams.push('&color=' + sku.color.slug)
-        }
-        if(sku.glass) {
-            urlParams.push('&glass=' + sku.glass.slug)
-        }
-
-        if(urlParams.length) {
-            return urlInitial + '?' + urlParams.join("")
-        }
-
-        return urlInitial
-    },
 }

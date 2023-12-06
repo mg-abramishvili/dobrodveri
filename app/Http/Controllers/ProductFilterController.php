@@ -14,34 +14,43 @@ class ProductFilterController extends Controller
 {
     public function indexData(Request $request)
     {
-        $category_id = $request->category_id;
-        $page = $request->page ? $request->page : 1;
-        $types = $request->types;
-        $styles = $request->styles;
-        $surfaces = $request->surfaces;
-        $priceFrom = $request->price_from;
-        $priceTo = $request->price_to;
-        $colors = $request->colors;
-        $glasses = $request->glasses;
-        
-        $filteredTypes = Type::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, null, $styles, $surfaces, $colors, $glasses);
+        $filterParams['category_id'] = $request->category_id;
+        $filterParams['priceFrom'] = $request->price_from;
+        $filterParams['priceTo'] = $request->price_to;
+        $filterParams['types'] = $request->types;
+        $filterParams['styles'] = $request->styles;
+        $filterParams['surfaces'] = $request->surfaces;
+        $filterParams['colors'] = $request->colors;
+        $filterParams['glasses'] = $request->glasses;
+
+        $filteredTypes = Type::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['types'] = null;
+
+            $query->withFilters($filterParams);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredStyles = Style::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, null, $surfaces, $colors, $glasses);
+        $filteredStyles = Style::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['styles'] = null;
+            
+            $query->withFilters($filterParams);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredSurfaces = Surface::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, $styles, null, $colors, $glasses);
+        $filteredSurfaces = Surface::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['surfaces'] = null;
+            
+            $query->withFilters($filterParams);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredColors = Color::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, $styles, $surfaces, null, $glasses);
+        $filteredColors = Color::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['colors'] = null;
+            
+            $query->withFilters($filterParams);
         }])->orderBy('skus_count', 'desc')->get();
 
-        $filteredGlasses = Glass::withCount(['skus' => function ($query) use($category_id, $types, $styles, $surfaces, $colors, $glasses) {
-            $query->withFilters($category_id, $types, $styles, $surfaces, $colors, null);
+        $filteredGlasses = Glass::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['glasses'] = null;
+            
+            $query->withFilters($filterParams);
         }])->orderBy('skus_count', 'desc')->get();
         
         return response()->json([

@@ -10,10 +10,13 @@ use App\Models\Surface;
 use App\Models\Color;
 use App\Models\Glass;
 use App\Http\Resources\SkuResource;
+use App\Traits\getSkus;
 use Illuminate\Http\Request;
 
 class SkuController extends Controller
 {
+    use getSkus;
+
     public function addToFavorite(Request $request)
     {
         // session()->forget('favorites');
@@ -44,33 +47,19 @@ class SkuController extends Controller
 
     public function indexData(Request $request)
     {
-        $category_id = $request->category_id;
-        $page = $request->page ? $request->page : 1;
-        $types = $request->types;
-        $styles = $request->styles;
-        $surfaces = $request->surfaces;
-        $priceFrom = $request->price_from;
-        $priceTo = $request->price_to;
-        $colors = $request->colors;
-        $glasses = $request->glasses;
-
+        $filterParams['category_id'] = $request->category_id;
+        $filterParams['priceFrom'] = $request->price_from;
+        $filterParams['priceTo'] = $request->price_to;
+        $filterParams['types'] = $request->types;
+        $filterParams['styles'] = $request->styles;
+        $filterParams['surfaces'] = $request->surfaces;
+        $filterParams['colors'] = $request->colors;
+        $filterParams['glasses'] = $request->glasses;
+        $filterParams['page'] = $request->page ? $request->page : 1;
+        $filterParams['order'] = $request->order ? $request->order : 'price_asc';
+        
         $perPage = 30;
-
-        $skus = Sku::select(['skus.*', 'products.price as product_price'])
-                    ->join('products', 'skus.product_id', '=', 'products.id')
-                    ->withFilters($category_id, $types, $styles, $surfaces, $colors, $glasses)
-                    ->orderBy('products.price', 'asc');
-
-        $pagination['total_pages'] = round($skus->count() / $perPage);
-        $pagination['current_page'] = (int)$page;
-
-        $skus = $skus->skip(($perPage * $page) - $perPage)
-                    ->take($perPage)
-                    ->get();
-
-        return response()->json([
-            'skus' => SkuResource::collection($skus),
-            'pagination' => $pagination,
-        ]);
+        
+        return $this->getSkus($filterParams, $perPage);
     }
 }
