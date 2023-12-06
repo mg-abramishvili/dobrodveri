@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
             $pagesAbout = Page::where('order', '>=', 1000)->get();
             
             $shareData['pages'] = $pages;
-            $shareData['pages'] = $pagesAbout;
+            $shareData['pagesAbout'] = $pagesAbout;
         }
         
         View::share($shareData);
