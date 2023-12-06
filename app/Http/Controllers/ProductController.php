@@ -42,6 +42,7 @@ class ProductController extends Controller
             $product->hit = true;
         }
         
+        $product->timestamps = false;
         $product->save();
 
         $productResource = new ProductResource(Product::where('slug', $productSlug)->first());

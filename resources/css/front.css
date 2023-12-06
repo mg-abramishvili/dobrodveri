@@ -1016,6 +1016,7 @@ header .container {
 .product-detail-tab-attributes table tr td:first-child {
     color: #5d5d64;
     width: 30%;
+    font-weight: 700;
 }
 .product-reviews-stars {
     display: inline-flex;
