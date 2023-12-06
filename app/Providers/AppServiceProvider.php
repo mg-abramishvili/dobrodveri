@@ -43,10 +43,14 @@ class AppServiceProvider extends ServiceProvider
         {
             $pages = Page::where('is_folder1', false)
                             ->where('is_folder2', false)
+                            ->where('order', '<', 1000)
                             ->orderBy('order', 'asc')
                             ->get();
+
+            $pagesAbout = Page::where('order', '>=', 1000)->get();
             
             $shareData['pages'] = $pages;
+            $shareData['pages'] = $pagesAbout;
         }
         
         View::share($shareData);

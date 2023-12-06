@@ -91,6 +91,11 @@
                                 <li>
                                     <a href="/polezno/">Полезно</a>
                                 </li>
+                                @foreach($pagesAbout as $page)
+                                    <li>
+                                        <a href="/p/{{ $page->slug }}/">{{ $page->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="header-bottom-nav">
