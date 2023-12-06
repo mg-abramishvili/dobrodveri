@@ -27,7 +27,7 @@
         </ul>
     </div>
 
-    <div class="container product-detail">
+    <div class="container product-detail @if($product['category']['id'] == 2) product-detail-vkhod @endif">
         <div class="product-detail-image-sliders">
             <product-slider :product="{{ json_encode($product) }}"></product-slider>
         </div>
