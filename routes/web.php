@@ -35,6 +35,7 @@ Route::get('_favorites', function () {
     return session('favorites');
 });
 Route::post('_favorites', [App\Http\Controllers\SkuController::class, 'addToFavorite']);
+Route::delete('_favorite/{sku}', [App\Http\Controllers\SkuController::class, 'removeFromFavorite']);
 
 Route::view('policy', 'policy');
 

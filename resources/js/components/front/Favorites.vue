@@ -28,6 +28,8 @@
                     </div>
                 </div>
             </a>
+
+            <span @click="remove(sku.id)" class="favorite-remove">Удалить</span>
         </div>
 
         <p v-if="!skus">Товаров в избранном нет.</p>
@@ -55,6 +57,14 @@
                     this.skus = response.data
                     
                     this.views.loading = false
+                })
+            },
+            remove(skuID) {
+                axios.delete(`/_favorite/${skuID}`)
+                .then(response => {
+                    this.views.loading = true
+
+                    this.loadFavoritesSkus()
                 })
             }
         }

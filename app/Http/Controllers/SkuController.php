@@ -29,6 +29,19 @@ class SkuController extends Controller
         session()->put('favorites', $favorites);
     }
 
+    public function removeFromFavorite($skuID)
+    {
+        $favorites = session()->get('favorites', []);
+        
+        unset($favorites[$skuID]);
+        
+        if(count($favorites) > 0) {
+            session()->put('favorites', $favorites);
+        } else {
+            session()->forget('favorites');
+        }
+    }
+
     public function indexData(Request $request)
     {
         $category_id = $request->category_id;
