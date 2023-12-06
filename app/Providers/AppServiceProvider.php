@@ -41,7 +41,10 @@ class AppServiceProvider extends ServiceProvider
 
         if (Schema::hasTable('pages'))
         {
-            $pages = Page::where('is_folder1', false)->where('is_folder2', false)->get();
+            $pages = Page::where('is_folder1', false)
+                            ->where('is_folder2', false)
+                            ->orderBy('order', 'asc')
+                            ->get();
             
             $shareData['pages'] = $pages;
         }
