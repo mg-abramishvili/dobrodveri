@@ -1455,7 +1455,7 @@ header .container {
 }
 .promo-list-item {
     width: calc(33.3333% - 20px);
-    display: block;
+    display: flex;
     text-decoration: none;
     color: #151528;
     margin-bottom: 20px;

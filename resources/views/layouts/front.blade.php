@@ -62,7 +62,7 @@
                             </nav>
                         </div>
                         <div class="header-top-tel">
-                            <a href="tel:+79378504040">8 937 850 40 40</a>
+                            <a href="tel:+79378504040">8 (937) 850-40-40</a>
                             <span>Ежедневно с 10:00 до 20:00</span>
                         </div>
                     </div>
