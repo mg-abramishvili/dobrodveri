@@ -28,18 +28,18 @@ class AppServiceProvider extends ServiceProvider
             $shareData['categories'] = $categories;
         }
 
-        if (Schema::hasTable('products'))
-        {
-            $popularProducts = Product::where('is_active', 1)
-                                        ->where('category_id', 1)
-                                        ->orWhere('category_id', 2)
-                                        // ->where('view_counter', '>=', 50)
-                                        ->orderBy('view_counter', 'desc')
-                                        ->take(12)
-                                        ->get();
+        // if (Schema::hasTable('products'))
+        // {
+        //     $popularProducts = Product::where('is_active', 1)
+        //                                 ->where('category_id', 1)
+        //                                 ->orWhere('category_id', 2)
+        //                                 // ->where('view_counter', '>=', 50)
+        //                                 ->orderBy('view_counter', 'desc')
+        //                                 ->take(12)
+        //                                 ->get();
 
-            $shareData['popularProducts'] = json_encode(ProductResource::collection($popularProducts));
-        }
+        //     $shareData['popularProducts'] = json_encode(ProductResource::collection($popularProducts));
+        // }
 
         if (Schema::hasTable('pages'))
         {
