@@ -168,11 +168,11 @@ export default {
                 this.products = response.data.products
 
                 this.setPagination(
-                    response.data.pagination.last_page,
+                    response.data.pagination.total_pages,
                     response.data.pagination.current_page
                 )
 
-                // this.loadProductSKUs()
+                this.loadProductSKUs()
             })
         },
         loadProductSKUs(page) {

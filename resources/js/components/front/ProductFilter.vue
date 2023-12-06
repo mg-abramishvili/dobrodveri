@@ -107,18 +107,17 @@ export default {
             }
         }
     },
-    watch: {
-        selected: {
-            deep: true,
-            handler() {
-                this.$parent.filterParams = this.selected
-
-                this.$parent.loadProductSKUs()
-            }
-        }
-    },
     created() {
         this.selected = this.filterParams
+    },
+    mounted() {
+        this.$watch('selected', function() {
+            this.$parent.filterParams = this.selected
+
+            this.$parent.loadProductSKUs()
+        }, {
+            deep: true
+        })
     },
     components: {
         PriceRangeSlider
