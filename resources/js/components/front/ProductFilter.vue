@@ -292,7 +292,7 @@ export default {
             this.genURL()
         },
         resetFilter() {
-            this.selected = JSON.parse(JSON.stringify(this.initialFilterParams))
+            window.location.href = '/catalog/' + this.category.slug + '/'
         },
         genURL() {
             let filterParamsURL = []
