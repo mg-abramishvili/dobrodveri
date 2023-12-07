@@ -15,17 +15,17 @@
                 @endif
             </div>
     
-            @if($product['percent'])
-                <div class="products-list-item-percent">
-                    {{ $product['percent'] }}
-                </div>
-            @endif
-    
             <div class="products-list-item-name">
                 {{ $product['name'] }}
             </div>
     
             <div class="products-list-item-tags">
+                @if($product['percent'])
+                    <div class="products-list-item-tag products-list-item-tag-percent">
+                        {{ $product['percent'] }}
+                    </div>
+                @endif
+
                 @if($product['hit'])
                     <div class="products-list-item-tag products-list-item-tag-hit">Хит</div>
                 @endif
