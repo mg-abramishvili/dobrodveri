@@ -31,6 +31,7 @@ class ProductsResource extends JsonResource
             'sale' => $this->sale,
             'discount' => $this->discount,
             'special' => $this->special,
+            'balance' => $this->balance,
         ];
     }
 }
