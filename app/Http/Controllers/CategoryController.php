@@ -30,23 +30,19 @@ class CategoryController extends Controller
         $productsWithPagination = null;
         $skusWithPagination = null;
 
-        $rulesForSKU = [
-            "types",
-            "styles",
-            "colors",
-            "glasses",
-            "surfaces",
-            "innerdecors",
-            "purposes",
-            "furnituretypes",
-        ];
-        
-        if(count(array_intersect($rulesForSKU, array_keys($filterParams))) > 0)
-        {
+        if(
+            $filterParams['colors'] ||
+            $filterParams["types"] ||
+            $filterParams["styles"] ||
+            $filterParams["colors"] ||
+            $filterParams["glasses"] ||
+            $filterParams["surfaces"] ||
+            $filterParams["innerdecors"] ||
+            $filterParams["purposes"] ||
+            $filterParams["furnituretypes"]
+        ) {
             $skusWithPagination = $this->getSkus($filterParams, $perPage)->getContent();
-        }
-        else
-        {
+        } else {
             $productsWithPagination = $this->getProducts($category->id, $filterParams, $perPage)->getContent();
         }
 
