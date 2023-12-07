@@ -200,7 +200,12 @@ header .container {
     border-radius: 100%;
     position: absolute;
     top: 0;
+}
+.favorites-counter {
     right: 15px;
+}
+.promo-counter {
+    right: 0;
 }
 .header-top-tel {
     width: 19%;
