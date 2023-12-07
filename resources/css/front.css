@@ -694,21 +694,15 @@ header .container {
 }
 .products-list-item-tags {
     position: absolute;
-    top: 200px;
+    top: 15px;
     left: 15px;
-    height: 70px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 40px;
-    align-content: flex-end;
 }
 .products-list-item-tag {
     color: #fff;
     font-size: 11px;
-    width: auto;
-    max-width: 100%;
-    padding: 3px 4px;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
     border-radius: 4px;
     margin-bottom: 4px;
 }
@@ -723,9 +717,6 @@ header .container {
 }
 .products-list-item-tag-sale {
     background-color: #FF9414;
-}
-.products-list-item-tag-percent {
-    background-color: rgb(247, 73, 73);
 }
 .product-list-item-sku-params {
     height: 100px;
