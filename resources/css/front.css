@@ -625,7 +625,7 @@ header .container {
 }
 .products-list-item-price,
 .products-list-item-price small {
-    font-size: 15px;
+    font-size: 100%;
 }
 .products-list-item-price {
     font-weight: 700;
@@ -634,7 +634,7 @@ header .container {
     align-items: center;
     justify-content: center;
     height: 20px;
-    font-size: 17px;
+    font-size: 18px;
 }
 .products-list-item-price small {
     margin-left: 3px;
