@@ -694,7 +694,7 @@ header .container {
 .products-list-item-tags {
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 15px;
 }
 .products-list-item-tag {
     color: #fff;
