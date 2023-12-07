@@ -15,7 +15,7 @@
                 <div class="form-check">
                     <input v-model="selected.colors" class="form-check-input" type="checkbox" :value="color.slug" :id="'color_' + color.slug" :disabled="color.skus_count == 0">
                     <label class="form-check-label" :class="{ 'form-check-label-disabled': color.skus_count == 0 }"  :for="'color_' + color.slug">
-                        <img :src="color.image"/> {{ color.name }} <small v-if="color.skus_count > 0">{{ color.skus_count }}</small>
+                        <img :src="color.image" :alt="color.name"/> {{ color.name }} <small v-if="color.skus_count > 0">{{ color.skus_count }}</small>
                     </label>
                 </div>
             </template>
@@ -30,7 +30,7 @@
                 <div class="form-check">
                     <input v-model="selected.glasses" class="form-check-input" type="checkbox" :value="glass.slug" :id="'glass_' + glass.slug" :disabled="glass.skus_count == 0">
                     <label class="form-check-label" :class="{ 'form-check-label-disabled': glass.skus_count == 0 }"  :for="'glass_' + glass.slug">
-                        <img :src="glass.image"/> {{ glass.name }} <small v-if="glass.skus_count > 0">{{ glass.skus_count }}</small>
+                        <img :src="glass.image" :alt="glass.name"/> {{ glass.name }} <small v-if="glass.skus_count > 0">{{ glass.skus_count }}</small>
                     </label>
                 </div>
             </template>
