@@ -106,7 +106,7 @@ class Sku extends Model
             })
             ->when(isset($filterParams['furnituretypes']), function ($query) use ($filterParams) {
                 $query->whereHas('furnituretype', function($query) use($filterParams) {
-                    $query->whereIn('furnituretypes.slug', $filterParams['furnituretypes']);
+                    $query->whereIn('furniture_types.slug', $filterParams['furnituretypes']);
                 });
             });
     }
