@@ -56,5 +56,8 @@
                 @endif
             </div>
         @endif
+
+        <span onclick='window.location = "tel:+79378504040"'>Заказать</span>
+        <span>Подробнее</span>
     </a>
 </div>

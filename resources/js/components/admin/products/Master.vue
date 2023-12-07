@@ -49,10 +49,6 @@
                         <label class="form-label">Цена</label>
                         <input v-model="price" type="number" min="0" class="form-control">
                     </div>
-                    <div class="col-12 col-lg-3 mb-4">
-                        <label class="form-label">Старая цена</label>
-                        <input v-model="oldPrice" type="number" min="0" class="form-control" disabled>
-                    </div>
                 </div>
 
                 <div class="mb-4">
@@ -231,13 +227,6 @@ export default {
                 return false
             }
         },
-        oldPrice() {
-            if(this.product.factory && this.product.factory.coef) {
-                return Math.round(this.price * this.product.factory.coef / 10) * 10
-            } else {
-                return this.price
-            }
-        },
     },
     created() {
         this.loadProduct()
@@ -339,12 +328,12 @@ export default {
             }
 
             this.views.saveButton = false
+            this.views.loading = true
 
             let data = {
                 name: this.name,
                 slug: this.slug,
                 price: this.price,
-                old_price: this.oldPrice,
                 category: this.selected.category,
                 type: this.selected.type,
                 surface: this.selected.surface,
@@ -375,11 +364,11 @@ export default {
             if(!this.editMode) {
                 axios.post(`/_admin/products`, data)
                 .then(response => {
-                    this.views.saveButton = true
-                    this.$router.push({ name: 'Products' })
+                    window.location.href = '/admin/product-master/' + response.data + '/'
                 })
                 .catch(errors => {
                     this.views.saveButton = true
+                    this.views.loading = false
 
                     return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })
@@ -389,10 +378,11 @@ export default {
                 axios.put(`/_admin/product/${this.$route.params.id}/update`, data)
                 .then(response => {
                     this.views.saveButton = true
-                    this.$router.push({ name: 'Products' })
+                    this.views.loading = false
                 })
                 .catch(errors => {
                     this.views.saveButton = true
+                    this.views.loading = false
 
                     return this.$toast.error(errors.response.data ? errors.response.data : errors)
                 })

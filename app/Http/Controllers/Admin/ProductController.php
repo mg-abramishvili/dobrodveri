@@ -69,6 +69,8 @@ class ProductController extends Controller
         $product->balance = $request->balance;
 
         $product->save();
+
+        return $product->id;
     }
 
     public function update($id, Request $request)
