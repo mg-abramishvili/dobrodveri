@@ -251,8 +251,8 @@ export default {
                 })
             }
 
-            if(this.req_furniture_type && this.req_furniture_type.split(',').length) {
-                this.req_furniture_type.split(',').forEach(c => {
+            if(this.req_furnituretype && this.req_furnituretype.split(',').length) {
+                this.req_furnituretype.split(',').forEach(c => {
                     this.selected.furnituretypes.push(c)
                 })
             }
