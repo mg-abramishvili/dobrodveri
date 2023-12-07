@@ -28,8 +28,6 @@ class ProductsResource extends JsonResource
             'colors' => count($colors) > 0 ? ProductColorResource::collection(array_slice($colors, 0, 6)) : null,
             'other_colors' => count($colors) > 3 ? ProductColorResource::collection(array_slice($colors, 6)) : null,
             'hit' => $this->hit,
-            'sale' => $this->sale,
-            'discount' => $this->discount,
             'special' => $this->special,
             'balance' => $this->balance,
         ];
