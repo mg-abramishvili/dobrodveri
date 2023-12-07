@@ -96,7 +96,7 @@ class Sku extends Model
             })
             ->when(isset($filterParams['innerdecors']), function ($query) use ($filterParams) {
                 $query->whereHas('innerdecor', function($query) use($filterParams) {
-                    $query->whereIn('innerdecors.slug', $filterParams['innerdecors']);
+                    $query->whereIn('inner_decors.slug', $filterParams['innerdecors']);
                 });
             })
             ->when(isset($filterParams['purposes']), function ($query) use ($filterParams) {
