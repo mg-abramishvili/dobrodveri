@@ -560,10 +560,13 @@ header .container {
 /* PRODUCT LIST */
 .products-list-item {
     text-align: center;
-    width: 25%;
+    width: 20%;
     position: relative;
     height: 400px;
     margin-bottom: 25px;
+}
+.container .category-products {
+    width: 25%;
 }
 .products-list-item .product-list-item-inner {
     display: block;
