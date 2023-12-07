@@ -56,8 +56,10 @@
                 @endif
             </div>
         @endif
-
-        <span onclick='window.location = "tel:+79378504040"'>Заказать</span>
-        <span>Подробнее</span>
     </a>
+
+    <div class="products-list-item-buttons">
+        <a href="tel:+79378504040">Заказать</a>
+        <a href="/product/{{ $product['slug'] }}">Подробнее</a>
+    </div>
 </div>

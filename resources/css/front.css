@@ -561,18 +561,42 @@ header .container {
 .products-list-item {
     text-align: center;
     width: 25%;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
 }
 .products-list-item a {
     display: block;
     text-decoration: none;
     color: #151528;
-    padding: 20px;
-    border-radius: 8px;
-    position: relative;
 }
-.products-list-item a:hover,
-.products-list-item a:focus {
+.products-list-item:hover,
+.products-list-item:focus {
     box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+.products-list-item-buttons {
+    display: none;
+    width: 100%;
+    justify-content: center;
+}
+.products-list-item:hover .products-list-item-buttons {
+    display: flex;
+}
+.products-list-item-buttons a {
+    border: 1px solid;
+    border-color: #FF9414;
+    font-size: 13px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+.products-list-item-buttons a:nth-child(1) {
+    background-color: #FF9414;
+    color: #fff;
+}
+.products-list-item-buttons a:nth-child(2) {
+    background-color: transparent;
+    color: #151528;
 }
 .products-list-item .products-list-item-name {
     margin: 0;
@@ -600,7 +624,7 @@ header .container {
 }
 .products-list-item-percent {
     position: absolute;
-    bottom: 100px;
+    top: 220px;
     left: 20px;
     color: #fff;
     background-color: red;
@@ -628,7 +652,7 @@ header .container {
     top: 40px;
     right: 20px;
 }
-.products-list-item a:hover .products-list-item-colors {
+.products-list-item:hover .products-list-item-colors {
     display: block;
 }
 .products-list-item-colors ul {
