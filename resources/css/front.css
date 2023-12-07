@@ -563,6 +563,7 @@ header .container {
     width: 25%;
     position: relative;
     height: 330px;
+    margin-bottom: 25px;
 }
 .products-list-item .product-list-item-inner {
     display: block;
