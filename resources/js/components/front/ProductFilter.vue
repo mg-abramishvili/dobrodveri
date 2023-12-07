@@ -144,6 +144,7 @@ import PriceRangeSlider from './PriceRangeSlider.vue'
 export default {
     props: [
         'category_id',
+        'category_slug',
         'req_price_from',
         'req_price_to',
         'req_type',
@@ -292,7 +293,7 @@ export default {
             this.genURL()
         },
         resetFilter() {
-            window.location.href = '/catalog/' + this.category.slug + '/'
+            window.location.href = '/catalog/' + this.category_slug + '/'
         },
         genURL() {
             let filterParamsURL = []

@@ -13,6 +13,8 @@
         <aside class="category-filter">
             <product-filter
                 :category_id="{{ $category->id }}"
+                
+                category_slug="{{ $category->slug }}"
 
                 @if(request()->price_from)
                     req_price_from="{{ request()->price_from }}"
