@@ -64,6 +64,11 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function getPriceSortAttribute()
+    {
+        return $this->skus->first() && $this->skus->first()->price ? $this->skus->first()->price : $this->price;
+    }
+
     // public function scopeWithFilters($query, $category_id, $types, $styles, $surfaces, $priceFrom, $priceTo)
     // {
     //     return $query

@@ -26,10 +26,10 @@ trait getProducts {
         $pagination['current_page'] = (int)$filterParams['page'];
 
         if($filterParams['order'] == 'price_asc') {
-            $products = $products->sortBy('price');
+            $products = $products->sortBy('price_sort');
         }
         if($filterParams['order'] == 'price_desc') {
-            $products = $products->sortByDesc('price');
+            $products = $products->sortByDesc('price_sort');
         }
         if($filterParams['order'] == 'popular') {
             $products = $products->sortByDesc('view_counter');
