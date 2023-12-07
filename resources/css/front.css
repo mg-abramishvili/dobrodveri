@@ -607,6 +607,7 @@ header .container {
     border-radius: 5px;
     padding: 5px 10px;
     margin: 0 5px;
+    width: calc(50% - 20px);
 }
 .products-list-item-buttons a:nth-child(1) {
     background-color: #FF9414;
