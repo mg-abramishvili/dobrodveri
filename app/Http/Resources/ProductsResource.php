@@ -24,7 +24,7 @@ class ProductsResource extends JsonResource
             'vkhod_image' => $this->vkhod_image,
             'price' => $price,
             'old_price' => $oldPrice,
-            'percent' => '-' . $percent . '%',
+            'percent' => $percent ? '-' . $percent . '%' : null,
             'colors' => count($colors) > 0 ? ProductColorResource::collection(array_slice($colors, 0, 6)) : null,
             'other_colors' => count($colors) > 3 ? ProductColorResource::collection(array_slice($colors, 6)) : null,
             'hit' => $this->hit,
