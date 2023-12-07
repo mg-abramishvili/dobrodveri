@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Page;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductsResource;
 
 class AppServiceProvider extends ServiceProvider
 {
