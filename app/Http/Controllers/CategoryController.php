@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $category = Category::where('slug', $categorySlug)->first();
 
         $filterParams = $this->getFilterParams($request, 'product', $category->id);
-
+return $filterParams;
         $perPage = 30;
 
         $productsWithPagination = null;
