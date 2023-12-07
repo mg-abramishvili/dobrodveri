@@ -326,15 +326,15 @@ export default {
             }
 
             if(this.selected.innerdecors.length) {
-                filterParamsURL.push('&surface=' + this.selected.innerdecors.join(','))
+                filterParamsURL.push('&innerdecor=' + this.selected.innerdecors.join(','))
             }
 
             if(this.selected.purposes.length) {
-                filterParamsURL.push('&surface=' + this.selected.purposes.join(','))
+                filterParamsURL.push('&purpose=' + this.selected.purposes.join(','))
             }
 
             if(this.selected.furnituretypes.length) {
-                filterParamsURL.push('&surface=' + this.selected.furnituretypes.join(','))
+                filterParamsURL.push('&furnituretype=' + this.selected.furnituretypes.join(','))
             }
 
             history.pushState(null, null, '?' + filterParamsURL.join(""))
