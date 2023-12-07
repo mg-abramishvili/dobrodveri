@@ -239,8 +239,8 @@ export default {
                 })
             }
 
-            if(this.req_inner_decor && this.req_inner_decor.split(',').length) {
-                this.req_inner_decor.split(',').forEach(c => {
+            if(this.req_innerdecor && this.req_innerdecor.split(',').length) {
+                this.req_innerdecor.split(',').forEach(c => {
                     this.selected.innerdecors.push(c)
                 })
             }
