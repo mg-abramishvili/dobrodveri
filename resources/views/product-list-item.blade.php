@@ -29,12 +29,6 @@
                 @if($product['hit'])
                     <div class="products-list-item-tag products-list-item-tag-hit">Хит</div>
                 @endif
-                @if($product['discount'])
-                    <div class="products-list-item-tag products-list-item-tag-discount">Скидка</div>
-                @endif
-                @if($product['sale'])
-                    <div class="products-list-item-tag products-list-item-tag-sale">Распродажа</div>
-                @endif
                 @if($product['special'])
                     <div class="products-list-item-tag products-list-item-tag-special">Акция</div>
                 @endif

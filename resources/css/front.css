@@ -651,9 +651,9 @@ header .container {
     color: #fff;
     background-color: red;
     border-radius: 5px;
-    padding: 3px 5px;
+    padding: 3px 3px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 12px;
 }
 .products-list-item-image {
     height: 250px;
@@ -672,7 +672,7 @@ header .container {
 .products-list-item-colors {
     display: none;
     position: absolute;
-    top: 40px;
+    top: 50px;
     right: 20px;
 }
 .products-list-item:hover .products-list-item-colors {
@@ -684,8 +684,8 @@ header .container {
     list-style: none;
 }
 .products-list-item-colors ul li img {
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
     border-radius: 100%;
     border: 2px solid #ccc;
 }
@@ -696,8 +696,10 @@ header .container {
 }
 .products-list-item-tag {
     color: #fff;
-    font-size: 12px;
-    padding: 2px 5px;
+    font-size: 11px;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
     border-radius: 4px;
     margin-bottom: 4px;
 }
