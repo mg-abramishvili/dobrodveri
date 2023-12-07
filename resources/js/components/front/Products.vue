@@ -65,14 +65,7 @@ export default {
 
             axios.get(`/_product_skus`, {
                 params: {
-                    category_id: this.filterParams.category_id,
-                    colors: this.filterParams.colors,
-                    glasses: this.filterParams.glasses,
-                    types: this.filterParams.types,
-                    styles: this.filterParams.styles,
-                    surfaces: this.filterParams.surfaces,
-                    price_from: this.filterParams.price_from,
-                    price_to: this.filterParams.price_to,
+                    filter_params: this.filterParams,
                     order: this.order,
                     page: page ? page : 1,
                 }

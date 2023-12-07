@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Traits\getProducts;
 use App\Traits\getSkus;
+use App\Traits\getFilterParams;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    use getProducts, getSkus;
+    use getProducts, getFilterParams, getSkus;
 
     public function index()
     {
@@ -22,16 +23,7 @@ class CategoryController extends Controller
     {
         $category = Category::where('slug', $categorySlug)->first();
 
-        $filterParams['category_id'] = $category->id;
-        $filterParams['priceFrom'] = $request->price_from;
-        $filterParams['priceTo'] = $request->price_to;
-        $filterParams['types'] = $request->types;
-        $filterParams['styles'] = $request->styles;
-        $filterParams['surfaces'] = $request->surfaces;
-        $filterParams['colors'] = $request->color ? explode(',', $request->color) : null;
-        $filterParams['glasses'] = $request->glasses;
-        $filterParams['page'] = $request->page ? $request->page : 1;
-        $filterParams['order'] = $request->order ? $request->order : 'price_asc';
+        $filterParams = $this->getFilterParams($request, 'product', $category->id);
 
         $perPage = 30;
 

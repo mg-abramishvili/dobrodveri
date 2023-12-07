@@ -82,6 +82,21 @@
         </div>
     </div>
 
+    <div v-if="category_id == 2" class="filter-box">
+        <p>Внутренняя отделка</p>
+        
+        <div class="filter-box-list">
+            <template v-for="innerdecor in innerdecors">
+                <div class="form-check">
+                    <input v-model="selected.innerdecors" class="form-check-input" type="checkbox" :value="innerdecor.slug" :id="'innerdecor_' + innerdecor.slug" :disabled="innerdecor.skus_count == 0">
+                    <label class="form-check-label" :class="{ 'form-check-label-disabled': innerdecor.skus_count == 0 }" :for="'innerdecor_' + innerdecor.slug">
+                        {{ innerdecor.name }} <small>{{ innerdecor.skus_count }}</small>
+                    </label>
+                </div>
+            </template>
+        </div>
+    </div>
+
     <div class="category-filter-buttons">
         <button @click="applyFilter()" class="category-filter-button">
             Применить фильтр

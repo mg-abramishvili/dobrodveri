@@ -11,11 +11,12 @@ use App\Models\Color;
 use App\Models\Glass;
 use App\Http\Resources\SkuResource;
 use App\Traits\getSkus;
+use App\Traits\getFilterParams;
 use Illuminate\Http\Request;
 
 class SkuController extends Controller
 {
-    use getSkus;
+    use getFilterParams, getSkus;
 
     public function addToFavorite(Request $request)
     {
@@ -47,17 +48,8 @@ class SkuController extends Controller
 
     public function indexData(Request $request)
     {
-        $filterParams['category_id'] = $request->category_id;
-        $filterParams['priceFrom'] = $request->price_from;
-        $filterParams['priceTo'] = $request->price_to;
-        $filterParams['types'] = $request->types;
-        $filterParams['styles'] = $request->styles;
-        $filterParams['surfaces'] = $request->surfaces;
-        $filterParams['colors'] = $request->colors;
-        $filterParams['glasses'] = $request->glasses;
-        $filterParams['page'] = $request->page ? $request->page : 1;
-        $filterParams['order'] = $request->order ? $request->order : 'price_asc';
-        
+        $filterParams = $this->getFilterParams($request, 'sku', null);
+
         $perPage = 30;
         
         return $this->getSkus($filterParams, $perPage);
