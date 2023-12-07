@@ -14,8 +14,6 @@ class ProductResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $colors = $this->skus->unique('color_id')->values()->all();
-
         $price = $this->price;
         $oldPrice = $this->factory && $this->factory->coef ? round($this->price * $this->factory->coef / 10) * 10 : null;
         $percent = $oldPrice ?  round((1 - $price / $oldPrice) * 100, 0) : null;
@@ -37,8 +35,7 @@ class ProductResource extends JsonResource
             'old_price' => $oldPrice,
             'percent' => $percent ? '-' . $percent . '%' : null,
             'skus' => SkuResource::collection($this->skus),
-            'colors' => count($colors) > 0 ? ProductColorResource::collection(array_slice($colors, 0, 6)) : null,
-            'other_colors' => count($colors) > 3 ? ProductColorResource::collection(array_slice($colors, 6)) : null,
+            'colors' => ProductColorResource::collection($this->skus->unique('color_id')->values()->all()),
             'glasses' => ProductGlassResource::collection($this->skus->where('glass_id', '!=', null)->unique('glass_id')->values()->all()),
             'reviews' => ProductReviewResource::collection($this->reviews->where('is_active', 1)),
             'rating' => $this->reviews->where('is_active', 1)->count() ? $this->reviews->where('is_active', 1)->sum('rating') / $this->reviews->where('is_active', 1)->count() : null,
