@@ -29,6 +29,11 @@ class Sku extends Model
         return $this->hasOneThrough(Surface::class, Product::class, 'id', 'id', 'product_id', 'surface_id');
     }
 
+    public function purpose()
+    {
+        return $this->hasOneThrough(Purpose::class, Product::class, 'id', 'id', 'product_id', 'purpose_id');
+    }
+
     public function color()
     {
         return $this->belongsTo(Color::class);
