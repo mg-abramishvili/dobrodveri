@@ -576,6 +576,8 @@ header .container {
 }
 .products-list-item .products-list-item-name {
     margin: 0;
+    height: 40px;
+    overflow: hidden;
 }
 .products-list-item-price,
 .products-list-item-price small {
@@ -584,9 +586,28 @@ header .container {
 .products-list-item-price {
     font-weight: 700;
     color: #FF9414;
+    display: flex;
+    justify-content: center;
 }
 .products-list-item-price small {
-    color: #60605e;
+    margin-left: 3px;
+}
+.products-list-item-price-old {
+    color: #777;
+    font-weight: 400;
+    margin-left: 10px;
+    text-decoration: line-through;
+}
+.products-list-item-percent {
+    position: absolute;
+    bottom: 100px;
+    left: 20px;
+    color: #fff;
+    background-color: red;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-weight: 700;
+    font-size: 14px;
 }
 .products-list-item-image {
     height: 250px;
@@ -604,7 +625,7 @@ header .container {
 .products-list-item-colors {
     display: none;
     position: absolute;
-    top: 20px;
+    top: 40px;
     right: 20px;
 }
 .products-list-item a:hover .products-list-item-colors {
@@ -620,6 +641,30 @@ header .container {
     height: 25px;
     border-radius: 100%;
     border: 2px solid #ccc;
+}
+.products-list-item-tags {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.products-list-item-tag {
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+.products-list-item-tag-hit {
+    background-color: #FF9414;
+}
+.products-list-item-tag-special {
+    background-color: rgb(247, 73, 73);
+}
+.products-list-item-tag-discount {
+    background-color: #FF9414;
+}
+.products-list-item-tag-sale {
+    background-color: #FF9414;
 }
 .product-list-item-sku-params {
     height: 100px;

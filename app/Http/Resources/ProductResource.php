@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\ProductColorResource;
 use App\Http\Resources\ProductGlassResource;
 use App\Http\Resources\ProductReviewResource;
+use App\Http\Resources\SkuResource;
 use App\Models\Promo;
 
 class ProductResource extends JsonResource
@@ -25,10 +26,11 @@ class ProductResource extends JsonResource
             'type' => $this->type ? $this->type->name : null,
             'construct' => $this->construct ? $this->construct->name : null,
             'surface' => $this->surface ? $this->surface->name : null,
-            'factory_coef' => $this->factory ? $this->factory->coef : null,
             'sizes' => $this->sizes,
-            'price' => $this->skus->count() && $this->skus->first()->price ? $this->skus->first()->price : $this->price,
-            'skus' => $this->skus->load('color', 'glass', 'innerdecor'),
+            'price' => $this->price,
+            'old_price' => $this->factory && $this->factory->coef ? round($this->price * $this->factory->coef / 10) * 10 : null,
+            // 'skus' => $this->skus->load('color', 'glass', 'innerdecor'),
+            'skus' => SkuResource::collection($this->skus),
             'colors' => ProductColorResource::collection($this->skus->unique('color_id')->values()->all()),
             'glasses' => ProductGlassResource::collection($this->skus->where('glass_id', '!=', null)->unique('glass_id')->values()->all()),
             'reviews' => ProductReviewResource::collection($this->reviews->where('is_active', 1)),

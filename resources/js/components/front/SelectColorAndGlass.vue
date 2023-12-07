@@ -140,8 +140,10 @@ export default {
             }
         },
         priceOld() {
-            if(this.product.factory_coef) {
-                return Math.round(this.price * this.product.factory_coef / 10) * 10
+            if(this.selectedSKU && this.selectedSKU.old_price > 0) {
+                return this.selectedSKU.old_price
+            } else {
+                return this.product.old_price ? this.product.old_price : null
             }
         },
     },

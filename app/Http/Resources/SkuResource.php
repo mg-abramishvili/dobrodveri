@@ -23,6 +23,10 @@ class SkuResource extends JsonResource
         $link = count($linkParams) > 0 ? $linkInitial . '?' . implode("", $linkParams) : $linkInitial;
 
 
+        $price = $this->price ? $this->price : $this->product->price;
+        $oldPrice = $this->product->factory && $this->product->factory->coef ? round($price * $this->product->factory->coef / 10) * 10 : null;
+
+
         return [
             'id' => $this->id,
             'name' => $this->product->name,
@@ -31,9 +35,12 @@ class SkuResource extends JsonResource
             'type' => $this->product->type,
             'surface' => $this->product->surface,
             'color' => $this->color,
+            'color_id' => $this->color_id,
             'glass' => $this->glass,
+            'glass_id' => $this->glass_id,
             'image' => $this->image,
-            'price' => $this->price ? $this->price : $this->product->price,
+            'price' => $price,
+            'old_price' => $oldPrice,
             'all_colors' => ProductColorResource::collection($this->product->skus->unique('color_id')->values()->all()),
             'link' => $link,
         ];
