@@ -22,10 +22,11 @@ class SkuResource extends JsonResource
         
         $link = count($linkParams) > 0 ? $linkInitial . '?' . implode("", $linkParams) : $linkInitial;
 
+        $colors = $this->product->skus->unique('color_id')->values()->all();
 
         $price = $this->price ? $this->price : $this->product->price;
         $oldPrice = $this->product->factory && $this->product->factory->coef ? round($price * $this->product->factory->coef / 10) * 10 : null;
-
+        $percent = $oldPrice ?  round((1 - $price / $oldPrice) * 100, 0) : null;
 
         return [
             'id' => $this->id,
@@ -41,8 +42,13 @@ class SkuResource extends JsonResource
             'image' => $this->image,
             'price' => $price,
             'old_price' => $oldPrice,
-            'all_colors' => ProductColorResource::collection($this->product->skus->unique('color_id')->values()->all()),
+            'percent' => $percent ? '-' . $percent . '%' : null,
+            'colors' => count($colors) > 0 ? ProductColorResource::collection(array_slice($colors, 0, 6)) : null,
+            'other_colors' => count($colors) > 3 ? ProductColorResource::collection(array_slice($colors, 6)) : null,
             'link' => $link,
+            'balance' => $this->product->balance,
+            'hit' => $this->product->hit,
+            'special' => $this->product->special,
         ];
     }
 }
