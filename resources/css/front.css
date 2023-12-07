@@ -578,6 +578,7 @@ header .container {
     display: none;
     width: 100%;
     justify-content: center;
+    position: absolute;
 }
 .products-list-item:hover .products-list-item-buttons {
     display: flex;
