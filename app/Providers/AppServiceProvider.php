@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
                                         ->take(12)
                                         ->get();
 
-            $shareData['popularProducts'] = json_encode(ProductResource::collection($popularProducts));
+            $shareData['popularProducts'] = json_encode(ProductsResource::collection($popularProducts));
         }
 
         if (Schema::hasTable('pages'))

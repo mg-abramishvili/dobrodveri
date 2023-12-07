@@ -565,7 +565,7 @@ header .container {
     height: 400px;
     margin-bottom: 25px;
 }
-.container .category-products {
+.container .category-products .products-list-item {
     width: 25%;
 }
 .products-list-item .product-list-item-inner {
