@@ -8,8 +8,7 @@
             class="product-detail-slider-mini"
         >
             <swiper-slide v-for="(sku, index) in product.skus" @click="selectThumb(index)" :id="'mini-slide' + index">
-                <img v-if="sku.image" :src="sku.image" alt="">
-                <img v-else src="/img/no-image.jpg" alt="">
+                <img :src="sku.image ? sku.image : '/img/no-image.jpg'" :alt="sku.name">
             </swiper-slide>
             
             <button v-if="product.skus.length > 4" @click="prevMini()" class="button-prev">
@@ -32,10 +31,9 @@
             :class="{'product-detail-slider-vkhod': product.category.id == 2}"
         >
             <swiper-slide v-for="(sku, index) in product.skus">
-                <img v-if="product.vkhod_image" :src="product.vkhod_image" alt="">
+                <img v-if="product.vkhod_image" :src="product.vkhod_image" :alt="sku.name">
 
-                <img v-if="sku.image" :src="sku.image" alt="">
-                <img v-else src="/img/no-image.jpg" alt="">
+                <img :src="sku.image ? sku.image : '/img/no-image.jpg'" :alt="sku.name">
             </swiper-slide>
         </swiper>
     </div>

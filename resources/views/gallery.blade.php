@@ -5,27 +5,27 @@
         <div class="swiper gallery-slider">
             <div class="swiper-wrapper">
                 <div class="swiper-slide gallery-slider-item">
-                    <img src="/img/no-image.jpg" alt="">
+                    <img src="/img/no-image.jpg" alt="Примеры наших работ">
                 </div>
 
                 <div class="swiper-slide gallery-slider-item">
-                    <img src="/img/no-image.jpg" alt="">
+                    <img src="/img/no-image.jpg" alt="Примеры наших работ">
                 </div>
 
                 <div class="swiper-slide gallery-slider-item">
-                    <img src="/img/no-image.jpg" alt="">
+                    <img src="/img/no-image.jpg" alt="Примеры наших работ">
                 </div>
 
                 <div class="swiper-slide gallery-slider-item">
-                    <img src="/img/no-image.jpg" alt="">
+                    <img src="/img/no-image.jpg" alt="Примеры наших работ">
                 </div>
 
                 <div class="swiper-slide gallery-slider-item">
-                    <img src="/img/no-image.jpg" alt="">
+                    <img src="/img/no-image.jpg" alt="Примеры наших работ">
                 </div>
 
                 <div class="swiper-slide gallery-slider-item">
-                    <img src="/img/no-image.jpg" alt="">
+                    <img src="/img/no-image.jpg" alt="Примеры наших работ">
                 </div>
             </div>
 
