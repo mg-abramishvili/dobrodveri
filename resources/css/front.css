@@ -597,6 +597,7 @@ header .container {
 .products-list-item-credit {
     display: none;
     background-color: #219d06;
+    border-radius: 4px;
     color: #fff;
     position: absolute;
     right: 15px;
