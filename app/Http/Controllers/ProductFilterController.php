@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Sku;
 use App\Models\Type;
 use App\Models\Style;
-use App\Models\Surface;
 use App\Models\Color;
 use App\Models\Glass;
+use App\Models\Surface;
+use App\Models\InnerDecor;
+use App\Models\Purpose;
+use App\Models\FurnitureType;
 use Illuminate\Http\Request;
 
 class ProductFilterController extends Controller
@@ -22,6 +25,9 @@ class ProductFilterController extends Controller
         $filterParams['surfaces'] = $request->surfaces;
         $filterParams['colors'] = $request->colors;
         $filterParams['glasses'] = $request->glasses;
+        $filterParams['innerdecors'] = $request->innerdecors;
+        $filterParams['purposes'] = $request->purposes;
+        $filterParams['furnituretypes'] = $request->furnituretypes;
 
         $filteredTypes = Type::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['types'] = null;
@@ -52,6 +58,24 @@ class ProductFilterController extends Controller
             
             $query->withFilters($filterParams);
         }])->orderBy('skus_count', 'desc')->get();
+
+        $filteredInnerDecors = InnerDecor::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['innerdecors'] = null;
+            
+            $query->withFilters($filterParams);
+        }])->orderBy('skus_count', 'desc')->get();
+
+        $filteredPurposes = Purpose::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['purposes'] = null;
+            
+            $query->withFilters($filterParams);
+        }])->orderBy('skus_count', 'desc')->get();
+
+        $filteredFurnitureTypes = FurnitureType::withCount(['skus' => function ($query) use($filterParams) {
+            $filterParams['furnituretypes'] = null;
+            
+            $query->withFilters($filterParams);
+        }])->orderBy('skus_count', 'desc')->get();
         
         return response()->json([
             'types' => $filteredTypes,
@@ -59,6 +83,9 @@ class ProductFilterController extends Controller
             'surfaces' => $filteredSurfaces,
             'colors' => $filteredColors,
             'glasses' => $filteredGlasses,
+            'innerdecors' => $filteredInnerDecors,
+            'purposes' => $filteredPurposes,
+            'furnituretypes' => $filteredFurnitureTypes,
         ]);
     }
 }

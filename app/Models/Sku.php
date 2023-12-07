@@ -69,11 +69,6 @@ class Sku extends Model
                     $query->whereIn('styles.slug', $filterParams['styles']);
                 });
             })
-            ->when(isset($filterParams['surfaces']), function ($query) use ($filterParams) {
-                $query->whereHas('surface', function($query) use($filterParams) {
-                    $query->whereIn('surfaces.slug', $filterParams['surfaces']);
-                });
-            })
             ->when(isset($filterParams['colors']), function ($query) use ($filterParams) {
                 $query->whereHas('color', function($query) use($filterParams) {
                     $query->whereIn('colors.slug', $filterParams['colors']);
@@ -82,6 +77,26 @@ class Sku extends Model
             ->when(isset($filterParams['glasses']), function ($query) use ($filterParams) {
                 $query->whereHas('glass', function($query) use($filterParams) {
                     $query->whereIn('glasses.slug', $filterParams['glasses']);
+                });
+            })
+            ->when(isset($filterParams['surfaces']), function ($query) use ($filterParams) {
+                $query->whereHas('surface', function($query) use($filterParams) {
+                    $query->whereIn('surfaces.slug', $filterParams['surfaces']);
+                });
+            })
+            ->when(isset($filterParams['innerdecors']), function ($query) use ($filterParams) {
+                $query->whereHas('innerdecors', function($query) use($filterParams) {
+                    $query->whereIn('innerdecors.slug', $filterParams['innerdecors']);
+                });
+            })
+            ->when(isset($filterParams['purposes']), function ($query) use ($filterParams) {
+                $query->whereHas('purposes', function($query) use($filterParams) {
+                    $query->whereIn('purposes.slug', $filterParams['purposes']);
+                });
+            })
+            ->when(isset($filterParams['furnituretypes']), function ($query) use ($filterParams) {
+                $query->whereHas('furnituretypes', function($query) use($filterParams) {
+                    $query->whereIn('furnituretypes.slug', $filterParams['furnituretypes']);
                 });
             });
     }

@@ -30,24 +30,28 @@
                     req_style="{{ request()->style }}"
                 @endif
 
-                @if(request()->innerdecor)
-                    req_inner_decor="{{ request()->innerdecor }}"
-                @endif
-
-                @if(request()->furnituretype)
-                    req_furniture_type="{{ request()->furnituretype }}"
-                @endif
-
-                @if(request()->surface)
-                    req_surface="{{ request()->surface }}"
-                @endif
-
                 @if(request()->color)
                     req_color="{{ request()->color }}"
                 @endif
 
                 @if(request()->glass)
                     req_glass="{{ request()->glass }}"
+                @endif
+
+                @if(request()->surface)
+                    req_surface="{{ request()->surface }}"
+                @endif
+
+                @if(request()->innerdecor)
+                    req_innerdecor="{{ request()->innerdecor }}"
+                @endif
+
+                @if(request()->purpose)
+                    req_purpose="{{ request()->purpose }}"
+                @endif
+
+                @if(request()->furnituretype)
+                    req_furnituretype="{{ request()->furnituretype }}"
                 @endif
             />
         </aside>

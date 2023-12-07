@@ -97,6 +97,36 @@
         </div>
     </div>
 
+    <div v-if="category_id == 2" class="filter-box">
+        <p>Назначение двери</p>
+        
+        <div class="filter-box-list">
+            <template v-for="purpose in purposes">
+                <div class="form-check">
+                    <input v-model="selected.purposes" class="form-check-input" type="checkbox" :value="purpose.slug" :id="'purpose_' + purpose.slug" :disabled="purpose.skus_count == 0">
+                    <label class="form-check-label" :class="{ 'form-check-label-disabled': purpose.skus_count == 0 }" :for="'purpose_' + purpose.slug">
+                        {{ purpose.name }} <small>{{ purpose.skus_count }}</small>
+                    </label>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <div v-if="category_id == 3" class="filter-box">
+        <p>Тип фурнитуры</p>
+        
+        <div class="filter-box-list">
+            <template v-for="furnituretype in furnituretypes">
+                <div class="form-check">
+                    <input v-model="selected.furnituretypes" class="form-check-input" type="checkbox" :value="furnituretype.slug" :id="'furnituretype_' + furnituretype.slug" :disabled="furnituretype.skus_count == 0">
+                    <label class="form-check-label" :class="{ 'form-check-label-disabled': furnituretype.skus_count == 0 }" :for="'furnituretype_' + furnituretype.slug">
+                        {{ furnituretype.name }} <small>{{ furnituretype.skus_count }}</small>
+                    </label>
+                </div>
+            </template>
+        </div>
+    </div>
+
     <div class="category-filter-buttons">
         <button @click="applyFilter()" class="category-filter-button">
             Применить фильтр
@@ -118,19 +148,23 @@ export default {
         'req_price_to',
         'req_type',
         'req_style',
-        'req_surface',
-        'req_inner_decor',
-        'req_furniture_type',
         'req_color',
         'req_glass',
+        'req_surface',
+        'req_innerdecor',
+        'req_purpose',
+        'req_furnituretype',
     ],
     data() {
         return {
             types: [],
             styles: [],
-            surfaces: [],
             colors: [],
             glasses: [],
+            surfaces: [],
+            innerdecors: [],
+            purposes: [],
+            furnituretypes: [],
 
             selected: {},
 
@@ -140,9 +174,12 @@ export default {
                 price_to: 100000,
                 types: [],
                 styles: [],
-                surfaces: [],
                 colors: [],
                 glasses: [],
+                surfaces: [],
+                innerdecors: [],
+                purposes: [],
+                furnituretypes: [],
             },
 
             views: {
@@ -196,25 +233,55 @@ export default {
                 })
             }
 
+            if(this.req_surface && this.req_surface.split(',').length) {
+                this.req_surface.split(',').forEach(c => {
+                    this.selected.surfaces.push(c)
+                })
+            }
+
+            if(this.req_inner_decor && this.req_inner_decor.split(',').length) {
+                this.req_inner_decor.split(',').forEach(c => {
+                    this.selected.innerdecors.push(c)
+                })
+            }
+
+            if(this.req_purpose && this.req_purpose.split(',').length) {
+                this.req_purpose.split(',').forEach(c => {
+                    this.selected.purposes.push(c)
+                })
+            }
+
+            if(this.req_furniture_type && this.req_furniture_type.split(',').length) {
+                this.req_furniture_type.split(',').forEach(c => {
+                    this.selected.furnituretypes.push(c)
+                })
+            }
+
             this.loadFilter()
         },
         loadFilter() {
             axios.get(`/_product_filter`, {
                 params: {
                     category_id: this.selected.category_id,
-                    colors: this.selected.colors,
-                    glasses: this.selected.glasses,
                     types: this.selected.types,
                     styles: this.selected.styles,
+                    colors: this.selected.colors,
+                    glasses: this.selected.glasses,
                     surfaces: this.selected.surfaces,
+                    innerdecors: this.selected.innerdecors,
+                    purposes: this.selected.purposes,
+                    furnituretypes: this.selected.furnituretypes,
                 }
             })
             .then(response => {
-                this.types = response.data.types
-                this.styles = response.data.styles
-                this.surfaces = response.data.surfaces
-                this.colors = response.data.colors
-                this.glasses = response.data.glasses
+                this.types = response.data.types,
+                this.styles = response.data.styles,
+                this.colors = response.data.colors,
+                this.glasses = response.data.glasses,
+                this.surfaces = response.data.surfaces,
+                this.innerdecors = response.data.innerdecors,
+                this.purposes = response.data.purposes,
+                this.furnituretypes = response.data.furnituretypes,
 
                 this.views.loading = false
             })
@@ -246,16 +313,28 @@ export default {
                 filterParamsURL.push('&style=' + this.selected.styles.join(','))
             }
 
-            if(this.selected.surfaces.length) {
-                filterParamsURL.push('&surface=' + this.selected.surfaces.join(','))
-            }
-
             if(this.selected.colors.length) {
                 filterParamsURL.push('&color=' + this.selected.colors.join(','))
             }
 
             if(this.selected.glasses.length) {
                 filterParamsURL.push('&glass=' + this.selected.glasses.join(','))
+            }
+
+            if(this.selected.surfaces.length) {
+                filterParamsURL.push('&surface=' + this.selected.surfaces.join(','))
+            }
+
+            if(this.selected.innerdecors.length) {
+                filterParamsURL.push('&surface=' + this.selected.innerdecors.join(','))
+            }
+
+            if(this.selected.purposes.length) {
+                filterParamsURL.push('&surface=' + this.selected.purposes.join(','))
+            }
+
+            if(this.selected.furnituretypes.length) {
+                filterParamsURL.push('&surface=' + this.selected.furnituretypes.join(','))
             }
 
             history.pushState(null, null, '?' + filterParamsURL.join(""))
