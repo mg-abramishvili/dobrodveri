@@ -36,7 +36,7 @@ class Sku extends Model
 
     public function furnituretype()
     {
-        return $this->hasOneThrough(FurnitureType::class, Product::class, 'id', 'id', 'product_id', 'furnituretype_id');
+        return $this->hasOneThrough(FurnitureType::class, Product::class, 'id', 'id', 'product_id', 'furniture_type_id');
     }
 
     public function color()
