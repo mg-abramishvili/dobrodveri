@@ -34,6 +34,11 @@ class Sku extends Model
         return $this->hasOneThrough(Purpose::class, Product::class, 'id', 'id', 'product_id', 'purpose_id');
     }
 
+    public function furnituretype()
+    {
+        return $this->hasOneThrough(FurnitureType::class, Product::class, 'id', 'id', 'product_id', 'type_id');
+    }
+
     public function color()
     {
         return $this->belongsTo(Color::class);
@@ -100,7 +105,7 @@ class Sku extends Model
                 });
             })
             ->when(isset($filterParams['furnituretypes']), function ($query) use ($filterParams) {
-                $query->whereHas('furnituretypes', function($query) use($filterParams) {
+                $query->whereHas('furnituretype', function($query) use($filterParams) {
                     $query->whereIn('furnituretypes.slug', $filterParams['furnituretypes']);
                 });
             });
