@@ -14,7 +14,7 @@ class ProductsResource extends JsonResource
         $colors = $this->skus->unique('color_id')->values()->all();
         $price = $this->skus->count() && $this->skus->first()->price ? $this->skus->first()->price : $this->price;
         $oldPrice = $this->factory && $this->factory->coef ? round($price * $this->factory->coef / 10) * 10 : null;
-        $percent = $oldPrice ?  round((1 - $price / $oldPrice) * 100, 1) : null;
+        $percent = $oldPrice ?  round((1 - $price / $oldPrice) * 100, 0) : null;
 
         return [
             'id' => $this->id,
