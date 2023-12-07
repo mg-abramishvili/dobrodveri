@@ -577,6 +577,7 @@ header .container {
     height: 100%;
     border-radius: 8px;
     height: 100%;
+    background-color: #fff;
 }
 .products-list-item:hover .product-list-item-inner,
 .products-list-item:focus .product-list-item-inner {
