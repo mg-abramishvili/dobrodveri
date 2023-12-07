@@ -30,7 +30,18 @@ class CategoryController extends Controller
         $productsWithPagination = null;
         $skusWithPagination = null;
 
-        if($filterParams['colors'])
+        $rulesForSKU = [
+            "types",
+            "styles",
+            "colors",
+            "glasses",
+            "surfaces",
+            "innerdecors",
+            "purposes",
+            "furnituretypes",
+        ];
+        
+        if(count(array_intersect($rulesForSKU, array_keys($filterParams))) > 0)
         {
             $skusWithPagination = $this->getSkus($filterParams, $perPage)->getContent();
         }
