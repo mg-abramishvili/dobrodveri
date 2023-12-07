@@ -594,6 +594,19 @@ header .container {
     text-decoration: none;
     color: #151528;
 }
+.products-list-item-credit {
+    display: none;
+    background-color: #219d06;
+    color: #fff;
+    position: absolute;
+    right: 15px;
+    top: 245px;
+    font-size: 12px;
+    padding: 3px 4px;
+}
+.products-list-item:hover .products-list-item-credit {
+    display: block;
+}
 .products-list-item-buttons {
     display: none;
     width: 100%;

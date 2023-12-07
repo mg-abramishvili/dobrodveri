@@ -15,15 +15,15 @@
                 @endif
             </div>
     
+            <div class="products-list-item-name">
+                {{ $product['name'] }}
+            </div>
+
             @if($product['percent'])
                 <div class="products-list-item-percent">
                     {{ $product['percent'] }}
                 </div>
             @endif
-    
-            <div class="products-list-item-name">
-                {{ $product['name'] }}
-            </div>
 
             @if($product['balance'])
                 <div class="products-list-item-balance">
@@ -37,6 +37,10 @@
                     {{ $product['balance'] }}
                 </div>
             @endif
+
+            <div class="products-list-item-credit">
+                Рассрочка 0%
+            </div>
     
             <div class="products-list-item-tags">
                 @if($product['hit'])
