@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductsResource;
 use App\Traits\storeInRecentlyViewed;
 use Illuminate\Http\Request;
 
@@ -29,9 +30,9 @@ class ProductController extends Controller
         
         $product->save();
 
-        $productResource = new ProductResource(Product::where('slug', $productSlug)->first());
+        $productResource = new ProductResource($product);
 
-        $this->storeInRecentlyViewed(json_encode($productResource));
+        $this->storeInRecentlyViewed(json_encode(new ProductsResource($product)));
 
         return view('product', ['product' => json_encode($productResource)]);
     }
