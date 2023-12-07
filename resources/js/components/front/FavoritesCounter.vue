@@ -1,5 +1,5 @@
 <template>
-    <div class="favorites-coutner">
+    <div class="favorites-counter">
         {{ counter }}
     </div>
 </template>

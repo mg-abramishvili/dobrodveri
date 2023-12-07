@@ -187,7 +187,8 @@ header .container {
     border-bottom: 1px solid #ccc;
     text-decoration: none;
 }
-.favorites-coutner {
+.favorites-counter,
+.promo-counter {
     background-color: #FF9414;
     color: #fff;
     font-weight: 700;

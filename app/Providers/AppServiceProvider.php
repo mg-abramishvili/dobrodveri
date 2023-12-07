@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Page;
+use App\Models\Promo;
 use App\Http\Resources\ProductsResource;
 
 class AppServiceProvider extends ServiceProvider
@@ -53,6 +54,13 @@ class AppServiceProvider extends ServiceProvider
             
             $shareData['pages'] = $pages;
             $shareData['pagesAbout'] = $pagesAbout;
+        }
+
+        if (Schema::hasTable('promos'))
+        {
+            $promoCounter = Promo::all()->count();
+
+            $shareData['promoCounter'] = $promoCounter;
         }
         
         View::share($shareData);
