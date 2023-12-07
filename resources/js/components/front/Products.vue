@@ -89,6 +89,21 @@ export default {
             this.pagination.prevPage = this.pagination.currentPage > 1 ? this.pagination.currentPage - 1 : null
             this.pagination.nextPage = this.pagination.currentPage < this.pagination.totalPages ? this.pagination.currentPage + 1 : null
         },
+        prevPage() {
+            this.pagination.currentPage = this.pagination.prevPage
+
+            this.goToPage(this.pagination.prevPage)
+        },
+        nextPage() {
+            this.pagination.currentPage = this.pagination.nextPage
+
+            this.goToPage(this.pagination.nextPage)
+        },
+        goToPage(page) {
+            window.scrollTo(0, 0)
+            
+            return this.loadProductSKUs(page)
+        },
         changeOrder(event) {
             this.order = event.target.value
             
