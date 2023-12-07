@@ -95,7 +95,7 @@ class Sku extends Model
                 });
             })
             ->when(isset($filterParams['purposes']), function ($query) use ($filterParams) {
-                $query->whereHas('purposes', function($query) use($filterParams) {
+                $query->whereHas('purpose', function($query) use($filterParams) {
                     $query->whereIn('purposes.slug', $filterParams['purposes']);
                 });
             })
