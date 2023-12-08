@@ -56,11 +56,20 @@
             <a href="tel:+79378504040">Заказать</a>
             <a :href="sku.link">Подробнее</a>
         </div>
+
+        <div class="products-list-item-heart">
+            <AddToFavorites :sku_id="sku.id" />
+        </div>
     </div>
 </template>
 
 <script>
+import AddToFavorites from '../AddToFavorites.vue'
+
 export default {
-    props: ['sku'],   
+    props: ['sku'],
+    components: {
+        AddToFavorites
+    },
 }
 </script>

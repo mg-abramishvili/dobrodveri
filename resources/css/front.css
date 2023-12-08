@@ -634,6 +634,33 @@ header .container {
 .products-list-item:hover .products-list-item-credit {
     display: block;
 }
+.products-list-item-heart {
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.products-list-item:hover .products-list-item-heart {
+    display: block;
+}
+.products-list-item-heart button {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+}
+.products-list-item-heart button svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: rgb(255, 82, 82);
+}
+.products-list-item-heart button:hover {
+    cursor: pointer;
+}
+.products-list-item-heart button:hover svg {
+    color: red;
+}
 .products-list-item-buttons {
     display: none;
     width: 100%;
@@ -734,7 +761,7 @@ header .container {
 .products-list-item-colors {
     display: none;
     position: absolute;
-    top: 50px;
+    top: 60px;
     right: 15px;
 }
 .products-list-item:hover .products-list-item-colors {
