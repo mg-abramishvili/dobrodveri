@@ -3,6 +3,7 @@
 use App\Models\MainSlider;
 use App\Models\Product;
 use App\Models\Promo;
+use App\Models\Page;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
