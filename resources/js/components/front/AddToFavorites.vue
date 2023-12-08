@@ -11,10 +11,16 @@
         </template>
     </button>
         
-    <button v-if="SkuInFavorites">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-heart-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-        </svg>
+    <button v-if="SkuInFavorites" @click="remove()">
+        <template v-if="views.addToFavoritesButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+            </svg>
+        </template>
+
+        <template v-if="!views.addToFavoritesButton">
+            <LoaderSpinner />
+        </template>
     </button>
 </template>
 
@@ -73,6 +79,24 @@ export default {
                 }, 1000)
             })
         },
+        remove() {
+            if(!this.sku_id) {
+                return
+            }
+
+            this.views.addToFavoritesButton = false
+
+            axios.delete(`/_favorite/${this.sku_id}`)
+            .then(response => {
+                this.emitter.emit('favorite-count', 'New Favorite Item Added!')
+
+                setTimeout(() => {
+                    this.views.addToFavoritesButton = true
+
+                    this.loadFavorites()
+                }, 1000)
+            })
+        }
     },
     components: {
         LoaderSpinner
