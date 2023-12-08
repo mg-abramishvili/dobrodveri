@@ -889,7 +889,7 @@ header .container {
     margin: 0 auto;
 }
 .product-detail-slider-vkhod .swiper-slide img {
-    max-width: 50%;
+    max-width: calc(50% - 10px);
 }
 .swiper.product-detail-slider-mini {
     height: 500px;
@@ -1397,6 +1397,21 @@ header .container {
     flex-wrap: wrap;
     justify-content: flex-start;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.how-to-buy-item:nth-child(2):before,
+.how-to-buy-item:nth-child(3):before,
+.how-to-buy-item:nth-child(4):before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 0;
+    margin-left: -80px;
+    height: 2px;
+    background-color: #FF9414;
+    width: 100px;
 }
 .how-to-buy-item-icon {
     width: 100px;

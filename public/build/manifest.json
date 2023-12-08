@@ -8,7 +8,7 @@
     "src": "resources/css/admin.css"
   },
   "resources/css/front.css": {
-    "file": "assets/front-356e227e.css",
+    "file": "assets/front-dce3dd8b.css",
     "isEntry": true,
     "src": "resources/css/front.css"
   },
@@ -44,7 +44,7 @@
     "css": [
       "assets/admin-3f40aef1.css"
     ],
-    "file": "assets/admin-d24b0a2e.js",
+    "file": "assets/admin-19596cb6.js",
     "imports": [
       "_globalFilters-e23ead2f.js"
     ],
@@ -59,7 +59,7 @@
     "css": [
       "assets/front-51439c61.css"
     ],
-    "file": "assets/front-6827c72f.js",
+    "file": "assets/front-298de314.js",
     "imports": [
       "_globalFilters-e23ead2f.js"
     ],
