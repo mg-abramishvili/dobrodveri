@@ -147,6 +147,7 @@ export default {
     props: [
         'category_id',
         'category_slug',
+        'req_order',
         'req_price_from',
         'req_price_to',
         'req_type',
@@ -173,6 +174,7 @@ export default {
 
             initialFilterParams: {
                 category_id: this.category_id,
+                order: 'price_asc',
                 price_from: 0,
                 price_to: 100000,
                 types: [],
@@ -204,6 +206,10 @@ export default {
     },
     methods: {
         loadRequestedFilterParams() {
+            if(this.req_order) {
+                this.selected.order = this.req_order
+            }
+
             if(this.req_price_from) {
                 this.selected.price_from = this.req_price_from
             }
@@ -302,14 +308,6 @@ export default {
         genURL() {
             let filterParamsURL = []
 
-            if(this.selected.price_from.length) {
-                filterParamsURL.push('&price_from=' + this.selected.price_from)
-            }
-
-            if(this.selected.price_to.length) {
-                filterParamsURL.push('&price_to=' + this.selected.price_to)
-            }
-
             if(this.selected.types.length) {
                 filterParamsURL.push('&type=' + this.selected.types.join(','))
             }
@@ -340,6 +338,18 @@ export default {
 
             if(this.selected.furnituretypes.length) {
                 filterParamsURL.push('&furnituretype=' + this.selected.furnituretypes.join(','))
+            }
+
+            if(this.selected.price_from.length) {
+                filterParamsURL.push('&price_from=' + this.selected.price_from)
+            }
+
+            if(this.selected.price_to.length) {
+                filterParamsURL.push('&price_to=' + this.selected.price_to)
+            }
+
+            if(this.selected.order.length) {
+                filterParamsURL.push('&order=' + this.selected.order)
             }
 
             history.pushState(null, null, '?' + filterParamsURL.join(""))

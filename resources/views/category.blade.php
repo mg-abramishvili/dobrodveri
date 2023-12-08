@@ -11,10 +11,14 @@
         <h1 class="title-header">{{ $category->name }}</h1>
 
         <aside class="category-filter">
-            <product-filter
+            <products-filter
                 :category_id="{{ $category->id }}"
                 
                 category_slug="{{ $category->slug }}"
+                
+                @if(request()->order)
+                    req_order="{{ request()->order }}"
+                @endif
 
                 @if(request()->price_from)
                     req_price_from="{{ request()->price_from }}"
@@ -55,10 +59,16 @@
                 @if(request()->furnituretype)
                     req_furnituretype="{{ request()->furnituretype }}"
                 @endif
-            />
+            ></products-filter>
         </aside>
 
         <div class="category-products">
+            <products-order
+                @if(request()->order)
+                    req_order="{{ request()->order }}"
+                @endif
+            ></products-order>
+
             <div id="category-products-list" class="category-products-list">
                 @if($productsWithPagination)
                     @each('product-list-item', $productsWithPagination['products'], 'product')
@@ -69,7 +79,7 @@
                 @endif
             </div>
 
-            <products />
+            <products></products>
         </div>
     </div>
 

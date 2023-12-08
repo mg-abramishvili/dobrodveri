@@ -2,12 +2,6 @@
     <Loader v-if="start && views.loading" />
     
     <template v-if="start && !views.loading">
-        <select @change="changeOrder($event)">
-            <option value="price_asc" :selected="order == 'price_asc'">По возрастанию цены</option>
-            <option value="price_desc" :selected="order == 'price_desc'">По убыванию цены</option>
-            <option value="popular" :selected="order == 'popular'">По популярности</option>
-        </select>
-
         <div v-if="productSKUs.length" class="category-products-list">
             <div v-for="sku in productSKUs" class="products-list-item">
                 <SkuListItem :sku="sku" />
@@ -56,6 +50,8 @@ export default {
 
             this.filterParams = filterParams
 
+            this.order = filterParams.order
+
             this.loadProductSKUs()
         })
     },
@@ -103,11 +99,6 @@ export default {
             window.scrollTo(0, 0)
             
             return this.loadProductSKUs(page)
-        },
-        changeOrder(event) {
-            this.order = event.target.value
-            
-            this.loadProductSKUs(1)
         },
         removeProductsDOM() {
             let productDOM = document.getElementById('category-products-list')

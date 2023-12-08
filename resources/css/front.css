@@ -542,6 +542,14 @@ header .container {
     flex-wrap: wrap;
     width: 100%;
 }
+.category-products-order {
+    margin-bottom: 15px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #FF9414;
+    border-radius: 5px;
+    padding: 0 10px;
+}
 .pagination {
     display: flex;
     justify-content: center;
