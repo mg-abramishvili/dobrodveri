@@ -1,140 +1,142 @@
 <template>
-    <div class="filter-box">
-        <p class="fw-bold mb-1">Цена</p>
+    <div class="filter-inner" :class="{'filter-inner-overlay': views.loading }">
+        <div class="filter-box">
+            <p class="fw-bold mb-1">Цена</p>
 
-        <PriceRangeSlider :min="selected.price_from" :max="selected.price_to" />
-    </div>
-
-    <div class="filter-box">
-        <p v-if="category_id == 1">Цвет</p>
-        <p v-if="category_id == 2">Цвет внутренней панели</p>
-        <p v-if="category_id == 3">Цвет</p>
-        
-        <div class="filter-box-list filter-box-list-large">
-            <template v-for="color in colors">
-                <div class="form-check">
-                    <input v-model="selected.colors" class="form-check-input" type="checkbox" :value="color.slug" :id="'color_' + color.slug" :disabled="color.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': color.skus_count == 0 }"  :for="'color_' + color.slug">
-                        <img :src="color.image" :alt="color.name"/> {{ color.name }} <small v-if="color.skus_count > 0">{{ color.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+            <PriceRangeSlider :min="selected.price_from" :max="selected.price_to" />
         </div>
-    </div>
 
-    <div v-if="category_id == 1" class="filter-box">
-        <p>Цвет стекла</p>
-        
-        <div class="filter-box-list">
-            <template v-for="glass in glasses">
-                <div class="form-check">
-                    <input v-model="selected.glasses" class="form-check-input" type="checkbox" :value="glass.slug" :id="'glass_' + glass.slug" :disabled="glass.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': glass.skus_count == 0 }"  :for="'glass_' + glass.slug">
-                        <img :src="glass.image" :alt="glass.name"/> {{ glass.name }} <small v-if="glass.skus_count > 0">{{ glass.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+        <div class="filter-box">
+            <p v-if="category_id == 1">Цвет</p>
+            <p v-if="category_id == 2">Цвет внутренней панели</p>
+            <p v-if="category_id == 3">Цвет</p>
+            
+            <div class="filter-box-list filter-box-list-large">
+                <template v-for="color in colors">
+                    <div class="form-check">
+                        <input v-model="selected.colors" class="form-check-input" type="checkbox" :value="color.slug" :id="'color_' + color.slug" :disabled="color.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': color.skus_count == 0 }"  :for="'color_' + color.slug">
+                            <img :src="color.image" :alt="color.name"/> {{ color.name }} <small v-if="color.skus_count > 0">{{ color.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
 
-    <div v-if="category_id == 1" class="filter-box">
-        <p>Тип двери</p>
-        
-        <div class="filter-box-list">
-            <template v-for="type in types">
-                <div class="form-check">
-                    <input v-model="selected.types" class="form-check-input" type="checkbox" :value="type.slug" :id="'type_' + type.slug" :disabled="type.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': type.skus_count == 0 }" :for="'type_' + type.slug">
-                        {{ type.name }} <small>{{ type.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+        <div v-if="category_id == 1" class="filter-box">
+            <p>Цвет стекла</p>
+            
+            <div class="filter-box-list">
+                <template v-for="glass in glasses">
+                    <div class="form-check">
+                        <input v-model="selected.glasses" class="form-check-input" type="checkbox" :value="glass.slug" :id="'glass_' + glass.slug" :disabled="glass.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': glass.skus_count == 0 }"  :for="'glass_' + glass.slug">
+                            <img :src="glass.image" :alt="glass.name"/> {{ glass.name }} <small v-if="glass.skus_count > 0">{{ glass.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
 
-    <div v-if="category_id == 1" class="filter-box">
-        <p>Стиль</p>
-        
-        <div class="filter-box-list">
-            <template v-for="style in styles">
-                <div class="form-check">
-                    <input v-model="selected.styles" class="form-check-input" type="checkbox" :value="style.slug" :id="'style_' + style.slug" :disabled="style.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': style.skus_count == 0 }" :for="'style_' + style.slug">
-                        {{ style.name }} <small>{{ style.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+        <div v-if="category_id == 1" class="filter-box">
+            <p>Тип двери</p>
+            
+            <div class="filter-box-list">
+                <template v-for="type in types">
+                    <div class="form-check">
+                        <input v-model="selected.types" class="form-check-input" type="checkbox" :value="type.slug" :id="'type_' + type.slug" :disabled="type.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': type.skus_count == 0 }" :for="'type_' + type.slug">
+                            {{ type.name }} <small>{{ type.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
 
-    <div v-if="category_id == 1" class="filter-box">
-        <p>Покрытие</p>
-        
-        <div class="filter-box-list">
-            <template v-for="surface in surfaces">
-                <div class="form-check">
-                    <input v-model="selected.surfaces" class="form-check-input" type="checkbox" :value="surface.slug" :id="'surface_' + surface.slug" :disabled="surface.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': surface.skus_count == 0 }" :for="'surface_' + surface.slug">
-                        {{ surface.name }} <small>{{ surface.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+        <div v-if="category_id == 1" class="filter-box">
+            <p>Стиль</p>
+            
+            <div class="filter-box-list">
+                <template v-for="style in styles">
+                    <div class="form-check">
+                        <input v-model="selected.styles" class="form-check-input" type="checkbox" :value="style.slug" :id="'style_' + style.slug" :disabled="style.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': style.skus_count == 0 }" :for="'style_' + style.slug">
+                            {{ style.name }} <small>{{ style.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
 
-    <div v-if="category_id == 2" class="filter-box">
-        <p>Внутренняя отделка</p>
-        
-        <div class="filter-box-list">
-            <template v-for="innerdecor in innerdecors">
-                <div class="form-check">
-                    <input v-model="selected.innerdecors" class="form-check-input" type="checkbox" :value="innerdecor.slug" :id="'innerdecor_' + innerdecor.slug" :disabled="innerdecor.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': innerdecor.skus_count == 0 }" :for="'innerdecor_' + innerdecor.slug">
-                        {{ innerdecor.name }} <small>{{ innerdecor.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+        <div v-if="category_id == 1" class="filter-box">
+            <p>Покрытие</p>
+            
+            <div class="filter-box-list">
+                <template v-for="surface in surfaces">
+                    <div class="form-check">
+                        <input v-model="selected.surfaces" class="form-check-input" type="checkbox" :value="surface.slug" :id="'surface_' + surface.slug" :disabled="surface.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': surface.skus_count == 0 }" :for="'surface_' + surface.slug">
+                            {{ surface.name }} <small>{{ surface.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
 
-    <div v-if="category_id == 2" class="filter-box">
-        <p>Назначение двери</p>
-        
-        <div class="filter-box-list">
-            <template v-for="purpose in purposes">
-                <div class="form-check">
-                    <input v-model="selected.purposes" class="form-check-input" type="checkbox" :value="purpose.slug" :id="'purpose_' + purpose.slug" :disabled="purpose.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': purpose.skus_count == 0 }" :for="'purpose_' + purpose.slug">
-                        {{ purpose.name }} <small>{{ purpose.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+        <div v-if="category_id == 2" class="filter-box">
+            <p>Внутренняя отделка</p>
+            
+            <div class="filter-box-list">
+                <template v-for="innerdecor in innerdecors">
+                    <div class="form-check">
+                        <input v-model="selected.innerdecors" class="form-check-input" type="checkbox" :value="innerdecor.slug" :id="'innerdecor_' + innerdecor.slug" :disabled="innerdecor.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': innerdecor.skus_count == 0 }" :for="'innerdecor_' + innerdecor.slug">
+                            {{ innerdecor.name }} <small>{{ innerdecor.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
 
-    <div v-if="category_id == 3" class="filter-box">
-        <p>Тип фурнитуры</p>
-        
-        <div class="filter-box-list">
-            <template v-for="furnituretype in furnituretypes">
-                <div class="form-check">
-                    <input v-model="selected.furnituretypes" class="form-check-input" type="checkbox" :value="furnituretype.slug" :id="'furnituretype_' + furnituretype.slug" :disabled="furnituretype.skus_count == 0">
-                    <label class="form-check-label" :class="{ 'form-check-label-disabled': furnituretype.skus_count == 0 }" :for="'furnituretype_' + furnituretype.slug">
-                        {{ furnituretype.name }} <small>{{ furnituretype.skus_count }}</small>
-                    </label>
-                </div>
-            </template>
+        <div v-if="category_id == 2" class="filter-box">
+            <p>Назначение двери</p>
+            
+            <div class="filter-box-list">
+                <template v-for="purpose in purposes">
+                    <div class="form-check">
+                        <input v-model="selected.purposes" class="form-check-input" type="checkbox" :value="purpose.slug" :id="'purpose_' + purpose.slug" :disabled="purpose.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': purpose.skus_count == 0 }" :for="'purpose_' + purpose.slug">
+                            {{ purpose.name }} <small>{{ purpose.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
 
-    <div class="category-filter-buttons">
-        <button @click="applyFilter()" class="category-filter-button">
-            Применить фильтр
-        </button>
+        <div v-if="category_id == 3" class="filter-box">
+            <p>Тип фурнитуры</p>
+            
+            <div class="filter-box-list">
+                <template v-for="furnituretype in furnituretypes">
+                    <div class="form-check">
+                        <input v-model="selected.furnituretypes" class="form-check-input" type="checkbox" :value="furnituretype.slug" :id="'furnituretype_' + furnituretype.slug" :disabled="furnituretype.skus_count == 0">
+                        <label class="form-check-label" :class="{ 'form-check-label-disabled': furnituretype.skus_count == 0 }" :for="'furnituretype_' + furnituretype.slug">
+                            {{ furnituretype.name }} <small>{{ furnituretype.skus_count }}</small>
+                        </label>
+                    </div>
+                </template>
+            </div>
+        </div>
 
-        <button @click="resetFilter()" class="category-filter-button">
-            Сбросить фильтр
-        </button>
+        <div class="category-filter-buttons">
+            <button @click="applyFilter()" class="category-filter-button">
+                Применить фильтр
+            </button>
+
+            <button @click="resetFilter()" class="category-filter-button">
+                Сбросить фильтр
+            </button>
+        </div>
     </div>
 </template>
 
