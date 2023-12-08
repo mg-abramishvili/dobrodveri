@@ -33,49 +33,49 @@ class ProductFilterController extends Controller
             $filterParams['types'] = null;
 
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
 
         $filteredStyles = Style::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['styles'] = null;
             
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
 
         $filteredSurfaces = Surface::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['surfaces'] = null;
             
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
 
         $filteredColors = Color::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['colors'] = null;
             
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
 
         $filteredGlasses = Glass::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['glasses'] = null;
             
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
 
         $filteredInnerDecors = InnerDecor::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['innerdecors'] = null;
             
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
 
         $filteredPurposes = Purpose::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['purposes'] = null;
             
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
 
         $filteredFurnitureTypes = FurnitureType::withCount(['skus' => function ($query) use($filterParams) {
             $filterParams['furnituretypes'] = null;
             
             $query->withFilters($filterParams);
-        }])->orderBy('skus_count', 'desc')->get();
+        }])->orderBy('skus_count', 'desc')->orderBy('name')->get();
         
         return response()->json([
             'types' => $filteredTypes,
