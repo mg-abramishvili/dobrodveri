@@ -67,7 +67,11 @@ export default {
 
             this.$parent.image = this.image
 
-            document.querySelector('[data-bs-dismiss="offcanvas"]').click()
+            let offcanvases = document.querySelectorAll('[data-bs-dismiss="offcanvas"]')
+
+            offcanvases.forEach(offcanvas => {
+                offcanvas.click()
+            })
         }
     },
     components: {

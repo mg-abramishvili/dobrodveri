@@ -974,6 +974,7 @@ header .container {
 }
 .product-colors-list,
 .product-glasses-list,
+.product-innerdecors-list,
 .product-sizes-list,
 .product-types-list {
     list-style-type: none;
@@ -983,6 +984,7 @@ header .container {
 }
 .product-colors-list li,
 .product-glasses-list li,
+.product-innerdecors-list li,
 .product-sizes-list li,
 .product-types-list li {
     display: inline-block;
@@ -991,6 +993,7 @@ header .container {
 }
 .product-colors p,
 .product-glasses p,
+.product-innerdecors p,
 .product-sizes p,
 .product-types p {
     margin-top: 0;
@@ -1001,6 +1004,7 @@ header .container {
 }
 .product-color-button,
 .product-glass-button,
+.product-innerdecor-button,
 .product-size-button,
 .product-type-button {
     background: none;
@@ -1024,6 +1028,7 @@ header .container {
 }
 .product-color-button_active,
 .product-glass-button_active,
+.product-innerdecor-button_active,
 .product-size-button_active,
 .product-type-button_active {
     border-color: #FF9414

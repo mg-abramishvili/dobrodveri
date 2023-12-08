@@ -48,8 +48,8 @@
                     glass="{{ request()->glass }}"
                 @endif
     
-                @if(request()->innerdecor)
-                    innerdecor="{{ request()->innerdecor }}"
+                @if(request()->inner_decor)
+                    inner_decor="{{ request()->inner_decor }}"
                 @endif
     
                 @if(request()->size)
@@ -154,6 +154,78 @@
                                     <td>Покрытие</td>
                                     <td>
                                         {{ $product['surface'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['purpose']))
+                                <tr>
+                                    <td>Назначение двери</td>
+                                    <td>
+                                        {{ $product['purpose'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['napolnenie']))
+                                <tr>
+                                    <td>Наполнение</td>
+                                    <td>
+                                        {{ $product['napolnenie'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['tolschina_polotna']))
+                                <tr>
+                                    <td>Толщина полотна</td>
+                                    <td>
+                                        {{ $product['tolschina_polotna'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['tolschina_metalla']))
+                                <tr>
+                                    <td>Толщина металла</td>
+                                    <td>
+                                        {{ $product['tolschina_metalla'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['vnutr_panel']))
+                                <tr>
+                                    <td>Внутренняя панель</td>
+                                    <td>
+                                        {{ $product['vnutr_panel'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['zamok']))
+                                <tr>
+                                    <td>Замок</td>
+                                    <td>
+                                        {{ $product['zamok'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['termorazryv']))
+                                <tr>
+                                    <td>Терморазрыв</td>
+                                    <td>
+                                        {{ $product['termorazryv'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['noch_zadvizh']))
+                                <tr>
+                                    <td>Ночная задвижка</td>
+                                    <td>
+                                        {{ $product['noch_zadvizh'] }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(isset($product['rebra_zh']))
+                                <tr>
+                                    <td>Ребра жесткости</td>
+                                    <td>
+                                        {{ $product['rebra_zh'] }}
                                     </td>
                                 </tr>
                             @endif

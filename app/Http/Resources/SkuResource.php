@@ -19,6 +19,9 @@ class SkuResource extends JsonResource
         if($this->glass) {
             $linkParams[] = '&glass=' . $this->glass->slug;
         }
+        if($this->innerdecor) {
+            $linkParams[] = '&inner_decor=' . $this->innerdecor->slug;
+        }
         
         $link = count($linkParams) > 0 ? $linkInitial . '?' . implode("", $linkParams) : $linkInitial;
 
@@ -37,8 +40,10 @@ class SkuResource extends JsonResource
             'surface' => $this->product->surface,
             'color' => $this->color,
             'color_id' => $this->color_id,
-            'glass' => $this->glass,
-            'glass_id' => $this->glass_id,
+            'glass' => $this->glass ? $this->glass : null,
+            'glass_id' => $this->glass_id ? $this->glass_id : null,
+            'inner_decor' => $this->innerdecor ? $this->innerdecor : null,
+            'inner_decor_id' => $this->inner_decor_id ? $this->inner_decor_id : null,
             'image' => $this->image,
             'price' => $price,
             'old_price' => $oldPrice,

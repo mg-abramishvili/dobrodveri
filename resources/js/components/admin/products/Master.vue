@@ -377,8 +377,7 @@ export default {
             if(this.editMode) {
                 axios.put(`/_admin/product/${this.$route.params.id}/update`, data)
                 .then(response => {
-                    this.views.saveButton = true
-                    this.views.loading = false
+                    window.location.href = '/admin/product-master/' + this.$route.params.id + '/'
                 })
                 .catch(errors => {
                     this.views.saveButton = true

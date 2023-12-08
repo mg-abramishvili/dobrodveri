@@ -67,8 +67,8 @@ export default {
                 let productName = this.product.name
                 let productPrice = this.sku.price ? this.sku.price : this.product.price
                 let paramsColor = this.sku.color.name
+                let paramsInnerDecor = this.sku.inner_decor ? this.sku.inner_decor.name : null
                 let paramsSize = this.size
-                let paramsInnerDecor = this.sku.innerdecor ? this.sku.innerdecor.name : null
                 let paramsGlass = this.sku.glass ? this.sku.glass.name : null
 
                 msg.push(productName)
@@ -76,14 +76,14 @@ export default {
                 if(paramsColor) {
                     msg.push(paramsColor)
                 }
-                if(paramsSize) {
-                    msg.push(paramsSize)
+                if(paramsGlass) {
+                    msg.push(paramsGlass)
                 }
                 if(paramsInnerDecor) {
                     msg.push(paramsInnerDecor)
                 }
-                if(paramsGlass) {
-                    msg.push(paramsGlass)
+                if(paramsSize) {
+                    msg.push(paramsSize)
                 }
 
                 msg.push(productPrice + 'руб.')

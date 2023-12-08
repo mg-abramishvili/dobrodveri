@@ -17,6 +17,17 @@
         </ul>
     </div>
 
+    <div v-if="product.inner_decors.length" class="product-innerdecors">
+        <p>Внутренняя отделка</p>
+        <ul class="product-innerdecors-list">
+            <li v-for="inner_decor in product.inner_decors">
+                <button @click="selectInnerDecor(inner_decor)" class="product-innerdecor-button" :class="{'product-innerdecor-button_active': selected.inner_decor.id == inner_decor.id}">
+                    {{ inner_decor.name }}
+                </button>
+            </li>
+        </ul>
+    </div>
+
     <div v-if="product.sizes.length" class="product-sizes">
         <p>Размер</p>
         <ul class="product-sizes-list">
@@ -74,12 +85,13 @@
 import LoaderSpinner from './LoaderSpinner.vue'
 
 export default {
-    props: ['product', 'size', 'color', 'glass', 'innerdecor'],
+    props: ['product', 'size', 'color', 'glass', 'inner_decor'],
     data() {
         return {
             selected: {
                 color: '',
                 glass: '',
+                inner_decor: '',
                 size: '',
             },
             
@@ -93,6 +105,7 @@ export default {
     mounted() {
         this.selectColor()
         this.selectGlass()
+        this.selectInnerDecor()
         this.selectSize()
 
         if(this.color && this.product.colors.length) {
@@ -101,6 +114,10 @@ export default {
 
         if(this.glass && this.product.glasses.length) {
             this.selectGlass(this.product.glasses.find(g => g.slug == this.glass))
+        }
+
+        if(this.inner_decor && this.product.inner_decors.length) {
+            this.selectInnerDecor(this.product.inner_decors.find(i => i.slug == this.inner_decor))
         }
 
         if(this.size && this.product.sizes.length) {
@@ -115,6 +132,14 @@ export default {
 
                 if(this.selected.color && this.selected.glass) {
                     selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id && sku.glass_id == this.selected.glass.id)
+                    
+                    this.selectedSKU = selectedSKU
+                    
+                    return this.emitSKU(selectedSKU)
+                }
+
+                if(this.selected.color && this.selected.inner_decor) {
+                    selectedSKU = this.product.skus.find((sku) => sku.color_id == this.selected.color.id && sku.inner_decor_id == this.selected.inner_decor.id)
                     
                     this.selectedSKU = selectedSKU
                     
@@ -168,6 +193,17 @@ export default {
                 this.selected.glass = glass
             } else {
                 this.selected.glass = this.product.glasses[0] ? this.product.glasses[0] : null
+            }
+        },
+        selectInnerDecor(inner_decor) {
+            if(!this.product.inner_decors.length) {
+                return
+            }
+
+            if(inner_decor) {
+                this.selected.inner_decor = inner_decor
+            } else {
+                this.selected.inner_decor = this.product.inner_decors[0] ? this.product.inner_decors[0] : null
             }
         },
         selectSize(size) {

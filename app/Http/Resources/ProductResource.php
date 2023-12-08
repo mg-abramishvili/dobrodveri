@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\ProductColorResource;
 use App\Http\Resources\ProductGlassResource;
+use App\Http\Resources\ProductInnerDecorResource;
 use App\Http\Resources\ProductReviewResource;
 use App\Http\Resources\SkuResource;
 use App\Models\Promo;
@@ -37,6 +38,7 @@ class ProductResource extends JsonResource
             'skus' => SkuResource::collection($this->skus),
             'colors' => ProductColorResource::collection($this->skus->unique('color_id')->values()->all()),
             'glasses' => ProductGlassResource::collection($this->skus->where('glass_id', '!=', null)->unique('glass_id')->values()->all()),
+            'inner_decors' => ProductInnerDecorResource::collection($this->skus->where('inner_decor_id', '!=', null)->unique('inner_decor_id')->values()->all()),
             'reviews' => ProductReviewResource::collection($this->reviews->where('is_active', 1)),
             'rating' => $this->reviews->where('is_active', 1)->count() ? $this->reviews->where('is_active', 1)->sum('rating') / $this->reviews->where('is_active', 1)->count() : null,
             'balance' => $this->balance,
@@ -47,6 +49,15 @@ class ProductResource extends JsonResource
             'sale' => $this->sale,
             'discount' => $this->discount,
             'special' => $this->special,
+            'purpose' => $this->purpose ? $this->purpose->name : null,
+            'napolnenie' => $this->napolnenie,
+            'tolschina_polotna' => $this->tolschina_polotna,
+            'tolschina_metalla' => $this->tolschina_metalla,
+            'vnutr_panel' => $this->vnutr_panel,
+            'zamok' => $this->zamok,
+            'termorazryv' => $this->termorazryv,
+            'noch_zadvizh' => $this->noch_zadvizh,
+            'rebra_zh' => $this->rebra_zh,
         ];
     }
 }
