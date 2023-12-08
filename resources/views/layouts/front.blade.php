@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>@yield('title')</title>
+        <meta name="description" content="@yield('description')">
 
         <link rel="stylesheet" href="/css/swiper-bundle.min.css" />
         @yield('css')

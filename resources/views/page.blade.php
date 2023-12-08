@@ -1,6 +1,7 @@
 @extends('layouts.front')
 @section('title', $page->name . '- Добродвери')
 @section('description', $page->name . '- Добродвери')
+
 @section('content')
     <div class="container breadcrumbs">
         <ul>

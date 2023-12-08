@@ -42,7 +42,7 @@
             <div v-if="sku.colors && sku.colors.length" class="products-list-item-colors">
                 <ul>
                     <li v-for="color in sku.colors">
-                        <img :src="color.image" />
+                        <img :src="color.image" :alt="color.name" />
                     </li>
                 </ul>
 

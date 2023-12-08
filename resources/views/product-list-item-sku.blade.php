@@ -56,7 +56,7 @@
                     <ul>
                         @foreach($sku['colors'] as $color)
                             <li>
-                                <img src="{{ $color['image']}}" />
+                                <img src="{{ $color['image']}}" src="{{ $color['name']}}" />
                             </li>
                         @endforeach
                     </ul>

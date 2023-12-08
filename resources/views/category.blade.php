@@ -4,7 +4,8 @@
 @endphp
 
 @extends('layouts.front')
-@section('title', 'Каталог - Добродвери')
+@section('title', $category->name . ' - купить в Уфе - Добродвери')
+@section('description', $category->name . ' - купить в Уфе - Добродвери')
 
 @section('content')
     <div class="container category">

@@ -3,7 +3,8 @@
 @endphp
 
 @extends('layouts.front')
-@section('title', $product["name"] . ' - Добродвери')
+@section('title', $product["name"] . ' - купить в Уфе - Добродвери')
+@section('description', $product["name"] . ' - купить в Уфе - Добродвери')
 
 @section('content')
     <div class="container breadcrumbs">

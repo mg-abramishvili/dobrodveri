@@ -61,6 +61,19 @@ Route::get('promo/{id}', function ($id) {
 });
 
 
+Route::get('/sitemap.xml', function () {
+    $pages = Page::all();
+    $products = Product::all();
+    $latestUpdatedProduct = Product::orderBy('updated_at', 'desc')->first();
+
+    return response()->view('sitemap', [
+        'products' => $products,
+        'pages' => $pages,
+        'latestUpdatedProduct' => $latestUpdatedProduct,
+    ])->header('Content-Type', 'text/xml');
+});
+
+
 
 // ADMIN
 Route::get('admin', function () {
