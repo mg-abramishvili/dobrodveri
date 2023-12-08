@@ -263,6 +263,8 @@ export default {
             this.loadFilter()
         },
         loadFilter() {
+            this.views.loading = true
+
             axios.get(`/_product_filter`, {
                 params: {
                     category_id: this.selected.category_id,
