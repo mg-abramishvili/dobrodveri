@@ -47,7 +47,7 @@ class CategoryController extends Controller
         } else {
             $productsWithPagination = $this->getProducts($category->id, $filterParams, $perPage)->getContent();
         }
-
+        
         return view('category', [
             'category' => $category,
             'productsWithPagination' => $productsWithPagination ? $productsWithPagination : null,

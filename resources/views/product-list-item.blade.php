@@ -74,5 +74,11 @@
             <a href="tel:+79378504040">Заказать</a>
             <a href="/product/{{ $product['slug'] }}">Подробнее</a>
         </div>
+
+        @if($product['first_sku_id'])
+            <div class="products-list-item-heart">
+                <add-to-favorites :sku_id="{{ $product['first_sku_id'] }}"></add-to-favorites>
+            </div>
+        @endif
     </div>
 </div>

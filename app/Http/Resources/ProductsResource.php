@@ -30,6 +30,7 @@ class ProductsResource extends JsonResource
             'hit' => $this->hit,
             'special' => $this->special,
             'balance' => $this->balance,
+            'first_sku_id' => $this->skus->count() && $this->skus->first() ? $this->skus->first()->id : null,
         ];
     }
 }

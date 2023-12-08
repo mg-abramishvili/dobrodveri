@@ -8,7 +8,7 @@
     "src": "resources/css/admin.css"
   },
   "resources/css/front.css": {
-    "file": "assets/front-e87034bd.css",
+    "file": "assets/front-d60ee3c9.css",
     "isEntry": true,
     "src": "resources/css/front.css"
   },
@@ -52,14 +52,14 @@
     "src": "resources/js/admin.js"
   },
   "resources/js/front.css": {
-    "file": "assets/front-51439c61.css",
+    "file": "assets/front-8445cf6f.css",
     "src": "resources/js/front.css"
   },
   "resources/js/front.js": {
     "css": [
-      "assets/front-51439c61.css"
+      "assets/front-8445cf6f.css"
     ],
-    "file": "assets/front-595f8f5d.js",
+    "file": "assets/front-fdc1a201.js",
     "imports": [
       "_globalFilters-e23ead2f.js"
     ],
