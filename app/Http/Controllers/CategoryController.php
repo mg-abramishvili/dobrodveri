@@ -31,6 +31,8 @@ class CategoryController extends Controller
         $skusWithPagination = null;
 
         if(
+            $filterParams['priceFrom'] ||
+            $filterParams['priceTo'] ||
             $filterParams['colors'] ||
             $filterParams["types"] ||
             $filterParams["styles"] ||
