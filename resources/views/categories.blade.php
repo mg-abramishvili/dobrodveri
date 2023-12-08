@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container category">
-        <h1 class="title-header">{{ $category->name }}</h1>
+        <h1 class="title-header">Каталог</h1>
 
         
         <ul>
